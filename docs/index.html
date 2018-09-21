@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Spark - an awesome application engine</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css">
+      <link rel="stylesheet" href="spark-global.css">
+      <link rel="stylesheet" href="spark-landing.css">
+      <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <nav>
+      <div class="logo"></div>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-book"></i> Documentation</a></li>
+        <li class="menu__item"><a href="" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+      </ul>
+    </nav>
+    <div class="hero">
+      <h1 class="hero__title">Spark</h1>
+      <p class="hero__description">Take your embedded apps to the next level!</p>
+    </div>
+    <!--<div>
+      <h3>Scene graph API exposed to a Javascript engine</h3>
+    </div>-->
+    <div class="hero__terminal">
+      <pre>
+        <!-- Place your demo code here -->
+        <div class="feature" >
+          <div class="feature__item" >
+            <video autoplay muted  width="285"><!--loop-->
+              <source src="GalleryMove.mov" type="video/mp4" >
+            </video>
+        </div>
+          <div class="feature__item">
+            <video autoplay muted  width="285"><!--loop-->
+              <source src="GalleryMove.mov" type="video/mp4" >
+            </video>
+        </div>
+        <div class="feature__item">
+            <video autoplay muted  width="285"><!--loop-->
+              <source src="GalleryMove.mov" type="video/mp4" >
+            </video>
+          </div>
+        </div>
+        <!--<code class="shell-session demo">hyperyolo ~ $ </code>-->
+      </pre>
+    </div>
+    <div class="wrapper">
+
+      <div class="feature">
+        <div class="feature__item">
+          <h3 class="section__title">Rich Animation</h3>
+          <p>Native animations supporting non-linear tweening. </p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">JavaScript Bindings</h3>
+          <p>JavaScript bindings allow applications written in JavaScript to take advantage of native performance.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Used by Firebolt in the RDK</h3>
+          <p><a href="firebolt/index.html"><strong><i>Firebolt</i></strong></a> is an application platform for devices powered by the <a href="http://rdkcentral.com/"><strong><i>RDK</i></strong></a>.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Open Source</h3>
+          <p>Spark is an open source project, so if you don't like something - submit a Pull Request! </p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Service Bubbling</h3>
+          <p>Provide service availability through the heirarchy of your applications</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Atomic Building Blocks</h3>
+          <p>Small set of atomic building blocks allows for composition.  Use a framework, build your own, or use the Spark API directly.</p>
+        </div>
+      </div>
+      <div class="keybinding">
+        <ul class="keybinding__detail">
+          <h3 class="keybinding__title">Default Keybindings</h3>
+          <li>Quit without saving <span class="keybinding__label">Ctrl+C</span></li>
+          <li>Save <span class="keybinding__label">Cmd+S</span></li>
+          <li>Save and Quit <span class="keybinding__label">Ctrl+D</span></li>
+          <li>Undo <span class="keybinding__label">Cmd+Z</span></li>
+        </ul>
+        <ul class="keybinding__detail">
+          <h3 class="keybinding__title">Markdown Keybindings</h3>
+          <li><span class="keybinding__label">Ctrl+A</span> Insert Link Markdown</li>
+          <li><span class="keybinding__label">Ctrl+I</span> Insert Image Markdown</li>
+          <li><span class="keybinding__label">Ctrl+V</span> Insert YouTube Video</li>
+          <li><span class="keybinding__label">Ctrl+T</span> Insert Table</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <p>Read our documentation for API and functionality information.</p>
+        <a href="doc.html" class="button--primary">Documentation</a>
+      </div>
+    </div>
+    <div class="changelog">
+      <div class="wrapper">
+        <h3 class="section__title">Release Highlights</h3>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v1.0.0.0</h4>
+            <small class="changelog__date">16August2018</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>OSX-only release</li>
+              <li>Renamed application from pxscene to Spark</li>
+              <li>Extend imageResource API to support Data URI/URLs</li>
+              <li>Provide bookmarking/history in browser.js - use PAGE DOWN key to toggle on/off a bookmark list of urls used during this Spark session</li>
+              <li>Implemented spark versioning - use scene.capabilities.graphics.svg to check if SVG support is available.  More capabilities to come...</li>
+              <li>Fix issue that was causing pxImage9 hanging behavior during CI tests</li>
+              <li>Limit http2 functionality to client-only</li>
+              <li>Implement get function for color properties:  textColor, fillColor, lineColor from pxText/pxRect</li>
+              <li>Add a build time switch to turn off CORS enforcement for image and font downloads.</li>
+              <li>Implement List Box Component.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v0.41.2.0</h4>
+            <small class="changelog__date">07August2018</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>OSX-only release</li>
+              <li>Rename type 'Wayland' to type 'external'.</li>
+              <li>Fixed issue related to ellipsis on single line with word wrap.</li>
+              <li>Fix for irregular artifacts on fonts.</li>
+              <li>Fix for improper termination on artifacts.</li>
+              <li>Re design on implementation of CORS.</li>
+              <li>Added Support for http2, oauth and crypto node modules.</li>
+              <li>New import test added to CI.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v0.41.1.0</h4>
+            <small class="changelog__date">19July2018</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Updates to fix text Regression.</li>
+              <li>Fix for naming conflicts in rtservicemanager.js.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__callout">
+          <a href="releaseNotes/notes.html" class="button--secondary">Checkout Full Release Notes</a>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">Spark is an open source project in <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script>
+  </body>
+</html>
