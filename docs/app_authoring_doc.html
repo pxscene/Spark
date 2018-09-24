@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spark: Application Authoring</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="spark-global.css">
+    <link rel="stylesheet" href="spark-doc.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <h1 class="logo"> Spark <span class="logo__thin">Doc</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-home"></i> Docs Home</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <aside class="doc__nav">
+        <ul>
+          <li class="js-btn selected">Overview</li>
+          <li class="js-btn">HTTP Caching</li>
+          <li class="js-btn">Service Bubbling</li>
+          <li class="js-btn">px Built-in Functionality</li>
+          <li class="js-btn">px Delegates</li>
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
+          <h2>Application Authoring</h2>
+          <h3 class="section__title">Overview</h3>
+          <p></p>When authoring Spark applications, there are many things to consider, such as caching and bundling applications and their resources. 
+          In addition, there are many Tips and Tricks that may be helpful when getting up and running with Spark for the first time. </p>
+          <p>We hope this Application Authoring Documentation will help. </p>
+        </section>
+        <hr />
+        <section class="js-section">
+          <h3 class="section__title">HTTP Caching</h3>
+          <p><p>In Spark, downloaded HTTP image files and Javascript files are cached on the disk to avoid repetitive downloads of unmodified data. This is done to speedup processing by removing network download time of same data.</p>
+          <h4>Caching mechanism:</h4>
+          <ul>
+            <li>Default  maximum cache size is 20 MB. Maximum cache size can be changed if needed.</li>
+            <li>Default cache directory is <em>/tmp/cache</em>. Default cache directory can be changed if needed</li>
+            <li>For every downloaded image/Javascript file, unique number is generated, which is used as cache file name</li>
+            <li>Every file in cache has HTTP header and payload data. Every cache data is attached with the expiry date, based on the HTTP response field parameters</li>
+            <li>When the maximum cache size is reached or when sufficient space for new file download is not available, oldest file in cache will be removed, to provide space for new file downloaded</li>
+            <li>When a file (say Javascript or image file) is required in pxScene application, cache will be checked for availability. If it is available and valid, it will be retrieved and used for application.Else, new data will be downloaded,cached and returned to application</li>
+            <li>Cache control mechanism mentioned in <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a> is followed.Caching is implemented based on the rules given in the specification</li>
+          </ul>
+          <h3>Cache data validation:</h3>
+          <ol>
+            <li>HTTP header and payload is cached only if it is not expired and headers does not contain <em>"Cache-Control:no-store"</em> field</li>
+            <li>When cache data is requested for reuse, below validations are done, before providing cache data to the application:</li>
+          </ol>
+          <ul>
+            <li>If data in cache is expired and the cached HTTP header contains <em>"Cache-Control:must-revalidate"</em>, cached data is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, same cached data will be sent back to application. Or new updated data from server is stored in cache and returned back to application </li>
+            <li>If data in cache is not expired and the cached HTTP header contains <em>"Cache-Control:no-cache"</em>, cached data is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, same cached data will be sent back to application. Or new updated data from server is stored in cache and returned back to application</li>
+            <li>If data in cache is not expired and the cached HTTP header contains <em>"Cache-Control:no-cache=&lt;header params&gt;"</em>, cached HTTP header fields mentioned in params alone is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, new header fields will be updated in cache and the updated cache data will be sent back to application</li>
+            <li>If cached HTTP header contains <em>ETag</em> parameter, new request is sent to server with the header option <em>"If-None-Match:&lt;Etag-id&gt;"</em>.If the response from the server is <em>302</em>, cached data is returned to the application. Else, new data received from server is updated in cache and provided to application</li>
+          </ul>
+          <p>
+            <br/>
+          </p>
+          <h3>Example of Server Configuration (Apache)</h3>
+          <p>Add directives to httpd.conf. The following is an example of adding cache-control response header for a specific directory.  This example also turns off ETags to avoid round trips to servers.</p>
+          <p>Sample directives to add in httpd.conf on a server:</p>
+          <pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+          # Add cache-response headers for slice app
+          &lt;Directory "/var/www/html/px_apps/slice"&gt;
+              ExpiresActive On
+              ExpiresDefault "access plus 1 day"
+              Header set Cache-Control "max-age=86400"
+              Header unset ETag
+          &lt;/Directory&gt;
+          </pre>
+       
+        </section>
+        <hr />
+        <section class="js-section">
+          <h3 class="section__title">Service Bubbling</h3>
+          <p>Service bubbling allows scenes within a heirarchy to provide services to other scenes. A parent scene can indicate
+            that it wishes to vend a service by using the <i>addServiceProvider(serviceProviderFunction)</i> function.  Then a scene wishing to use 
+            that service would call <i>scene.getService(serviceName)</i> where the <i>serviceName</i> is the name of the service the scene wishes 
+            to use.  More details are explained below in this section.
+          </p>
+          <p><i>scene</i> supports two functions for providing service:</p>
+            <ul>
+              <li>addServiceProvider(serviceProviderFunction)</li>
+              <li>removeServiceProvider(serviceProviderFunction)</li>
+            </ul>
+            <p>A scene that wishes to provide a service must call <i>addServiceProvider</i>, passing it a <i>serviceProviderFunction</i>.  
+              The <i>serviceProviderFunction</i> will be called whenever a scene in the hierarchy requests a service by name.  The <strong>serviceProviderFunction</strong> must do the following:
+              <br/>
+            <ul>
+              <li>Accept two arguments<ul>
+                  <li>serviceName: when the <i>serviceProviderFunction</i> is called, this will be the name of the service being requested.<ul>
+                      <li>All service names should be properly namespaced</li>
+                      <li>All service names should include a version number</li>
+                      <li>Ex. com.mycompany.myService_1</li>
+                    </ul>
+                  </li>
+                  <li>serviceContext: when the <i>serviceProviderFunction</i> is called, this will contain information about the scene that is requesting the service.  
+                    This gives the provider the opportunity to deny access to the service to specific requesters, as required.  ServiceContext has the following properties:<ul>
+                      <li>url: url is the originating URL from which the script requesting the service was loaded</li>
+                      <li>serviceContext: this is an object, that if populated, is a property bag from the requesting scene.</li>
+                      <li>permissions: TBD</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Evaluate serviceName and serviceContext to determine if and what service should be provided</li>
+              <li>Returns one of the following:<ul>
+                  <li>Object - An object representing the service being requested</li>
+                  <li>"DENY" - the process of locating services is halted immediately. A null value will be returned from getService</li>
+                  <li>"ALLOW" - this serviceProvider can't provide the service, but will allow the search for the service to continue</li>
+                </ul>
+              </li>
+            </ul>
+            <p>A scene that has called <i>addServiceProvider</i> should call <strong>removeServiceProvider</strong> when it no longer wishes to vend the service or when it closing.</stirng></p>
+            <br/>
+            <p><i>scene</i> supports a function for scenes to request vended services by name: </p>
+            <p>
+              <strong>scene.getService</strong>
+            </p>
+            <ul>
+              <li>Checks the current scene for any service provider functions</li>
+              <li>If a serviceProvider is found, it calls each service provider function found, passing the service name and service context</li>
+              <li>If a service (object other than "DENY" or "ALLOW") is returned from the service provider function, the service provider function is returned from getService</li>
+              <li>If DENY is returned from the service provider function, the search for a service is halted, getService returns null</li>
+              <li>If ALLOW is returned from the service provider function, the search is allowed to continue</li>
+              <li>If all service provider functions of a scene return ALLOW, the search bubbles up to the parent scene's service provider functions.</li>
+              <li>This bubbling continues up the scene hierarchy to the root scene.</li>
+            </ul>
+            <p>
+              <br/>
+            </p>
+            <p>
+              <strong>Image 1:  Some possibilities with service provider functions:</strong>
+            </p>
+            <ul>
+              <li>Child Scenes C + D can access service 2, 3, 4 and 5.</li>
+              <li>Child Scenes C + D cannot access service 1, as Child Scene A denies it.</li>
+              <li>Child Scenes E + F can access service 1, 2, 3, and 4.  But service 1 will be a different implementation as provided by Child Scene B.</li>
+            </ul>
+            <p>
+                <p><img src="images/ServiceBubblingIllustration.png"></p>
+            </p>
+            <p>
+              <br/>
+            </p>   
+        </section>
+        <hr />
+        <section class="js-section">
+            <h3 class="section__title">px Built-in Functionality</h3>
+
+            <ul style="list-style-type:circle">
+                <li><i>px.appQueryParams</i>: can be used to retrieve query parameter values passed on the launch url</li>
+                <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+                    
+  px.appQueryParams.&lt;parameterName&gt;;
+                </pre>... where &lt;parameterName&gt; is the name of a parameter that was passed in.  This will return an undefined javascript object if a parameter with that name was not specified.</p>
+                <p>
+                <li><i>px.getPackageBaseFilePath()</i>: function which returns the root URL path of entry JavaScript file or archive</li>
+                <p><pre  class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+  var basePackageUri = px.getPackageBaseFilePath();
+ 
+  var fontMed = scene.create({t: "fontResource", url: basePackageUri + "/myFont.ttf");
+</pre></p>
+                <li><i>px.getModuleFile(fileName)</i>: function that returns a promise for the contents of a file in current module's archive or path</li>
+                <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+  var fileLoadPromise = px.getModuleFile(imagesUrl);
+  fileLoadPromise.then(function(data) {
+    // do processing
+    // where 'data' is the contents of the 'imagesUrl' file
+  }
+ </pre>This function can be useful for loading JSON or other data for an application.</p>
+
+                <li><i>px.log</i>: original low level debugging</li>
+                <li><i>px.getBaseFilePath()</i>: function which returns the root URL path of the current JavaScript file, even if it is pulled in via <i>px.import</i>.  Availability:  Spark 1.2.0.0 and later.</li>
+              </ul>
+
+          </section>
+          <hr />
+          <section class="js-section">
+              <h3 class="section__title">px Delegates</h3>
+              <p>Delegates are customization points that permit a JavaScript program running in <i>Spark</i> to optionally change 
+                the default behavior of the Spark core framework.  </p>
+              <p>Currently the following <i>delegate</i> patterns are supported...</p>
+              <ul style="list-style-type:circle">
+                  <li><i>Clearscreen</i>: A given Spark JavaScript app can choose to "decline" the default clear screen (to BLACK) by implementing the delegate method below.</li>
+                  <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+                      
+      // Delegate for Clearscreen
+      module.exports.wantsClearscreen = function()
+      {
+          return false;
+      };
+                  </pre>Defining and exporting this function in a Spark JavaScript application can offer performance improvements, for instance when an application would already be painting an opaque background so that the built-in "clear to Black" would be redundant.</p>
+                  <p>
+
+                </ul>
+  
+            </section>
+            <hr />
+      </article>
+    </div>
+
+    <footer class="footer">Spark is an open source project in github <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script> 
+  </body>
+</html>

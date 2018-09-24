@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spark: px Framework</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="spark-global.css">
+    <link rel="stylesheet" href="spark-doc.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <h1 class="logo"> Spark <span class="logo__thin">Doc</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-home"></i> Docs Home</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <aside class="doc__nav">
+        <ul>
+          <li class="js-btn selected">Overview</li>
+          <li class="js-btn">px.import</li>
+          <li class="js-btn">px.configImport</li>
+          <li class="js-btn">px Built-in Functionality</li>
+          <li class="js-btn">px Delegates</li>
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
+          <h2>px Framework</h2>
+          <h3 class="section__title">Overview</h3>
+          <p>Spark uses the px Framework to import the versioned UI API to use for an application. The px Framework disables 
+            the nodejs <i>require</i> keyword and instead provides <i>px.import</i> as an asynchronous loading 
+            mechanism for including modules in applications.</p>
+        </section>
+        <hr />
+        <section class="js-section">
+          <h3 class="section__title">px.import</h3>
+          <p>px.import is used to include modules, jars, and individual JavaScript files into a JavaScript page. 
+            It is similar to the Nodejs "require" function, with some available enhancements. Unlike <i>require</i>, <i>px.import</i> is asynchronous.</p>
+            <p>px.import can include one to many modules in a single call and returns a promise when all imported source is ready for use.</p>
+            <h4>Limitations</h4>
+            <p>Only the following Nodejs modules are allowed for import: </p>
+            <ul>
+                <li>crypto (as of Release 0.41)</li>
+                <li>htmlparser</li>
+                <li>http - restricted to client functionality</li>
+                <li>https - restricted to client functionality</li>
+                <li>http2 (as of Release 0.41) - restricted to client functionality </li>
+                <li>url</li>
+                <li><strike>net - restricted to client functionality</strike><i> deprecated as of Release 0.40</i></li>
+                <li>oauth (as of Release 0.41)</li>
+                <li>querystring</li>
+                <li>ws - restricted to client functionality</li>
+            </ul>
+            <h4>px Prefix</h4>
+            <p>When used in <i>px.import</i>, the <i>px:</i> prefix has special meaning and references javascript built into Spark.
+                <ul>
+                    <li><i>px:scene</i>: import version of Spark scene graph objects</li>
+                    <li><i>px:tools</i>: import file from builtin tools here: <a href="https://github.com/pxscene/pxCore/tree/master/examples/pxScene2d/src/rcvrcore/tools">tools in github        </a></li>
+                </ul>
+            </p>
+
+            <h4>Usage</h4>
+            <p>Import a single javascript file</p>
+            <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+
+// import the scene object, version 1
+px.import("px:scene.1.js").then( function ready(scene) {
+  var root = scene.root;
+  .
+  .
+  .
+  }).catch( function importFailed(err){
+  console.error("Imports failed for myexample.js: " + err)
+});
+</pre>
+
+                    <p>Import multiple items</p>
+                    <p>
+                        <pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+
+// import the scene object, version 1,
+// import the built-in keycode constants [need reference],
+// import the Nodejs url module
+px.import({ scene: 'px:scene.1.js',
+              keys: 'px:tools.keys.js',
+              url: 'url' }).then( function importsAreReady(imports) {
+  var scene = imports.scene;
+  var keys = imports.keys;
+  var url = imports.url;
+  var root = imports.scene.root;
+  .
+  .
+  .
+  }).catch( function importFailed(err){
+  console.error("Imports failed for myexample.js: " + err)
+});
+</pre></p>
+        
+        </section>
+        <hr />
+        <section class="js-section">
+          <h3 class="section__title">px.configImport</h3>
+          <p>px.configImport can be used to name a common frameworks location, then that name can be used within px.import.</p>
+          <h4>Usage</h4>
+          <p></p>
+          <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:10px">
+
+px.configImport({"pxFramework:":"http://www.pxscene.org/someFrameworks/widgets/"});
+
+px.import({ scene: 'px:scene.1.js',
+           image: 'pxFramework:ImageAnimator.js'
+}).then( function importsAreReady(imports)
+
+var root = scene.root;
+var image = image.ImageAnimator;
+.
+.
+.
+}).catch( function importFailed(err){
+console.error("Imports failed for myexample.js: " + err)
+});
+</pre>
+          </p>          
+        </section>
+        <hr />
+        <section class="js-section">
+            <h3 class="section__title">px Built-in Functionality</h3>
+
+            <ul style="list-style-type:circle">
+                <li><i>px.appQueryParams</i>: can be used to retrieve query parameter values passed on the launch url</li>
+                <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+                    
+  px.appQueryParams.&lt;parameterName&gt;;
+                </pre>... where &lt;parameterName&gt; is the name of a parameter that was passed in.  This will return an undefined javascript object if a parameter with that name was not specified.</p>
+                <p>
+                <li><i>px.getPackageBaseFilePath()</i>: function which returns the root URL path of entry JavaScript file or archive</li>
+                <p><pre  class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+  var basePackageUri = px.getPackageBaseFilePath();
+ 
+  var fontMed = scene.create({t: "fontResource", url: basePackageUri + "/myFont.ttf");
+</pre></p>
+                <li><i>px.getModuleFile(fileName)</i>: function that returns a promise for the contents of a file in current module's archive or path</li>
+                <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+  var fileLoadPromise = px.getModuleFile(imagesUrl);
+  fileLoadPromise.then(function(data) {
+    // do processing
+    // where 'data' is the contents of the 'imagesUrl' file
+  }
+ </pre>This function can be useful for loading JSON or other data for an application.</p>
+
+                <li><i>px.log</i>: original low level debugging</li>
+                <li><i>px.getBaseFilePath()</i>: function which returns the root URL path of the current JavaScript file, even if it is pulled in via <i>px.import</i>.  Availability:  Spark 1.2.0.0 and later.</li>
+              </ul>
+
+          </section>
+          <hr />
+          <section class="js-section">
+              <h3 class="section__title">px Delegates</h3>
+              <p>Delegates are customization points that permit a JavaScript program running in <i>Spark</i> to optionally change 
+                the default behavior of the Spark core framework.  </p>
+              <p>Currently the following <i>delegate</i> patterns are supported...</p>
+              <ul style="list-style-type:circle">
+                  <li><i>Clearscreen</i>: A given Spark JavaScript app can choose to "decline" the default clear screen (to BLACK) by implementing the delegate method below.</li>
+                  <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+                      
+      // Delegate for Clearscreen
+      module.exports.wantsClearscreen = function()
+      {
+          return false;
+      };
+                  </pre>Defining and exporting this function in a Spark JavaScript application can offer performance improvements, for instance when an application would already be painting an opaque background so that the built-in "clear to Black" would be redundant.</p>
+                  <p>
+
+                </ul>
+  
+            </section>
+            <hr />
+      </article>
+    </div>
+
+    <footer class="footer">Spark is an open source project in github <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script> 
+  </body>
+</html>

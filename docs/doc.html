@@ -26,9 +26,10 @@
         <ul>
           <li class="js-btn selected">What is Spark?</li>
           <li class="js-btn">Getting Started</li>
-          <li class="js-btn">Configuration</li>
+          <li class="js-btn">px Framework</li>
           <li class="js-btn">The API</li>
-          <li class="js-btn">Issues</li>
+          <li class="js-btn">Configuration</li>
+          <li class="js-btn">Authoring Applications</li>
         </ul>
       </aside>
       <article class="doc__content">
@@ -46,13 +47,13 @@
             </ul>
           </p>
           <p>Spark is built on top of a project called &quot;pxCore&quot;.  pxCore is a small lightweight library that provides a portable 
-            framebuffer and windowing abstraction for C++.  Spark is a 2d scene graph API supporting that defines a small set of atomic UI elements and exposes them 
+            framebuffer and windowing abstraction for C++.  Spark is a 2d scene graph API that defines a small set of atomic UI elements and exposes them 
             with JavaScript wrappers.  The result is a lightweight, portable application engine that can be used to build rich application experiences.</p>
           <p>A high level representation of the runtime stack is below</p>
-          <p><img src="sparkStackHighLevel.png"></p>
+          <p><img src="images/sparkStackHighLevel.png"></p>
           <p>The stack components.
           <ul>
-             <li>Native OS and graphic drivers - provides specific kernal, OS and UI services for the native system</li>
+             <li>Native OS and graphic drivers - provides specific kernel, OS and UI services for the native system</li>
              <li>pxCore - provides UI scene and primitive components used by the px Framework to render components.  Most
                 of pxCore is creating using C++, with JavaScript bindings to its UI API.
              </li>
@@ -61,12 +62,12 @@
                 JavaScript engine.  However, this may vary based on the target platform.
              </li>
              <li>px Framework - provides the public JavaScript API for creating reusable UI modules and applications, in
-                addition to the facilities for loading and launching px-based application modules.
+                addition to the facilities for loading and launching px-based application modules.  Since the px Framework is just 
+                one example of what could be done with the pxCore library, its source can be found in the &quot;examples&quot; section 
+                of the pxCore GitHub Repository:  <a href="https://github.com/pxscene/pxCore/tree/master/examples/pxScene2d" class="link link--dark">examples/pxScene2d</a>
              </li>
           </ul>
           </p>
-
-
         </section>
         <hr />
         <section class="js-section">
@@ -89,15 +90,15 @@
                 </ul>
                 <pre class="nohighlight code">
                   <code class="tab__pane active mac" >
-                    <img src="Spark128.png" height="25" align="middle">
+                    <img src="images/Spark128.png" height="25" align="middle">
                     <strong>
-                      <a href="dist/osx/pxscene/Spark.dmg">stable</a>
+                      <a href="dist/osx/pxscene/Spark.dmg" class="link link--dark">stable</a>
                     </strong>
                     &nbsp;&nbsp;
                     
-                    <img src="SparkEdge128.png" height="25" align="middle">
+                    <img src="images/SparkEdge128.png" height="25" align="middle">
                     <strong>
-                      <a href="http://96.116.56.119/edge/osx/artifacts/SparkEdge.dmg">
+                      <a href="http://96.116.56.119/edge/osx/artifacts/SparkEdge.dmg" class="link link--dark">
                         <superscript>edge</superscript>
                       </a>
                     </strong>
@@ -110,11 +111,11 @@
                    </code>
                   <code class="tab__pane linux">No installer available.  See for Spark build instructions: TBD</code>
                   <code class="tab__pane win">          
-                    <img src="Spark128.png" height="25"  align="middle">
-                    <strong><a href="https://github.com/pxscene/pxCore/releases/download/0.41.1.0/pxscene-setup.exe.zip">stable</a></strong>&nbsp;&nbsp;
+                    <img src="images/Spark128.png" height="25"  align="middle">
+                    <strong><a href="https://github.com/pxscene/pxCore/releases/download/0.41.1.0/pxscene-setup.exe.zip" class="link link--dark">stable</a></strong>&nbsp;&nbsp;
                     
-                    <img src="SparkEdge128.png"  height="25"  align="middle">
-                        <strong><a href="http://96.116.56.119/edge/windows/sparkEdge-setup.exe">edge</a></strong>
+                    <img src="images/SparkEdge128.png"  height="25"  align="middle">
+                        <strong><a href="http://96.116.56.119/edge/windows/sparkEdge-setup.exe" class="link link--dark">edge</a></strong>
                         <br/>
                         <br/>
                         <strong>Minimum System Requirements:</strong> &nbsp; OS: Windows 10 &nbsp; | &nbsp; RAM: 128 MB &nbsp; | &nbsp; Disk Space: 24 MB
@@ -134,9 +135,9 @@
             <ol>
                 <li>Open the installed Spark application</li>
                 <li>In the Spark browser window that opens, type in or paste the path to a js file to run.  
-                    If not a fully qualified path name, the browser will search in <strong><a href="http://www.pxscene.org/examples/px-reference/gallery">pxscene.org</a></strong>
+                    If not a fully qualified path name, the browser will search in <strong><a href="http://www.pxscene.org/examples/px-reference/gallery" class="link link--dark">pxscene.org</a></strong>
                     for the file name entered.  Source for this location can be found in this github repo: 
-                    <strong><a href="https://github.com/johnrobinsn/pxscene/tree/gh-pages">pxscene/pxscene</a></strong>  
+                    <strong><a href="https://github.com/johnrobinsn/pxscene/tree/gh-pages" class="link link--dark">pxscene/pxscene</a></strong>  
                     Examples to try:
                     <ul style="list-style-type:circle">
                       <li><i>fancy.js</i>  - a bouncing, animated soccer ball</li>
@@ -168,8 +169,60 @@
        
         <hr />
         <section class="js-section">
+          <h3 class="section__title">px Framework</h3>
+          <p>In order to use the px framework in JavaScript, the application must &quot;import&quot; the scene API to include the versioned API for Spark widgets.
+            Spark disables the nodejs &quot;require&quot; keyword and instead provides &quot;px.import&quot; as an asynchronous loading mechanism for including
+            modules in applications.</p>  
+            
+          <p><a href="frameworks_doc.html" class="link link--light">px Framework Documentation</a></p>
+
+        </section>
+        <hr />
+        <section class="js-section">
+          <h3 class="section__title">The API</h3>
+          <p>Spark provides atomic building blocks that can be composed into rich sets of components.  Building an application is easy using the Spark API!</p>
+          <p>Spark's base widgets can be grouped to make more complex components.  All visual widgets have a basic set of properties for 
+            onscreen positioning and dimensions.  In addition, any widget type can act as a parent container for other widget types; the child widgets'
+            positions will be relative to their parent's position.</p>
+          <p>The main parent container for widgets is called a &quot;scene&quot;.  When an application is started, a root scene is created as the parent for 
+            the application scene.  Scenes can then create visual widgets or even other scenes to compose a full application experience. </p>
+          <p>Spark widgets are created in JavaScript by passing a property bag to the widget creation API: 
+            <pre>     scene.create({t:'scene', url:"http://pxscene.org/examples/px-reference/gallery/gallery.js"});</pre></p>
+          <p>Each widget type has a unique set of properties, but all inherit a basic set of properties from the &quot;object&quot; type. 
+            We can construct a very simple &quot;Hello World&quot; application with just the following code: 
+            <pre>     scene.create({
+                   t:"text",                // Element type will be text
+                   parent: scene.root,      // Parent element
+                   text:"Hello, World!",    // the text
+                   x:100, y:100,            // position
+                   textColor:0xff0000ff,    // RGBA - red text
+                   pixelSize:64});          // font height</pre>
+            </p>
+            The Hello World example will produce the example screen shown below.
+            <p><img src="images/HelloWorldSceneSmall.png"></p>
+            </p> 
+            <br/>
+        
+          <p>The base widgets are as follows:
+            <ul style="list-style-type:circle">
+              <li><a href="apis/index.html#rectangle" class="link link--dark">rect</a></li>
+              <li><a href="apis/index.html#text" class="link link--dark">text</a></li>
+              <li><a href="apis/index.html#textBox" class="link link--dark">textBox</a></li>
+              <li><a href="apis/index.html#image" class="link link--dark">image</a></li>
+              <li><a href="apis/index.html#image9" class="link link--dark">image9</a></li>
+              <li><a href="apis/index.html#imageA" class="link link--dark">imageA</a></li>
+              <li><a href="apis/index.html#object" class="link link--dark">object</a></li>
+              <li><a href="apis/index.html#scene" class="link link--dark">scene</a></li>
+              <li><a href="apis/index.html#wayland" class="link link--dark">external</a></li>
+            </ul>
+          </p>
+          <p>The detailed API document is <a href="apis/index.html" class="link link--dark">here</a>.</p>
+        </section>
+        <hr />
+        <section class="js-section">
           <h3 class="section__title">Configuration</h3>
-          <p>Learn how to configure settings for Spark, such as your default window size and texture memory.</p>
+          <p>Spark is ready to go &quot;out of the box&quot;, but can be configured for some advanced settings, if needed.  
+            Settings currently supported include modifications to default window size and texture memory allowances.</p>
           <p>Spark settings can be set either via the command line (when launching Spark) or through a configuration file.  
             To use the configuration file, create a file called .sparkSettings.json in your Home directory.
             The configuration file will be in json format with key value pairs and will look something like this: </p>
@@ -214,52 +267,24 @@
               <td>true</td>
             </tr>
           </table>
-          <p>Under normal circumstances, Spark does not support the &quot;require&quot; keyword.  However, by creating a file called &quot;.pxsceneEnableRequire&quot; in the HOME directory</p>
-        </section>
-        <hr/>
-        <section class="js-section">
-          <h3 class="section__title">The API</h3>
-          <p>Spark provides atomic building blocks that can be composed into rich sets of components.  Building an application is easy using the Spark API!</p>
-          <p>Spark's base widgets can be grouped to make more complex components.  All visual widgets have a basic set of properties for 
-            onscreen positioning and dimensions.  In addition, any widget type can act as a parent container for other widget types; the child widgets'
-            positions will be relative to their parent's position.</p>
-          <p>The main parent container for widgets is called a &quot;scene&quot;.  When an application is started, a root scene is created as the parent for 
-            the application scene.  Scenes can then create visual widgets or even other scenes to compose a full application experience. </p>
-          <p>Spark widgets are created in JavaScript by passing a property bag to the widget creation API: 
-            <pre>     scene.create({t:'scene', url:"http://pxscene.org/examples/px-reference/gallery/gallery.js"});</pre></p>
-          <p>Each widget type has a unique set of properties, but all inherit a basic set of properties from the &quot;object&quot; type. 
-            We can construct a very simple &quot;Hello World&quot; application with just the following code: 
-            <pre>     scene.create({
-                   t:"text",                // Element type will be text
-                   parent: scene.root,      // Parent element
-                   text:"Hello, World!",    // the text
-                   x:100, y:100,            // position
-                   textColor:0xff0000ff,    // RGBA - red text
-                   pixelSize:64});          // font height</pre>
-            </p>
-            <br/>
-        
-          <p>The base widgets are as follows:
-            <ul style="list-style-type:circle">
-              <li><a href="apis/index.html#rectangle">rect</a></li>
-              <li><a href="apis/index.html#text">text</a></li>
-              <li><a href="apis/index.html#textBox">textBox</a></li>
-              <li><a href="apis/index.html#image">image</a></li>
-              <li><a href="apis/index.html#image9">image9</a></li>
-              <li><a href="apis/index.html#imageA">imageA</a></li>
-              <li><a href="apis/index.html#object">object</a></li>
-              <li><a href="apis/index.html#scene">scene</a></li>
-              <li><a href="apis/index.html#wayland">external</a></li>
-            </ul>
-          </p>
-          <p>The detailed API document is <a href="apis/index.html">here</a>.</p>
-        </section>
-        <hr />
-        <section class="js-section">
-          <h3 class="section__title">Issues</h3>
-          <p>Lorem ipsum dolor sit amet, scripta tibique indoctum sit ei, mel inani aeterno ad. Facer oratio ex per. At eam movet verear, in sea brute patrioque disputando, usu nonumes torquatos an. Ex his quaerendum intellegebat, ut vel homero accusam. Eum at debet tibique, in vocibus temporibus adversarium sed. Porro verear eu vix, ne usu tation vituperata.</p>
-          <p>Malis percipitur an pro. Pro aperiam persequeris at, at sonet sensibus mei, id mea postulant definiebas concludaturque. Id qui malis abhorreant, mazim melius quo et. At eam altera dolorum, case dicant lobortis ius te, ad vel affert oportere reprehendunt. Quo no verterem deseruisse, mea brute postea te, ne per tacimates suavitate vituperatoribus.</p>
-        </section>
+        <p>Under normal circumstances, Spark does not support the <i>require</i> keyword.  However, by creating a file called <i>.pxsceneEnableRequire</i> in the HOME directory, some distributions of 
+        the Spark binary do support it.</p>
+        <h4>Other Configuration Options</h4>
+        <ul style="list-style-type:circle">
+          <li><i>Control logging level from Spark runtime</i>: An environment variable called <b>RT_LOG_LEVEL</b> controls the debug logging level of the Spark runtime. 
+            Valid values in order of greatest to least verbosity are as follows:
+          <ul>
+            <li>debug</li><li>info</li><li>warn</li><li>error</li><li>fatal</li></ul></li>
+        </ul>
+       
+      </section>
+      <hr/>
+      <section class="js-section">
+        <h3 class="section__title">Authoring Applications</h3>
+        <p> When authoring Spark applications, there are many things to consider, such as caching and bundling applications and their resources. 
+          In addition, there are many Tips and Tricks that may be helpful when getting up and running with Spark for the first time. </p>
+        <p>We hope this <a href="app_authoring_doc.html" target="_blank" class="link link--light">Application Authoring Documentation</a> will help. </p>
+      </section>
       </article>
     </div>
 

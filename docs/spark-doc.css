@@ -109,6 +109,11 @@ html, body {
   margin-top: 0.5rem;
 }
 
+/* typography */
+.section__title {
+  color: var(--title-color-docs);
+}
+
 @media (max-width: 750px) {
   .wrapper {
     flex-direction: column;

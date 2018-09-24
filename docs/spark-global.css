@@ -2,6 +2,7 @@
 :root {
   --primary-color: #432E30;
   --primary-color-light: #8E7474;
+  --title-color-docs: rgba(182, 81, 91, 0.872);
   --accent-color: #FE6A6B;
   --accent-color-light: #FFE4E4;
   --accent-color-dark: #B94B4C;
@@ -87,6 +88,7 @@ hr {
 .tab__pane.active {
   display: block;
 }
+
 
 /* code */
 .code {
