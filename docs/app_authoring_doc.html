@@ -27,8 +27,6 @@
           <li class="js-btn selected">Overview</li>
           <li class="js-btn">HTTP Caching</li>
           <li class="js-btn">Service Bubbling</li>
-          <li class="js-btn">px Built-in Functionality</li>
-          <li class="js-btn">px Delegates</li>
         </ul>
       </aside>
       <article class="doc__content">
@@ -156,58 +154,7 @@
             </p>   
         </section>
         <hr />
-        <section class="js-section">
-            <h3 class="section__title">px Built-in Functionality</h3>
 
-            <ul style="list-style-type:circle">
-                <li><i>px.appQueryParams</i>: can be used to retrieve query parameter values passed on the launch url</li>
-                <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
-                    
-  px.appQueryParams.&lt;parameterName&gt;;
-                </pre>... where &lt;parameterName&gt; is the name of a parameter that was passed in.  This will return an undefined javascript object if a parameter with that name was not specified.</p>
-                <p>
-                <li><i>px.getPackageBaseFilePath()</i>: function which returns the root URL path of entry JavaScript file or archive</li>
-                <p><pre  class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
-  var basePackageUri = px.getPackageBaseFilePath();
- 
-  var fontMed = scene.create({t: "fontResource", url: basePackageUri + "/myFont.ttf");
-</pre></p>
-                <li><i>px.getModuleFile(fileName)</i>: function that returns a promise for the contents of a file in current module's archive or path</li>
-                <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
-  var fileLoadPromise = px.getModuleFile(imagesUrl);
-  fileLoadPromise.then(function(data) {
-    // do processing
-    // where 'data' is the contents of the 'imagesUrl' file
-  }
- </pre>This function can be useful for loading JSON or other data for an application.</p>
-
-                <li><i>px.log</i>: original low level debugging</li>
-                <li><i>px.getBaseFilePath()</i>: function which returns the root URL path of the current JavaScript file, even if it is pulled in via <i>px.import</i>.  Availability:  Spark 1.2.0.0 and later.</li>
-              </ul>
-
-          </section>
-          <hr />
-          <section class="js-section">
-              <h3 class="section__title">px Delegates</h3>
-              <p>Delegates are customization points that permit a JavaScript program running in <i>Spark</i> to optionally change 
-                the default behavior of the Spark core framework.  </p>
-              <p>Currently the following <i>delegate</i> patterns are supported...</p>
-              <ul style="list-style-type:circle">
-                  <li><i>Clearscreen</i>: A given Spark JavaScript app can choose to "decline" the default clear screen (to BLACK) by implementing the delegate method below.</li>
-                  <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
-                      
-      // Delegate for Clearscreen
-      module.exports.wantsClearscreen = function()
-      {
-          return false;
-      };
-                  </pre>Defining and exporting this function in a Spark JavaScript application can offer performance improvements, for instance when an application would already be painting an opaque background so that the built-in "clear to Black" would be redundant.</p>
-                  <p>
-
-                </ul>
-  
-            </section>
-            <hr />
       </article>
     </div>
 
