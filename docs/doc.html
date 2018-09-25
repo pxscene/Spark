@@ -30,6 +30,7 @@
           <li class="js-btn">The API</li>
           <li class="js-btn">Configuration</li>
           <li class="js-btn">Authoring Applications</li>
+          <li class="js-btn">Debugging with VSCode</li>
         </ul>
       </aside>
       <article class="doc__content">
@@ -284,6 +285,93 @@
         <p> When authoring Spark applications, there are many things to consider, such as caching and bundling applications and their resources. 
           In addition, there are many Tips and Tricks that may be helpful when getting up and running with Spark for the first time. </p>
         <p>We hope this <a href="app_authoring_doc.html" target="_blank" class="link link--light">Application Authoring Documentation</a> will help. </p>
+      </section>
+      <hr/>
+      <section class="js-section">
+        <h3 class="section__title">Debugging with VSCode</h3>
+        <p>When developing applications, it is often necessary to be able to step through the code to debug an issue.  VSCode provides a very nice
+          environment for debugging Spark applications. <i>The below steps have been verified and tested on OS X. </i> 
+          <h4>From within VSCode</h4>
+          <ol>
+              <li>Download and install <a href="https://code.visualstudio.com/">Visual Studio Code</a> </li>
+              <li>In Visual Studio Code use the File->Open menu to open the local directory where your Spark JavaScript application code resides, and select the file that you want to debug. 
+                <p><em>Note: Open the directory rather than just a single file; opening the directory will create a ./vscode subdirectory within your js directory, and this is needed for the debug configuration in step #3. </em>
+                </p></li>
+              <li>Click on the debug icon in Visual Studio Code (along the left-hand side) and then click on the gear (top of the left-most panel) this should open a file called launch.json. Replace the contents of launch.json with the code block below.
+                <p><em>NOTE: From VSCode 1.25 and greater ... it is necessary to include "protocol": "legacy", in launch.json.</em></p>
+                <pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+
+    // Reference
+    // https://code.visualstudio.com/Docs/editor/debugging
+    // https://github.com/Microsoft/vscode/issues/102
+    
+    {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "DBG file in Spark",
+        "type": "node",
+        "request": "launch",
+        "protocol": "legacy",
+        "cwd": "/Applications/Spark.app/Contents/MacOS",
+        "runtimeExecutable": "/Applications/Spark.app/Contents/MacOS/Spark",
+        "args":["${file}"],
+        "env" : {
+        "LD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib",
+        "DYLD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib"
+        //,"BREAK_ON_SCRIPTSTART":1    
+        }
+      },
+      {
+        "name": "DBG Spark",
+        "type": "node",
+        "request": "launch",
+        "protocol": "legacy",
+        "cwd": "/Applications/Spark.app/Contents/MacOS",
+        "runtimeExecutable": "/Applications/Spark.app/Contents/MacOS/Spark",
+        "env" : {
+        "LD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib",
+        "DYLD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib"
+        //,"BREAK_ON_SCRIPTSTART":1      
+        }
+      },   
+      {
+      "name": "Attach Spark",
+      "type": "node",
+      "request": "attach",
+      // TCP/IP address. Default is "localhost".
+      "address": "localhost",
+      // Port to attach to.
+      "port": 5858,
+      "sourceMaps": false
+      }
+    ]
+    }</pre>
+              </li>
+              <li>Go back to the file that you'd like to debug (click on the explorer icon top left-hand side). 
+                Set a breakpoint by clicking to the left of the appropriate source line.
+              </li>
+              <li>Go back to the debugger. Choose the &quot;DBG Spark&quot; configuration and then click the green &quot;debug arrow&quot;. 
+                You should see the Spark application launch and in the browser url bar enter the file url that corresponds to 
+                the JavaScript file that you want to debug. Alternatively, choose the &quot;DBG file in Spark&quot; configuration, 
+                make sure the JavaScript file you want to launch is the focused file in the IDE, then click the green &quot;debug arrow&quot;. 
+                This will launch the focused file directly without displaying the Spark browser url bar.
+              </li>
+              <li>You should now be able to set and hit breakpoints in the debugger.
+                  <em>Note: If you have set environment variable BREAK_ON_SCRIPTSTART=1, execution will get stopped as the JavaScript file 
+                    loads; otherwise, execution will stop at breakpoints only.</em>
+              </li>
+          </ol>  
+      <h4>Attaching to a running instance of spark</h4>  
+      <p><em>Note: You must have started Spark with the --debug=5858 (5858 being the ip port specified in your .vscode/launch.json config file) command line option in order for this to work. eg. ./spark.sh --debug=5858</em></p>   
+          <ol>
+            <li>Launch Spark as described above.</li>
+            <li>Please set up your VSCode launch.json as described above. Then go to the debugger and choose the &quot;Attach pxscene&quot; config option, and click the debugger &quot;green arrow&quot;.</li>
+            <li>Within Spark enter the file URL of the JavaScript file that you want to debug.</li>
+            <li>Within VSCode, navigate to the source for the JavaScript file that you want to debug. You should now be able to set and hit breakpoints.</li>
+          </ol>
+      <h4>See Also</h4>
+      <p><a href="https://code.visualstudio.com/Docs/editor/debugging">https://code.visualstudio.com/Docs/editor/debugging</a></p>
       </section>
       </article>
     </div>

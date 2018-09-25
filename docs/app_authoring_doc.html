@@ -124,10 +124,11 @@
             <br/>
             <p><i>scene</i> supports a function for scenes to request vended services by name: </p>
             <p>
-              <strong>scene.getService</strong>
+              <strong>scene.getService(serviceName)</strong>
             </p>
+            <p>Internally, Spark will do the following: </p>
             <ul>
-              <li>Checks the current scene for any service provider functions</li>
+              <li>Check the current scene for any service provider functions</li>
               <li>If a serviceProvider is found, it calls each service provider function found, passing the service name and service context</li>
               <li>If a service (object other than "DENY" or "ALLOW") is returned from the service provider function, the service provider function is returned from getService</li>
               <li>If DENY is returned from the service provider function, the search for a service is halted, getService returns null</li>
