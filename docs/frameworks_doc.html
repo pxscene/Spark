@@ -27,7 +27,12 @@
           <li class="js-btn selected">Overview</li>
           <li class="js-btn">px.import</li>
           <li class="js-btn">px.configImport</li>
-          <li class="js-btn">px Built-in Functionality</li>
+          <li class="js-btn">px.appQueryParams</li>
+          <li class="js-btn">px.getPackageBaseFilePath</li>
+          <li class="js-btn">px.getBaseFilePath</li>
+          <li class="js-btn">px.getModuleFile</li>
+          <li class="js-btn">px.getFile</li>
+          <li class="js-btn">px.log</li>
           <li class="js-btn">px Delegates</li>
         </ul>
       </aside>
@@ -38,6 +43,9 @@
           <p>Spark uses the px Framework to import the versioned UI API to use for an application. The px Framework disables 
             the nodejs <i>require</i> keyword and instead provides <i>px.import</i> as an asynchronous loading 
             mechanism for including modules in applications.</p>
+            <p>In addition, the px Framework provides built-in variables and functions for commonly used functionality.  Please see this page for 
+              details of these built-ins.
+            </p>
         </section>
         <hr />
         <section class="js-section">
@@ -108,7 +116,7 @@ px.import({ scene: 'px:scene.1.js',
         <hr />
         <section class="js-section">
           <h3 class="section__title">px.configImport</h3>
-          <p>px.configImport can be used to name a common frameworks location, then that name can be used within px.import.</p>
+          <p><i>px.configImport</i> can be used to name a common frameworks location, then that name can be used within px.import.</p>
           <h4>Usage</h4>
           <p></p>
           <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:10px">
@@ -132,35 +140,60 @@ console.error("Imports failed for myexample.js: " + err)
         </section>
         <hr />
         <section class="js-section">
-            <h3 class="section__title">px Built-in Functionality</h3>
-
-            <ul style="list-style-type:circle">
-                <li><i>px.appQueryParams</i>: can be used to retrieve query parameter values passed on the launch url</li>
-                <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+            <h3 class="section__title">px.appQueryParams</h3>
+            <p><i>px.appQueryParams</i>: can be used to retrieve query parameter values passed on the launch url</p>
+            <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
                     
   px.appQueryParams.&lt;parameterName&gt;;
                 </pre>... where &lt;parameterName&gt; is the name of a parameter that was passed in.  This will return an undefined javascript object if a parameter with that name was not specified.</p>
-                <p>
-                <li><i>px.getPackageBaseFilePath()</i>: function which returns the root URL path of entry JavaScript file or archive</li>
-                <p><pre  class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+        </section>
+        <hr />
+        <section class="js-section">
+            <h3 class="section__title">px.getPackageBaseFilePath</h3>
+            <p><i>px.getPackageBaseFilePath()</i>: function which returns the root URL path of entry JavaScript file or archive</p>
+            <p><pre  class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
   var basePackageUri = px.getPackageBaseFilePath();
  
   var fontMed = scene.create({t: "fontResource", url: basePackageUri + "/myFont.ttf");
 </pre></p>
-                <li><i>px.getModuleFile(fileName)</i>: function that returns a promise for the contents of a file in current module's archive or path</li>
-                <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
-  var fileLoadPromise = px.getModuleFile(imagesUrl);
+        </section>
+        <hr />
+        <section class="js-section">
+            <h3 class="section__title">px.getBaseFilePath</h3>
+            <p><i>px.getBaseFilePath()</i>: function which returns the root URL path of the current JavaScript file, even if it is pulled in via <i>px.import</i>.</p>  
+            <p>Availability:  Spark 1.2.0.0 and later. </p>
+          </section>
+        <hr />
+        <section class="js-section">
+            <h3 class="section__title">px.getModuleFile</h3>
+            <p><i>px.getModuleFile(fileName)</i>: function that returns a promise for the contents of a file in current module's archive or path</p>
+            <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+  var fileLoadPromise = px.getModuleFile(imagesFileName);
+  fileLoadPromise.then(function(data) {
+    // do processing
+    // where 'data' is the contents of the 'imagesFileName' file
+  }
+ </pre>This function can be useful for loading JSON or other data for an application.</p>
+        </section>
+        <hr />
+        <section class="js-section">
+            <h3 class="section__title">px.getFile</h3>
+            <p><i>px.getFile(fileUrl)</i>: function that returns a promise for the contents of a file downloaded from <i>fileUrl</i>.  Note that permissions will be enforced for the <i>fileUrl</i>,
+            such that the application must have permission to access the protocol and origin of <i>fileUrl</i>.</p>
+            <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
+  var fileLoadPromise = px.getFile(imagesUrl);
   fileLoadPromise.then(function(data) {
     // do processing
     // where 'data' is the contents of the 'imagesUrl' file
   }
  </pre>This function can be useful for loading JSON or other data for an application.</p>
+        </section>
+        <hr />
+        <section class="js-section">
+            <h3 class="section__title">px.log</h3>
+            <p><i>px.log</i>: original low level debugging</p>
+        </section>
 
-                <li><i>px.log</i>: original low level debugging</li>
-                <li><i>px.getBaseFilePath()</i>: function which returns the root URL path of the current JavaScript file, even if it is pulled in via <i>px.import</i>.  Availability:  Spark 1.2.0.0 and later.</li>
-              </ul>
-
-          </section>
           <hr />
           <section class="js-section">
               <h3 class="section__title">px Delegates</h3>

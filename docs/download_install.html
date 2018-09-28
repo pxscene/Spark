@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spark Download and Install</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="spark-global.css">
+    <link rel="stylesheet" href="spark-doc.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <h1 class="logo">Spark <span class="logo__thin">Doc</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-home"></i> Docs Home</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <aside class="doc__nav">
+        <ul>
+           <li class="js-btn selected">Download</li>
+           <li class="js-btn">Install</li>
+           <li class="js-btn">Try it!</li>
+
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
+          <h2>Get Spark!</h2>
+          <p>To get started, download and install the Spark binary for your platform. Then follow the instructions to run a few simple Spark applications.</p>
+          <h3 class="section__title">Download</h3>
+          <p>Two different flavors of Spark builds are available: stable and edge. <br/>
+            <ul style="list-style-type:circle">  
+              <li><i>Release</i> builds are release builds that have been tested and verified. </li>
+              <li><i>Edge</i> builds are built daily by a cron job, so they represent the bleeding-edge of the latest Spark code.</li>
+            </ul>
+          </p><br/>
+          <div class="download">
+              <div class="tab__container">
+                <ul class="tab__menu">
+                  <li class="tab active" data-tab="mac">mac</li>
+                  <li class="tab" data-tab="linux">linux</li>
+                  <li class="tab" data-tab="win">win</li>
+                  <li class="tab" data-tab="pi">pi</li>
+                </ul>
+                <pre class="nohighlight code">
+                  <code class="tab__pane active mac" >
+                    <div ></div>
+                    <strong>Minimum System Requirements:</strong> 
+                      <br/> &nbsp;OS: Macbook Pro (macOS Sierra) 
+                      <br/> &nbsp;RAM: 256 MB 
+                      <br/> &nbsp;Disk Space: 24 MB 
+                      <br/> &nbsp;Processor Speed:1 GHz
+                    <br/>
+                    <br/>
+                    <img src="images/Spark128.png" height="50" align="middle">
+                    <strong>
+                      <a href="dist/osx/pxscene/Spark.dmg" class="link link--light">Spark - release</a>
+                    </strong>
+                    &nbsp;&nbsp;
+                    
+                    <img src="images/SparkEdge128.png" height="50" align="middle">
+                    <strong>
+                      <a href="http://96.116.56.119/edge/osx/artifacts/SparkEdge.dmg" class="link link--light">
+                        <superscript>Spark - edge</superscript>
+                      </a>
+                    </strong>
+                    <br/>
+                    <br/>
+      
+
+                   </code>
+                  <code class="tab__pane linux">No installer available.  See for Spark build instructions: <i>TBD</i></code>
+                  <code class="tab__pane win">    
+                    <strong>Minimum System Requirements:</strong> 
+                      <br/>&nbsp; OS: Windows 10 
+                      <br/>&nbsp; RAM: 128 MB 
+                      <br/>&nbsp; Disk Space: 24 MB
+                      <br/>&nbsp; Processor Speed:1 GHz 
+                    <br/>
+                    <br/>     
+                    <img src="images/Spark128.png" height="50"  align="middle">
+                    <strong><a href="https://github.com/pxscene/pxCore/releases/download/0.41.1.0/pxscene-setup.exe.zip" class="link link--light">Spark - release</a></strong>&nbsp;&nbsp;
+                    
+                    <img src="images/SparkEdge128.png"  height="50"  align="middle">
+                        <strong><a href="http://96.116.56.119/edge/windows/sparkEdge-setup.exe" class="link link--light">Spark - edge</a></strong>
+                        <br/>
+                        <br/>
+
+                 </code>
+                  <code class="tab__pane pi">No installer available.  See for Spark build instructions: <i>TBD</i></code>
+                </pre>
+              </div>
+            </div><!-- install-->
+        </section>
+        <hr />
+        <section class="js-section">
+          <h3 class="section__title">Install</h3>
+          <p>Follow the installer instructions to install the downloaded Spark binary.</p>
+          <br/>
+          <div class="install">
+              <div class="tab__container">
+                <ul class="tab__menu">
+                  <li class="tab active" data-tab="mac">mac</li>
+                  <li class="tab" data-tab="linux">linux</li>
+                  <li class="tab" data-tab="win">win</li>
+                  <li class="tab" data-tab="pi">pi</li>
+                </ul>
+                <pre class="nohighlight code">
+                  <code class="tab__pane active mac" >
+                    <ol>
+                      <li>Open the downloaded dmg file.</li>
+                      <li>Within the window that opens, drag and drop the Spark binary to the Applications folder.</li>
+                    </ol>
+                  </code>
+                  <code class="tab__pane linux">N/A.  Please see TBD for instructions to build Spark for linux platforms.</code>
+                  <code class="tab__pane win">    
+                    <ol>
+                      <li>Expand the downloaded zip file</li>
+                      <li>Double-click the exe installer and click &quot;Allow&quot; at the pop-up prompt asking for permission to edit local machine.</li>
+                    </ol>
+                  </code>
+                  <code class="tab__pane pi">N/A.  Please see TBD for instructions to build Spark for the Raspberry Pi.</code>
+                </pre>
+              </div>
+            </div>
+        </section>
+        <hr />
+        <section class="js-section">
+
+            <h3 class="section__title">Try it!</h3>
+            <p>Now that Spark is installed, run some samples to see what it can do.</p>
+            <h5>Option 1: (This is the preferred method for running Spark applications.)</h5>
+            <ol>
+                <li>Open the installed Spark application</li>
+                <li>In the Spark browser window that opens, type in or paste the path to a js file to run.  
+                    If not a fully qualified path name, the browser will search in <strong><a href="http://www.pxscene.org/examples/px-reference/gallery" class="link link--dark">pxscene.org</a></strong>
+                    for the file name entered.  Source for this location can be found in this github repo: 
+                    <strong><a href="https://github.com/johnrobinsn/pxscene/tree/gh-pages" class="link link--dark">pxscene/pxscene</a></strong>  
+                    Examples to try:
+                    <ul style="list-style-type:circle">
+                      <li><i>fancy.js</i>  - a bouncing, animated soccer ball</li>
+                      <li><i>event.js</i> – Use mouse movement, mouse and keyboard clicks to cause animated bubbles to appear</li>
+                      <li><i>fonts.js</i> – A page where typed text is rendered in a variety of downloaded fonts</li>
+                      <li><i>picturepile.js</i> – pictures animating in and landing in random positions in “pile”</li>
+                      <li><i>gallery.js</i> – All of the above examples, plus a few more, all loading on the screen at once</li>
+
+                    </ul>
+                  </li>
+            </ol> 
+            <h5>Option 2: Command line</h5>
+            <ol>
+                <li>Use the start up script to start Spark and pass the path to the js file to run</li>
+                <br/>
+                <div class="runSamples">
+                    <div class="tab__container">
+                      <ul class="tab__menu">
+                        <li class="tab active" data-tab="mac">mac</li>
+                        <li class="tab" data-tab="linux">linux</li>
+                        <li class="tab" data-tab="win">win</li>
+                        <li class="tab" data-tab="pi">pi</li>
+                      </ul>
+                      <pre class="nohighlight code">
+                        <code class="tab__pane active mac" >
+                          cd /Applications/Spark.app/Contents/MacOS <br/>
+                          ./spark.sh {path_to_javascript_file_name}.js
+                        </code>
+                        <code class="tab__pane linux">
+                          cd pxCore/examples/pxScene2d/src <br/>
+                          ./spark.sh {path_to_javascript_file_name}.js
+                        </code>
+                        <code class="tab__pane win">    
+                          cd C:\Program Files (x86)\pxscene <br/>
+                          pxscene.exe {path_to_javascript_file_name}.js
+                        </code>
+                        <code class="tab__pane pi">TBD</code>
+                      </pre>
+                    </div>
+                  </div>
+
+                <li>Examples of running from command line with Option 2 (on mac):
+                   <ul style="list-style-type:circle">
+                    <li><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">./Spark.sh http://www.pxscene.org/examples/px-reference/gallery/picturepile.js</pre></li>
+                    <li><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">./Spark.sh http://www.pxscene.org/examples/px-reference/gallery/gallery.js</pre></li>
+                  </ul>
+                </li>
+                <li>Running ./pxscene.sh without a parameter will load the Spark browser (just as if starting the app directly), allowing you to type URLs to load 
+                  into the browser input field.
+                </li>
+
+            </ol> 
+
+        </section>
+
+      </article>
+    </div>
+
+    <footer class="footer">Spark is an open source project in github <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script> 
+  </body>
+</html>

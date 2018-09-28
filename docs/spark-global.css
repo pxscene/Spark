@@ -53,6 +53,7 @@ hr {
 /* tabs */
 .tab__container {
   position: relative;
+  width: 60%;
 }
 
 .tab__container > ul {
@@ -161,6 +162,7 @@ hr {
 
 .link:hover {
   color: var(--accent-color);
+  font-size: 110%;
 }
 
 .link--dark {

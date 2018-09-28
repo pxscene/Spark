@@ -29,7 +29,8 @@
           <li class="js-btn">px Framework</li>
           <li class="js-btn">The API</li>
           <li class="js-btn">Configuration</li>
-          <li class="js-btn">Authoring Applications</li>
+          <li class="js-btn">Application Basics</li>
+          <li class="js-btn">Advanced Topics</li>
           <li class="js-btn">Debugging with VSCode</li>
         </ul>
       </aside>
@@ -74,98 +75,12 @@
         <section class="js-section">
           <h3 class="section__title">Getting Started</h3>
           <p>To get started, download and install the Spark binary for your platform. Then follow the instructions to run a few simple Spark applications.</p>
-          <h4 class="section__title">Install</h4>
-          <p>Two different flavors of Spark builds are available: stable and edge. <br/>
-            <ul style="list-style-type:circle">  
-              <li><i>Stable</i> builds are release builds that have been tested and verified. </li>
-              <li><i>Edge</i> builds are built daily by a chron job, so they represent the bleeding-edge of the latest Spark code.</li>
-            </ul>
-          </p><br/>
-          <div class="installation">
-              <div class="tab__container">
-                <ul class="tab__menu">
-                  <li class="tab active" data-tab="mac">mac</li>
-                  <li class="tab" data-tab="linux">linux</li>
-                  <li class="tab" data-tab="win">win</li>
-                  <li class="tab" data-tab="pi">pi</li>
-                </ul>
-                <pre class="nohighlight code">
-                  <code class="tab__pane active mac" >
-                    <img src="images/Spark128.png" height="25" align="middle">
-                    <strong>
-                      <a href="dist/osx/pxscene/Spark.dmg" class="link link--dark">stable</a>
-                    </strong>
-                    &nbsp;&nbsp;
-                    
-                    <img src="images/SparkEdge128.png" height="25" align="middle">
-                    <strong>
-                      <a href="http://96.116.56.119/edge/osx/artifacts/SparkEdge.dmg" class="link link--dark">
-                        <superscript>edge</superscript>
-                      </a>
-                    </strong>
-                    <br/>
-                    <br/>
-      
-                    <strong>Minimum System Requirements:</strong> &nbsp; OS: Macbook Pro (macOS Sierra) &nbsp; | &nbsp; RAM: 256 MB &nbsp; | &nbsp; Disk
-                    Space: 24 MB &nbsp; | &nbsp; Processor Speed:1 GHz
-      
-                   </code>
-                  <code class="tab__pane linux">No installer available.  See for Spark build instructions: TBD</code>
-                  <code class="tab__pane win">          
-                    <img src="images/Spark128.png" height="25"  align="middle">
-                    <strong><a href="https://github.com/pxscene/pxCore/releases/download/0.41.1.0/pxscene-setup.exe.zip" class="link link--dark">stable</a></strong>&nbsp;&nbsp;
-                    
-                    <img src="images/SparkEdge128.png"  height="25"  align="middle">
-                        <strong><a href="http://96.116.56.119/edge/windows/sparkEdge-setup.exe" class="link link--dark">edge</a></strong>
-                        <br/>
-                        <br/>
-                        <strong>Minimum System Requirements:</strong> &nbsp; OS: Windows 10 &nbsp; | &nbsp; RAM: 128 MB &nbsp; | &nbsp; Disk Space: 24 MB
-                        &nbsp; | &nbsp; Processor Speed:1 GHz
-                 </code>
-                  <code class="tab__pane pi">No installer available.  See for Spark build instructions: TBD</code>
-                </pre>
-              </div>
-            </div><!-- install-->
-            <p>Two different flavors of Spark builds are available: stable and edge. <br/>
-              <i>Stable</i> builds are release builds that have been tested and verified. <br/>
-              <i>Edge</i> builds are built daily by a chron job, so they represent the bleeding-edge of the latest Spark code.</p><br/>
-
-            <h4 class="section__title">Run Samples</h4>
-            <p>Now that Spark is installed, run some samples to see what it can do.</p>
-            <h5>Option 1: (This is the preferred method for running Spark applications.)</h5>
-            <ol>
-                <li>Open the installed Spark application</li>
-                <li>In the Spark browser window that opens, type in or paste the path to a js file to run.  
-                    If not a fully qualified path name, the browser will search in <strong><a href="http://www.pxscene.org/examples/px-reference/gallery" class="link link--dark">pxscene.org</a></strong>
-                    for the file name entered.  Source for this location can be found in this github repo: 
-                    <strong><a href="https://github.com/johnrobinsn/pxscene/tree/gh-pages" class="link link--dark">pxscene/pxscene</a></strong>  
-                    Examples to try:
-                    <ul style="list-style-type:circle">
-                      <li><i>fancy.js</i>  - a bouncing, animated soccer ball</li>
-                      <li><i>event.js</i> – Use mouse movement, mouse and keyboard clicks to cause animated bubbles to appear</li>
-                      <li><i>fonts.js</i> – A page where typed text is rendered in a variety of downloaded fonts</li>
-                      <li><i>picturepile.js</i> – pictures animating in and landing in random positions in “pile”</li>
-                      <li><i>gallery.js</i> – All of the above examples, plus a few more, all loading on the screen at once</li>
-
-                    </ul>
-                  </li>
-            </ol> 
-            <h5>Option 2: Command line</h5>
-            <ol>
-                <li>Use the start up script to start Spark and pass the path to the js file to run</li>
-                <pre class="nohighlight code" >
-                  cd /Applications/spark.app/Contents/MacOS
-                  ./Spark.sh {path_to_javascript_file_name}.js
-                </pre>
-                <li>Examples of running from command line with Option 2:
-                   <ul style="list-style-type:circle">
-                    <li>./Spark.sh http://www.pxscene.org/examples/px-reference/gallery/picturepile.js</li>
-                    <li>./Spark.sh http://www.pxscene.org/examples/px-reference/gallery/gallery.js</li>
-                  </ul>
-                </li>
-
-            </ol> 
-
+          <p>
+              <div class="callout">
+                  <p>Go to Downloads page </p>
+                  <a href="download_install.html" class="button--primary">Downloads</a>
+                </div>
+              </p>
         </section>
        
         <hr />
@@ -289,14 +204,27 @@
       </section>
       <hr/>
       <section class="js-section">
-        <h3 class="section__title">Authoring Applications</h3>
+        <h3 class="section__title">Application Basics</h3>
+        <p> Spark applications run in a browser-<i>like</i> environment. They have a DOM and leverage HTML5 paradigms like Promises and W3C event bubbling semantics; however,
+        since they are not running in a browser, there are some differences and basics to keep in mind.  </p>
+        <p>
+        <div class="callout">
+            <p>Read more on Application Basics</p>
+            <a href="app_basics_doc.html" class="button--primary">Application Basics</a>
+          </div>
+        </p>
+      </section>
+      <hr/>
+      <hr/>
+      <section class="js-section">
+        <h3 class="section__title">Advanced Topics</h3>
         <p> When authoring Spark applications, there are many things to consider, such as caching and bundling applications and their resources. 
           In addition, there are many Tips and Tricks that may be helpful when getting up and running with Spark for the first time. </p>
         <p>
         <div class="callout">
-            <p>Read more on Application Authoring</p>
-            <a href="app_authoring_doc.html" class="button--primary">Application Authoring Documentation</a>
-          </div>
+          <p>Read more on Application Authoring</p>
+          <a href="app_advanced_doc.html" class="button--primary">Advanced Topics</a>
+        </div>
         </p>
       </section>
       <hr/>
