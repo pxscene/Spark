@@ -46,7 +46,7 @@ nav {
 /* demo section */
 
 .demo__terminal {
-  width: 70%;
+  width: 900px;
   margin: -3rem auto 3rem auto;
   text-align: left;
   color: white;
@@ -64,8 +64,8 @@ nav {
 }
 
 .video__item {
-  /*max-width: calc(33% - 20px);*/
-  margin: 0 20px 0 0;
+  max-width: calc(50% - 40px);
+  margin: 20px 20px 0 0; 
 }
 
 .video__item .section__title {
