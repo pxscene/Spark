@@ -14,6 +14,7 @@
   <body>
     <div class="doc__bg"></div>
     <nav class="header">
+      <div class="logo_svg"></div>
       <h1 class="logo">Spark <span class="logo__thin">Doc</span></h1>
       <ul class="menu">
         <div class="menu__item toggle"><span></span></div>
@@ -21,11 +22,12 @@
         <li class="menu__item"><a href="index.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
       </ul>
     </nav>
-    <div class="wrapper">
+    <div class="wrapper__doc">
       <aside class="doc__nav">
-        <ul>
+        <ul class="fixed">
           <li class="js-btn selected">What is Spark?</li>
           <li class="js-btn">Getting Started</li>
+          <li class="js-btn">The Spark Browser</li>
           <li class="js-btn">px Framework</li>
           <li class="js-btn">The API</li>
           <li class="js-btn">Configuration</li>
@@ -52,7 +54,7 @@
             framebuffer and windowing abstraction for C++.  Spark is a 2d scene graph API that defines a small set of atomic UI elements and exposes them 
             with JavaScript wrappers.  The result is a lightweight, portable application engine that can be used to build rich application experiences.</p>
           <p>A high level representation of the runtime stack is below</p>
-          <p><img src="images/sparkStackHighLevel.png"></p>
+          <p><img src="images/sparkStack.png" height="350"></p>
           <p>The stack components.
           <ul>
              <li>Native OS and graphic drivers - provides specific kernel, OS and UI services for the native system</li>
@@ -82,7 +84,17 @@
                 </div>
               </p>
         </section>
-       
+        <hr />
+        <section class="js-section">
+          <h3 class="section__title">The Spark Browser</h3>
+          <p></p>
+          <p>
+              <div class="callout">
+                  <p>Go to Getting Started page </p>
+                  <a href="browser.html" class="button--primary">The Spark Browser</a>
+                </div>
+              </p>
+        </section>       
         <hr />
         <section class="js-section">
           <h3 class="section__title">px Framework</h3>
@@ -214,7 +226,6 @@
           </div>
         </p>
       </section>
-      <hr/>
       <hr/>
       <section class="js-section">
         <h3 class="section__title">Advanced Topics</h3>

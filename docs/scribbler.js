@@ -10,7 +10,7 @@ var getAll = function (selector, scope) {
 };
 
 // setup typewriter effect in the terminal demo
-if (document.getElementsByClassName('demo').length > 0) {
+/*if (document.getElementsByClassName('demo').length > 0) {
   var i = 0;
   var txt = `scribbler
             [Entry mode; press Ctrl+D to save and quit; press Ctrl+C to quit without saving]
@@ -32,7 +32,7 @@ if (document.getElementsByClassName('demo').length > 0) {
   }
 
   setTimeout(typeItOut, 1800);
-}
+}*/
 
 // toggle tabs on codeblock
 window.addEventListener("load", function() {
@@ -84,12 +84,59 @@ function setActiveLink(event) {
 function smoothScrollTo(i, event) {
   var element = sections[i];
   setActiveLink(event);
+  this.console.log("element.offsetTop is "+ element.offsetTop );
 
-  window.scrollTo({
-    'behavior': 'smooth',
-    'top': element.offsetTop - 20,
-    'left': 0
-  });
+  var docNav = get('.doc__nav > ul.fixed');
+  var wrapper = get('.wrapper__doc');
+  if(wrapper) { 
+    var style = window.getComputedStyle(wrapper);
+    var direction = style.getPropertyValue('flex-direction');
+    //var position =  docNav.getAttribute("position");
+    if( direction == 'column') {
+      window.scrollTo({
+        'behavior': 'smooth',
+        'top': element.offsetTop - 80,
+        'left': 0
+      });
+    } else {
+      window.scrollTo({
+        'behavior': 'smooth',
+        'top': element.offsetTop - 80,
+        'left': 0
+      });
+    }
+  } else {
+    window.scrollTo({
+      'behavior': 'smooth',
+      'top': element.offsetTop - 80,
+      'left': 0
+    });
+  }
+/*   var docNav = get('.doc__nav > ul.fixed');
+  if(docNav) { 
+    var style = window.getComputedStyle(docNav);
+    var position = style.getPropertyValue('position');
+    //var position =  docNav.getAttribute("position");
+    if( position == 'relative') {
+      window.scrollTo({
+        'behavior': 'smooth',
+        'top': element.offsetTop - (80 + docNav.offsetHeight) ,
+        'left': 0
+      });
+    } else {
+      window.scrollTo({
+        'behavior': 'smooth',
+        'top': element.offsetTop - 80,
+        'left': 0
+      });
+    }
+  } else {
+    window.scrollTo({
+      'behavior': 'smooth',
+      'top': element.offsetTop - 80,
+      'left': 0
+    });
+  } */
 }
 
 if (btns.length && sections.length > 0) {
@@ -97,18 +144,49 @@ if (btns.length && sections.length > 0) {
     btns[i].addEventListener('click', smoothScrollTo.bind(this,i));
   }
 }
+/*
+var mediaFunction = function(media) {
+  if (media.matches) { // If media query matches
+      document.body.style.backgroundColor = "yellow";
+      var docNav = get('.doc__nav > ul.fixed');
+      var docContent = get('.doc__content');
+      docContent.style.setProperty('padding-top', docNav.offsetHeight +'px');
 
+  } else {
+      document.body.style.backgroundColor = "pink";
+      var docContent = get('.doc__content');
+      docContent.style.setProperty('padding-top', 0);
+
+
+  }
+}
+
+
+var mediaWindow = window.matchMedia("(max-width: 1215px)")
+mediaFunction(mediaWindow) // Call listener function at run time
+mediaWindow.addListener(mediaFunction) // Attach listener function on state changes
+*/
 // fix menu to page-top once user starts scrolling
 window.addEventListener('scroll', function () {
   var docNav = get('.doc__nav > ul');
+  var head = get('.header');
 
+/*this.console.log("window.pageYOffset is "+ window.pageYOffset );
+this.console.log("head.offsetTop is "+head.offsetTop );
+this.console.log("head.offsetHeight is "+head.offsetHeight );
   if( docNav) {
-    if (window.pageYOffset > 63) {
+    if (window.pageYOffset >= head.offsetHeight) {
       docNav.classList.add('fixed');
     } else {
       docNav.classList.remove('fixed');
     }
-  }
+   }  
+  console.log("scrolling!");
+  if (window.pageYOffset > 0) {
+    head.classList.add("sticky");
+  } else {
+    head.classList.remove("sticky");
+  } */
 });
 
 // responsive navigation

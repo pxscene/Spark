@@ -43,7 +43,16 @@ hr {
   box-sizing: border-box;
 }
 
+
 /* global components */
+.logo_svg {
+  background: url('logo.svg') no-repeat;
+  /*background-size: contain;*/
+  background-size: 50.2px 50px;
+  min-width: 50.2px;
+  margin: 10px 10px 10px 10px;
+  vertical-align: middle;
+}
 
 /* typography */
 .section__title {
@@ -109,6 +118,58 @@ hr {
 .code--inline {
   padding: 3px 6px;
   font-size: 80%;
+}
+/* keybinding section */
+.keybinding {
+  margin-top: 3rem;
+  display: flex;
+}
+
+.keybinding__detail {
+  position: relative;
+  border: 1px solid var(--code-bg-color);
+  flex-basis: 50%;
+  padding: 2rem 1rem 1rem 1rem;
+  list-style: none;
+  line-height: 2rem;
+}
+
+.keybinding__detail:first-child {
+  text-align: right;
+  padding-right: 1rem;
+}
+
+.keybinding__detail:last-child {
+  padding-left: 1rem;
+  margin-left: -1px;
+}
+
+.keybinding__detail:first-child .keybinding__title {
+  position: absolute;
+  right: 0.5rem;
+  top: -2rem;
+  background-color: white;
+  padding: 0 0.5rem;
+}
+
+.keybinding__detail:last-child .keybinding__title {
+  position: absolute;
+  left: 0.5rem;
+  top: -2rem;
+  background-color: white;
+  padding: 0 0.5rem;
+}
+
+.keybinding__label {
+  background: var(--white-color);
+  border: 1px solid var(--light-gray-color);
+  box-shadow: 0 1px 0 0 var(--medium-gray-color);
+  border-radius: 3px;
+  font-family: Courier;
+  font-size: 0.7rem;
+  color: var(--dark-gray-color);
+  padding: 3px 3px 1px 3px;
+  vertical-align: middle;
 }
 
 /* buttons */

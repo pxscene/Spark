@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Spark Browser</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="spark-global.css">
+    <link rel="stylesheet" href="spark-doc.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <div class="logo_svg"></div>
+      <h1 class="logo">Spark <span class="logo__thin">Doc</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-home"></i> Docs Home</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper__doc">
+      <aside class="doc__nav">
+        <ul>
+           <li class="js-btn selected">The Browser</li>
+           <li class="js-btn">Shortcuts</li>
+
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
+          <h2>The Spark Browser</h2>
+          <p>The Spark Browser is launched whenever Spark is not passed an URL on startup.</p>
+          <h3 class="section__title">The Browser</h3>
+          <p></p>
+        </section>
+        <hr />
+        <section class="js-section">
+          <h3 class="section__title">Shortcuts</h3>
+          <div class="keybinding">
+              <ul class="keybinding__detail">
+                <h3 class="keybinding__title">Spark Browser Shortcuts</h3>
+                <li> Show Help page that defines all Shortcuts<span class="keybinding__label">Ctrl+Alt+K</span></li>
+                <li> Show About page with details about Spark <span class="keybinding__label">Ctrl+Alt+A</span></li>
+                <li> Toggle URL edit box visibility.  Go fullscreen ! <span class="keybinding__label">Ctrl+Alt+F</span></li>
+                <li> Sets focus on URL edit box - and selects ALL <span class="keybinding__label">Ctrl+Alt+Shift+L</span></li>
+                <li> Load browser.js <span class="keybinding__label">Ctrl+Alt+Shift+H</span></li>
+              </ul>
+              <ul class="keybinding__detail">
+                <h3 class="keybinding__title">Spark General Shortcuts</h3>
+                <li><span class="keybinding__label">Ctrl+Alt+Y</span> Toggle FPS</li>
+                <li><span class="keybinding__label">Ctrl+Alt+O</span> Toggle object outlines</li>
+                <li><span class="keybinding__label">Ctrl+Alt+Shift+D</span> Log debug info and object count</li>
+                <li><span class="keybinding__label">Ctrl+Alt+D</span> Show dirty rect outlines</li>
+                <li><span class="keybinding__label">Ctrl+Alt+S</span> Take a screenshot</li>
+                <li><span class="keybinding__label">Ctrl+Alt+Shift+R</span> Reload scene</li>
+              </ul>
+            </div>
+        </section>
+
+      </article>
+    </div>
+
+    <footer class="footer">Spark is an open source project in github <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script> 
+  </body>
+</html>
