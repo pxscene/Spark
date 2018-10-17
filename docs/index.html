@@ -115,6 +115,28 @@
       <div class="wrapper">
         <h3 class="section__title">Release Highlights</h3>
         <div class="changelog__item">
+            <div class="changelog__meta">
+              <h4 class="changelog__title">v1.1.0.3</h4>
+              <small class="changelog__date">27September2018</small>
+            </div>
+            <div class="changelog__detail">
+              <ul>
+                <li>Added capabilities to apps that can check to determine if CORS is being enforced</li>
+                <li>Additional API support to the scene for texture memory usage</li>
+                <li>Upgraded external freetype to version 2.8.1</li>
+                <li>Add ability to load Resources from JAR files</li>
+                <li>TestRunner can accept multiple tests.json files as parameters</li>
+                <li>Implemented Tree Control Component</li>
+                <li>Set default permissions to allow testRunner to access local json test files for CI builds</li>
+                <li>Optimus logs about launch/load time on loading applications</li>
+                <li>Fixed : Native apps that implement suspend/resume will cause pxscene to freeze on suspend sometimes (graphics_lifecycle app, mse_player app)</li>
+                <li>Fixed : OPTIMUS PRIME: Shouldn't be able to create multiple applications with same App ID</li>
+                <li>Fixed : Spark crashes while loading applications in windows</li>
+                <li>Fixed : Error in reusing SVG Images from http cache at /tmp/cache</li>
+              </ul>
+            </div>
+          </div>
+        <div class="changelog__item">
           <div class="changelog__meta">
             <h4 class="changelog__title">v1.0.0.0</h4>
             <small class="changelog__date">16August2018</small>
@@ -152,18 +174,6 @@
             </ul>
           </div>
         </div>
-        <div class="changelog__item">
-          <div class="changelog__meta">
-            <h4 class="changelog__title">v0.41.1.0</h4>
-            <small class="changelog__date">19July2018</small>
-          </div>
-          <div class="changelog__detail">
-            <ul>
-              <li>Updates to fix text Regression.</li>
-              <li>Fix for naming conflicts in rtservicemanager.js.</li>
-            </ul>
-          </div>
-        </div>
         <div class="changelog__callout">
           <a href="releaseNotes/notes.html" class="button--secondary">Checkout Full Release Notes</a>
         </div>
@@ -172,6 +182,6 @@
     <footer class="footer">Spark is an open source project in <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="scribbler.js"></script>
+    <script src="sparkScript.js"></script>
   </body>
 </html>
