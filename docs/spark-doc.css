@@ -114,7 +114,7 @@ html, body {
   color: var(--title-color-docs);
 }
 
-@media (max-width: 1215px) {
+@media (max-width: 1255px) {
   .wrapper {
     flex-direction: column;
   }
