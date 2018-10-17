@@ -7,8 +7,8 @@
     <title>Spark: Advanced Topics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="spark-global.css">
-    <link rel="stylesheet" href="spark-doc.css">
+    <link rel="stylesheet" href="stylesheets/spark-global.css">
+    <link rel="stylesheet" href="stylesheets/spark-doc.css">
     <link rel="author" href="humans.txt">
   </head>
   <body>
@@ -68,7 +68,7 @@
             <li>Cache control mechanism mentioned in <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a> is followed.Caching is implemented based on the rules given in the specification</li>
           </ul>
           <h3>Cache data validation:</h3>
-          <ol class="content_ol">
+          <ol class="content__ol">
             <li>HTTP header and payload is cached only if it is not expired and headers does not contain <em>"Cache-Control:no-store"</em> field</li>
             <li>When cache data is requested for reuse, below validations are done, before providing cache data to the application:</li>
               <ul class="content__ul__circle">
@@ -186,6 +186,6 @@
     <footer class="footer">Spark is an open source project in github <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="sparkScript.js"></script> 
+    <script src="scripts/sparkScript.js"></script> 
   </body>
 </html>
