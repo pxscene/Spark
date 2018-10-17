@@ -56,7 +56,7 @@
             <p>px.import can include one to many modules in a single call and returns a promise when all imported source is ready for use.</p>
             <h4>Limitations</h4>
             <p>Only the following Nodejs modules are allowed for import: </p>
-            <ul>
+            <ul class="content__ul__circle">
                 <li>crypto (as of Release 0.41)</li>
                 <li>htmlparser</li>
                 <li>http - restricted to client functionality</li>
@@ -70,7 +70,7 @@
             </ul>
             <h4>px Prefix</h4>
             <p>When used in <i>px.import</i>, the <i>px:</i> prefix has special meaning and references javascript built into Spark.
-                <ul>
+                <ul class="content__ul__circle">
                     <li><i>px:scene</i>: import version of Spark scene graph objects</li>
                     <li><i>px:tools</i>: import file from builtin tools here: <a href="https://github.com/pxscene/pxCore/tree/master/examples/pxScene2d/src/rcvrcore/tools">tools in github        </a></li>
                 </ul>
@@ -201,7 +201,7 @@ console.error("Imports failed for myexample.js: " + err)
               <p>Delegates are customization points that permit a JavaScript program running in <i>Spark</i> to optionally change 
                 the default behavior of the Spark core framework.  </p>
               <p>Currently the following <i>delegate</i> patterns are supported...</p>
-              <ul style="list-style-type:circle">
+              <ul class="content__ul__circle">
                   <li><i>Clearscreen</i>: A given Spark JavaScript app can choose to "decline" the default clear screen (to BLACK) by implementing the delegate method below.</li>
                   <p><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">
                       

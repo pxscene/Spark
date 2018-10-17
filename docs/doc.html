@@ -42,7 +42,7 @@
           <p>Spark is a cross-platform application engine. It is a native C++ scene graph API exposed to a Javascript engine. 
             It allows applications to be written in JavaScript to use native rendering functionality. 
             The authored javascript has access to the Spark API for visual elements that are used for composition.
-              <ul style="list-style-type:circle">
+              <ul class="content__ul__circle">
                 <li>supports rich animation and alpha masking primitives</li>
                 <li>exposes a DOM-like programming model</li>
                 <li>supports promises for asynchronous behaviors</li>
@@ -56,7 +56,7 @@
           <p>A high level representation of the runtime stack is below</p>
           <p><img src="images/sparkStack.png" height="350"></p>
           <p>The stack components.
-          <ul>
+          <ul class="content__ul__circle">
              <li>Native OS and graphic drivers - provides specific kernel, OS and UI services for the native system</li>
              <li>pxCore - provides UI scene and primitive components used by the px Framework to render components.  Most
                 of pxCore is creating using C++, with JavaScript bindings to its UI API.
@@ -135,7 +135,7 @@
             <br/>
         
           <p>The base widgets are as follows:
-            <ul style="list-style-type:circle">
+            <ul class="content__ul__circle">
               <li><a href="apis/index.html#rectangle" class="link link--dark">rect</a></li>
               <li><a href="apis/index.html#text" class="link link--dark">text</a></li>
               <li><a href="apis/index.html#textBox" class="link link--dark">textBox</a></li>
@@ -206,10 +206,10 @@
         <p>Under normal circumstances, Spark does not support the <i>require</i> keyword.  However, by creating a file called <i>.pxsceneEnableRequire</i> in the HOME directory, some distributions of 
         the Spark binary do support it.</p>
         <h4>Other Configuration Options</h4>
-        <ul style="list-style-type:circle">
+        <ul class="content__ul__circle">
           <li><i>Control logging level from Spark runtime</i>: An environment variable called <b>RT_LOG_LEVEL</b> controls the debug logging level of the Spark runtime. 
             Valid values in order of greatest to least verbosity are as follows:
-          <ul>
+          <ul class="content__ul__circle">
             <li>debug</li><li>info</li><li>warn</li><li>error</li><li>fatal</li></ul></li>
         </ul>
        
@@ -244,7 +244,7 @@
         <p>When developing applications, it is often necessary to be able to step through the code to debug an issue.  VSCode provides a very nice
           environment for debugging Spark applications. <i>The below steps have been verified and tested on OS X. </i> 
           <h4>From within VSCode</h4>
-          <ol>
+          <ol class="content__ol">
               <li>Download and install <a href="https://code.visualstudio.com/">Visual Studio Code</a> </li>
               <li>In Visual Studio Code use the File->Open menu to open the local directory where your Spark JavaScript application code resides, and select the file that you want to debug. 
                 <p><em>Note: Open the directory rather than just a single file; opening the directory will create a ./vscode subdirectory within your js directory, and this is needed for the debug configuration in step #3. </em>
@@ -316,7 +316,7 @@
           </ol>  
       <h4>Attaching to a running instance of spark</h4>  
       <p><em>Note: You must have started Spark with the --debug=5858 (5858 being the ip port specified in your .vscode/launch.json config file) command line option in order for this to work. eg. ./spark.sh --debug=5858</em></p>   
-          <ol>
+          <ol class="content__ol">
             <li>Launch Spark as described above.</li>
             <li>Please set up your VSCode launch.json as described above. Then go to the debugger and choose the &quot;Attach pxscene&quot; config option, and click the debugger &quot;green arrow&quot;.</li>
             <li>Within Spark enter the file URL of the JavaScript file that you want to debug.</li>

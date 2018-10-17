@@ -108,7 +108,16 @@ html, body {
   padding: 0 0 5rem 1rem;
  
 }
-
+.content__ul {
+  font-weight: 200;
+}
+.content__ul__circle {
+  font-weight: 200;
+  list-style-type: circle;
+}
+.content__ol {
+  font-weight: 200;
+}
 /* typography */
 .section__title {
   color: var(--title-color-docs);

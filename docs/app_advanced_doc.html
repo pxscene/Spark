@@ -38,7 +38,6 @@
           <h3 class="section__title">Overview</h3>
           <p>When authoring Spark applications, there are many things to consider, such as caching and bundling applications and their resources. 
           In addition, there are many Tips and Tricks that may be helpful when getting up and running with Spark for the first time. </p>
-          <p>We hope this Application Authoring Documentation will help. </p>
         </section>
         <hr />
         <section class="js-section">
@@ -59,7 +58,7 @@
           <h3 class="section__title">HTTP Caching</h3>
           <p><p>In Spark, downloaded HTTP image files and Javascript files are cached on the disk to avoid repetitive downloads of unmodified data. This is done to speedup processing by removing network download time of same data.</p>
           <h4>Caching mechanism:</h4>
-          <ul>
+          <ul class="content__ul__circle">
             <li>Default  maximum cache size is 20 MB. Maximum cache size can be changed if needed.</li>
             <li>Default cache directory is <em>/tmp/cache</em>. Default cache directory can be changed if needed</li>
             <li>For every downloaded image/Javascript file, unique number is generated, which is used as cache file name</li>
@@ -69,16 +68,16 @@
             <li>Cache control mechanism mentioned in <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a> is followed.Caching is implemented based on the rules given in the specification</li>
           </ul>
           <h3>Cache data validation:</h3>
-          <ol>
+          <ol class="content_ol">
             <li>HTTP header and payload is cached only if it is not expired and headers does not contain <em>"Cache-Control:no-store"</em> field</li>
             <li>When cache data is requested for reuse, below validations are done, before providing cache data to the application:</li>
-          </ol>
-          <ul>
-            <li>If data in cache is expired and the cached HTTP header contains <em>"Cache-Control:must-revalidate"</em>, cached data is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, same cached data will be sent back to application. Or new updated data from server is stored in cache and returned back to application </li>
-            <li>If data in cache is not expired and the cached HTTP header contains <em>"Cache-Control:no-cache"</em>, cached data is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, same cached data will be sent back to application. Or new updated data from server is stored in cache and returned back to application</li>
-            <li>If data in cache is not expired and the cached HTTP header contains <em>"Cache-Control:no-cache=&lt;header params&gt;"</em>, cached HTTP header fields mentioned in params alone is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, new header fields will be updated in cache and the updated cache data will be sent back to application</li>
-            <li>If cached HTTP header contains <em>ETag</em> parameter, new request is sent to server with the header option <em>"If-None-Match:&lt;Etag-id&gt;"</em>.If the response from the server is <em>302</em>, cached data is returned to the application. Else, new data received from server is updated in cache and provided to application</li>
-          </ul>
+              <ul class="content__ul__circle">
+                <li>If data in cache is expired and the cached HTTP header contains <em>"Cache-Control:must-revalidate"</em>, cached data is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, same cached data will be sent back to application. Or new updated data from server is stored in cache and returned back to application </li>
+                <li>If data in cache is not expired and the cached HTTP header contains <em>"Cache-Control:no-cache"</em>, cached data is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, same cached data will be sent back to application. Or new updated data from server is stored in cache and returned back to application</li>
+                <li>If data in cache is not expired and the cached HTTP header contains <em>"Cache-Control:no-cache=&lt;header params&gt;"</em>, cached HTTP header fields mentioned in params alone is revalidated by sending a new HTTP request with <em>"Cache-Control: max-age=0"</em> parameter. Based on server response, new header fields will be updated in cache and the updated cache data will be sent back to application</li>
+                <li>If cached HTTP header contains <em>ETag</em> parameter, new request is sent to server with the header option <em>"If-None-Match:&lt;Etag-id&gt;"</em>.If the response from the server is <em>302</em>, cached data is returned to the application. Else, new data received from server is updated in cache and provided to application</li>
+              </ul>
+            </ol>
           <p>
             <br/>
           </p>
@@ -105,23 +104,25 @@
             to use.  More details are explained below in this section.
           </p>
           <p><i>scene</i> supports two functions for providing service:</p>
-            <ul>
+            <ul class="content__ul__circle">
               <li>addServiceProvider(serviceProviderFunction)</li>
               <li>removeServiceProvider(serviceProviderFunction)</li>
             </ul>
             <p>A scene that wishes to provide a service must call <i>addServiceProvider</i>, passing it a <i>serviceProviderFunction</i>.  
               The <i>serviceProviderFunction</i> will be called whenever a scene in the hierarchy requests a service by name.  The <strong>serviceProviderFunction</strong> must do the following:
               <br/>
-            <ul>
+            <ul class="content__ul">
               <li>Accept two arguments<ul>
-                  <li>serviceName: when the <i>serviceProviderFunction</i> is called, this will be the name of the service being requested.<ul>
+                  <li>serviceName: when the <i>serviceProviderFunction</i> is called, this will be the name of the service being requested.
+                    <ul class="content__ul">
                       <li>All service names should be properly namespaced</li>
                       <li>All service names should include a version number</li>
                       <li>Ex. com.mycompany.myService_1</li>
                     </ul>
                   </li>
                   <li>serviceContext: when the <i>serviceProviderFunction</i> is called, this will contain information about the scene that is requesting the service.  
-                    This gives the provider the opportunity to deny access to the service to specific requesters, as required.  ServiceContext has the following properties:<ul>
+                    This gives the provider the opportunity to deny access to the service to specific requesters, as required.  ServiceContext has the following properties:
+                    <ul class="content__ul">
                       <li>url: url is the originating URL from which the script requesting the service was loaded</li>
                       <li>serviceContext: this is an object, that if populated, is a property bag from the requesting scene.</li>
                       <li>permissions: TBD</li>
@@ -144,7 +145,7 @@
               <strong>scene.getService(serviceName)</strong>
             </p>
             <p>Internally, Spark will do the following: </p>
-            <ul>
+            <ul class="content__ul__circle">
               <li>Check the current scene for any service provider functions</li>
               <li>If a serviceProvider is found, it calls each service provider function found, passing the service name and service context</li>
               <li>If a service (object other than "DENY" or "ALLOW") is returned from the service provider function, the service provider function is returned from getService</li>
@@ -159,7 +160,7 @@
             <p>
               <strong>Image 1:  Some possibilities with service provider functions:</strong>
             </p>
-            <ul>
+            <ul class="content__ul__circle">
               <li>Child Scenes C + D can access service 2, 3, 4 and 5.</li>
               <li>Child Scenes C + D cannot access service 1, as Child Scene A denies it.</li>
               <li>Child Scenes E + F can access service 1, 2, 3, and 4.  But service 1 will be a different implementation as provided by Child Scene B.</li>
