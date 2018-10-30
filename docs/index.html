@@ -115,6 +115,28 @@
       <div class="wrapper">
         <h3 class="section__title">Release Highlights</h3>
         <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v1.2.0.1</h4>
+            <small class="changelog__date">30October2018</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Fixed : Could not load font face.</li>
+              <li>Fixed : Application present on base url are failed to load.</li>
+              <li>Fixed : answers.js smoke test failed in edge_2018-10-01</li>
+              <li>Fixed : px.import() fails when importing http/https multiple times</li>
+              <li>Fixed : px.getFile(filename) exposes files on disk</li>
+              <li>Fixed : TextBox promise doesn't fire unless the textBox has a parent</li>
+              <li>Support relative paths for 'require' in v8</li>
+              <li>Investigate why https:// takes so much longer than http://</li>
+              <li>Rework on dirty rectangles to improve the CPU performance.</li>
+              <li>rtRemoteRunUntil() is extremely CPU greedy</li>
+              <li>Disabled the Font/Glyph 'scaling' memory saving strategy.</li>
+              <li>Resolving image paths for images used within imported .js files</li>
+            </ul>
+          </div>
+        </div>
+        <div class="changelog__item">
             <div class="changelog__meta">
               <h4 class="changelog__title">v1.1.0.3</h4>
               <small class="changelog__date">27September2018</small>
@@ -133,6 +155,7 @@
                 <li>Fixed : OPTIMUS PRIME: Shouldn't be able to create multiple applications with same App ID</li>
                 <li>Fixed : Spark crashes while loading applications in windows</li>
                 <li>Fixed : Error in reusing SVG Images from http cache at /tmp/cache</li>
+		<li>Avoid ETag check if cache is not stale.</li>
               </ul>
             </div>
           </div>
@@ -153,24 +176,6 @@
               <li>Implement get function for color properties:  textColor, fillColor, lineColor from pxText/pxRect</li>
               <li>Add a build time switch to turn off CORS enforcement for image and font downloads.</li>
               <li>Implement List Box Component.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="changelog__item">
-          <div class="changelog__meta">
-            <h4 class="changelog__title">v0.41.2.0</h4>
-            <small class="changelog__date">07August2018</small>
-          </div>
-          <div class="changelog__detail">
-            <ul>
-              <li>OSX-only release</li>
-              <li>Rename type 'Wayland' to type 'external'.</li>
-              <li>Fixed issue related to ellipsis on single line with word wrap.</li>
-              <li>Fix for irregular artifacts on fonts.</li>
-              <li>Fix for improper termination on artifacts.</li>
-              <li>Re design on implementation of CORS.</li>
-              <li>Added Support for http2, oauth and crypto node modules.</li>
-              <li>New import test added to CI.</li>
             </ul>
           </div>
         </div>
