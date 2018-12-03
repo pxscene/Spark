@@ -112,6 +112,29 @@
       </div>
     </div>
     <div class="changelog">
+       <div class="wrapper">
+         <h3 class="section__title">Release Highlights</h3>
+         <div class="changelog__item">
+           <div class="changelog__meta">
+             <h4 class="changelog__title">v1.2.0.2</h4>
+             <small class="changelog__date">01November2018</small>
+           </div>
+           <div class="changelog__detail">
+             <ul>
+              <li>Fixed : Decoding of inline SVG fails.</li>
+              <li>Fixed : Defect found in coverity scan, Fixing on uninitialized variable.</li>
+              <li>Add display settings notification support.</li>
+              <li>New dirty rectangles easter eggs.</li>
+              <li>Identify any excessive logging statements made by the Spark plugin.</li>
+              <li>Modify spark permission for explicit allows.</li>
+              <li>Fixed: New thread sanitizer warning detected in code coverage output.</li>
+              <li>"Object outline " Easter egg is failing on Mac spark 1.0.0.1</li>
+              <li>Move rtRemote to its own repository or submodule.</li>
+              <li>Fix text box metrics/measurements.</li>
+             </ul>
+           </div>
+         </div>
+    <div class="changelog">
       <div class="wrapper">
         <h3 class="section__title">Release Highlights</h3>
         <div class="changelog__item">
@@ -161,26 +184,6 @@
               </ul>
             </div>
           </div>
-        <div class="changelog__item">
-          <div class="changelog__meta">
-            <h4 class="changelog__title">v1.0.0.0</h4>
-            <small class="changelog__date">16August2018</small>
-          </div>
-          <div class="changelog__detail">
-            <ul>
-              <li>OSX-only release</li>
-              <li>Renamed application from pxscene to Spark</li>
-              <li>Extend imageResource API to support Data URI/URLs</li>
-              <li>Provide bookmarking/history in browser.js - use PAGE DOWN key to toggle on/off a bookmark list of urls used during this Spark session</li>
-              <li>Implemented spark versioning - use scene.capabilities.graphics.svg to check if SVG support is available.  More capabilities to come...</li>
-              <li>Fix issue that was causing pxImage9 hanging behavior during CI tests</li>
-              <li>Limit http2 functionality to client-only</li>
-              <li>Implement get function for color properties:  textColor, fillColor, lineColor from pxText/pxRect</li>
-              <li>Add a build time switch to turn off CORS enforcement for image and font downloads.</li>
-              <li>Implement List Box Component.</li>
-            </ul>
-          </div>
-        </div>
         <div class="changelog__callout">
           <a href="releaseNotes/notes.html" class="button--secondary">Checkout Full Release Notes</a>
         </div>
