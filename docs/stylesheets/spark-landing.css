@@ -119,10 +119,10 @@ nav {
 .changelog__item {
   display: flex;
 }
-/*
+
 .changelog__meta {
   flex-basis: 25%;
-}*/
+}
 
 .changelog__meta small {
   color: var(--primary-color-light);
