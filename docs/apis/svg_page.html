@@ -6,6 +6,7 @@
 <link href="./style/style.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
 
+<body>
 <div id="container">
 
 
@@ -157,6 +158,44 @@ pxScene has the following support for Scalable Vector Graphics (SVG):
 
 <br>
 <hr>
+<h1> SVG Capability </h1>
+<br>
+
+<section style="display: grid" >
+  <div style="grid-column: 1">
+  <code>capabilities.graphics.svg          = 1</code> <br>
+  <code>capabilities.graphics.svg          = 2</code>
+  </div>
+
+  <div style="grid-column: 2">
+  Capability includes loading SVG files only.<br>
+  Capability includes <i>inline</i> SVG and SVG files.
+  </div>
+</section>
+<br>
+<br>
+<div style="font: 11px/18px Lucida Grande, Arial, sans-serif;">
+The following code shows how to test the supported capability of SVG in Spark releases.
+<br>
+<br>
+<codeblock>
+  <code>
+    if( scene.capabilities&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;== undefined ||<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;scene.capabilities.graphics&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;== undefined ||<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;scene.capabilities.graphics.svg == undefined)<br>
+    {<br>
+    &nbsp;&nbsp;console.log("Oh NO ... SVG is not supported in this build.");<br>
+    }<br>
+    <br>
+    if(scene.capabilities.graphics.svg == 2) /// INLINE SVG is supported<br>
+    {<br>
+      &nbsp;&nbsp;console.log("Yay ... SVG is supported - including 'INLINE SVG' in this build.");<br>
+    }<br>
+    <br>
+  </code>
+</codeblock>
+</div>
+<hr>
 <br>
 
 <h1> SVG Advantages </h1>
@@ -295,6 +334,6 @@ Below are some useful essential SVG shapes, demonstrating both <i>linear</i> and
 
 
 <br/>
-</div>
+</div><!-- container -->
 </body>
 </html>
