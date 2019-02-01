@@ -114,6 +114,23 @@
     <div class="changelog">
        <div class="wrapper">
          <h3 class="section__title">Release Highlights</h3>
+
+         <div class="changelog__item">
+            <div class="changelog__meta">
+              <h4 class="changelog__title">v1.4.0.1</h4>
+              <small class="changelog__date">29January2019</small>
+            </div>
+            <div class="changelog__detail">
+              <ul>
+                <li>Add scene.info.build.os property</li>
+                <li>Enable CORS for Spark by Default</li>
+                <li>Fixed : Shortcut for Debug Logging from Spark browser</li>
+                <li>Fixed : Promise creation should only happen once for most pxObjects</li>
+                <li>Fixed : TextBox related issues to do with alignment and newlines </li>
+              </ul>
+            </div>
+          </div>
+
          <div class="changelog__item">
            <div class="changelog__meta">
              <h4 class="changelog__title">v1.3.0.2</h4>
@@ -159,28 +176,6 @@
             </ul>
           </div>
         </div>
-        <div class="changelog__item">
-            <div class="changelog__meta">
-              <h4 class="changelog__title">v1.1.0.3</h4>
-              <small class="changelog__date">27September2018</small>
-            </div>
-            <div class="changelog__detail">
-              <ul>
-                <li>Added capabilities to apps that can check to determine if CORS is being enforced</li>
-                <li>Additional API support to the scene for texture memory usage</li>
-                <li>Upgraded external freetype to version 2.8.1</li>
-                <li>Add ability to load Resources from JAR files</li>
-                <li>TestRunner can accept multiple tests.json files as parameters</li>
-                <li>Implemented Tree Control Component</li>
-                <li>Set default permissions to allow testRunner to access local json test files for CI builds</li>
-                <li>Optimus logs about launch/load time on loading applications</li>
-                <li>Fixed : Native apps that implement suspend/resume will cause pxscene to freeze on suspend sometimes (graphics_lifecycle app, mse_player app)</li>
-                <li>Fixed : OPTIMUS PRIME: Shouldn't be able to create multiple applications with same App ID</li>
-                <li>Fixed : Spark crashes while loading applications in windows</li>
-                <li>Fixed : Error in reusing SVG Images from http cache at /tmp/cache</li>
-              </ul>
-            </div>
-          </div>
         <div class="changelog__callout">
           <a href="docs/releaseNotes/notes.html" class="button--secondary">Checkout Full Release Notes</a>
         </div>
