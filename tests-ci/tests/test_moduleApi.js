@@ -18,8 +18,8 @@ px.import({
   module.exports.tests = {
     thisModuleBaseFilePath: () => {
       return new Promise(resolve => {
-        resolve(assert(baseFilePath === 'https://www.sparkui.org/examples/tests-ci/tests' ||
-          baseFilePath === 'https://www.sparkui.org/examples/tests-ci/test-run/../tests',
+        resolve(assert(baseFilePath === 'https://www.sparkui.org/tests-ci/tests' ||
+          baseFilePath === 'https://www.sparkui.org/tests-ci/test-run/../tests',
           `Uri is: ${baseFilePath}`));
       });
     },
