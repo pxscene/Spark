@@ -60,5 +60,5 @@ scene.on("onResize", function(e) {console.log("fancy resize", e.w, e.h); updateS
 updateSize(scene.getWidth(), scene.getHeight());
 
 }).catch( function importFailed(err){
-  console.error("Import failed for fancy.js: " + err)
+  console.error("Import failed for test_fancyNewAnimate.js: " + err)
 });

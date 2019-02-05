@@ -57,5 +57,5 @@ px.import("px:scene.1.js").then(function (scene) {
   });
   updateSize(scene.getWidth(), scene.getHeight());
 }).catch(function (e) {
-  console.error("Import failed for fancy.js: " + e);
+  console.error("Import failed for apng2.js: " + e);
 });
