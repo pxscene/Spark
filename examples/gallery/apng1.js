@@ -54,5 +54,5 @@ px.import("px:scene.1.js").then(function (scene) {
     layout();
   });
 }).catch(function (e) {
-  console.error("Import failed for fancy.js: " + e);
+  console.error("Import failed for apng1.js: " + e);
 });
