@@ -1473,7 +1473,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateNoClipNoLeadingH1V0ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateNoClipNoLeadingH1V0ParentRoot Promise rejection received'));
        });
@@ -1487,7 +1486,6 @@ var tests = {
      setAlignV(0);
      setTruncation(0);
      text2.leading=0;
-     setParentToRoot();
      text2.clip=true;
      text2.wordWrap=false;
  
@@ -1504,7 +1502,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateClipNoLeadingH1V0ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateClipNoLeadingH1V0ParentRoot Promise rejection received'));
        });
@@ -1518,7 +1515,6 @@ var tests = {
      setAlignV(0);
      setTruncation(0);
      text2.leading=10;
-     setParentToRoot();
      text2.clip=false;
      text2.wordWrap=false;
  
@@ -1535,7 +1531,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateNoClipLeadingH1V0ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateNoClipLeadingH1V0ParentRoot Promise rejection received'));
        });
@@ -1549,7 +1544,6 @@ var tests = {
      setAlignV(0);
      setTruncation(0);
      text2.leading=10;
-     setParentToRoot();
      text2.clip=true;
      text2.wordWrap=false;
  
@@ -1566,7 +1560,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateClipLeadingH1V0ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateClipLeadingH1V0ParentRoot Promise rejection received'));
        });
@@ -1580,7 +1573,6 @@ var tests = {
      setAlignV(1);
      setTruncation(0);
      text2.leading=0;
-     setParentToRoot();
      text2.clip=false;
      text2.wordWrap=false;
  
@@ -1597,7 +1589,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateNoClipNoLeadingH1V1ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateNoClipNoLeadingH1V1ParentRoot Promise rejection received'));
        });
@@ -1611,7 +1602,6 @@ var tests = {
      setAlignV(1);
      setTruncation(0);
      text2.leading=0;
-     setParentToRoot();
      text2.clip=true;
      text2.wordWrap=false;
  
@@ -1628,7 +1618,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateClipNoLeadingH1V1ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateClipNoLeadingH1V1ParentRoot Promise rejection received'));
        });
@@ -1642,7 +1631,6 @@ var tests = {
      setAlignV(1);
      setTruncation(0);
      text2.leading=10;
-     setParentToRoot();
      text2.clip=false;
      text2.wordWrap=false;
  
@@ -1659,7 +1647,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateNoClipLeadingH1V1ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateNoClipLeadingH1V1ParentRoot Promise rejection received'));
        });
@@ -1673,7 +1660,6 @@ var tests = {
      setAlignV(1);
      setTruncation(0);
      text2.leading=10;
-     setParentToRoot();
      text2.clip=true;
      text2.wordWrap=false;
  
@@ -1690,7 +1676,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateClipLeadingH1V1ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateClipLeadingH1V1ParentRoot Promise rejection received'));
        });
@@ -1704,7 +1689,6 @@ var tests = {
      setAlignV(2);
      setTruncation(0);
      text2.leading=0;
-     setParentToRoot();
      text2.clip=false;
      text2.wordWrap=false;
  
@@ -1721,7 +1705,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateNoClipNoLeadingH1V2ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateNoClipNoLeadingH1V2ParentRoot Promise rejection received'));
        });
@@ -1735,7 +1718,6 @@ var tests = {
      setAlignV(2);
      setTruncation(0);
      text2.leading=0;
-     setParentToRoot();
      text2.clip=true;
      text2.wordWrap=false;
  
@@ -1752,7 +1734,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateClipNoLeadingH1V2ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateClipNoLeadingH1V2ParentRoot Promise rejection received'));
        });
@@ -1766,7 +1747,6 @@ var tests = {
      setAlignV(2);
      setTruncation(0);
      text2.leading=10;
-     setParentToRoot();
      text2.clip=false;
      text2.wordWrap=false;
  
@@ -1783,7 +1763,6 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateNoClipLeadingH1V2ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateNoClipLeadingH1V2ParentRoot Promise rejection received'));
        });
@@ -1797,7 +1776,6 @@ var tests = {
      setAlignV(2);
      setTruncation(0);
      text2.leading=10;
-     setParentToRoot();
      text2.clip=true;
      text2.wordWrap=false;
  
@@ -1814,12 +1792,13 @@ var tests = {
          else {
            resolve(textMeasurementResults(expectedValuesMeasure.newlinesTextNoWrapNoTruncateClipLeadingH1V2ParentRoot));
          }
-         cleanup();
        }, function(o) {
          resolve(assert(false,'newlinesTextNoWrapNoTruncateClipLeadingH1V2ParentRoot Promise rejection received'));
        });
      });
    }, wordBoundaryCharsTextNoWrapNoTruncateNoClipH0V0: function() {
+
+    cleanup();
     console.log("text2tests.js wordBoundaryCharsTextNoWrapNoTruncateNoClipH0V0");
     // set to longest text
     setText(wordBoundaryCharsText,"text=wordBoundaryCharsText");
