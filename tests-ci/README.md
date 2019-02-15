@@ -12,7 +12,7 @@ Spark is built from the pxCore Open Source GitHub project here: [pxCore](https:/
 1. Create a JavaScript file according to instructions in [Defining Tests](#defining-tests-to-be-run-by-testRunner).  
 2. Test your test:  Use the manual test mechanism described in [Test Frameworks Tools](#test-frameworks-tools) - tools_manualTests.js - to run your test and verify the results.
 3. Create a pull request to add the JavaScript file to [Spark](https://github.com/pxscene/Spark/tree/master/tests-ci/tests) for open source availability.
-3. Once your JavaScript file has been merged to the Spark repository, add that test file name and other properties to pxCore/tests/pxScene2d/tests/testRunner/test.json according to the instructions in [Adding a Test Page in tests.json](#adding-a-test-page-in-tests.json).  Note that the "timeToRun" mechanism should only be used to run pages that are not explicitly authored to be tests. Otherwise, any tests added should export the tests variable and run tests and return results, as described in [Defining Tests](#defining-tests-to-be-run-by-testRunner).
+3. Once your JavaScript file has been merged to the Spark repository, add that test file name and other properties to pxCore/tests/pxScene2d/tests/testRunner/test.json according to the instructions in [Adding a Test Page in tests.json](#adding-a-test-page-in-testsjson).  Note that the "timeToRun" mechanism should only be used to run pages that are not explicitly authored to be tests. Otherwise, any tests added should export the tests variable and run tests and return results, as described in [Defining Tests](#defining-tests-to-be-run-by-testRunner).
 
 
 ### Defining Tests to be Run by testRunner
