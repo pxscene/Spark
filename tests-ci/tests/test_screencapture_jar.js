@@ -2,7 +2,7 @@
 
 let imports = {
   scene: 'px:scene.1.js',
-  scr_cap_utils: './screen_capture_utils.jar',
+  scr_cap_utils: './helpers/screen_capture_utils.jar',
   assert: '../test-run/assert.js',
   manual: '../test-run/tools_manualTests.js'
 };
