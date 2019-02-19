@@ -72,13 +72,13 @@ var tests = {
   test3: function() {
   return new Promise(function(resolve, reject) {
         console.log("test3: testing scene childrens");
+        var results = [];
         var url = basePackageUri+"/helpers/test_simpleApiChild.js";
         var sceneChild = scene.create({t:'scene',parent:root,url:url});
         url = "https://www.sparkui.org/examples/gallery/images/ball.png";
         var ball = scene.create({t:"image",url:url,parent:sceneChild});
         ball.ready.then(function() {
           var childrens = sceneChild.children;
-          var results = [];
           results.push(assert(childrens !== null,"scene chilrens are not proper"));
           resolve(results);
         }, function(obj) {
@@ -91,15 +91,14 @@ var tests = {
 
   test4: function() {
     return new Promise(function(resolve, reject) {
+    var results = [];
     var image9 = scene.create({t:"image9",parent:root, url:"https://www.sparkui.org/examples/gallery/images/dolphin.jpg"});
     image9.ready.then(function()  {
       console.log("test4: image9 ready");
-      var results = [];
       results.push(assert(image9.url=="https://www.sparkui.org/examples/gallery/images/dolphin.jpg","url is not proper"));
       resolve(results);
     }, function(obj) { 
       console.log("test4: REJECTION!");
-      var results = [];
       results.push(assert(false,"https://www.sparkui.org/examples/gallery/images/dolphin.jpg failed to load!"));
       resolve(results);
     });
@@ -154,10 +153,10 @@ var tests = {
   test10: function() {
     return new Promise(function(resolve, reject) {
         console.log("test10: testing c property");
+        var results = [];
         var url = "https://www.sparkui.org/examples/gallery/images/ball.png";
         var ball = scene.create({t:"image",url:url, c:[{t:"rect"}]});
         ball.ready.then(function() {
-          var results = [];
           results.push(assert(ball !== null,"ball is created"));
           resolve(results);
         },function(obj) {
@@ -171,6 +170,7 @@ var tests = {
 
   test11: function() {
     return new Promise(function(resolve, reject) {
+      var results = [];
       var url = basePackageUri+"/helpers/test_simpleApiChild.js";
       var ball;
       var sceneChild = scene.create({t:'scene',parent:root,url:url,painting:true,draw:true,focus:true,w:100,h:100});
@@ -179,7 +179,6 @@ var tests = {
           url = "https://www.sparkui.org/examples/gallery/images/ball.png";
           ball = scene.create({t:"image",url:url,draw:true,mask:true,parent:sceneChild});
           //ball.ready.then(function() {});
-          var results = [];
           results.push(assert(sceneChild === ball.parent,"test11 succeeded"));
           resolve(results);
       },function(obj) {
