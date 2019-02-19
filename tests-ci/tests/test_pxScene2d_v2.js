@@ -26,7 +26,7 @@ module.exports.beforeStart = function() {
 var tests = {
   test1: function() {
   return new Promise(function(resolve, reject) {
-   var url = basePackageUri+"/simpleTestApiChild.js";
+   var url = basePackageUri+"/helpers/test_simpleApiChild.js";
    var sceneChild = scene.create({t:'scene',parent:root,url:url,id:"1",cx:0,cy:0,rx:0,ry:0,rz:0,painting:true,mask:false,draw:true,focus:false,interactive:false,hitTest:false,w:100,h:100});
    sceneChild.on("hello",function() {});
    sceneChild.delListener("hello",function() {});
@@ -72,9 +72,9 @@ var tests = {
   test3: function() {
   return new Promise(function(resolve, reject) {
         console.log("test3: testing scene childrens");
-        var url = basePackageUri+"/simpleTestApiChild.js";
+        var url = basePackageUri+"/helpers/test_simpleApiChild.js";
         var sceneChild = scene.create({t:'scene',parent:root,url:url});
-        url = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/tests/images/ball.png"; 
+        url = "https://www.sparkui.org/examples/gallery/images/ball.png";
         var ball = scene.create({t:"image",url:url,parent:sceneChild});
         ball.ready.then(function() {
           var childrens = sceneChild.children;
@@ -91,16 +91,16 @@ var tests = {
 
   test4: function() {
     return new Promise(function(resolve, reject) {
-    var image9 = scene.create({t:"image9",parent:root, url:"https://px-apps.sys.comcast.net/pxscene-samples/images/dolphin.jpg"});
+    var image9 = scene.create({t:"image9",parent:root, url:"https://www.sparkui.org/examples/gallery/images/dolphin.jpg"});
     image9.ready.then(function()  {
       console.log("test4: image9 ready");
       var results = [];
-      results.push(assert(image9.url=="https://px-apps.sys.comcast.net/pxscene-samples/images/dolphin.jpg","url is not proper"));
+      results.push(assert(image9.url=="https://www.sparkui.org/examples/gallery/images/dolphin.jpg","url is not proper"));
       resolve(results);
     }, function(obj) { 
       console.log("test4: REJECTION!");
       var results = [];
-      results.push(assert(false,"https://px-apps.sys.comcast.net/pxscene-samples/images/dolphin.jpg failed to load!"));
+      results.push(assert(false,"https://www.sparkui.org/examples/gallery/images/dolphin.jpg failed to load!"));
       resolve(results);
     });
   });
@@ -154,7 +154,7 @@ var tests = {
   test10: function() {
     return new Promise(function(resolve, reject) {
         console.log("test10: testing c property");
-        var url = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/tests/images/ball.png"; 
+        var url = "https://www.sparkui.org/examples/gallery/images/ball.png";
         var ball = scene.create({t:"image",url:url, c:[{t:"rect"}]});
         ball.ready.then(function() {
           var results = [];
@@ -171,12 +171,12 @@ var tests = {
 
   test11: function() {
     return new Promise(function(resolve, reject) {
-      var url = basePackageUri+"/simpleTestApiChild.js";
+      var url = basePackageUri+"/helpers/test_simpleApiChild.js";
       var ball;
       var sceneChild = scene.create({t:'scene',parent:root,url:url,painting:true,draw:true,focus:true,w:100,h:100});
       sceneChild.ready.then(function()  {
           console.log("test11: scene child is ready");
-          url = "https://px-apps.sys.comcast.net/pxscene-samples/examples/px-reference/tests/images/ball.png"; 
+          url = "https://www.sparkui.org/examples/gallery/images/ball.png";
           ball = scene.create({t:"image",url:url,draw:true,mask:true,parent:sceneChild});
           //ball.ready.then(function() {});
           var results = [];
@@ -194,7 +194,7 @@ var tests = {
   testServiceContext: function() {
     return new Promise(function(resolve, reject) {
       var results = [];
-      var url = basePackageUri+"/simpleTestApiChild.js";
+      var url = basePackageUri+"/helpers/test_simpleApiChild.js";
 
       var sceneChild = scene.create({t:'scene',parent:root,url:url,w:100,h:100, serviceContext:{test:"value1",name:"blah"}});
       sceneChild.ready.then(function()  {
