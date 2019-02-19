@@ -41,7 +41,7 @@ var drboundsY2 = scene.create({t:"text", parent:root, x:400, y:60, textColor:0xF
 var testText = scene.create({t:"text", parent:root, x:600, y:60, textColor:0xFFDDFFFF, pixelSize:15,clip:false,text:"Test="});
 
 
-var url = "http://www.pxscene.org/examples/px-reference/gallery/images/apng/cube.png";
+var url = "http://www.sparkui.org/examples/gallery/images/apng/cube.png";
 
 var testrect = scene.create({t:"rect",url:url,parent:container,fillColor:0,x:0, y:100, w:300, h:300,cx:150,cy:150, draw:false});
 var testimage = scene.create({ t: "image", url: url, parent: container, stretchX: 1, x:0, y:0, w:300, h:300, draw:false });          
