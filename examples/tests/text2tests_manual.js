@@ -97,8 +97,8 @@ var xPosHint = scene.create({t:"text", parent:root, x:460, y:container.y+540, te
 var yPosStatus = scene.create({t:"text", parent:root, x:20, y:container.y+560, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"y=0"});
 var yPosHint = scene.create({t:"text", parent:root, x:120, y:container.y+560, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use y and Y)"});
 
-var px = 10;
-var py = 10;
+var px = 0;
+var py = 0;
 var leading = 0;
 
 
