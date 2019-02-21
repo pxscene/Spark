@@ -7,6 +7,7 @@ var root = scene.root;
 // Use fontUrl to load from web
 var fontUrlStart = "http://www.pxscene.org/examples/px-reference/fonts/";
 var IndieFlower = "IndieFlower.ttf";
+var FreeSans = "FreeSans";
 var DejaVu = "DejaVuSans.ttf";
 var DejaVuSerif = "DejaVuSerif.ttf";
 var DancingScript = "DancingScript-Regular.ttf";
@@ -89,14 +90,19 @@ var xStopPosHint = scene.create({t:"text", parent:root, x:465, y:container.y+480
 var leadingStatus = scene.create({t:"text", parent:root, x:350, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"leading=0"});
 var leadingHint = scene.create({t:"text", parent:root, x:465, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use + -)"});
 var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+IndieFlower+" (http)"});
-var parentStatus = scene.create({t:"text", parent:root, x:350, y:container.y+540, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"parent=container"});
-var parentHint = scene.create({t:"text", parent:root, x:535, y:container.y+540, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use b)"});
-var px = 0;
-var py = 0;
+var parentStatus = scene.create({t:"text", parent:root, x:20, y:container.y+540, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"parent=container"});
+var parentHint = scene.create({t:"text", parent:root, x:180, y:container.y+540, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use b)"});
+var xPosStatus = scene.create({t:"text", parent:root, x:350, y:container.y+540, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"x=0"});
+var xPosHint = scene.create({t:"text", parent:root, x:460, y:container.y+540, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use x and X)"});
+var yPosStatus = scene.create({t:"text", parent:root, x:20, y:container.y+560, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"y=0"});
+var yPosHint = scene.create({t:"text", parent:root, x:120, y:container.y+560, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use y and Y)"});
+
+var px = 10;
+var py = 10;
 var leading = 0;
 
 
-var text2 = scene.create({t:"textBox", clip:true, parent:container, x:px, y:py, rx:0, ry:0, rz:0,x:0, y:0});
+var text2 = scene.create({t:"textBox", clip:true, parent:container, x:px, y:py, rx:0, ry:0, rz:0});
    text2.h=400;
    text2.w=400;
    text2.textColor=0xFFDDFFFF;
@@ -262,7 +268,7 @@ scene.root.on("onChar", function(e) {
     } else {
       clipStatus.text ="clip=false";
     }    
-  } else if(e.charCode ==120) { // x for xStartPos
+  } else if(e.charCode ==108) { // l for xStartPos
     if(text2.xStartPos == 0) {
       text2.xStartPos = 25; 
       xStartPosStatus.text="xStartPos=25";
@@ -270,7 +276,7 @@ scene.root.on("onChar", function(e) {
       text2.xStartPos = 0;
       xStartPosStatus.text="xStartPos=0";
     }
-  } else if(e.charCode ==108) { // l for xStopPos
+  } else if(e.charCode ==76) { // L for xStopPos
     if(text2.xStopPos == 0) {
       text2.xStopPos = 325; 
       xStopPosStatus.text="xStopPos=325";
@@ -358,6 +364,11 @@ scene.root.on("onChar", function(e) {
       //text2.fontUrl = fontUrlStart+DancingScriptBold; 
       fontStatus.text = "font="+DancingScriptBold+" (http)";
     } else if(fontStatus.text == "font="+DancingScriptBold+" (http)"){
+      text2.font = "";
+      text2.fontUrl = "";
+      //text2.fontUrl = fontUrlStart+IndieFlower; 
+      fontStatus.text = "font="+FreeSans+" (http)";
+    } else if(fontStatus.text == "font="+FreeSans+" (http)"){
       text2.font = fontIndieFlower;
       //text2.fontUrl = fontUrlStart+IndieFlower; 
       fontStatus.text = "font="+IndieFlower+" (http)";
@@ -379,10 +390,24 @@ scene.root.on("onChar", function(e) {
       parentStatus.text="parent=root";
     }
     
+  } else if(e.charCode == 120) { // x for increasing textBox.x
+    text2.x+=5;
+    xPosStatus.text="x="+text2.x;
+  } else if(e.charCode == 88) { // X for reducing textBox.x
+    text2.x-=5;
+    xPosStatus.text="x="+text2.x;
+  } else if(e.charCode == 121) { // y for increasing textBox.x
+    text2.y+=5;
+    yPosStatus.text="y="+text2.y;
+  } else if(e.charCode == 89) { // Y for reducing textBox.x
+    text2.y-=5;
+    yPosStatus.text="y="+text2.y;
   }
+
   bg.removeAll();
   text2.ready.then(function(text) {
     console.log("!CLF: Promise received");
+    measurements=text.measureText();
     textready(text);
 
   });
