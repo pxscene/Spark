@@ -81,9 +81,9 @@ module.exports.tests.test05_uploadCapture = () => {
   return Promise.resolve(imports.assert(true));
 };
 
-module.exports.tests.test06_wait1s = () => {
-  return new Promise(resolve => setTimeout(() => resolve(imports.assert(true)), 1000));
-};
+// module.exports.tests.test06_wait1s = () => {
+//   return new Promise(resolve => setTimeout(() => resolve(imports.assert(true)), 1000));
+// };
 
 module.exports.tests.test07_createOverlay = () => {
   const props = {
