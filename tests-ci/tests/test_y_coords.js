@@ -127,15 +127,17 @@ var tests = {
       
       // Measure text in textbox
       var measurements = obj.measureText();
-      results.push(assert(measurements.bounds.x1 == 0, "textBox bounds.x1 is "+measurements.bounds.x1+" but should be 0"));
-      results.push(assert(measurements.bounds.x2 == 453, "textBox bounds.x2 is "+measurements.bounds.x2+" but should be 453"));
-      results.push(assert(measurements.bounds.y1 == 0, "textBox bounds.y1 is "+measurements.bounds.y1+" but should be 0"));
-      results.push(assert(measurements.bounds.y2 == 29, "textBox bounds.y2 is "+measurements.bounds.y2+" but should be 29"));
-      results.push(assert(measurements.charFirst.y == 24 || measurements.charFirst.y == 25, "textBox charFirst.y is "+measurements.charFirst.y+" but should be 24 or 25"));
-      results.push(assert(measurements.charLast.y == 24 || measurements.charLast.y == 25, "textBox charLast.y is "+measurements.charLast.y+" but should be 24 or 25"));
-      results.push(assert(measurements.charFirst.x == 0, "textBox charFirst.x is "+measurements.charFirst.x+" but should be 0"));
-      results.push(assert(measurements.charLast.x == 453, "textBox charLast.x is "+measurements.charLast.x+" but should be 453"));
-            
+      results.push(assert(measurements.bounds.x1 == 20, "textBox bounds.x1 is "+measurements.bounds.x1+" but should be 20"));
+      results.push(assert(measurements.bounds.x2 == 473, "textBox bounds.x2 is "+measurements.bounds.x2+" but should be 473"));
+      results.push(assert(measurements.bounds.y1 == 100, "textBox bounds.y1 is "+measurements.bounds.y1+" but should be 100"));
+      results.push(assert(measurements.bounds.y2 == 129, "textBox bounds.y2 is "+measurements.bounds.y2+" but should be 129"));
+      results.push(assert(measurements.charFirst.y == 124 || measurements.charFirst.y == 125, "textBox charFirst.y is "+measurements.charFirst.y+" but should be 124 or 125"));
+      results.push(assert(measurements.charLast.y == 124 || measurements.charLast.y == 125, "textBox charLast.y is "+measurements.charLast.y+" but should be 124 or 125"));
+      results.push(assert(measurements.charFirst.x == 20, "textBox charFirst.x is "+measurements.charFirst.x+" but should be 20"));
+      results.push(assert(measurements.charLast.x == 473, "textBox charLast.x is "+measurements.charLast.x+" but should be 473"));
+      var boundsRect = scene.create({t:"rect", fillColor:0x00000000, parent:obj.parent, lineColor:0xFFFF0077, lineWidth:1, x:measurements.bounds.x1, y:measurements.bounds.y1, w:measurements.bounds.x2 - measurements.bounds.x1, h:measurements.bounds.y2 - measurements.bounds.y1});
+      var charsRect = scene.create({t:"rect", fillColor:0x00000000, parent:obj.parent, lineColor:0xFF00FF77, lineWidth:1, x:measurements.charFirst.x, y:measurements.charFirst.y, w:measurements.charLast.x - measurements.charFirst.x, h:(measurements.charLast.y - measurements.charFirst.y)==0?1:(measurements.charLast.y - measurements.charFirst.y)});
+           
       // Test font metrics
       results.push( assert(obj.pixelSize === 25,"textBox.pixelSize does not match expected value of 25: value is "+ obj.pixelSize));
       var metrics = fontDejaVuSans.getFontMetrics(obj.pixelSize);
@@ -147,7 +149,7 @@ var tests = {
       console.log("font measure gives width = "+fontMeasurements.w);
       
       var fontMeasurements = fontDejaVuSans.measureText(obj.pixelSize,obj.text);
-      results.push( assert(measurements.bounds.x2 === fontMeasurements.w, "Text width from textBox does not match font measurement width"));
+      results.push( assert(measurements.bounds.x2-measurements.bounds.x1 === fontMeasurements.w, "Text width from textBox does not match font measurement width"));
       
       // Check textBox width 
       results.push(assert(obj.w === 800, "textBox does not match defined width of 800"));
@@ -159,6 +161,9 @@ var tests = {
       
       // Measure text in textbox
       var measurements = obj.measureText();
+      var boundsRect = scene.create({t:"rect", fillColor:0x00000000, parent:obj.parent, lineColor:0xFFFF0077, lineWidth:1, x:measurements.bounds.x1, y:measurements.bounds.y1, w:measurements.bounds.x2 - measurements.bounds.x1, h:measurements.bounds.y2 - measurements.bounds.y1});
+      var charsRect = scene.create({t:"rect", fillColor:0x00000000, parent:obj.parent, lineColor:0xFF00FF77, lineWidth:1, x:measurements.charFirst.x, y:measurements.charFirst.y, w:measurements.charLast.x - measurements.charFirst.x, h:(measurements.charLast.y - measurements.charFirst.y)==0?1:(measurements.charLast.y - measurements.charFirst.y)});
+      
       results.push(assert(measurements.bounds.x1 == 0, "textboxInContainer bounds.x1 is "+measurements.bounds.x1+" but should be 0"));
       results.push(assert(measurements.bounds.x2 == 453, "textboxInContainer bounds.x2 is "+measurements.bounds.x2+" but should be 453"));
       results.push(assert(measurements.bounds.y1 == 0, "textboxInContainer bounds.y1 is "+measurements.bounds.y1+" but should be 0"));

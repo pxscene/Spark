@@ -321,6 +321,19 @@ var expectedValuesMeasure = {
   "newlineslongestTextNoWrapTruncateNoClipEllipsisH1V1":[3.5,156.5,396.5,243.5,133.5,176.5,396.5,234.5], //newlineslongestTextNoWrapTruncateNoClipEllipsisH1V1
   "newlineslongestTextNoWrapNoTruncateNoClipNoEllipsisH1V1":[-12,156.5,412,243.5,133.5,176.5,412,234.5], //newlineslongestTextNoWrapNoTruncateNoClipNoEllipsisH1V1
   "newlineslongestTextNoWrapNoTruncateClipNoEllipsisH1V1":[0,156.5,400,243.5,133.5,176.5,400,234.5], //newlineslongestTextNoWrapNoTruncateClipNoEllipsisH1V1
+
+  "longTextWrapTruncateClipEllipsisH1V1XY":[13.5,50.5,400,369.5,13.5,70.5,252,360.5], //longTextWrapTruncateClipEllipsisH1V1XY
+  "longerTextWrapTruncateClipEllipsisH1V1XY":[12,21.5, 400, 398.5, 17, 41.5, 400, 389.5], //longerTextWrapTruncateClipEllipsisH1V1XY
+  "longestTextWrapTruncateClipEllipsisH1V1XY":[13.5, 21.5, 400, 398.5, 13.5, 41.5, 400, 389.5], //longestTextWrapTruncateClipEllipsisH1V1XY
+  "shortTextWrapTruncateClipEllipsisH1V1XY":[128,195.5,292,224.5,128,215.5,292,215.5], //shortTextWrapTruncateClipEllipsisH1V1XY
+  "mediumTextWrapTruncateClipEllipsisH1V1XY":[15,123,400,297,15,143,400,288], //mediumTextWrapTruncateClipEllipsisH1V1XY
+  "newlineTextWrapTruncateClipEllipsisH1V1XY":[142,166.5,278,253.5,168.5,186.5,276.5,244.5], //newlineTextWrapTruncateClipEllipsisH1V1XY
+  "newlineslongerTextWrapTruncateClipEllipsisH1V1XY":[20.5,152,399.5,268,20.5,172,276.5,259], //newlineslongerTextWrapTruncateClipEllipsisH1V1XY
+  "newlineslongestTextWrapTruncateClipEllipsisH1V1XY":[20.5,152,399.5,268,143.5,172,232.5,259], //newlineslongestTextWrapTruncateClipEllipsisH1V1XY
+  "continuousTextWrapTruncateClipEllipsisH1V1XY":[12,181,400,239,12,201,346,230], //continuousTextWrapTruncateClipEllipsisH1V1XY
+  "continuousLongTextWrapTruncateClipEllipsisH1V1XY":[10.5,21.5,400,398.5,12,41.5,400,389.5], //continuousLongTextWrapTruncateClipEllipsisH1V1XY
+  "multilinesTextWrapTruncateClipEllipsisH1V1XY":[10,79.5,400,340.5,32.5,99.5,277.5,331.5], //multilinesTextWrapTruncateClipEllipsisH1V1XY
+  
 };
 
 var textMeasurementResults = function(values) {
@@ -1077,8 +1090,405 @@ var tests = {
          resolve(assert(false,'newlineslongestTextNoWrapNoTruncateClipNoEllipsisH1V1 Promise rejection received'));
        });
      });
+   },
+   longTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js longTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(longText,"text=long");
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     text2.x=10;
+     text2.y=10;
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("longTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.longTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'longTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   longerTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js longerTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(longText2,"text=longer");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("longerTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.longerTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'longerTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   longestTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js longestTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(longText3,"text=longest");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("longestTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.longestTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'longestTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   shortTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js shortTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(shortText,"text=short");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("shortTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.shortTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'shortTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   mediumTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js mediumTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(mediumText,"text=medium");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("mediumTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.mediumTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'mediumTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   newlineTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js newlineTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(newlineText,"text=newline");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("newlineTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.newlineTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'newlineTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   newlineslongerTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js newlineslongerTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(newlineLongerText,"text=newlineLonger");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("newlineslongerTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.newlineslongerTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'newlineslongerTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   newlineslongestTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js newlineslongestTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(newlineLongestText,"text=newlineLongest");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("newlineslongestTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.newlineslongestTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'newlineslongestTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   continuousTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js continuousTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(continuousText,"text=continuous");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("continuousTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.continuousTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'continuousTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   continuousLongTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js continuousLongTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(continuousLongText,"text=continuousLong");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("continuousLongTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.continuousLongTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'continuousLongTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
+   },
+   multilinesTextWrapTruncateClipEllipsisH1V1XY: function() {
+     console.log("text2tests_more.js multilinesTextWrapTruncateClipEllipsisH1V1XY");
+     // set to longest text
+     setText(multilinesText,"text=multilines");
+     text2.x=10;
+     text2.y=10;
+     setAlignH(1);
+     setAlignV(1);
+     setTruncation(1);
+     if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+       text2.ready.then(function(myText) {
+        bg.removeAll();
+         textready(myText);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("multilinesTextWrapTruncateClipEllipsisH1V1XY", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else {
+           resolve(textMeasurementResults(expectedValuesMeasure.multilinesTextWrapTruncateClipEllipsisH1V1XY));
+         }
+       }, function(o) {
+         resolve(assert(false,'multilinesTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
+       });
+     });
    }
  }
+
 module.exports.beforeStart = beforeStart;
 module.exports.tests = tests;
 

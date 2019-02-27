@@ -21,8 +21,8 @@ var expectedResults = {
     bounds_y2: 188,
     charFirst_x: 40,
     charFirst_y: 99,
-    charLast_x: 155,
-    charLast_y: 100
+    charLast_x: 195,
+    charLast_y: 180
   },
   
   test2: {
@@ -32,8 +32,8 @@ var expectedResults = {
     bounds_y2: 188,
     charFirst_x: 220,
     charFirst_y: 99,
-    charLast_x: 157,
-    charLast_y: 100
+    charLast_x: 377,
+    charLast_y: 180
   },
 
   test3: {
@@ -43,8 +43,8 @@ var expectedResults = {
     bounds_y2: 333,
     charFirst_x: 40,
     charFirst_y: 244,
-    charLast_x: 138,
-    charLast_y: 100
+    charLast_x: 178,
+    charLast_y: 325
   },
 
   test4: {
@@ -54,8 +54,8 @@ var expectedResults = {
     bounds_y2: 333,
     charFirst_x: 220,
     charFirst_y: 244,
-    charLast_x: 122,
-    charLast_y: 100
+    charLast_x: 342,
+    charLast_y: 325
   }
   ,
 
@@ -66,8 +66,8 @@ var expectedResults = {
     bounds_y2: 429,
     charFirst_x: 40,
     charFirst_y: 394,
-    charLast_x: 73,
-    charLast_y: 46
+    charLast_x: 113,
+    charLast_y: 421
   }
  }
 
@@ -82,6 +82,9 @@ var tests = {
 
       textBox.ready.then( function(obj) {
         var measure = textBox.measureText();
+        var boundsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFFFF0077, lineWidth:1, x:measure.bounds.x1, y:measure.bounds.y1, w:measure.bounds.x2 - measure.bounds.x1, h:measure.bounds.y2 - measure.bounds.y1});
+        var charsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFF00FF77, lineWidth:1, x:measure.charFirst.x, y:measure.charFirst.y, w:measure.charLast.x - measure.charFirst.x, h:(measure.charLast.y - measure.charFirst.y)==0?1:(measure.charLast.y - measure.charFirst.y)});
+       
         results.push(assert(measure.bounds.x1 == expectedResults.test1.bounds_x1, "Bounds x1 "+measure.bounds.x1+" does not match expected value "+ expectedResults.test1.bounds_x1));
         results.push(assert(measure.bounds.y1 == expectedResults.test1.bounds_y1, "Bounds y1 "+measure.bounds.y1+" does not match expected value "+ expectedResults.test1.bounds_y1));
         results.push(assert(measure.bounds.x2 == expectedResults.test1.bounds_x2, "Bounds x2 "+measure.bounds.x2+" does not match expected value "+ expectedResults.test1.bounds_x2));
@@ -106,6 +109,9 @@ var tests = {
 
       textBox.ready.then( function(obj) {
         var measure = textBox.measureText();
+        var boundsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFFFF0077, lineWidth:1, x:measure.bounds.x1, y:measure.bounds.y1, w:measure.bounds.x2 - measure.bounds.x1, h:measure.bounds.y2 - measure.bounds.y1});
+        var charsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFF00FF77, lineWidth:1, x:measure.charFirst.x, y:measure.charFirst.y, w:measure.charLast.x - measure.charFirst.x, h:(measure.charLast.y - measure.charFirst.y)==0?1:(measure.charLast.y - measure.charFirst.y)});
+       
         results.push(assert(measure.bounds.x1 == expectedResults.test2.bounds_x1, "Bounds x1 "+measure.bounds.x1+" does not match expected value "+ expectedResults.test2.bounds_x1));
         results.push(assert(measure.bounds.y1 == expectedResults.test2.bounds_y1, "Bounds y1 "+measure.bounds.y1+" does not match expected value "+ expectedResults.test2.bounds_y1));
         results.push(assert(measure.bounds.x2 == expectedResults.test2.bounds_x2, "Bounds x2 "+measure.bounds.x2+" does not match expected value "+ expectedResults.test2.bounds_x2));
@@ -131,6 +137,9 @@ var tests = {
 
       textBox.ready.then( function(obj) {
         var measure = textBox.measureText();
+        var boundsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFFFF0077, lineWidth:1, x:measure.bounds.x1, y:measure.bounds.y1, w:measure.bounds.x2 - measure.bounds.x1, h:measure.bounds.y2 - measure.bounds.y1});
+        var charsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFF00FF77, lineWidth:1, x:measure.charFirst.x, y:measure.charFirst.y, w:measure.charLast.x - measure.charFirst.x, h:(measure.charLast.y - measure.charFirst.y)==0?1:(measure.charLast.y - measure.charFirst.y)});
+       
         results.push(assert(measure.bounds.x1 == expectedResults.test3.bounds_x1, "Bounds x1 "+measure.bounds.x1+" does not match expected value "+ expectedResults.test3.bounds_x1));
         results.push(assert(measure.bounds.y1 == expectedResults.test3.bounds_y1, "Bounds y1 "+measure.bounds.y1+" does not match expected value "+ expectedResults.test3.bounds_y1));
         results.push(assert(measure.bounds.x2 == expectedResults.test3.bounds_x2, "Bounds x2 "+measure.bounds.x2+" does not match expected value "+ expectedResults.test3.bounds_x2));
@@ -156,6 +165,9 @@ var tests = {
 
       textBox.ready.then( function(obj) {
         var measure = textBox.measureText();
+        var boundsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFFFF0077, lineWidth:1, x:measure.bounds.x1, y:measure.bounds.y1, w:measure.bounds.x2 - measure.bounds.x1, h:measure.bounds.y2 - measure.bounds.y1});
+        var charsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFF00FF77, lineWidth:1, x:measure.charFirst.x, y:measure.charFirst.y, w:measure.charLast.x - measure.charFirst.x, h:(measure.charLast.y - measure.charFirst.y)==0?1:(measure.charLast.y - measure.charFirst.y)});
+       
         results.push(assert(measure.bounds.x1 == expectedResults.test4.bounds_x1, "Bounds x1 "+measure.bounds.x1+" does not match expected value "+ expectedResults.test4.bounds_x1));
         results.push(assert(measure.bounds.y1 == expectedResults.test4.bounds_y1, "Bounds y1 "+measure.bounds.y1+" does not match expected value "+ expectedResults.test4.bounds_y1));
         results.push(assert(measure.bounds.x2 == expectedResults.test4.bounds_x2, "Bounds x2 "+measure.bounds.x2+" does not match expected value "+ expectedResults.test4.bounds_x2));
@@ -181,6 +193,9 @@ var tests = {
 
       textBox.ready.then( function(obj) {
         var measure = textBox.measureText();
+        var boundsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFFFF0077, lineWidth:1, x:measure.bounds.x1, y:measure.bounds.y1, w:measure.bounds.x2 - measure.bounds.x1, h:measure.bounds.y2 - measure.bounds.y1});
+        var charsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFF00FF77, lineWidth:1, x:measure.charFirst.x, y:measure.charFirst.y, w:measure.charLast.x - measure.charFirst.x, h:(measure.charLast.y - measure.charFirst.y)==0?1:(measure.charLast.y - measure.charFirst.y)});
+       
         results.push(assert(measure.bounds.x1 == expectedResults.test5.bounds_x1, "Bounds x1 "+measure.bounds.x1+" does not match expected value "+ expectedResults.test5.bounds_x1));
         results.push(assert(measure.bounds.y1 == expectedResults.test5.bounds_y1, "Bounds y1 "+measure.bounds.y1+" does not match expected value "+ expectedResults.test5.bounds_y1));
         results.push(assert(measure.bounds.x2 == expectedResults.test5.bounds_x2, "Bounds x2 "+measure.bounds.x2+" does not match expected value "+ expectedResults.test5.bounds_x2));

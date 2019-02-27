@@ -82,10 +82,10 @@ var tests = {
       var results = [];
       var measurements = textBox.measureText();
       
-      results.push(assert(measurements.bounds.x2 === 412,"Text bounds "+measurements.bounds.x2+" does not match expected value of 459"));
+      results.push(assert(measurements.bounds.x2 === 432,"Text bounds "+measurements.bounds.x2+" does not match expected value of 432"));
       
       var fontMeasurements = fontPacifico.measureText(textBox.pixelSize,textBox.text);
-      results.push(assert(measurements.bounds.x2 === fontMeasurements.w, "Text width from TextBox does not match font measurement width"));
+      results.push(assert(measurements.bounds.x2-measurements.bounds.x1 === fontMeasurements.w, "Text width from TextBox does not match font measurement width"));
       if( doScreenshot) 
       {
           setTimeout( function() {
@@ -109,10 +109,13 @@ var tests = {
     textBox.ready.then(function() {
       var results = [];
       var measurements = textBox.measureText();
+      var boundsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFFFF0077, lineWidth:1, x:measurements.bounds.x1, y:measurements.bounds.y1, w:measurements.bounds.x2 - measurements.bounds.x1, h:measurements.bounds.y2 - measurements.bounds.y1});
+      var charsRect = scene.create({t:"rect", fillColor:0x00000000, parent:textBox.parent, lineColor:0xFF00FF77, lineWidth:1, x:measurements.charFirst.x, y:measurements.charFirst.y, w:measurements.charLast.x - measurements.charFirst.x, h:(measurements.charLast.y - measurements.charFirst.y)==0?1:(measurements.charLast.y - measurements.charFirst.y)});
       
-      results.push(assert(measurements.bounds.x2 === 412,"Text bounds "+measurements.bounds.x2+" does not match expected value of 459"));
+      
+      results.push(assert(measurements.bounds.x2 === 432,"Text bounds "+measurements.bounds.x2+" does not match expected value of 432"));
       var fontMeasurements = fontPacifico.measureText(textBox.pixelSize,textBox.text);
-      results.push(assert(measurements.bounds.x2 === fontMeasurements.w, "Text width from TextBox does not match font measurement width"));
+      results.push(assert(measurements.bounds.x2-measurements.bounds.x1 === fontMeasurements.w, "Text width from TextBox does not match font measurement width"));
       if( doScreenshot) 
       {
           setTimeout( function() {
