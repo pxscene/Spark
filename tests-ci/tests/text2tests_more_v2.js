@@ -322,17 +322,17 @@ var expectedValuesMeasure = {
   "newlineslongestTextNoWrapNoTruncateNoClipNoEllipsisH1V1":[-12,156.5,412,243.5,133.5,176.5,412,234.5], //newlineslongestTextNoWrapNoTruncateNoClipNoEllipsisH1V1
   "newlineslongestTextNoWrapNoTruncateClipNoEllipsisH1V1":[0,156.5,400,243.5,133.5,176.5,400,234.5], //newlineslongestTextNoWrapNoTruncateClipNoEllipsisH1V1
 
-  "longTextWrapTruncateClipEllipsisH1V1XY":[13.5,50.5,400,369.5,13.5,70.5,252,360.5], //longTextWrapTruncateClipEllipsisH1V1XY
-  "longerTextWrapTruncateClipEllipsisH1V1XY":[12,21.5, 400, 398.5, 17, 41.5, 400, 389.5], //longerTextWrapTruncateClipEllipsisH1V1XY
-  "longestTextWrapTruncateClipEllipsisH1V1XY":[13.5, 21.5, 400, 398.5, 13.5, 41.5, 400, 389.5], //longestTextWrapTruncateClipEllipsisH1V1XY
+  "longTextWrapTruncateClipEllipsisH1V1XY":[13.5,50.5,406.5,369.5,13.5,70.5,252,360.5], //longTextWrapTruncateClipEllipsisH1V1XY
+  "longerTextWrapTruncateClipEllipsisH1V1XY":[12,21.5, 408, 398.5, 17, 41.5, 406.5, 389.5], //longerTextWrapTruncateClipEllipsisH1V1XY
+  "longestTextWrapTruncateClipEllipsisH1V1XY":[13.5, 21.5, 406.5, 398.5, 13.5, 41.5, 406.5, 389.5], //longestTextWrapTruncateClipEllipsisH1V1XY
   "shortTextWrapTruncateClipEllipsisH1V1XY":[128,195.5,292,224.5,128,215.5,292,215.5], //shortTextWrapTruncateClipEllipsisH1V1XY
-  "mediumTextWrapTruncateClipEllipsisH1V1XY":[15,123,400,297,15,143,400,288], //mediumTextWrapTruncateClipEllipsisH1V1XY
+  "mediumTextWrapTruncateClipEllipsisH1V1XY":[15,123,405,297,15,143,401,288], //mediumTextWrapTruncateClipEllipsisH1V1XY
   "newlineTextWrapTruncateClipEllipsisH1V1XY":[142,166.5,278,253.5,168.5,186.5,276.5,244.5], //newlineTextWrapTruncateClipEllipsisH1V1XY
   "newlineslongerTextWrapTruncateClipEllipsisH1V1XY":[20.5,152,399.5,268,20.5,172,276.5,259], //newlineslongerTextWrapTruncateClipEllipsisH1V1XY
   "newlineslongestTextWrapTruncateClipEllipsisH1V1XY":[20.5,152,399.5,268,143.5,172,232.5,259], //newlineslongestTextWrapTruncateClipEllipsisH1V1XY
-  "continuousTextWrapTruncateClipEllipsisH1V1XY":[12,181,400,239,12,201,346,230], //continuousTextWrapTruncateClipEllipsisH1V1XY
-  "continuousLongTextWrapTruncateClipEllipsisH1V1XY":[10.5,21.5,400,398.5,12,41.5,400,389.5], //continuousLongTextWrapTruncateClipEllipsisH1V1XY
-  "multilinesTextWrapTruncateClipEllipsisH1V1XY":[10,79.5,400,340.5,32.5,99.5,277.5,331.5], //multilinesTextWrapTruncateClipEllipsisH1V1XY
+  "continuousTextWrapTruncateClipEllipsisH1V1XY":[12,181,408,239,12,201,346,230], //continuousTextWrapTruncateClipEllipsisH1V1XY
+  "continuousLongTextWrapTruncateClipEllipsisH1V1XY":[10.5,21.5,409.5,398.5,12,41.5,405.5,389.5], //continuousLongTextWrapTruncateClipEllipsisH1V1XY
+  "multilinesTextWrapTruncateClipEllipsisH1V1XY":[10,79.5,410,340.5,32.5,99.5,277.5,331.5], //multilinesTextWrapTruncateClipEllipsisH1V1XY
   
 };
 
