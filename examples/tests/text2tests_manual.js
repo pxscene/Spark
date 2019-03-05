@@ -409,6 +409,8 @@ scene.root.on("onChar", function(e) {
     console.log("!CLF: Promise received");
     measurements=text.measureText();
     textready(text);
+    rect.x=text.parent.x + text.x;
+    rect.y=text.parent.y + text.y;
 
   });
 });
