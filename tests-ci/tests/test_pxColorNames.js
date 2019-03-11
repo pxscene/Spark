@@ -127,7 +127,7 @@ if(manualTest === true) {
 
 }).catch( function importFailed(err){
   console.log("err: "+err);
-  console.error("Import for test_pxAnimateTimeUnits.js failed: " + err)
+  console.error("Import for test_pxColorNames.js failed: " + err)
 });
 
 
