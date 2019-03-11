@@ -33,9 +33,9 @@ function toHex32str(dec)
 }
 function hasCapabilities()
 {
-  if( scene.capabilities                    == undefined ||
-      scene.capabilities.graphics           == undefined ||
-      scene.capabilities.graphics.cssColors == undefined)
+  if( scene.capabilities                 == undefined ||
+      scene.capabilities.graphics        == undefined ||
+      scene.capabilities.graphics.colors == undefined)
   {
     return false; // "Oh NO ... cssColors is not supported in this build."
   }

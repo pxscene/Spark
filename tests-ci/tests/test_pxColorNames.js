@@ -13,6 +13,17 @@ var manualTest = manual.getManualTestValue();
 root.w = 800;
 root.h = 300;
 
+function hasCapabilities()
+{
+  if( scene.capabilities                 == undefined ||
+      scene.capabilities.graphics        == undefined ||
+      scene.capabilities.graphics.colors == undefined)
+  {
+    return false; // "Oh NO ... cssColors is not supported in this build."
+  }
+  return true;
+}
+
 module.exports.beforeStart = function() {
   console.log("test_pxColorNames beforeStart()!");
 
@@ -26,33 +37,68 @@ var tests = {
 
   test1: function()
   {
-      return new Promise(function(resolve, reject)
+    if(hasCapabilities() == false)
+    {
+      return Promise.resolve(["test1 - SKIPPED ...  color is not supported in this build."]);
+    }
+
+    return new Promise(function(resolve, reject)
+    {
+      var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      rect.ready.then(function(o)
       {
-        var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
-        rect.ready.then(function(o)
+        var results = [];
+
+        var color, value;
+        colorNames.map( clrObj =>
         {
-          var results = [];
+            color = clrObj.color;
+            value = clrObj.value;
 
-          var color, value;
-          colorNames.map( clrObj =>
-          {
-              color = clrObj.color;
-              value = clrObj.value;
+            rect.fillColor = color;
 
-              rect.fillColor = color;
+            console.log("TEST1 >>  fillColor:  '"+color+"' ("+value+") == " + rect.fillColor);
 
-              console.log("TEST1 >>  fillColor:  '"+color+"' ("+value+") == " + rect.fillColor);
-
-              results.push(assert(rect.fillColor === value," fillColor: '"+color+"' ("+value+") != " + rect.fillColor ));
-          });
-
-          resolve(results);
+            results.push(assert(rect.fillColor === value," fillColor: '"+color+"' ("+value+") != " + rect.fillColor ));
         });
-      })
-    },
+
+        resolve(results);
+      });
+    })
+  },
 
   test2: function()
   {
+    if(hasCapabilities() == false)
+    {
+      return Promise.resolve(["test2 - SKIPPED ...  color is not supported in this build."]);
+    }
+
+    return new Promise(function(resolve, reject)
+    {
+      var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      rect.ready.then(function(o)
+      {
+        var results = [];
+
+        rect.fillColor = "#fff8";
+
+        // console.log("TEST2 >>  fillColor: " + rect.fillColor);
+
+        results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
+      });
+
+        resolve(results);
+    });
+  },
+
+    test3: function()
+    {
+      if(hasCapabilities() == false)
+      {
+        return Promise.resolve(["test3 - SKIPPED ...  color is not supported in this build."]);
+      }
+
       return new Promise(function(resolve, reject)
       {
         var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
@@ -60,36 +106,16 @@ var tests = {
         {
           var results = [];
 
-          rect.fillColor = "#fff8";
+          rect.fillColor = "#ffffff88";
 
-          // console.log("TEST2 >>  fillColor: " + rect.fillColor);
+          // console.log("TEST3 >>  fillColor: " + rect.fillColor);
 
           results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
         });
 
           resolve(results);
       });
-    },
-
-    test3: function()
-    {
-        return new Promise(function(resolve, reject)
-        {
-          var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
-          rect.ready.then(function(o)
-          {
-            var results = [];
-
-            rect.fillColor = "#ffffff88";
-
-            // console.log("TEST3 >>  fillColor: " + rect.fillColor);
-
-            results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
-          });
-
-            resolve(results);
-        });
-      }
+    }
 }
 
 module.exports.tests = tests;
@@ -97,7 +123,6 @@ module.exports.tests = tests;
 if(manualTest === true) {
 
   manual.runTestsManually(tests, module.exports.beforeStart);
-
 }
 
 }).catch( function importFailed(err){
