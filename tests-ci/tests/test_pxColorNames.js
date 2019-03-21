@@ -66,7 +66,7 @@ var tests = {
       },
       function() // reject
       {
-        reject(["test1 - REJECT ... promise was rejected"]);
+        results.push(assert(false, " ... promise was rejected" ));
       });
     })
   },
@@ -92,7 +92,7 @@ var tests = {
       },
       function() // reject
       {
-        reject(["test2 - REJECT ... promise was rejected"]);
+        results.push(assert(false, " ... promise was rejected" ));
       });
     });
   },
@@ -118,7 +118,7 @@ var tests = {
         },
         function() // reject
         {
-          reject(["test3 - REJECT ... promise was rejected"]);
+          results.push(assert(false, " ... promise was rejected" ));
         })
       });
     }
