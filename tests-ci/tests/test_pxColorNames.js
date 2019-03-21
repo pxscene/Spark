@@ -67,6 +67,9 @@ var tests = {
       function() // reject
       {
         results.push(assert(false, " ... promise was rejected" ));
+      }).then( function() 
+      {
+        resolve(results);
       });
     })
   },
@@ -93,35 +96,41 @@ var tests = {
       function() // reject
       {
         results.push(assert(false, " ... promise was rejected" ));
+      }).then( function() 
+      {
+        resolve(results);
       });
-    });
+    })
   },
 
-    test3: function()
+  test3: function()
+  {
+    if(hasCapabilities() == false)
     {
-      if(hasCapabilities() == false)
-      {
-        return Promise.resolve(["test3 - SKIPPED ...  color is not supported in this build."]);
-      }
-
-      return new Promise(function(resolve, reject)
-      {
-        var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
-        rect.ready.then(function(o)
-        {
-          var results = [];
-          rect.fillColor = "#ffffff88"; // RRGGBB A
-
-          results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
-
-          resolve(results);
-        },
-        function() // reject
-        {
-          results.push(assert(false, " ... promise was rejected" ));
-        })
-      });
+      return Promise.resolve(["test3 - SKIPPED ...  color is not supported in this build."]);
     }
+
+    return new Promise(function(resolve, reject)
+    {
+      var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      rect.ready.then(function(o)
+      {
+        var results = [];
+        rect.fillColor = "#ffffff88"; // RRGGBB A
+
+        results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
+
+        resolve(results);
+      },
+      function() // reject
+      {
+        results.push(assert(false, " ... promise was rejected" ));
+      }).then( function() 
+      {
+        resolve(results);
+      });
+    })
+  }
 }
 
 module.exports.tests = tests;
