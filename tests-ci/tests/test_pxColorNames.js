@@ -86,9 +86,9 @@ var tests = {
         // console.log("TEST2 >>  fillColor: " + rect.fillColor);
 
         results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
-      });
 
         resolve(results);
+      });
     });
   },
 
@@ -111,9 +111,9 @@ var tests = {
           // console.log("TEST3 >>  fillColor: " + rect.fillColor);
 
           results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
-        });
 
           resolve(results);
+        });
       });
     }
 }
