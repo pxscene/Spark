@@ -66,7 +66,7 @@ var tests = {
       },
       function() // reject
       {
-        reject(["test1 - REJECT ...  color test failed. (unknown)"]);
+        reject(["test1 - REJECT ... promise was rejected"]);
       });
     })
   },
@@ -84,7 +84,7 @@ var tests = {
       rect.ready.then(function(o)
       {
         var results = [];
-        rect.fillColor = "#fff8"; // RGB A
+        rect.fillColor = "#ff8"; // RGB A
 
         results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
 
@@ -92,7 +92,7 @@ var tests = {
       },
       function() // reject
       {
-        reject(["test2 - REJECT ...  color test failed. (unknown)"]);
+        reject(["test2 - REJECT ... promise was rejected"]);
       });
     });
   },
@@ -118,7 +118,7 @@ var tests = {
         },
         function() // reject
         {
-          reject(["test3 - REJECT ...  color test failed. (unknown)"]);
+          reject(["test3 - REJECT ... promise was rejected"]);
         })
       });
     }
