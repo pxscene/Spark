@@ -49,13 +49,12 @@ px.import({
 // font that does not exist should fail to load
     let Invalid_font = scene.create({t: 'fontResource', url: fontUrlStart + InvalidFontName});
 
-    let message;
-
 // beforeStart will verify we have the correct resolutions for the fontResources that were preloaded
     let beforeStart = function () {
 
         return new Promise(function (resolve, reject) {
             let results = [];
+            let message;
             Promise.all([IndieFlower_font.ready, DejaVu_font.ready]).then(function () {
                 message = 'promise resolved received for IndieFlower_font and DejaVu_font';
                 results.push(assert(true, message));
@@ -90,127 +89,101 @@ px.import({
         });
     };
 
+    // Generic test function
+    let testFunc = function (params) {
+        return new Promise(function (resolve, reject) {
+
+            let results = [];
+            let message;
+
+            let timer = setTimeout(function() {
+                message = params.name + ' never got promise!';
+                logger.message('debug', message);
+                results.push(assert(false, message));
+                resolve(results);
+            }, 3000);
+
+            try {
+                textBox.font = params.font;
+            } catch (exception) {
+                message = params.name + ': ' +  params.exception.message;
+                results = assert(params.exception.assert, message);
+                logger.message('debug', message);
+                resolve(results);
+            }
+            textBox.ready.then(function () {
+                message = params.name + ': ' +  params.fulfilled.message;
+                results = assert(params.fulfilled.assert, message);
+                logger.message('debug', message);
+            }, function () {
+                message = params.name + ': ' +  params.rejected.message;
+                results = assert(params.rejected.assert, message);
+                logger.message('debug', message);
+            }).then(function () {
+                clearTimeout(timer);
+                resolve(results);
+            })
+        });
+    };
+
     let tests = {
+
         setTextBoxFontToInvalidValue: function () {
-            return new Promise(function (resolve, reject) {
-                let results = [];
-                try {
-                    textBox.font = 30;
-                } catch (exeception) {
-                    message = 'setTextBoxFontToInvalidValue: exception was received';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                    resolve(results);
+            return testFunc({
+                    name: 'setTextBoxFontToInvalidValue',
+                    font: 30,
+                    exception: {assert: false, message: 'exception was received'},
+                    fulfilled: {assert: false, message: 'expected rejection but received resolution'},
+                    rejected: {assert: true, message: 'expected and received rejection'}
                 }
-                textBox.ready.then(function () {
-                    message = 'setTextBoxFontToInvalidValue: expected rejection but received resolution';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                }, function () {
-                    message = 'setTextBoxFontToInvalidValue: expected and received rejection';
-                    results = assert(true, message);
-                    logger.message('debug', message);
-                }).then(function () {
-                    resolve(results);
-                })
-            });
+            );
         },
-        setTextBoxFontToInvalidObject: function () {
-            return new Promise(function (resolve, reject) {
-                let results = [];
-                try {
-                    textBox.font = {description: 'pxFont'};
-                } catch (exeception) {
-                    message = 'setTextBoxFontToInvalidObject: exception was received';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                    resolve(results);
-                }
-                textBox.ready.then(function () {
-                    message = 'setTextBoxFontToInvalidObject: expected rejection but received resolution';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                }, function () {
-                    message = 'setTextBoxFontToInvalidObject: expected and received rejection';
-                    results = assert(true, message);
-                    logger.message('debug', message);
-                }).then(function () {
-                    resolve(results);
-                })
-            });
-        },
-        setTextBoxFontToWrongScene: function () {
-            return new Promise(function (resolve, reject) {
-                let results = [];
-                try {
-                    textBox.font = scene.create({t: 'rect', parent: root});
-                } catch (exeception) {
-                    message = 'setTextBoxFontToWrongScene: exception was received';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                    resolve(results);
-                }
-                textBox.ready.then(function () {
-                    message = 'setTextBoxFontToWrongScene: expected rejection but received resolution';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                }, function () {
-                    message = 'setTextBoxFontToWrongScene: expected and received rejection';
-                    results = assert(true, message);
-                    logger.message('debug', message);
-                }).then(function () {
-                    resolve(results);
-                })
-            });
-        },
+
+        // DISABLED BECAUSE IT WILL CRASH SPARK WITHOUT THE XRE-1555 PATCH (due to the missing type validation)
+        //
+        // setTextBoxFontToInvalidObject: function () {
+        //     return testFunc({
+        //             name: 'setTextBoxFontToInvalidObject',
+        //             font: {description: 'pxFont'},
+        //             exception: {assert: false, message: 'exception was received'},
+        //             fulfilled: {assert: false, message: 'expected rejection but received resolution'},
+        //             rejected: {assert: true, message: 'expected and received rejection'}
+        //         }
+        //     );
+        // },
+
+        // setTextBoxFontToWrongScene: function () {
+        //     return testFunc({
+        //             name: 'setTextBoxFontToWrongScene',
+        //             font: scene.create({t: 'rect', parent: root}),
+        //             exception: {assert: false, message: 'exception was received'},
+        //             fulfilled: {assert: false, message: 'expected rejection but received resolution'},
+        //             rejected: {assert: true, message: 'expected and received rejection'}
+        //         }
+        //     );
+        // },
+
         setTextBoxFontToInvalidFont: function () {
-            return new Promise(function (resolve, reject) {
-                let results = [];
-                try {
-                    textBox.font = Invalid_font;
-                } catch (exeception) {
-                    message = 'setTextBoxFontToInvalidFont: exception was received';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                    resolve(results);
+            return testFunc({
+                    name: 'setTextBoxFontToInvalidFont',
+                    font: Invalid_font,
+                    exception: {assert: false, message: 'exception was received'},
+                    fulfilled: {assert: false, message: 'expected rejection but received resolution'},
+                    rejected: {assert: true, message: 'expected and received rejection'}
                 }
-                textBox.ready.then(function () {
-                    message = 'setTextBoxFontToInvalidFont: expected rejection but received resolution';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                }, function () {
-                    message = 'setTextBoxFontToInvalidFont: expected and received rejection';
-                    results = assert(true, message);
-                    logger.message('debug', message);
-                }).then(function () {
-                    resolve(results);
-                })
-            });
+            );
         },
+
         setTextBoxFontToValidFont: function () {
-            return new Promise(function (resolve, reject) {
-                let results = [];
-                try {
-                    textBox.font = IndieFlower_font;
-                } catch (exeception) {
-                    message = 'setTextBoxFontToValidFont: exception was received';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                    resolve(results);
+            return testFunc({
+                    name: 'setTextBoxFontToValidFont',
+                    font: IndieFlower_font,
+                    exception: {assert: false, message: 'exception was received'},
+                    fulfilled: {assert: true, message: 'expected and received resolution'},
+                    rejected: {assert: false, message: 'expected resolution but received rejection'}
                 }
-                textBox.ready.then(function () {
-                    message = 'setTextBoxFontToValidFont: expected and received resolution';
-                    results = assert(true, message);
-                    logger.message('debug', message);
-                }, function () {
-                    message = 'setTextBoxFontToValidFont: expected resolution but received rejection';
-                    results = assert(false, message);
-                    logger.message('debug', message);
-                }).then(function () {
-                    resolve(results);
-                })
-            });
-        }
+            );
+        },
     };
 
     module.exports.beforeStart = beforeStart;
