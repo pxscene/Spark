@@ -63,6 +63,10 @@ var tests = {
         });
 
         resolve(results);
+      },
+      function() // reject
+      {
+        reject(["test1 - REJECT ...  color test failed. (unknown)"]);
       });
     })
   },
@@ -80,14 +84,15 @@ var tests = {
       rect.ready.then(function(o)
       {
         var results = [];
-
-        rect.fillColor = "#fff8";
-
-        // console.log("TEST2 >>  fillColor: " + rect.fillColor);
+        rect.fillColor = "#fff8"; // RGB A
 
         results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
 
         resolve(results);
+      },
+      function() // reject
+      {
+        reject(["test2 - REJECT ...  color test failed. (unknown)"]);
       });
     });
   },
@@ -105,15 +110,16 @@ var tests = {
         rect.ready.then(function(o)
         {
           var results = [];
-
-          rect.fillColor = "#ffffff88";
-
-          // console.log("TEST3 >>  fillColor: " + rect.fillColor);
+          rect.fillColor = "#ffffff88"; // RRGGBB A
 
           results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
 
           resolve(results);
-        });
+        },
+        function() // reject
+        {
+          reject(["test3 - REJECT ...  color test failed. (unknown)"]);
+        })
       });
     }
 }
