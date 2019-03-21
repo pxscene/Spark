@@ -34,13 +34,12 @@ px.import({
     let DejaVu = 'DejaVuSans.ttf';
     let InvalidFontName = 'InvalidFontName.ttf';
 
-// The two test widgets
-    let FONT_PIXEL_SIZE = 30;
+// Test widget
     let textBox = scene.create({
         t: 'textBox',
         parent: root,
         x: 15, y: 70,
-        pixelSize: FONT_PIXEL_SIZE,
+        pixelSize: 30,
         text: 'textBox scene'
     });
 
