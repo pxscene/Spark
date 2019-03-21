@@ -22,7 +22,7 @@ px.import({
     let Logger = imports.log.Logger;
     let setLoggingLevel = imports.log.setLoggingLevel;
     let logger = new Logger('XRE2-1555');
-    let rtLogLevel = process.env.RT_LOG_LEVEL ? process.env.RT_LOG_LEVEL : 'debug'; // TODO: set 'warn' here!
+    let rtLogLevel = process.env.RT_LOG_LEVEL ? process.env.RT_LOG_LEVEL : 'warn';
     setLoggingLevel(rtLogLevel);
 
     let doScreenshot = false;
