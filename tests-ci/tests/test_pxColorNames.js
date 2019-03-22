@@ -45,10 +45,10 @@ var tests = {
     return new Promise(function(resolve, reject)
     {
       var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      var results = [];
+
       rect.ready.then(function(o)
       {
-        var results = [];
-
         var color, value;
         colorNames.map( clrObj =>
         {
@@ -61,8 +61,6 @@ var tests = {
 
             results.push(assert(rect.fillColor === value," fillColor: '"+color+"' ("+value+") != " + rect.fillColor ));
         });
-
-        resolve(results);
       },
       function() // reject
       {
@@ -84,14 +82,13 @@ var tests = {
     return new Promise(function(resolve, reject)
     {
       var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      var results = [];
+
       rect.ready.then(function(o)
       {
-        var results = [];
         rect.fillColor = "#ff8"; // RGB A
 
         results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
-
-        resolve(results);
       },
       function() // reject
       {
@@ -113,9 +110,10 @@ var tests = {
     return new Promise(function(resolve, reject)
     {
       var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      var results = [];
+
       rect.ready.then(function(o)
       {
-        var results = [];
         rect.fillColor = "#ffffff88"; // RRGGBB A
 
         results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
