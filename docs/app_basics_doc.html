@@ -56,7 +56,115 @@
         <hr />
         <section class="js-section">
             <h3 class="section__title">Colors</h3>
-            <p></p>   
+            <p>
+<!--  -->
+
+
+<div style="background-color:#eee;padding:10px;border-radius:7px; display: grid">
+    <div style="grid-column: 1"><img src="images/colors/rgb-wheel.png" 
+    alt="Color Wheel" height="50" width="50"></img> </div>
+    <div style="grid-column: 2"><h1>HTML/CSS Named Colors</h1></div>
+</div>
+<br>
+
+<section style="display: grid">
+  <div style="grid-column: 1; text-align: center">
+    Read more:  <a href="https://www.w3schools.com/colors/colors_names.asp">HTML Color Names</a>
+  </div>
+
+  <div style="grid-column: 2; text-align: center">
+    Available as of <b> Spark v =1.6.0.1</b>
+  </div>
+</section>
+<br>
+Spark now supports HTML/CSS colors syntax and naming conventions for <b>setting</b> colors.
+<br>
+<br>
+This means that wherever you used <code> fillColor, textColor, lineColor </code> with a hexidecimal <code>0xRRGGBBAA</code> value in the past ...
+<br>
+<br>
+<pre>
+var rect1  = scene.create({ t: 'rect', parent: root, fillColor: 0xFF0000ff, lineColor: 0x000000ff,
+                    lineWidth: 2, x: 0, y: 0, w: 100, h: 100, interactive: false });
+</pre>
+  
+  ... now supports - 
+  <br>
+  <br>
+    <pre >
+rect1.fillColor = 0xFF0000ff;  // RED
+rect1.fillColor = "#f00";      // RED
+rect1.fillColor = "#ff0000";   // RED
+
+rect1.fillColor = "#f008";     // RED 50% alpha
+rect1.fillColor = "#ff000088"; // RED 50% alpha
+</pre>
+
+<br>
+<br>
+The following is now supported ... 
+<br>
+<br>
+<pre>
+var rect2 = scene.create({ t: 'rect', parent: root, fillColor: '#0808', lineColor: '#000f',
+            lineWidth: 1, x: scene.w/2, y: scene.h/2, w: 100, h: 100, px: 0.5, py: 0.5,
+            interactive: false }); 
+</pre>
+... notice the &nbsp&nbsp<code style="color: blue">fillColor: '#0808'</code> &nbsp  and the  &nbsp&nbsp<code style="color: blue">lineColor: '#000f'</code> &nbsp are using the HTML/CSS style color notation.
+<br>
+
+<br>
+
+<br>
+<h1>But Wait... there's more !</h1>
+
+You can also use the 147 defined <a href="https://www.w3schools.com/colors/colors_names.asp">HTML/CSS color names</a> .
+<br><br>
+Like this...
+<br>
+<pre>
+rect1.fillColor = "Red";         // 0xFF0000ff
+rect1.fillColor = "FireBrick ";  // 0xB22222ff
+
+rect1.fillColor = "DarkRed "     // 0x8B0000ff
+rect1.fillColor = "Maroon";      // 0x800000ff
+</pre>
+<br>
+  There are 147 defined colors ... including <a href="https://en.wikipedia.org/wiki/Eric_A._Meyer"> <b>rebeccapurple</b></a>.
+<br><br>
+<a href="images/colors/colors.png"> <img src="images/colors/colors.png"  alt="Color Wheel" style="width: 100%;max-height: 100%"></img></a>
+
+<br><br><br><br>
+
+
+<div class="title">
+  <!-- <img style="vertical-align:middle; width:50px; max-height: 100%" src="images/colors/color-highlight-logo.png" alt="Color Highlight"> -->
+  <a href="https://marketplace.visualstudio.com/items?itemName=naumovs.color-highlight"> <img src="images/colors/color-highlight-logo.png" style="vertical-align:middle; width:50px; max-height: 100%"  alt="Color Highlight"></img></a>
+  <span>VSCode Extensions</span>
+</div>
+
+
+<br>    
+<br>
+Whilst color RGB codes are neat, and HTML/CSS color syntax is tidy - actually seeing the color in your <b>Spark</b> code is better still.
+<br>
+<br>
+<b>VS Code</b> has an abundance of Extensions that improve productivity, and for colors - <b>Color Highlight</b> is <i>really</i> useful !
+<br><br>
+
+
+<b>Color Highlight</b> will render the colors that it finds in your Javascript source - or anywhere else it finds colors.
+<br>
+<br>
+<br>
+<img src="images/colors/color-highlight-example.png" style="width: 100%;max-height: 100%"  alt="Color Highlight Example"></img>
+
+<br>
+<br>
+
+
+<!--  -->
+            </p>   
         </section>
         <hr />
         <section class="js-section">

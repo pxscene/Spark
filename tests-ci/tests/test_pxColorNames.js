@@ -33,22 +33,27 @@ module.exports.beforeStart = function() {
   return promise;
 }
 
+function toHex(n)
+{
+  return ("0x" + ("0000000" + ((n|0)+4294967296).toString(16)).substr(-8) );
+}
+
 var tests = {
 
   test1: function()
   {
     if(hasCapabilities() == false)
     {
-      return Promise.resolve(["test1 - SKIPPED ...  color is not supported in this build."]);
+      return Promise.resolve(assert(true," test1 - SKIPPED ...  Color Names are not supported in this build.") );
     }
 
     return new Promise(function(resolve, reject)
     {
       var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      var results = [];
+
       rect.ready.then(function(o)
       {
-        var results = [];
-
         var color, value;
         colorNames.map( clrObj =>
         {
@@ -57,11 +62,16 @@ var tests = {
 
             rect.fillColor = color;
 
-            console.log("TEST1 >>  fillColor:  '"+color+"' ("+value+") == " + rect.fillColor);
+            // console.log("TEST1 >>  fillColor:  '"+color+"' ("+toHex(value)+") == " + toHex(rect.fillColor));
 
-            results.push(assert(rect.fillColor === value," fillColor: '"+color+"' ("+value+") != " + rect.fillColor ));
+            results.push(assert( rect.fillColor === value," fillColor: '"+color+"' ("+toHex(value)+") != " + toHex(rect.fillColor) ));
         });
-
+      },
+      function() // reject
+      {
+        results.push(assert(false, " ... promise was rejected" ));
+      }).then( function() 
+      {
         resolve(results);
       });
     })
@@ -71,51 +81,57 @@ var tests = {
   {
     if(hasCapabilities() == false)
     {
-      return Promise.resolve(["test2 - SKIPPED ...  color is not supported in this build."]);
+      return Promise.resolve(assert(true," test2 - SKIPPED ...  Color Names are not supported in this build.") );
     }
 
     return new Promise(function(resolve, reject)
     {
       var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      var results = [];
+
       rect.ready.then(function(o)
       {
-        var results = [];
+        rect.fillColor = "#fff8"; // RGB A
 
-        rect.fillColor = "#fff8";
-
-        // console.log("TEST2 >>  fillColor: " + rect.fillColor);
-
-        results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
-      });
-
+        results.push(assert( rect.fillColor === 0xFFFFFF88," fillColor: 0x" + toHex(rect.fillColor) + " != " + toHex(0xFFFFFF88) + "  << expected" ));
+      },
+      function() // reject
+      {
+        results.push(assert(false, " ... promise was rejected" ));
+      }).then( function() 
+      {
         resolve(results);
-    });
+      });
+    })
   },
 
-    test3: function()
+  test3: function()
+  {
+    if(hasCapabilities() == false)
     {
-      if(hasCapabilities() == false)
-      {
-        return Promise.resolve(["test3 - SKIPPED ...  color is not supported in this build."]);
-      }
-
-      return new Promise(function(resolve, reject)
-      {
-        var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
-        rect.ready.then(function(o)
-        {
-          var results = [];
-
-          rect.fillColor = "#ffffff88";
-
-          // console.log("TEST3 >>  fillColor: " + rect.fillColor);
-
-          results.push(assert(rect.fillColor === 0xFFFFFF88," fillColor: " + rect.fillColor ));
-        });
-
-          resolve(results);
-      });
+      return Promise.resolve(assert(true," test3 - SKIPPED ...  Color Names are not supported in this build.") );
     }
+
+    return new Promise(function(resolve, reject)
+    {
+      var rect = scene.create({ t: 'rect', parent: root, fillColor: "#000", x: 0, y: 0, w: 100, h: 100 });
+      var results = [];
+
+      rect.ready.then(function(o)
+      {
+        rect.fillColor = "#ffffff88"; // RRGGBB A
+
+        results.push(assert( rect.fillColor === 0xFFFFFF88," fillColor: 0x" + toHex(rect.fillColor) + " != " + toHex(0xFFFFFF88) + "  << expected" ));
+      },
+      function() // reject
+      {
+        results.push(assert(false, " ... promise was rejected" ));
+      }).then( function() 
+      {
+        resolve(results);
+      });
+    })
+  }
 }
 
 module.exports.tests = tests;
