@@ -22,7 +22,7 @@ px.import({
     let Logger = imports.log.Logger;
     let setLoggingLevel = imports.log.setLoggingLevel;
     let logger = new Logger('XRE2-1555');
-    let rtLogLevel = process.env.RT_LOG_LEVEL ? process.env.RT_LOG_LEVEL : 'warn';
+    let rtLogLevel = process.env.RT_LOG_LEVEL ? process.env.RT_LOG_LEVEL : 'debug';
     setLoggingLevel(rtLogLevel);
 
     let doScreenshot = false;
@@ -96,7 +96,7 @@ px.import({
             let results = [];
             let message;
 
-            let timer = setTimeout(function() {
+            let timer = setTimeout(function () {
                 message = params.name + ' never got promise!';
                 logger.message('debug', message);
                 results.push(assert(false, message));
@@ -106,17 +106,17 @@ px.import({
             try {
                 textBox.font = params.font;
             } catch (exception) {
-                message = params.name + ': ' +  params.exception.message;
+                message = params.name + ': ' + params.exception.message;
                 results = assert(params.exception.assert, message);
                 logger.message('debug', message);
                 resolve(results);
             }
             textBox.ready.then(function () {
-                message = params.name + ': ' +  params.fulfilled.message;
+                message = params.name + ': ' + params.fulfilled.message;
                 results = assert(params.fulfilled.assert, message);
                 logger.message('debug', message);
             }, function () {
-                message = params.name + ': ' +  params.rejected.message;
+                message = params.name + ': ' + params.rejected.message;
                 results = assert(params.rejected.assert, message);
                 logger.message('debug', message);
             }).then(function () {
@@ -128,40 +128,16 @@ px.import({
 
     let tests = {
 
-        setTextBoxFontToInvalidValue: function () {
+        setTextBoxFontToValidFont: function () {
             return testFunc({
-                    name: 'setTextBoxFontToInvalidValue',
-                    font: 30,
+                    name: 'setTextBoxFontToValidFont',
+                    font: IndieFlower_font,
                     exception: {assert: false, message: 'exception was received'},
-                    fulfilled: {assert: false, message: 'expected rejection but received resolution'},
-                    rejected: {assert: true, message: 'expected and received rejection'}
+                    fulfilled: {assert: true, message: 'expected and received resolution'},
+                    rejected: {assert: false, message: 'expected resolution but received rejection'}
                 }
             );
         },
-
-        // DISABLED BECAUSE IT WILL CRASH SPARK WITHOUT THE XRE-1555 PATCH (due to the missing type validation)
-        //
-        // setTextBoxFontToInvalidObject: function () {
-        //     return testFunc({
-        //             name: 'setTextBoxFontToInvalidObject',
-        //             font: {description: 'pxFont'},
-        //             exception: {assert: false, message: 'exception was received'},
-        //             fulfilled: {assert: false, message: 'expected rejection but received resolution'},
-        //             rejected: {assert: true, message: 'expected and received rejection'}
-        //         }
-        //     );
-        // },
-
-        // setTextBoxFontToWrongScene: function () {
-        //     return testFunc({
-        //             name: 'setTextBoxFontToWrongScene',
-        //             font: scene.create({t: 'rect', parent: root}),
-        //             exception: {assert: false, message: 'exception was received'},
-        //             fulfilled: {assert: false, message: 'expected rejection but received resolution'},
-        //             rejected: {assert: true, message: 'expected and received rejection'}
-        //         }
-        //     );
-        // },
 
         setTextBoxFontToInvalidFont: function () {
             return testFunc({
@@ -174,13 +150,37 @@ px.import({
             );
         },
 
-        setTextBoxFontToValidFont: function () {
+        setTextBoxFontToInvalidValue: function () {
             return testFunc({
-                    name: 'setTextBoxFontToValidFont',
-                    font: IndieFlower_font,
+                    name: 'setTextBoxFontToInvalidValue',
+                    font: 30,
                     exception: {assert: false, message: 'exception was received'},
-                    fulfilled: {assert: true, message: 'expected and received resolution'},
-                    rejected: {assert: false, message: 'expected resolution but received rejection'}
+                    fulfilled: {assert: false, message: 'expected rejection but received resolution'},
+                    rejected: {assert: true, message: 'expected and received rejection'}
+                }
+            );
+        },
+
+        // THE NEXT TESTS WILL CRASH SPARK WITHOUT THE XRE-1555 PATCH
+        // due to the missing type validation in pxText::setFont()
+        setTextBoxFontToInvalidObject: function () {
+            return testFunc({
+                    name: 'setTextBoxFontToInvalidObject',
+                    font: {description: 'pxFont'},
+                    exception: {assert: false, message: 'exception was received'},
+                    fulfilled: {assert: false, message: 'expected rejection but received resolution'},
+                    rejected: {assert: true, message: 'expected and received rejection'}
+                }
+            );
+        },
+
+        setTextBoxFontToWrongScene: function () {
+            return testFunc({
+                    name: 'setTextBoxFontToWrongScene',
+                    font: scene.create({t: 'rect', parent: root}),
+                    exception: {assert: false, message: 'exception was received'},
+                    fulfilled: {assert: false, message: 'expected rejection but received resolution'},
+                    rejected: {assert: true, message: 'expected and received rejection'}
                 }
             );
         },
