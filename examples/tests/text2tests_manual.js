@@ -85,8 +85,9 @@ var textStatus = scene.create({t:"text", parent:root, x:350, y:container.y+420, 
 var textHint = scene.create({t:"text", parent:root, x:620, y:container.y+420, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use small s)"});
 var clipStatus = scene.create({t:"text", parent:root, x:350, y:container.y+440, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"clip=true"});
 var xStartPosStatus = scene.create({t:"text", parent:root, x:350, y:container.y+460, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"xStartPos=0"});
+var xStartPosHint = scene.create({t:"text", parent:root, x:475, y:container.y+460, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use small L)"});
 var xStopPosStatus = scene.create({t:"text", parent:root, x:350, y:container.y+480, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"xStopPos=0"});
-var xStopPosHint = scene.create({t:"text", parent:root, x:465, y:container.y+480, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use small L)"});
+var xStopPosHint = scene.create({t:"text", parent:root, x:490, y:container.y+480, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use capital L)"});
 var leadingStatus = scene.create({t:"text", parent:root, x:350, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"leading=0"});
 var leadingHint = scene.create({t:"text", parent:root, x:465, y:container.y+500, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"(use + -)"});
 var fontStatus = scene.create({t:"text", parent:root, x:350, y:container.y+520, textColor:0xFFDDFFFF, pixelSize:20,clip:false,text:"font="+IndieFlower+" (http)"});
