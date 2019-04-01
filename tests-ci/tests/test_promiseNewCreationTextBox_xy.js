@@ -1,5 +1,8 @@
 "use strict";
-/** This test is for XRE2-597 - test reassigning url to image that had rejected promise, then url="", then url= valid url */
+/** 
+ * This test ensures that changing x or y values creates a new promise for textBox.
+ * This is because the text measurements for textBox are (currently) relative to its parent.
+ */
 
 px.import({scene:"px:scene.1.js",
            assert:"../test-run/assert.js",

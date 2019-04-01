@@ -1,5 +1,8 @@
 "use strict";
-/** This test is for XRE2-597 - test reassigning url to image that had rejected promise, then url="", then url= valid url */
+/** 
+ * This test ensures that changing x or y values does not create new promise for 
+ * text, rect, image, imageA and image9.
+ */
 
 px.import({scene:"px:scene.1.js",
            assert:"../test-run/assert.js",
