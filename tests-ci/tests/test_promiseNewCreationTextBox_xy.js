@@ -70,7 +70,7 @@ var tests = {
     return new Promise(function(resolve, reject) {
       var results = []; 
       textBox.animateTo({x:originalX,y:originalY}, 0.2, scene.animation.TWEEN_LINEAR).then( function() { 
-        // No new promise should be created
+        // New promise should be resolved or rejected
         textBox.ready.then(function(o) {
           results.push(assert(!(textBox.ready === textBoxReadySaved), "test_textBoxAnimatePos: textBox Promise was old"));
         }, function rejection(o) {
@@ -83,6 +83,24 @@ var tests = {
     });
   },
 
+
+  test_textBoxSetSamePos: function() {
+
+    return new Promise(function(resolve, reject) {
+      var results = []; 
+      textBox.x = originalX;
+      textBox.y = originalY;
+      // No new promise should be created
+      textBox.ready.then(function(o) {
+        results.push(assert((textBox.ready === textBoxReadySaved), "test_textBoxSetSamePos: new textBox Promise was created"));
+      }, function rejection(o) {
+        results.push(assert(false, "test_textBoxSetSamePos: Promise rejection received"));
+      }).then( function(obj) {
+        textBoxReadySaved = textBox.ready;
+        resolve(results);
+      });
+    });
+  },  
 
   test_textBoxReset: function() {
 
