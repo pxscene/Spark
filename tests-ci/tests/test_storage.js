@@ -128,20 +128,7 @@ module.exports.tests.test07_getItemsPrefix = () => {
     'getItems with prefix doesn\'t work'));
 };
 
-module.exports.tests.test08_persistence = () => {
-  let storage = imports.scene.storage;
-
-  storage.clear();
-  storage.setItem('key1', 'value1');
-
-  storage = imports.scene.storage;
-
-  const value1 = storage.getItem('key1');
-
-  return Promise.resolve(imports.assert(value1 === 'value1', 'persistence doesn\'t work'));
-};
-
-module.exports.tests.test09_capabilities = () => {
+module.exports.tests.test08_capabilities = () => {
   const capabilities = imports.scene.capabilities;
 
   return Promise.resolve(imports.assert(capabilities && capabilities.storage === 1, 'capabilities wrong'));
