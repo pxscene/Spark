@@ -18,6 +18,8 @@ importsPromise.then(im => {
   }
 });
 
+const this_url = module.appSceneContext.packageUrl;
+
 module.exports.tests = {};
 
 module.exports.tests.test01_getStorage = () => {
@@ -132,4 +134,75 @@ module.exports.tests.test08_capabilities = () => {
   const capabilities = imports.scene.capabilities;
 
   return Promise.resolve(imports.assert(capabilities && capabilities.storage === 1, 'capabilities wrong'));
+};
+
+module.exports.getStorage = () => imports.scene.storage;
+
+module.exports.tests.test09_childAppUsesSameStorage = () => {
+  const storage = imports.scene.storage;
+
+  storage.clear();
+  storage.setItem('key1', '123');
+  storage.setItem('key2', '456');
+
+  const new_scene = imports.scene.create({
+    t: 'scene',
+    parent: imports.scene.root,
+    w: imports.scene.w, h: imports.scene.h,
+    url: this_url + (this_url.indexOf('?') === -1 ? '?manualTest=0' : '&manualTest=0')
+  });
+
+  return new_scene.ready.then(s => {
+    const child = s.api.getStorage();
+
+    child.setItem('key3', '789');
+    const value1 = child.getItem('key1');
+    const value2 = child.getItem('key2');
+    const value3 = child.getItem('key3');
+
+    return imports.assert(
+      value1 === '123' && value2 === '456' && value3 === '789',
+      'child app storage differs');
+  });
+};
+
+module.exports.tests.test10_childAppStoragePermissions = () => {
+  const storage = imports.scene.storage;
+
+  storage.clear();
+  storage.setItem('key1', 'abc');
+  storage.setItem('key2', 'def');
+
+  const new_scene = imports.scene.create({
+    t: 'scene',
+    parent: imports.scene.root,
+    w: imports.scene.w, h: imports.scene.h,
+    url: this_url + (this_url.indexOf('?') === -1 ? '?manualTest=0' : '&manualTest=0'),
+    permissions: {
+      'url' : {
+        'allow' : [ '*' ]
+      },
+      "storage": {
+        "allow": 10
+      }
+    }
+  });
+
+  return new_scene.ready.then(s => {
+    const child = s.api.getStorage();
+
+    try {
+      child.setItem('key3', 'ghi');
+      return imports.assert(false, 'quota test');
+    } catch (ignored) {
+    }
+
+    const value1 = child.getItem('key1');
+    const value2 = child.getItem('key2');
+    const value3 = child.getItem('key3');
+
+    return imports.assert(
+      value1 === 'abc' && value2 === 'def' && value3 === '',
+      'child app storage differs');
+  });
 };
