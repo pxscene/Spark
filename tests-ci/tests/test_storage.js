@@ -99,12 +99,13 @@ module.exports.tests.test06_getItems = () => {
   const storage = imports.scene.storage;
 
   storage.clear();
+  const valueClear = storage.getItems();
   storage.setItem('key1', 'value1');
   storage.setItem('key2', 'value2');
   const value = storage.getItems();
 
   return Promise.resolve(imports.assert(
-    value.length === 2 &&
+    valueClear.length === 0 && value.length === 2 &&
     value[0].key === 'key1' && value[0].value === 'value1' &&
     value[1].key === 'key2' && value[1].value === 'value2',
     'getItems doesn\'t work'));
@@ -138,4 +139,10 @@ module.exports.tests.test08_persistence = () => {
   const value1 = storage.getItem('key1');
 
   return Promise.resolve(imports.assert(value1 === 'value1', 'persistence doesn\'t work'));
+};
+
+module.exports.tests.test09_capabilities = () => {
+  const capabilities = imports.scene.capabilities;
+
+  return Promise.resolve(imports.assert(capabilities && capabilities.storage === 1, 'capabilities wrong'));
 };
