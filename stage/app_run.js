@@ -53,7 +53,7 @@ components: 'components.js'
   }
   
   let appData = [
-    {"t":"pxImage","x":65,"y":35,"w":295,"h":40,"cx":147.5,"cy":20,"sx":1,"sy":1,"r":0,"url":"http://localhost:8080/hrimages/logo.png"},
+    {"t":"pxImage","x":65,"y":35,"w":295,"h":40,"cx":147.5,"cy":20,"sx":1,"sy":1,"r":0,"url":"http://www.sparkui.org/stage/hrimages/logo.png"},
     {"t":"component_Menu","x":981,"y":36,"w":250,"h":37,"cx":125,"cy":18.5,"sx":1,"sy":1,"r":0,"id":"menu",
       "items":"For You, Live Radio","fontSize":"22","highlight":4278190335},
     {"t":"component_Gallery","x":11,"y":264,"w":1225,"h":412,"cx":612.5,"cy":206,"sx":1,"sy":1,"r":0,"id":"gallery","dataSrc":"my_iheart"}
