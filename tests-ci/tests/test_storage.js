@@ -19,17 +19,28 @@ importsPromise.then(im => {
 });
 
 const this_url = module.appSceneContext.packageUrl;
-const child_url = (this_url.indexOf('?') === -1 ? this_url : this_url.substring(0, this_url.indexOf('?'))) + '?manualTest=0';
-const tiny_url = 'https://tinyurl.com/y4mjpdka?manualTest=0'; // -> https://www.sparkui.org/tests-ci/tests/test_storage.js?manualTest=0
+const child_url = this_url.split('?')[0] + '?manualTest=0';
+const tiny_url = 'https://tinyurl.com/y4mjpdka?manualTest=0';
+  // -> https://www.sparkui.org/tests-ci/tests/test_storage.js?manualTest=0
 
 module.exports.tests = {};
 
+/**
+ * 'storage'.
+ * Scene's 'storage' prop is not null.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test01_getStorage = () => {
   const storage = imports.scene.storage;
 
   return Promise.resolve(imports.assert(storage, 'no storage'));
 };
 
+/**
+ * 'setItem' / 'getItem'.
+ * Set items via 'setItem'. Get items via 'getItem', got the same values as set, for non existing - ''.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test02_setItem_getItem = () => {
   const storage = imports.scene.storage;
 
@@ -44,6 +55,11 @@ module.exports.tests.test02_setItem_getItem = () => {
     'setItem/getItem doesn\'t work'));
 };
 
+/**
+ * 'setItem' / 'getItem'.
+ * Set items via 'setItem'. Replace them via 'setItem'. Get items via 'getItem', values changed.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test03_updateItems = () => {
   const storage = imports.scene.storage;
 
@@ -61,6 +77,11 @@ module.exports.tests.test03_updateItems = () => {
     'update doesn\'t work'));
 };
 
+/**
+ * 'clear'.
+ * Set items via 'setItem'. Clear all via 'clear'. Get items via 'getItem', all are ''.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test04_clear = () => {
   const storage = imports.scene.storage;
 
@@ -79,6 +100,11 @@ module.exports.tests.test04_clear = () => {
     'clear doesn\'t work'));
 };
 
+/**
+ * 'removeItem'.
+ * Clear. Set items via 'setItem'. Remove some via 'removeItem'. Get items via 'getItem', removed are ''.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test05_removeItem = () => {
   const storage = imports.scene.storage;
 
@@ -99,6 +125,11 @@ module.exports.tests.test05_removeItem = () => {
     'removeItem doesn\'t work'));
 };
 
+/**
+ * 'getItems'.
+ * Clear. 'getItems' gives []. Set items via 'setItem'. 'getItems' gives an array with items as set.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test06_getItems = () => {
   const storage = imports.scene.storage;
 
@@ -115,6 +146,11 @@ module.exports.tests.test06_getItems = () => {
     'getItems doesn\'t work'));
 };
 
+/**
+ * 'getItems' (by prefix).
+ * Clear. Set items via 'setItem'. 'getItems' with prefix arg gives an array with items having a given prefix.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test07_getItemsPrefix = () => {
   const storage = imports.scene.storage;
 
@@ -132,6 +168,11 @@ module.exports.tests.test07_getItemsPrefix = () => {
     'getItems with prefix doesn\'t work'));
 };
 
+/**
+ * 'capabilities'.
+ * Scene's 'capabilities.storage' prop is 1.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test08_capabilities = () => {
   const capabilities = imports.scene.capabilities;
 
@@ -140,6 +181,11 @@ module.exports.tests.test08_capabilities = () => {
 
 module.exports.getStorage = () => imports.scene.storage;
 
+/**
+ * Apps with the same origin share the same storage.
+ * Set items. Create child scene, add items in its storage. Get items via 'getItem', got all items combined.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test09_childAppUsesSameStorage = () => {
   const storage = imports.scene.storage;
 
@@ -168,6 +214,11 @@ module.exports.tests.test09_childAppUsesSameStorage = () => {
   }).catch(() => imports.assert(false, 'child app test failed'));
 };
 
+/**
+ * Apps can't exceed quota.
+ * Create child scene with quota set via 'permissions'. Set items (by child) exceeding quota fails.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test10_childAppStoragePermissions = () => {
   const storage = imports.scene.storage;
 
@@ -209,6 +260,11 @@ module.exports.tests.test10_childAppStoragePermissions = () => {
   }).catch(() => imports.assert(false, 'child app quota test failed'));
 };
 
+/**
+ * Random apps have 0 quota.
+ * Create child scene (random origin). Set items (by child) fails. 'getItems' (by child) gives an empty array.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test11_arbitraryAppQuota = () => {
   const new_scene = imports.scene.create({
     t: 'scene',
@@ -234,6 +290,11 @@ module.exports.tests.test11_arbitraryAppQuota = () => {
   }).catch(() => imports.assert(false, 'arbitrary app test failed'));
 };
 
+/**
+ * Quota test.
+ * Set items (by child app) exceeding quota fails, not exceeding - succeeds. Remove frees space.
+ * @returns {Promise<string>}
+ */
 module.exports.tests.test12_quota = () => {
   const new_scene = imports.scene.create({
     t: 'scene',
