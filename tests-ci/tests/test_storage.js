@@ -19,6 +19,8 @@ importsPromise.then(im => {
 });
 
 const this_url = module.appSceneContext.packageUrl;
+const child_url = (this_url.indexOf('?') === -1 ? this_url : this_url.substring(0, this_url.indexOf('?'))) + '?manualTest=0';
+const tiny_url = 'https://tinyurl.com/y4mjpdka?manualTest=0'; // -> https://www.sparkui.org/tests-ci/tests/test_storage.js?manualTest=0
 
 module.exports.tests = {};
 
@@ -149,7 +151,7 @@ module.exports.tests.test09_childAppUsesSameStorage = () => {
     t: 'scene',
     parent: imports.scene.root,
     w: imports.scene.w, h: imports.scene.h,
-    url: this_url + (this_url.indexOf('?') === -1 ? '?manualTest=0' : '&manualTest=0')
+    url: child_url
   });
 
   return new_scene.ready.then(s => {
@@ -163,7 +165,7 @@ module.exports.tests.test09_childAppUsesSameStorage = () => {
     return imports.assert(
       value1 === '123' && value2 === '456' && value3 === '789',
       'child app storage differs');
-  });
+  }).catch(() => imports.assert(false, 'child app test failed'));
 };
 
 module.exports.tests.test10_childAppStoragePermissions = () => {
@@ -177,7 +179,7 @@ module.exports.tests.test10_childAppStoragePermissions = () => {
     t: 'scene',
     parent: imports.scene.root,
     w: imports.scene.w, h: imports.scene.h,
-    url: this_url + (this_url.indexOf('?') === -1 ? '?manualTest=0' : '&manualTest=0'),
+    url: child_url,
     permissions: {
       'url' : {
         'allow' : [ '*' ]
@@ -204,5 +206,30 @@ module.exports.tests.test10_childAppStoragePermissions = () => {
     return imports.assert(
       value1 === 'abc' && value2 === 'def' && value3 === '',
       'child app storage differs');
+  }).catch(() => imports.assert(false, 'child app quota test failed'));
+};
+
+module.exports.tests.test11_arbitraryAppQuota = () => {
+  const new_scene = imports.scene.create({
+    t: 'scene',
+    parent: imports.scene.root,
+    w: imports.scene.w, h: imports.scene.h,
+    url: tiny_url
   });
+
+  return new_scene.ready.then(s => {
+    const child = s.api.getStorage();
+
+    child.clear();
+
+    try {
+      child.setItem('key', 'value');
+      return imports.assert(false, 'quota test');
+    } catch (ignored) {
+    }
+
+    const value = child.getItems();
+
+    return imports.assert(value.length === 0, 'arbitrary app storage is not empty');
+  }).catch(() => imports.assert(false, 'arbitrary app test failed'));
 };
