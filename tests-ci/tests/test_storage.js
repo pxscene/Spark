@@ -233,3 +233,59 @@ module.exports.tests.test11_arbitraryAppQuota = () => {
     return imports.assert(value.length === 0, 'arbitrary app storage is not empty');
   }).catch(() => imports.assert(false, 'arbitrary app test failed'));
 };
+
+module.exports.tests.test12_quota = () => {
+  const new_scene = imports.scene.create({
+    t: 'scene',
+    parent: imports.scene.root,
+    w: imports.scene.w, h: imports.scene.h,
+    url: child_url,
+    permissions: {
+      'url' : {
+        'allow' : [ '*' ]
+      },
+      "storage": {
+        "allow": 20
+      }
+    }
+  });
+
+  return new_scene.ready.then(s => {
+    const child = s.api.getStorage();
+
+    child.clear();
+    child.setItem('1234', '5678');
+    child.setItem('9012', '3456');
+    // len 16
+    try {
+      child.setItem('7890', '1234');
+      return imports.assert(false, 'quota test');
+    } catch (ignored) {
+    }
+    // len 16
+    child.removeItem('1234');
+    // len 8
+    try {
+      child.setItem('7890', '1234');
+    } catch (ignored) {
+      return imports.assert(false, 'quota test');
+    }
+    // len 16
+    try {
+      child.setItem('5678', '9012');
+      return imports.assert(false, 'quota test');
+    } catch (ignored) {
+    }
+    // len 16
+    child.clear();
+    // len 0
+    try {
+      child.setItem('1234567890', '1234567890');
+    } catch (ignored) {
+      return imports.assert(false, 'quota test');
+    }
+    // len 20
+
+    return imports.assert(true);
+  }).catch(() => imports.assert(false, 'child app quota test failed'));
+};
