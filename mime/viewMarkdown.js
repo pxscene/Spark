@@ -35,7 +35,7 @@ px.import({
     this.scrollable = new Scrollable(this.scene, this.container, {blank: this.options.args.from === 'markdown'});
 
     //var mimeURL = this.options.mimeType.url.split('/');
-    var mimeURL = 'https://www.pxscene.org/mime/';
+    var mimeURL = 'https://madanagopalt.github.io/Spark/mime/';
     //mimeURL.pop();
     this.markdown = new Markdown(this.scene, this.scrollable, {
       basePath: this.basePath,
