@@ -6,15 +6,15 @@ var root = scene.root;
 
 // null or "" is the default face FreeSans.ttf
 var fonts = ["",
-             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Regular.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/DancingScript-Bold.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSans.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/DejaVuSerif.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/FontdinerSwanky.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/FreeSans.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/IndieFlower.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/Pacifico.ttf",
-             "http://www.pxscene.org/examples/px-reference/fonts/PoiretOne-Regular.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/DancingScript-Regular.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/DancingScript-Bold.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/DejaVuSans.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/DejaVuSerif.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/FontdinerSwanky.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/FreeSans.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/IndieFlower.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/Pacifico.ttf",
+             "http://madanagopalt.github.io/Spark/examples/px-reference/fonts/PoiretOne-Regular.ttf",
             ];
 console.log("fonts: " + fonts);
 console.log("fonts: ", fonts.length);

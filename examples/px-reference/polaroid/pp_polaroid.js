@@ -123,13 +123,13 @@ var polaroidW = (polaroidH*0.83);
 
 var bgShadow = scene.create({t:"image",url:bgShadowUrl,parent:bg,stretchX:1,stretchY:1,a:0.75});
 
-var captionFont = scene.create({t:"fontResource", url:"http://pxscene.org/examples/px-reference/fonts/DancingScript-Regular.ttf"});
+var captionFont = scene.create({t:"fontResource", url:"http://madanagopalt.github.io/Spark/examples/px-reference/fonts/DancingScript-Regular.ttf"});
 captionFont.ready.then( null, 
   function(res) {
     console.log("ERROR loading captionFont. StatusCode:"+res.loadStatus.statusCode+
                 " httpStatusCode:"+res.loadStatus.httpStatusCode)
     //IPV6 compatible location for font
-    captionFont = scene.create({t:"fontResource", url:"http://pxscene.org/examples/px-reference/fonts/IndieFlower.ttf"});}).
+    captionFont = scene.create({t:"fontResource", url:"http://madanagopalt.github.io/Spark/examples/px-reference/fonts/IndieFlower.ttf"});}).
   catch(function(error) {
     console.log("ERROR occurred while loading captionFont: "+error)
   });
