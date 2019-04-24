@@ -6,7 +6,7 @@ px.import("px:scene.1.js").then(function (scene) {
 
   var txt1 = scene.create({ t: "text", x: 10, text: "", parent: root, pixelSize: 64 });
 
-  var url = "http://madanagopalt.github.io/Spark/examples/px-reference/gallery/images/apng/cube.png";
+  var url = "http://www.sparkui.org/examples/px-reference/gallery/images/apng/cube.png";
   var ball = scene.create({ t: "imageA", w: 300, h: 300, url: url, parent: root });
   ball.ready.then(function () {
     ball.cx = ball.w / 2;

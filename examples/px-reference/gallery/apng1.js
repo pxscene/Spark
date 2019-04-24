@@ -4,11 +4,11 @@ px.import("px:scene.1.js").then(function (scene) {
 
   var basePackageUri = px.getPackageBaseFilePath();
 
-  var urls = ["http://madanagopalt.github.io/Spark/examples/px-reference/gallery/images/apng/elephant.png", // apng
-  "http://madanagopalt.github.io/Spark/examples/px-reference/gallery/images/apng/cube.png", // apng
-  "http://madanagopalt.github.io/Spark/examples/px-reference/gallery/images/apng/spinfox.png", // apng
-  "http://madanagopalt.github.io/Spark/examples/px-reference/gallery/images/star.png", // supports plain old pngs
-  "http://madanagopalt.github.io/Spark/examples/px-reference/gallery/images/ajpeg.jpg"];
+  var urls = ["http://www.sparkui.org/examples/px-reference/gallery/images/apng/elephant.png", // apng
+  "http://www.sparkui.org/examples/px-reference/gallery/images/apng/cube.png", // apng
+  "http://www.sparkui.org/examples/px-reference/gallery/images/apng/spinfox.png", // apng
+  "http://www.sparkui.org/examples/px-reference/gallery/images/star.png", // supports plain old pngs
+  "http://www.sparkui.org/examples/px-reference/gallery/images/ajpeg.jpg"];
 
   var ready = urls.map(function (url) {
     return scene.create({ t: "imageA", url: url, parent: scene.root }).ready.catch(function (e) {
