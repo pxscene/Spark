@@ -246,7 +246,7 @@ module.exports.tests.test10_childAppStoragePermissions = () => {
 
     try {
       child.setItem('key3', 'ghi');
-      return imports.assert(false, 'quota test');
+      return imports.assert(false, 'set over quota');
     } catch (ignored) {
     }
 
@@ -257,7 +257,7 @@ module.exports.tests.test10_childAppStoragePermissions = () => {
     return imports.assert(
       value1 === 'abc' && value2 === 'def' && value3 === '',
       'child app storage differs');
-  }).catch(() => imports.assert(false, 'child app quota test failed'));
+  }).catch(() => imports.assert(false, 'child app permissions quota test failed'));
 };
 
 /**
@@ -280,7 +280,7 @@ module.exports.tests.test11_arbitraryAppQuota = () => {
 
     try {
       child.setItem('key', 'value');
-      return imports.assert(false, 'quota test');
+      return imports.assert(false, 'set by random app');
     } catch (ignored) {
     }
 
@@ -320,7 +320,7 @@ module.exports.tests.test12_quota = () => {
     // len 16
     try {
       child.setItem('7890', '1234');
-      return imports.assert(false, 'quota test');
+      return imports.assert(false, 'set over quota');
     } catch (ignored) {
     }
     // len 16
@@ -329,12 +329,12 @@ module.exports.tests.test12_quota = () => {
     try {
       child.setItem('7890', '1234');
     } catch (ignored) {
-      return imports.assert(false, 'quota test');
+      return imports.assert(false, 'set under quota after remove');
     }
     // len 16
     try {
       child.setItem('5678', '9012');
-      return imports.assert(false, 'quota test');
+      return imports.assert(false, 'set over quota again');
     } catch (ignored) {
     }
     // len 16
@@ -343,7 +343,7 @@ module.exports.tests.test12_quota = () => {
     try {
       child.setItem('1234567890', '1234567890');
     } catch (ignored) {
-      return imports.assert(false, 'quota test');
+      return imports.assert(false, 'set equal to quota');
     }
     // len 20
 
