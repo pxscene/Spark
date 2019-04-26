@@ -18,7 +18,7 @@ importsPromise.then(im => {
   }
 });
 
-const child_url = 'https://www.sparkui.org/tests-ci/tests/helpers/test_childAppStorage.js';
+const child_url = `${px.getPackageBaseFilePath()}/helpers/test_childAppStorage.js`;
 const tiny_url = 'https://tinyurl.com/yxrf6ngq'; // redirects to test_childAppStorage.js
 
 module.exports.tests = {};
