@@ -143,7 +143,7 @@ var tests = {
 */
   test8: function() {
     return new Promise(function(resolve, reject) {
-      scene.debugMetrics();
+      scene.logDebugMetrics();
       var results = [];
       results.push("SUCCESS");
       resolve(results);
