@@ -18,10 +18,8 @@ importsPromise.then(im => {
   }
 });
 
-const this_url = module.appSceneContext.packageUrl;
-const child_url = this_url.split('?')[0] + '?manualTest=0';
-const tiny_url = 'https://tinyurl.com/y4mjpdka?manualTest=0';
-  // -> https://www.sparkui.org/tests-ci/tests/test_storage.js?manualTest=0
+const child_url = 'https://www.sparkui.org/tests-ci/tests/helpers/test_childAppStorage.js';
+const tiny_url = 'https://tinyurl.com/yxrf6ngq'; // redirects to test_childAppStorage.js
 
 module.exports.tests = {};
 
@@ -178,8 +176,6 @@ module.exports.tests.test08_capabilities = () => {
 
   return Promise.resolve(imports.assert(capabilities && capabilities.storage === 1, 'capabilities wrong'));
 };
-
-module.exports.getStorage = () => imports.scene.storage;
 
 /**
  * Apps with the same origin share the same storage.
