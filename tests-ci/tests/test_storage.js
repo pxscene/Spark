@@ -258,7 +258,7 @@ module.exports.tests.test10_childAppStoragePermissions = () => {
 
 /**
  * Random apps have 0 quota.
- * Create child scene (random origin). Set items (by child) fails. 'getItems' (by child) gives an empty array.
+ * Create child scene (random origin). Child scene's 'storage' is null.
  * @returns {Promise<string>}
  */
 module.exports.tests.test11_arbitraryAppQuota = () => {
@@ -272,17 +272,7 @@ module.exports.tests.test11_arbitraryAppQuota = () => {
   return new_scene.ready.then(s => {
     const child = s.api.getStorage();
 
-    child.clear();
-
-    try {
-      child.setItem('key', 'value');
-      return imports.assert(false, 'set by random app');
-    } catch (ignored) {
-    }
-
-    const value = child.getItems();
-
-    return imports.assert(value.length === 0, 'arbitrary app storage is not empty');
+    return imports.assert(child === null, 'arbitrary app storage is not null');
   }).catch(() => imports.assert(false, 'arbitrary app test failed'));
 };
 
