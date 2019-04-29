@@ -29,9 +29,9 @@ var tests = {
       for (var i=0; i<10; i++) {
         scene.create({ t: "rect", parent: root, w: root.w, h: root.h, clip: true, fillColor: "#F00" });
       }
-      var metricsBeforeRemove = scene.debugMetrics();
+      var metricsBeforeRemove = scene.logDebugMetrics();
       root.removeAll();
-      var metricsAfterRemove = scene.debugMetrics();
+      var metricsAfterRemove = scene.logDebugMetrics();
       results.push(assert((metricsBeforeRemove.numObjects-metricsAfterRemove.numObjects)>=10,"memory leak seen after removeAll call"));
       resolve(results);
     });
