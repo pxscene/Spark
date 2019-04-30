@@ -29,7 +29,7 @@ px.import({
     let manualTest = manual.getManualTestValue();
 
 // Use fontUrls to load from web
-    let fontUrlStart = 'http://www.pxscene.org/examples/px-reference/fonts/';
+    let fontUrlStart = 'http://www.sparkui.org/examples/fonts/';
     let IndieFlower = 'IndieFlower.ttf';
     let DejaVu = 'DejaVuSans.ttf';
     let InvalidFontName = 'InvalidFontName.ttf';
