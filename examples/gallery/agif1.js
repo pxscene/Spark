@@ -5,8 +5,6 @@ px.import("px:scene.1.js").then(function (scene) {
   var basePackageUri = px.getPackageBaseFilePath();
   var url = "http://www.sparkui.org/docs/images/Spark_equalizerSVG.gif";
 
-//"http://www.pxscene.org/examples/px-reference/gallery/images/apng/cube.png";
-
   var i = scene.create({ t: "imageA", url: url, parent: scene.root });
   var it = void 0;
 
