@@ -8,7 +8,7 @@ var root = scene.root;
 var assert = imports.assert.assert;
 var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = scene.isGifLoaderEnabled;
+var isGifLoaderEnabled = scene.gifSupportEnabled;
 var doScreenshot = shots.getScreenshotEnabledValue();
 var testPlatform=scene.info.build.os;
 
@@ -50,7 +50,7 @@ var tests = {
   test1: function() {
 	if (isGifLoaderEnabled == false)
 	{   
-	return new Promise(function(resolve, reject) { resolve(true);
+	return new Promise(function(resolve, reject) { resolve(isGifLoaderEnabled == false);
 		});
 	}
 	else
