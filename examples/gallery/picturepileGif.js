@@ -20,7 +20,7 @@ $.blah("foo");
 
 var root = $.root;
 
-var basePackageUri = "http://www.sparkui.org/examples/gallery/";//px.getPackageBaseFilePath();
+var basePackageUri = px.getPackageBaseFilePath();
 var bgUrl = basePackageUri+"/images/cork.png";
 var bgShadowUrl = basePackageUri+"/images/radial_gradient.png";
 var shadowUrl = basePackageUri+"/images/BlurRect.png";
