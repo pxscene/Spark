@@ -8,7 +8,7 @@ var root = scene.root;
 var assert = imports.assert.assert;
 var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = true;//scene.isGifLoaderEnabled;
+var isGifLoaderEnabled = scene.isGifLoaderEnabled;
 var doScreenshot = shots.getScreenshotEnabledValue();
 var testPlatform=scene.info.build.os;
 
@@ -48,22 +48,29 @@ var doScreenshotComparison = function(name, resolve, reject)
 var tests = {
 
   test1: function() {
-    
-  var img = scene.create({ t: "imageA", url: url, parent: scene.root });
+	if (isGifLoaderEnabled == false)
+	{   
+	return new Promise(function(resolve, reject) { resolve(true);
+		});
+	}
+	else
+	{
+  	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
 
-return new Promise(function(resolve, reject) {
-    img.ready.then(function() {
-      if(doScreenshot) 
-      {
-          setTimeout( function() {
-            doScreenshotComparison("test1", resolve)
-          }, timeoutForScreenshot);
-      } 
-      else 
-        resolve(isGifLoaderEnabled == true);
-    });
-  });
-  }
+	return new Promise(function(resolve, reject) {
+	    img.ready.then(function() {
+	      if(doScreenshot) 
+	      {
+		  setTimeout( function() {
+		    doScreenshotComparison("test1", resolve)
+		  }, timeoutForScreenshot);
+	      } 
+	      else 
+		resolve(isGifLoaderEnabled == true);
+	    });
+	  });
+	}
+     }
  }
 
 module.exports.beforeStart = beforeStart;
@@ -77,6 +84,5 @@ if(manualTest === true) {
 }
 
 }).catch( function importFailed(err){
-  if (isGifLoaderEnabled == true)
   console.error("Import failed for test_gifLoader.js: " + err)
 });
