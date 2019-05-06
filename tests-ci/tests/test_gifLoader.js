@@ -43,8 +43,7 @@ var doScreenshotComparison = function(name, resolve, reject)
         results.push(assert(false, "screenshot comparison for "+name+" failed due to error: "+err));
         resolve(results);
     });
-}
-var tests = {
+}var tests = {
 
   test1: function() {
 	if (isGifLoaderEnabled == false)
@@ -66,7 +65,7 @@ var tests = {
 		  }, timeoutForScreenshot);
 	      } 
 	      else 
-		resolve(isGifLoaderEnabled == true ? "test_gifLoader: SUCCESS" : "test_gifLoader: Failed to load file");
+		resolve(assert(isGifLoaderEnabled == true) , "test_gifLoader: Failed to load file");
 	    });
 	  });
 	}
@@ -81,19 +80,19 @@ test2: function() {
 	{
         var imgres = scene.create({t:'imageAResource',parent: scene.root});
   
-	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
-
+	var img = scene.create({ t: "imageA", url: url, resource:imgres, parent: scene.root });
+	     
 	return new Promise(function(resolve, reject) {
 	    img.ready.then(function() {
-             img.resource=imgres;
-	      if(doScreenshot) 
+
+              if(doScreenshot) 
 	      {
 		  setTimeout( function() {
 		    doScreenshotComparison("test1", resolve)
 		  }, timeoutForScreenshot);
 	      } 
 	      else 
-		resolve(isGifLoaderEnabled == true ? "test_gifLoader: SUCCESS" : "test_gifLoader: Failed to load file");
+		resolve(assert(isGifLoaderEnabled == true) , "test_gifLoader: Failed to load file");
 	    });
 	  });
 	}
