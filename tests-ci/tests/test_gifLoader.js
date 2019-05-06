@@ -44,7 +44,6 @@ var doScreenshotComparison = function(name, resolve, reject)
         resolve(results);
     });
 }
-
 var tests = {
 
   test1: function() {
@@ -54,7 +53,8 @@ var tests = {
 		});
 	}
 	else
-	{
+	{var imgres = scene.create({t:'imageAResource',parent: scene.root});
+  	
   	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
 
 	return new Promise(function(resolve, reject) {
@@ -66,7 +66,34 @@ var tests = {
 		  }, timeoutForScreenshot);
 	      } 
 	      else 
-		resolve(isGifLoaderEnabled == true);
+		resolve(isGifLoaderEnabled == true ? "test_gifLoader: SUCCESS" : "test_gifLoader: Failed to load file");
+	    });
+	  });
+	}
+     },
+test2: function() {
+	if (isGifLoaderEnabled == false)
+	{   
+	return new Promise(function(resolve, reject) { resolve(isGifLoaderEnabled == false);
+		});
+	}
+	else
+	{
+        var imgres = scene.create({t:'imageAResource',parent: scene.root});
+  
+	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
+
+	return new Promise(function(resolve, reject) {
+	    img.ready.then(function() {
+             img.resource=imgres;
+	      if(doScreenshot) 
+	      {
+		  setTimeout( function() {
+		    doScreenshotComparison("test1", resolve)
+		  }, timeoutForScreenshot);
+	      } 
+	      else 
+		resolve(isGifLoaderEnabled == true ? "test_gifLoader: SUCCESS" : "test_gifLoader: Failed to load file");
 	    });
 	  });
 	}
