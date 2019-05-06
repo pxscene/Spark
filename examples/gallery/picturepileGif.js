@@ -18,7 +18,13 @@ $("zzzzzzzzzzz");
 $.blah("foo");
 
 
+if ($.scene.capabilities.graphics.gif == true)
+   	{
+	console.error("Gif support is disabled");
+	return;
+	}
 var root = $.root;
+
 
 var basePackageUri = px.getPackageBaseFilePath();
 var bgUrl = basePackageUri+"/images/cork.png";

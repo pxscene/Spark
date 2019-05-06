@@ -2,8 +2,13 @@
 
 px.import("px:scene.1.js").then(function (scene) {
 
+  if (scene.capabilities.graphics.gif == true)
+   	{
+	console.error("Gif support is disabled");
+	return;
+	}
   var basePackageUri = px.getPackageBaseFilePath();
-  var url = "http://www.sparkui.org/docs/images/Spark_equalizerSVG.gif";
+  var url = basePackageUri + "/images/gifs/Spark_equalizerSVG.gif";
 
   var i = scene.create({ t: "imageA", url: url, parent: scene.root });
   var it = void 0;

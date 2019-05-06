@@ -8,7 +8,7 @@ var root = scene.root;
 var assert = imports.assert.assert;
 var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = scene.gifSupportEnabled;
+var isGifLoaderEnabled = scene.capabilities.graphics.gif;
 var doScreenshot = shots.getScreenshotEnabledValue();
 var testPlatform=scene.info.build.os;
 
@@ -17,7 +17,7 @@ var timeoutForScreenshot = 40;
 
 var basePackageUri = px.getPackageBaseFilePath();
 
-var url = "http://www.sparkui.org/docs/images/Spark_equalizerSVG.gif";
+var url = basePackageUri + "/images/Spark_equalizerSVG.gif";
 
 /**********************************************************************/
 /**                                                                   */
