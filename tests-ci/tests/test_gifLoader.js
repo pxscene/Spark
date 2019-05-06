@@ -49,6 +49,7 @@ var tests = {
   test1: function() {
 	if (isGifLoaderEnabled == undefined || isGifLoaderEnabled == false)
 	{   
+			console.log("No GIF support in this Spark build!")
 			return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != true));
 		});
 	}
@@ -73,6 +74,7 @@ var tests = {
 test2: function() {
 	if (isGifLoaderEnabled == undefined || isGifLoaderEnabled == false)
 	{   
+		console.log("No GIF support in this Spark build!")
 		return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != true));
 			});
 	}
