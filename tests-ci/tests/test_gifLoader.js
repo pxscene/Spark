@@ -43,12 +43,13 @@ var doScreenshotComparison = function(name, resolve, reject)
         results.push(assert(false, "screenshot comparison for "+name+" failed due to error: "+err));
         resolve(results);
     });
-}var tests = {
+}
+var tests = {
 
   test1: function() {
-	if (isGifLoaderEnabled == false)
+	if (isGifLoaderEnabled == undefined || isGifLoaderEnabled == false)
 	{   
-	return new Promise(function(resolve, reject) { resolve(isGifLoaderEnabled == false);
+			return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != true));
 		});
 	}
 	else
@@ -70,31 +71,31 @@ var doScreenshotComparison = function(name, resolve, reject)
 	}
      },
 test2: function() {
-	if (isGifLoaderEnabled == false)
+	if (isGifLoaderEnabled == undefined || isGifLoaderEnabled == false)
 	{   
-	return new Promise(function(resolve, reject) { resolve(isGifLoaderEnabled == false);
-		});
+		return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != true));
+			});
 	}
 	else
 	{
-        var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
+      var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
   
-	var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
-	     
-	return new Promise(function(resolve, reject) {
-	    img.ready.then(function() {
+			var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
+					
+			return new Promise(function(resolve, reject) {
+					img.ready.then(function() {
 
-              if(doScreenshot) 
-	      {
-		  setTimeout( function() {
-		    doScreenshotComparison("test1", resolve)
-		  }, timeoutForScreenshot);
-	      } 
-	      else 
-		resolve(assert(isGifLoaderEnabled == true) , "test_gifLoader: Failed to load file");
-	    });
-	  });
-	}
+									if(doScreenshot) 
+						{
+					setTimeout( function() {
+						doScreenshotComparison("test1", resolve)
+					}, timeoutForScreenshot);
+						} 
+						else 
+							resolve(assert(isGifLoaderEnabled == true) , "test_gifLoader: Failed to load file");
+					});
+				});
+			}
      }
  }
 
