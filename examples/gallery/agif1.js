@@ -2,7 +2,7 @@
 
 px.import("px:scene.1.js").then(function (scene) {
 
-  if (scene.capabilities.graphics.gif == true)
+  if (scene.capabilities.graphics.gif == false)
    	{
 	console.error("Gif support is disabled");
 	return;
