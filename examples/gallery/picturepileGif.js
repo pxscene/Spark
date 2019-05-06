@@ -18,7 +18,7 @@ $("zzzzzzzzzzz");
 $.blah("foo");
 
 
-if ($.scene.capabilities.graphics.gif == true)
+if ($.capabilities.graphics.gif == true)
    	{
 	console.error("Gif support is disabled");
 	return;
