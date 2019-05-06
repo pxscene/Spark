@@ -80,7 +80,7 @@ test2: function() {
 	{
         var imgres = scene.create({t:'imageAResource',parent: scene.root});
   
-	var img = scene.create({ t: "imageA", url: url, resource:imgres, parent: scene.root });
+	var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
 	     
 	return new Promise(function(resolve, reject) {
 	    img.ready.then(function() {
