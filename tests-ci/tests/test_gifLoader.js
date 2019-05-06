@@ -52,8 +52,7 @@ var doScreenshotComparison = function(name, resolve, reject)
 		});
 	}
 	else
-	{var imgres = scene.create({t:'imageAResource',parent: scene.root});
-  	
+	{
   	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
 
 	return new Promise(function(resolve, reject) {
@@ -78,7 +77,7 @@ test2: function() {
 	}
 	else
 	{
-        var imgres = scene.create({t:'imageAResource',parent: scene.root});
+        var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
   
 	var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
 	     
