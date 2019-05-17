@@ -1,7 +1,11 @@
 px.import("px:scene.1.js").then( function ready(scene) {
   var root = scene.root;
   var appURLs = ["dynamics.js","fonts.js","fancy.js","apng1.js"];
-
+  if (scene.capabilities.graphics.gif == true)
+   	{
+	appURLs.push("agif1.js");
+	appURLs.push("picturepileGif.js");
+	}
   var url;
   var basePackageUri = px.getPackageBaseFilePath();
 
