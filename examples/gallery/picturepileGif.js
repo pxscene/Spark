@@ -14,18 +14,18 @@ px.import("px:scene.1.js").then(function (scene) {
 }
 function getImageURL() {
   var urls = [
-    "chicagofire1-animated.gif",
-    "fallontonight1-animated.gif",
-    "jaylenosgarage1-animated.gif",
-    "ninjawarrior1-animated.gif",
-    "sharknado2-animated.gif",
-    "snl3-animated.gif",
-    "chicagofire1-still.gif",
-    "fallontonight1-still.gif",
-    "jaylenosgarage1-still.gif",
-    "ninjawarrior1-still.gif",
-    "sharknado2-still.gif",
-    "snl3-still.gif"
+    "IMG_1.gif",
+    "IMG_2.gif",
+    "IMG_3.gif",
+    "IMG_4.gif",
+    "IMG_5.gif",
+    "IMG_6.gif",
+    "IMG_7.gif",
+    "IMG_8.gif",
+    "IMG_9.gif",
+    "IMG_10.gif",
+    "IMG_11.gif",
+    "IMG_12.gif"
   ];
 	return basePackageUri+"/images/gifs/"+
     urls[randomInt(0,urls.length-1)];
