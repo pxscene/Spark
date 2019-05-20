@@ -53,7 +53,8 @@ A 2d scene graph API supporting the following:
 <li><a href="#textBox">textBox</a></li>
 <li><a href="#wayland">wayland</a></li>
 <li><a href="#image">image</a></li>
-<li><a href="#image9">image9</a></li>
+<li><a href="#image9">image9</a> (for 9-slice images)</li>
+<li><a href="#imageA">imageA</a> (for animated PNGs and GIFs)</li>
 <li><a href="#rectangle">rect</a></li>
 <li><a href="#object">object</a></li>
 <li><a href="#scene">scene</a></li>
@@ -61,6 +62,7 @@ A 2d scene graph API supporting the following:
 <dd>create resources that can be shared
 <br/>Use json t: to construct specific resource types:
 <li><a href="#imageResource">imageResource</a></li>
+<li><a href="#imageAResource">imageAResource</a></li>
 <li><a href="#fontResource">fontResource</a></li>
 </dd>
 </dd>
@@ -238,7 +240,7 @@ Returns an <a href="#Animate">Animate</a> object that can be used to cancel or c
 <h2><a name="image9"></a><code>Image9</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
 <h3>Properties</h3>
 <dt class="string"> url </dt>
-<dd>specifies the url of the image to load. supports .png and .jpg</dd>
+<dd>specifies the url of the image to load. Supports .png and .jpg</dd>
 <dt class="number"> insetLeft </dt>
 <dd>specifies the first slicing offset on the x-axis</dd>
 <dt class="number"> insetTop </dt>
@@ -253,6 +255,18 @@ Returns an <a href="#Animate">Animate</a> object that can be used to cancel or c
 <dd>specifies the <a href="#imageResource"><code>imageResource</code></a> to be used by this image9</dd>
 <br/>
 <dd>Note that setting url will create an <a href="#imageResource"><code>imageResource</code></a> and set the resource property for this image9.</dd>
+<hr/>
+<br/><br/>
+<h2><a name="imageA"></a><code>ImageA</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
+<h3>Properties</h3>
+<dt class="string"> url </dt>
+<dd>specifies the url of the image to load. Supports animated PNGs (as of release 0.28) and GIFs (as of release 1.7)</dd>
+<dt class="promise"> ready </dt>
+<dd>returns a promise for when the object is ready</dd>
+<dt class="resource"> resource </dt>
+<dd>specifies the <a href="#imageAResource"><code>imageAResource</code></a> to be used by this imageA</dd>
+<br/>
+<dd>Note that setting url will create an <a href="#imageAResource"><code>imageAResource</code></a> and set the resource property for this imageA.</dd>
 <hr/>
 <br/><br/>
 <h2><a name="text"></a><code>Text</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
@@ -391,6 +405,15 @@ Creates an element which contains a Wayland display.  Any Wayland clients that c
 <h2> SVG support in <b>imageResource</b></h2>
 
 See <a href="svg_page.html"> SVG imageResource page.</a>
+
+<br/><br/>
+<h2><a name="imageAResource"></a><code>imageAResource</code> instance inherits from <a href="#resource"><code>Resource</code></a></h2>
+<h3>Properties</h3>
+<dt class="number"> w </dt>
+<dd>pixel unit width of the image</dd>
+<dt class="number"> h </dt>
+<dd>pixel unit height of the image</dd>
+<hr/>
 
 <br/><br/>
 <h2><a name="fontResource"></a><code>fontResource</code> instance inherits from <a href="#resource"><code>Resource</code></a></h2>
