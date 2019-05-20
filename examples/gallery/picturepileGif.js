@@ -1,152 +1,54 @@
-px.import("px:scene.1.js").then( function ready(blah) {
+"use strict";
 
-var $ = (function(s) {
-  var pxQuery = function(selector, context) {
-    console.log("Selector: ", selector);
-  }
+px.import("px:scene.1.js").then(function (scene) {
 
-  Object.setPrototypeOf(pxQuery, s);
-
-  pxQuery.blah = function(s) {
-    console.log("blahblahbAH",s);
-  }
-
-  return pxQuery; // publish
-})(blah);
-
-$("zzzzzzzzzzz");
-$.blah("foo");
-
-
-if ($.capabilities.graphics.gif == false)
+  if (scene.capabilities.graphics.gif != 1)
    	{
 	console.error("Gif support is disabled");
 	return;
 	}
-var root = $.root;
-
-
-var basePackageUri = px.getPackageBaseFilePath();
-var bgUrl = basePackageUri+"/images/cork.png";
-var bgShadowUrl = basePackageUri+"/images/radial_gradient.png";
-var shadowUrl = basePackageUri+"/images/BlurRect.png";
-
-function randomInt(from, to) {
+  var basePackageUri =  px.getPackageBaseFilePath();
+  function randomInt(from, to) {
 	var range = to-from;
 	return Math.round(Math.random()*range + from);
 }
-
 function getImageURL() {
   var urls = [
-    "chicagofire1-animated.gif",
-    "fallontonight1-animated.gif",
-    "jaylenosgarage1-animated.gif",
-    "ninjawarrior1-animated.gif",
-    "sharknado2-animated.gif",
-    "snl3-animated.gif"
+    "IMG_1.gif",
+    "IMG_2.gif",
+    "IMG_3.gif",
+    "IMG_4.gif",
+    "IMG_5.gif",
+    "IMG_6.gif",
+    "IMG_7.gif",
+    "IMG_8.gif",
+    "IMG_9.gif",
+    "IMG_10.gif",
+    "IMG_11.gif",
+    "IMG_12.gif"
   ];
 	return basePackageUri+"/images/gifs/"+
     urls[randomInt(0,urls.length-1)];
 }
 
-var maxCover = 0.7;
-var maxW;
-var maxH;
+  var i = scene.create({ t: "imageA", url: getImageURL(), parent: scene.root });
+  var it = void 0;
 
-var bg = $.create({t:"image",url:bgUrl,parent:root,stretchX:2,stretchY:2});
-var bgShadow = $.create({t:"image",url:bgShadowUrl,parent:bg,stretchX:1,stretchY:1,a:0.75});
-
-var numPictures = 0;
-// back layer
-var picturesBg = $.create({t:"object",parent:root});
-// middle layer
-var pictures = $.create({t:"object",parent:root});
-// front layer
-var picturesFg = $.create({t:"object",parent:root});
-
-function doIt() {
-  
-	var urlIndex = 0;
-	
-  function newPicture() {
-    
-    var url = getImageURL();
-    var picture = $.create({t:"object",parent:picturesFg,
-                                x:(randomInt(0,1)==0)?-1000:$.w+2000,
-                                 y:randomInt(-200, 800),
-                                 sx: 3, sy: 3, 
-                                 r: randomInt(-45,45),a:0});
-    var shadow = $.create({t:"imageA",x:-37,y:-37,w:200,h:200,url:shadowUrl,parent:picture,a:0.45,insetTop:48,insetBottom:48,insetLeft:48,insetRight:48});
-    var fg = $.create({t:"imageA",x:0,y:0,parent:picture,url:url,sx:0.25,sy:0.25});
-    
-    fg.ready.then(function(pic){
-      picture.paint = false;
-      picture.a = 1;
-      var picW = pic.resource.w;
-      var picH = pic.resource.h;
-      var sx = Math.min(1,maxW/pic.resource.w);
-      var sy = Math.min(1,maxH/pic.resource.h);
-      var s = (sx<sy)?sx:sy;
-      fg.sx = fg.sy = s;
-      shadow.w = (pic.resource.w*s)+37+41;
-      shadow.h = (pic.resource.h*s)+37+41;
-      picture.cx = shadow.w/2;
-      picture.cy = shadow.h/2;
-
-      picture.animateTo({x:randomInt(50,$.w-(picW*fg.sx)-50),
-                          y:randomInt(50,$.h-(picH*fg.sx)-50),
-                          r:randomInt(-15,15),sx:1,sy:1},1,$.animation.TWEEN_STOP,$.animation.OPTION_LOOP, 1)
-        .then(function() {
-          picture.parent = pictures;
-          pictures.painting = true; 
-          pictures.painting=false;
-          if (pictures.numChildren > 10) {
-            var f = pictures.getChild(0);
-            f.parent = picturesBg;
-            pictures.painting = true; pictures.painting = false;
-            f.animateTo({a: 0}, 0.75, $.animation.TWEEN_LINEAR, $.animation.OPTION_LOOP, 1)
-              .then(function(f){
-                f.remove();
-              });
-          }
-          newPicture();
-        });    
-    },function(){
-      var res = picture.resource;
-      console.log("Error loading image statusCode:"+res.loadStatus.statusCode+
-                  " httpStatusCode:"+res.loadStatus.httpStatusCode);
-      picture.remove();
-      newPicture();
+  i.ready.then(function () {
+    var iw = scene.create({ t: "imageA", url: getImageURL(), parent: scene.root, stretchX: 1 });
+    iw.ready.then(function (o) {
+      iw.x = i.w;iw.w = i.w * 2;
     });
-   } 
-  newPicture();
-}
-
-function updateSize(w, h) {
-
-  bg.w = w;
-  bg.h = h;
-
-  bgShadow.w = w;
-  bgShadow.h = h;
-
-  pictures.w = w;
-  pictures.h = h;
-  pictures.painting = true; pictures.painting = false;
-
-  maxW = w*maxCover;
-  maxH = h*maxCover;
-}
-
-$.on("onResize", function(e){updateSize(e.w,e.h);});
-updateSize($.w, $.h);
-
-doIt();
-
-}).catch( function importFailed(err){
-  console.error("Import failed for picturepileGif.js: " + err)
+    var ih = scene.create({ t: "imageA", url: getImageURL(), parent: scene.root, stretchY: 1 });
+    ih.ready.then(function (o) {
+      ih.y = i.h;ih.h = i.h * 2;
+    });
+    it = scene.create({ t: "imageA", url: getImageURL(), parent: scene.root, stretchX: 2, stretchY: 2 });
+    it.ready.then(function (o) {
+      it.x = i.w;it.y = i.h;it.x = i.w;it.w = i.w * 2;it.y = i.h;it.h = i.h * 2;
+    });
+  });
+  
+}).catch(function (e) {
+  console.error("Import failed for fancy.js: " + e);
 });
-
-
-
-
