@@ -69,7 +69,8 @@ px.import({scene:"px:scene.1.js",
   
           var results = [];
   
-          var imageA = scene.create({t:"imageA",url:imageUrl,parent:root, w:50, h: 50});
+          var imageA = scene.create({t:"imageA",url:imageUrl,parent:root, w:50, h: 50,
+                                      stretchX: scene.stretch.STRETCH, stretchY: scene.stretch.STRETCH});
   
   
           Promise.all([imageA.ready]).then(function(obj) {
