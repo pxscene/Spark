@@ -31,7 +31,7 @@ function getImageURL() {
     urls[randomInt(0,urls.length-1)];
 }
 
-  var i = scene.create({ t: "imageA", url: getImageURL(), parent: scene.root });
+  var i = scene.create({ t: "imageA", url: getImageURL(), w:400, h:225, stretchX:1, stretchY:1, parent: scene.root });
   var it = void 0;
 
   i.ready.then(function () {
