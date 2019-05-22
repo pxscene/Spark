@@ -11,7 +11,7 @@ px.import("px:scene.1.js").then(function (scene) {
               "http://www.sparkui.org/examples/gallery/images/ajpeg.jpg"];
 
   var ready = urls.map(function (url) {
-    return scene.create({ t: "imageA", url: url, parent: scene.root }).ready.catch(function (e) {
+    return scene.create({ t: "imageA", url:url, w:256, h:256, stretchX:1, stretchY:1, parent: scene.root }).ready.catch(function (e) {
       return null;
     });
   });

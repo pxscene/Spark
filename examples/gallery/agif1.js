@@ -7,13 +7,15 @@ px.import("px:scene.1.js").then(function (scene) {
 	console.error("Gif support is disabled");
 	return;
 	}
-  var basePackageUri = px.getPackageBaseFilePath();
+  var basePackageUri = "http://www.sparkui.org/examples/gallery/";px.getPackageBaseFilePath();
   var url = basePackageUri + "/images/gifs/Spark_equalizerSVG.gif";
 
-  var i = scene.create({ t: "imageA", url: url, parent: scene.root });
+  var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
+  
+  var i = scene.create({ t: "imageA", resource:imgres,  w:400, h:225, stretchX:1, stretchY:1, parent: scene.root });
   var it = void 0;
-
-  i.ready.then(function () {
+  i.ready.then(function (imgres) {
+    
     var iw = scene.create({ t: "imageA", url: url, parent: scene.root, stretchX: 1 });
     iw.ready.then(function (o) {
       iw.x = i.w;iw.w = i.w * 2;
