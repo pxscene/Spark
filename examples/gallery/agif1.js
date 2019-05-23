@@ -10,7 +10,7 @@ px.import("px:scene.1.js").then(function (scene) {
   var basePackageUri = px.getPackageBaseFilePath();
   var url = basePackageUri + "/images/gifs/Spark_equalizerSVG.gif";
 
-  var i = scene.create({ t: "imageA",  url:url, parent: scene.root });
+  var i = scene.create({ t: "imageA", url: url, parent: scene.root });
   var it = void 0;
   i.ready.then(function () {
     
