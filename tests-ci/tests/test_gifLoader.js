@@ -98,32 +98,6 @@ test2: function() {
 					});
 				});
 			}
-     },
-  test3: function() {
-	if (isGifLoaderEnabled != 1 )
-	{   
-		console.log("No GIF support in this Spark build!")
-		return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != 1));
-			});
-	}
-	else
-	{
-		var img = scene.create({ t: "imageA", url: url, parent: scene.root, w: 500, h:500, stretchX:1, stretchY: 1 });
-		
-			return new Promise(function(resolve, reject) {
-					img.ready.then(function() {
-
-									if(doScreenshot) 
-						{
-					setTimeout( function() {
-						doScreenshotComparison("test1", resolve)
-					}, timeoutForScreenshot);
-						} 
-						else 
-							resolve(assert(isGifLoaderEnabled == 1 && img.w == 500 && img.h == 500) , "test_gifLoader: Failed to load file");
-					});
-				});
-			}
      }
 
  }
