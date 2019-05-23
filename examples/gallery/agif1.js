@@ -12,21 +12,21 @@ px.import("px:scene.1.js").then(function (scene) {
 
   var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
   
-  var i = scene.create({ t: "imageA", resource:imgres,  w:400, h:225, stretchX:1, stretchY:1, parent: scene.root });
+  var i = scene.create({ t: "imageA",  url:url, parent: scene.root });
   var it = void 0;
   i.ready.then(function (imgres) {
     
     var iw = scene.create({ t: "imageA", url: url, parent: scene.root, stretchX: 1 });
     iw.ready.then(function (o) {
-      iw.x = i.w;iw.w = i.w * 2;
+      iw.x = i.resource.w;iw.w = i.resource.w * 2;
     });
     var ih = scene.create({ t: "imageA", url: url, parent: scene.root, stretchY: 1 });
     ih.ready.then(function (o) {
-      ih.y = i.h;ih.h = i.h * 2;
+      ih.y = i.resource.h;ih.h = i.resource.h * 2;
     });
     it = scene.create({ t: "imageA", url: url, parent: scene.root, stretchX: 2, stretchY: 2 });
     it.ready.then(function (o) {
-      it.x = i.w;it.y = i.h;it.x = i.w;it.w = i.w * 2;it.y = i.h;it.h = i.h * 2;
+      it.x = i.resource.w;it.y = i.resource.h;it.x = i.resource.w;it.w = i.resource.w * 2;it.y = i.resource.h;it.h = i.resource.h * 2;
     });
   });
 
