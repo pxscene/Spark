@@ -25,7 +25,7 @@ px.import("px:scene.1.js").then(function (scene) {
       var o = images[i];
       var t = imageTargets[i];
       if (!o) continue;
-      if (x + (imageAResource >= 2 ? o.resource.w : o.w) > scene.getWidth()) {
+      if (x + (scene.capabilities.graphics.imageAResource >= 2 ? o.resource.w : o.w) > scene.getWidth()) {
         x = 0;
         y += rowHeight;
         rowHeight = 0;
@@ -37,8 +37,8 @@ px.import("px:scene.1.js").then(function (scene) {
         imageTargets[i].x = x;
         imageTargets[i].y = y;
       }
-      x += imageAResource >= 2 ? o.resource.w : o.w;
-      rowHeight = Math.max(rowHeight, imageAResource >= 2 ? o.resource.h : o.h);
+      x += scene.capabilities.graphics.imageAResource >= 2 ? o.resource.w : o.w;
+      rowHeight = Math.max(rowHeight, scene.capabilities.graphics.imageAResource >= 2 ? o.resource.h : o.h);
     }
   };
 
