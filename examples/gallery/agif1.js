@@ -2,13 +2,13 @@
 
 px.import("px:scene.1.js").then(function (scene) {
 
-  if (scene.capabilities.graphics.gif != 1)
+  if (scene.capabilities.graphics.gif==undefined || scene.capabilities.graphics.gif==0)
    	{
 	console.error("Gif support is disabled");
 	return;
 	}
   var basePackageUri = px.getPackageBaseFilePath();
-  var url = basePackageUri + "/images/gifs/Spark_equalizerSVG.gif";
+  var url = basePackageUri + "/images/gifs/IMG_5.gif";
 
   var i = scene.create({ t: "imageA", url: url, parent: scene.root });
   var it = void 0;
