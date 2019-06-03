@@ -8,7 +8,7 @@ var root = scene.root;
 var assert = imports.assert.assert;
 var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = scene.capabilities.graphics.gif;
+var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined ? 0 : scene.capabilities.graphics.gif >= 2;
 var doScreenshot = shots.getScreenshotEnabledValue();
 var testPlatform=scene.info.build.os;
 
@@ -47,15 +47,15 @@ var doScreenshotComparison = function(name, resolve, reject)
 var tests = {
 
   test1: function() {
-	if (isGifLoaderEnabled != 1)
+	if (!isGifLoaderEnabled)
 	{   
 			console.log("No GIF support in this Spark build!")
-			return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != 1));
+			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
 		});
 	}
 	else
 	{
-  	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
+  	var img = scene.create({ t: "image", url: url, parent: scene.root });
 
 	return new Promise(function(resolve, reject) {
 	    img.ready.then(function() {
@@ -66,23 +66,23 @@ var tests = {
 		  }, timeoutForScreenshot);
 	      } 
 	      else 
-		resolve(assert(isGifLoaderEnabled == 1) , "test_gifLoader: Failed to load file");
+		resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
 	    });
 	  });
 	}
      },
 test2: function() {
-	if (isGifLoaderEnabled != 1)
+	if (!isGifLoaderEnabled)
 	{   
 		console.log("No GIF support in this Spark build!")
-		return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != 1));
+		return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
 			});
 	}
 	else
 	{
-      var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
+      var imgres = scene.create({t:'imageResource', url:url, parent: scene.root});
   
-			var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
+			var img = scene.create({ t: "image", resource:imgres, parent: scene.root });
 					
 			return new Promise(function(resolve, reject) {
 					img.ready.then(function() {
@@ -90,11 +90,11 @@ test2: function() {
 									if(doScreenshot) 
 						{
 					setTimeout( function() {
-						doScreenshotComparison("test1", resolve)
+						doScreenshotComparison("test2", resolve)
 					}, timeoutForScreenshot);
 						} 
 						else 
-							resolve(assert(isGifLoaderEnabled == 1) , "test_gifLoader: Failed to load file");
+							resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
 					});
 				});
 			}
