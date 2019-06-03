@@ -260,7 +260,7 @@ Returns an <a href="#Animate">Animate</a> object that can be used to cancel or c
 <h2><a name="imageA"></a><code>ImageA</code> instance inherits from <a href="#object"><code>Object</code></a></h2>
 <h3>Properties</h3>
 <dt class="string"> url </dt>
-<dd>specifies the url of the image to load. Supports animated PNGs (as of release 0.28) and GIFs (as of release 1.7)</dd>
+<dd>specifies the url of the image to load. Supports animated PNGs (as of release 0.28) and GIFs (as of release 1.7).  Check for <code>(scene.capabilities.graphics.gif >= 1)</code> in a Spark application to confirm GIF support is available.</dd>
 <dt class="promise"> ready </dt>
 <dd>returns a promise for when the object is ready</dd>
 <dt class="resource"> resource </dt>
