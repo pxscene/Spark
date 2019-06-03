@@ -1,0 +1,22 @@
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Rules</key>
+  <array>
+    <dict>
+      <key>ProductID</key>
+      <string>org.pxscene.pxscene</string>
+      <key>Predicate</key>
+      <string>Ticket.version != '1.6.0.1'</string>
+      <key>Codebase</key>
+      <string>http://www.sparkui.org/dist/osx/spark/Spark.dmg</string>
+      <key>Hash</key>
+      <string>wAi6RF2O5g4hxtZRmJyTC/hAyf8=</string>
+      <key>Size</key>
+      <string>11577794</string>
+      <key>Version</key>
+      <string>1.6.0.1</string>
+    </dict>
+  </array>
+</dict>
+</plist>
