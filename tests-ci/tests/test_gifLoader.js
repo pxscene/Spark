@@ -90,7 +90,7 @@ test2: function() {
 									if(doScreenshot) 
 						{
 					setTimeout( function() {
-						doScreenshotComparison("test1", resolve)
+						doScreenshotComparison("test2", resolve)
 					}, timeoutForScreenshot);
 						} 
 						else 
@@ -98,9 +98,60 @@ test2: function() {
 					});
 				});
 			}
-     }
+     },
+ test3: function() {
+	if (isGifLoaderEnabled != 1)
+	{   
+			console.log("No GIF support in this Spark build!")
+			return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != 1));
+		});
+	}
+	else
+	{
+  	var img = scene.create({ t: "image", url: url, parent: scene.root });
 
- }
+	return new Promise(function(resolve, reject) {
+	    img.ready.then(function() {
+	      if(doScreenshot) 
+	      {
+		  setTimeout( function() {
+		    doScreenshotComparison("test3", resolve)
+		  }, timeoutForScreenshot);
+	      } 
+	      else 
+		resolve(assert(isGifLoaderEnabled == 1) , "test_gifLoader: Failed to load file");
+	    });
+	  });
+	}
+     },
+test4: function() {
+	if (isGifLoaderEnabled != 1)
+	{   
+		console.log("No GIF support in this Spark build!")
+		return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != 1));
+			});
+	}
+	else
+	{
+      var imgres = scene.create({t:'imageResource', url:url, parent: scene.root});
+  
+			var img = scene.create({ t: "image", resource:imgres, parent: scene.root });
+					
+			return new Promise(function(resolve, reject) {
+					img.ready.then(function() {
+
+									if(doScreenshot) 
+						{
+					setTimeout( function() {
+						doScreenshotComparison("test4", resolve)
+					}, timeoutForScreenshot);
+						} 
+						else 
+							resolve(assert(isGifLoaderEnabled == 1) , "test_gifLoader: Failed to load file");
+					});
+				});
+	}
+}
 
 module.exports.beforeStart = beforeStart;
 module.exports.tests = tests;
