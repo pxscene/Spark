@@ -119,9 +119,14 @@ nav {
 .changelog__item {
   display: flex;
 }
+.changelog__detail {
+  margin-left: 20%;
+  flex-basis: auto;
+ 
+}
 
 .changelog__meta {
-  flex-basis: 25%;
+  flex-basis: auto;
 }
 
 .changelog__meta small {
