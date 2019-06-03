@@ -99,6 +99,7 @@ test2: function() {
 				});
 			}
      }
+
  }
 
 module.exports.beforeStart = beforeStart;
