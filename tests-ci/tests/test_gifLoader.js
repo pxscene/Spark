@@ -8,7 +8,7 @@ var root = scene.root;
 var assert = imports.assert.assert;
 var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined ? 0 : scene.capabilities.graphics.gif;
+var isGifLoaderEnabled = scene.capabilities.graphics.gif;
 var doScreenshot = shots.getScreenshotEnabledValue();
 var testPlatform=scene.info.build.os;
 
@@ -47,10 +47,10 @@ var doScreenshotComparison = function(name, resolve, reject)
 var tests = {
 
   test1: function() {
-	if (!isGifLoaderEnabled)
+	if (isGifLoaderEnabled == undefined || isGifLoaderEnabled == false)
 	{   
 			console.log("No GIF support in this Spark build!")
-			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
+			return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != true));
 		});
 	}
 	else
@@ -66,16 +66,16 @@ var tests = {
 		  }, timeoutForScreenshot);
 	      } 
 	      else 
-		resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
+		resolve(assert(isGifLoaderEnabled == true) , "test_gifLoader: Failed to load file");
 	    });
 	  });
 	}
      },
 test2: function() {
-	if (!isGifLoaderEnabled)
+	if (isGifLoaderEnabled == undefined || isGifLoaderEnabled == false)
 	{   
 		console.log("No GIF support in this Spark build!")
-		return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
+		return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled != true));
 			});
 	}
 	else
@@ -90,68 +90,16 @@ test2: function() {
 									if(doScreenshot) 
 						{
 					setTimeout( function() {
-						doScreenshotComparison("test2", resolve)
+						doScreenshotComparison("test1", resolve)
 					}, timeoutForScreenshot);
 						} 
 						else 
-							resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
+							resolve(assert(isGifLoaderEnabled == true) , "test_gifLoader: Failed to load file");
 					});
 				});
 			}
-     },
- test3: function() {
-		if (isGifLoaderEnabled<2)
-		{   
-				console.log("No GIF support in this Spark build!")
-				return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled<2));
-			});
-		}
-		else
-		{
-			var img = scene.create({ t: "image", url: url, parent: scene.root });
-
-		return new Promise(function(resolve, reject) {
-				img.ready.then(function() {
-					if(doScreenshot) 
-					{
-				setTimeout( function() {
-					doScreenshotComparison("test3", resolve)
-				}, timeoutForScreenshot);
-					} 
-					else 
-			resolve(assert(isGifLoaderEnabled >= 2) , "test_gifLoader: Failed to load file");
-				});
-			});
-		}
-  },
-test4: function() {
-	if (isGifLoaderEnabled<2)
-	{   
-		console.log("No GIF support in this Spark build!")
-		return new Promise(function(resolve, reject) { resolve(assert(isGifLoaderEnabled<2));
-			});
-	}
-	else
-	{
-      var imgres = scene.create({t:'imageResource', url:url, parent: scene.root});
-  
-			var img = scene.create({ t: "image", resource:imgres, parent: scene.root });
-					
-			return new Promise(function(resolve, reject) {
-					img.ready.then(function() {
-
-									if(doScreenshot) 
-						{
-					setTimeout( function() {
-						doScreenshotComparison("test4", resolve)
-					}, timeoutForScreenshot);
-						} 
-						else 
-							resolve(assert(isGifLoaderEnabled>=2) , "test_gifLoader: Failed to load file");
-					});
-				});
-	}
-}
+     }
+ }
 
 module.exports.beforeStart = beforeStart;
 module.exports.tests = tests;
