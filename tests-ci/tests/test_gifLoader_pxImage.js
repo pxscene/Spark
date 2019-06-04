@@ -26,7 +26,7 @@ var url = basePackageUri + "/images/Spark_equalizerSVG.gif";
 /**********************************************************************/
 var beforeStart = function() {
   return new Promise(function(resolve, reject) {
-    resolve("test_gifLoader.js beforeStart");
+    resolve("test_gifLoader_pxImage.js beforeStart");
   });
 }
 
@@ -34,7 +34,7 @@ var doScreenshotComparison = function(name, resolve, reject)
 {
   testText.text="ScreenShot"+name;
     var results = rectMeasurementResults();
-    shots.validateScreenshot(basePackageUri+"/images/screenshot_results/"+testPlatform+"/gifLoader_test"+name+".png", false).then(function(match){
+    shots.validateScreenshot(basePackageUri+"/images/screenshot_results/"+testPlatform+"/gifLoader_pxImage_test"+name+".png", false).then(function(match){
         console.log("test result is match: "+match);
         results.push(assert(match == true, "screenshot comparison for "+name+" failed\n"+basePackageUri+"/images/screenshot_results/gifLoader_tests_"+name+".png"));
         resolve(results);
@@ -66,7 +66,7 @@ var tests = {
 		  }, timeoutForScreenshot);
 	      } 
 	      else 
-		resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
+		resolve(assert(isGifLoaderEnabled) , "test_gifLoader_pxImage: Failed to load file");
 	    });
 	  });
 	}
@@ -94,7 +94,7 @@ test2: function() {
 					}, timeoutForScreenshot);
 						} 
 						else 
-							resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
+							resolve(assert(isGifLoaderEnabled) , "test_gifLoader_pxImage: Failed to load file");
 					});
 				});
 			}
@@ -113,5 +113,5 @@ if(manualTest === true) {
 }
 
 }).catch( function importFailed(err){
-  console.error("Import failed for test_gifLoader.js: " + err)
+  console.error("Import failed for test_gifLoader_pxImage.js: " + err)
 });
