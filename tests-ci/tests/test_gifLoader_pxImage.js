@@ -8,7 +8,7 @@ var root = scene.root;
 var assert = imports.assert.assert;
 var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined ? 0 : scene.capabilities.graphics.gif >= 1;
+var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined ? 0 : scene.capabilities.graphics.gif >= 2;
 var doScreenshot = shots.getScreenshotEnabledValue();
 var testPlatform=scene.info.build.os;
 
@@ -26,7 +26,7 @@ var url = basePackageUri + "/images/Spark_equalizerSVG.gif";
 /**********************************************************************/
 var beforeStart = function() {
   return new Promise(function(resolve, reject) {
-    resolve("test_agifLoader.js beforeStart");
+    resolve("test_gifLoader.js beforeStart");
   });
 }
 
@@ -34,9 +34,9 @@ var doScreenshotComparison = function(name, resolve, reject)
 {
   testText.text="ScreenShot"+name;
     var results = rectMeasurementResults();
-    shots.validateScreenshot(basePackageUri+"/images/screenshot_results/"+testPlatform+"/agifLoader_test"+name+".png", false).then(function(match){
+    shots.validateScreenshot(basePackageUri+"/images/screenshot_results/"+testPlatform+"/gifLoader_test"+name+".png", false).then(function(match){
         console.log("test result is match: "+match);
-        results.push(assert(match == true, "screenshot comparison for "+name+" failed\n"+basePackageUri+"/images/screenshot_results/agifLoader_tests_"+name+".png"));
+        results.push(assert(match == true, "screenshot comparison for "+name+" failed\n"+basePackageUri+"/images/screenshot_results/gifLoader_tests_"+name+".png"));
         resolve(results);
      // });
     }).catch(function(err) {
@@ -55,7 +55,7 @@ var tests = {
 	}
 	else
 	{
-  	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
+  	var img = scene.create({ t: "image", url: url, parent: scene.root });
 
 	return new Promise(function(resolve, reject) {
 	    img.ready.then(function() {
@@ -66,7 +66,7 @@ var tests = {
 		  }, timeoutForScreenshot);
 	      } 
 	      else 
-		resolve(assert(isGifLoaderEnabled) , "test_agifLoader: Failed to load file");
+		resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
 	    });
 	  });
 	}
@@ -80,9 +80,9 @@ test2: function() {
 	}
 	else
 	{
-      var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
+      var imgres = scene.create({t:'imageResource', url:url, parent: scene.root});
   
-			var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
+			var img = scene.create({ t: "image", resource:imgres, parent: scene.root });
 					
 			return new Promise(function(resolve, reject) {
 					img.ready.then(function() {
@@ -94,7 +94,7 @@ test2: function() {
 					}, timeoutForScreenshot);
 						} 
 						else 
-							resolve(assert(isGifLoaderEnabled) , "test_agifLoader: Failed to load file");
+							resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
 					});
 				});
 			}
@@ -113,5 +113,5 @@ if(manualTest === true) {
 }
 
 }).catch( function importFailed(err){
-  console.error("Import failed for test_agifLoader.js: " + err)
+  console.error("Import failed for test_gifLoader.js: " + err)
 });
