@@ -2,27 +2,32 @@
 
 px.import("px:scene.1.js").then(function (scene) {
 
-  if (scene.capabilities.graphics.gif==undefined || scene.capabilities.graphics.gif==0)
+   if (scene.capabilities.graphics.gif==undefined || scene.capabilities.graphics.gif == 0)
    	{
 	console.error("Gif support is disabled");
+	return;
+	}
+	else if (scene.capabilities.graphics.gif == 1)
+   	{
+	console.error("GIF version support is not compatible with this example; example requires at least version 2");
 	return;
 	}
   var basePackageUri = px.getPackageBaseFilePath();
   var url = basePackageUri + "/images/gifs/Spark_equalizerSVG.gif";
 
-  var i = scene.create({ t: "imageA", url: url, parent: scene.root });
+  var i = scene.create({ t: "image", url: url, parent: scene.root });
   var it = void 0;
   i.ready.then(function () {
     
-    var iw = scene.create({ t: "imageA", url: url, parent: scene.root, stretchX: 1 });
+    var iw = scene.create({ t: "image", url: url, parent: scene.root, stretchX: 1 });
     iw.ready.then(function (o) {
       iw.x = i.resource.w;iw.w = i.resource.w * 2;
     });
-    var ih = scene.create({ t: "imageA", url: url, parent: scene.root, stretchY: 1 });
+    var ih = scene.create({ t: "image", url: url, parent: scene.root, stretchY: 1 });
     ih.ready.then(function (o) {
       ih.y = i.resource.h;ih.h = i.resource.h * 2;
     });
-    it = scene.create({ t: "imageA", url: url, parent: scene.root, stretchX: 2, stretchY: 2 });
+    it = scene.create({ t: "image", url: url, parent: scene.root, stretchX: 2, stretchY: 2 });
     it.ready.then(function (o) {
       it.x = i.resource.w;it.y = i.resource.h;it.x = i.resource.w;it.w = i.resource.w * 2;it.y = i.resource.h;it.h = i.resource.h * 2;
     });
