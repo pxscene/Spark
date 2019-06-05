@@ -44,5 +44,5 @@ px.import("px:scene.1.js").then(function (scene) {
     }
   });
 }).catch(function (e) {
-  console.error("Import failed for fancy.js: " + e);
+  console.error("Import failed for agif1.js: " + e);
 });
