@@ -30,7 +30,7 @@ var tests = {
       
   if (!isGifLoaderEnabled)
 	{   
-			console.log((scene.capabilities.graphics.gif == undefined || scene.capabilities.graphics.gif == 0) ? "No GIF support in this Spark build!" : "GIF version support is not compatible with this example; example requires at least version 2")
+			console.log(scene.capabilities.graphics.gif == undefined ? "No GIF support in this Spark build!" : "GIF version support is not compatible with this example; example requires at least version 2")
 			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
 		});
 	}
@@ -65,7 +65,7 @@ var tests = {
   test2: function() {
   if (!isGifLoaderEnabled)
 	{   
-			console.log((scene.capabilities.graphics.gif == undefined || scene.capabilities.graphics.gif == 0) ? "No GIF support in this Spark build!" : "GIF version support is not compatible with this example; example requires at least version 2")
+			console.log(scene.capabilities.graphics.gif == undefined ? "No GIF support in this Spark build!" : "GIF version support is not compatible with this example; example requires at least version 2")
 			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
 		});
 	}
@@ -99,7 +99,7 @@ var tests = {
   test3: function() {
   if (!isGifLoaderEnabled)
 	{   
-			console.log((scene.capabilities.graphics.gif == undefined || scene.capabilities.graphics.gif == 0) ? "No GIF support in this Spark build!" : "GIF version support is not compatible with this example; example requires at least version 2")
+			console.log(scene.capabilities.graphics.gif == undefined ? "No GIF support in this Spark build!" : "GIF version support is not compatible with this example; example requires at least version 2")
 			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
 		});
 	}
