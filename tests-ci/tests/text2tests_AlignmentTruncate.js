@@ -372,11 +372,12 @@ var doScreenshotComparison = function(name, resolve, reject)
 
 var tests = {
    longestTextWrapTruncateClipH2V0: function() {
-     console.log("text2tests_more.js longestTextWrapTruncateClipH2V0");
+     console.log("text2tests_AlignmentTruncate.js longestTextWrapTruncateClipH2V0");
      // set to longest text
      setText( longText3,"text=longest");
      text2.x=0;
      text2.y=0;
+     setTruncation(1);
      setAlignH(2);
      setAlignV(0);
      
@@ -410,13 +411,14 @@ var tests = {
      });
    },
    longestTextNoWrapTruncateClipH2V0: function() {
-     console.log("text2tests_more.js longestTextNoWrapTruncateClipH2V0");
+     console.log("text2tests_AlignmentTruncate.js longestTextNoWrapTruncateClipH2V0");
      // set to longest text
      setText( longText3,"text=longest");
      text2.x=0;
      text2.y=0;
      setAlignH(2);
      setAlignV(0);
+     setTruncation(1);
      
      if( text2.wordWrap) {
        toggleWordWrap();
@@ -448,7 +450,7 @@ var tests = {
      });
    },
    longestTextWrapTruncateAtWordClipH2V0: function() {
-     console.log("text2tests_more.js longestTextWrapTruncateAtWordClipH2V0");
+     console.log("text2tests_AlignmentTruncate.js longestTextWrapTruncateAtWordClipH2V0");
      // set to longest text
      setText( longText3,"text=longest");
      text2.x=0;
@@ -487,7 +489,7 @@ var tests = {
      });
    },
    longestTextNoWrapTruncateAtWordClipH2V0: function() {
-     console.log("text2tests_more.js longestTextNoWrapTruncateAtWordClipH2V0");
+     console.log("text2tests_AlignmentTruncate.js longestTextNoWrapTruncateAtWordClipH2V0");
      // set to longest text
      setText( longText3,"text=longest");
      text2.x=0;
