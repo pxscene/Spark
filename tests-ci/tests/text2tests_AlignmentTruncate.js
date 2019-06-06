@@ -333,6 +333,13 @@ var expectedValuesMeasure = {
   "continuousTextWrapTruncateClipEllipsisH1V1XY":[12,181,408,239,12,201,346,230], //continuousTextWrapTruncateClipEllipsisH1V1XY
   "continuousLongTextWrapTruncateClipEllipsisH1V1XY":[10.5,21.5,409.5,398.5,12,41.5,405.5,389.5], //continuousLongTextWrapTruncateClipEllipsisH1V1XY
   "multilinesTextWrapTruncateClipEllipsisH1V1XY":[10,79.5,410,340.5,32.5,99.5,277.5,331.5], //multilinesTextWrapTruncateClipEllipsisH1V1XY
+  
+  "longestTextWrapTruncateClipH2V0":[7,0,400,377,7,20,400,368], //longestTextWrapTruncateClipH2V0
+  "longestTextNoWrapTruncateClipH2V0":[8,0,400,29,8,20,400,20], //longestTextNoWrapTruncateClipH2V0
+  "longestTextWrapTruncateAtWordClipH2V0":[7,0,400,377,7,20,400,368], //longestTextWrapTruncateAtWordClipH2V0
+  "longestTextNoWrapTruncateAtWordClipH2V0":[98,0,400,29,98,20,400,20], //longestTextNoWrapTruncateAtWordClipH2V0
+  
+  
 };
 
 var textMeasurementResults = function(values) {
@@ -1485,7 +1492,161 @@ var tests = {
          resolve(assert(false,'multilinesTextWrapTruncateClipEllipsisH1V1XY Promise rejection received'));
        });
      });
+   },
+   longestTextWrapTruncateClipH2V0: function() {
+     console.log("text2tests_more.js longestTextWrapTruncateClipH2V0");
+     // set to longest text
+     setText( longText3,"text=longest");
+     text2.x=0;
+     text2.y=0;
+     setAlignH(2);
+     setAlignV(0);
+     
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+      if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+    
+     return new Promise(function(resolve, reject) {
+ 
+       text2.ready.then(function() {
+         bg.removeAll();
+         textready(text2);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("longestTextWrapTruncateClipH2V0", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else 
+           resolve(textMeasurementResults(expectedValuesMeasure.longestTextWrapTruncateClipH2V0));
+ 
+       }, function(o) {
+         resolve(assert(false,'longestTextWrapTruncateClipH2V0 Promise rejection received'));
+       });
+     });
+   },
+   longestTextNoWrapTruncateClipH2V0: function() {
+     console.log("text2tests_more.js longestTextNoWrapTruncateClipH2V0");
+     // set to longest text
+     setText( longText3,"text=longest");
+     text2.x=0;
+     text2.y=0;
+     setAlignH(2);
+     setAlignV(0);
+     
+     if( text2.wordWrap) {
+       toggleWordWrap();
+     }
+     
+      if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+ 
+       text2.ready.then(function() {
+         bg.removeAll();
+         textready(text2);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("longestTextNoWrapTruncateClipH2V0", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else 
+           resolve(textMeasurementResults(expectedValuesMeasure.longestTextNoWrapTruncateClipH2V0));
+ 
+       }, function(o) {
+         resolve(assert(false,'longestTextNoWrapTruncateClipH2V0 Promise rejection received'));
+       });
+     });
+   },
+   longestTextWrapTruncateAtWordClipH2V0: function() {
+     console.log("text2tests_more.js longestTextWrapTruncateAtWordClipH2V0");
+     // set to longest text
+     setText( longText3,"text=longest");
+     text2.x=0;
+     text2.y=0;
+     setAlignH(2);
+     setAlignV(0);
+     setTruncation(2);
+     
+     if( !text2.wordWrap) {
+       toggleWordWrap();
+     }
+      if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+    
+     return new Promise(function(resolve, reject) {
+ 
+       text2.ready.then(function() {
+         bg.removeAll();
+         textready(text2);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("longestTextWrapTruncateAtWordClipH2V0", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else 
+           resolve(textMeasurementResults(expectedValuesMeasure.longestTextWrapTruncateAtWordClipH2V0));
+ 
+       }, function(o) {
+         resolve(assert(false,'longestTextWrapTruncateAtWordClipH2V0 Promise rejection received'));
+       });
+     });
+   },
+   longestTextNoWrapTruncateAtWordClipH2V0: function() {
+     console.log("text2tests_more.js longestTextNoWrapTruncateAtWordClipH2V0");
+     // set to longest text
+     setText( longText3,"text=longest");
+     text2.x=0;
+     text2.y=0;
+     setAlignH(2);
+     setAlignV(0);
+     setTruncation(2);
+     if( text2.wordWrap) {
+       toggleWordWrap();
+     }
+     
+      if( !text2.clip) {
+       toggleClip();
+     }
+     if( !text2.ellipsis) {
+      toggleEllipsis();
+    }
+     return new Promise(function(resolve, reject) {
+ 
+       text2.ready.then(function() {
+         bg.removeAll();
+         textready(text2);
+         if( doScreenshot) 
+         {
+             setTimeout( function() {
+               doScreenshotComparison("longestTextNoWrapTruncateAtWordClipH2V0", resolve)
+             }, timeoutForScreenshot);
+         } 
+         else 
+           resolve(textMeasurementResults(expectedValuesMeasure.longestTextNoWrapTruncateAtWordClipH2V0));
+ 
+       }, function(o) {
+         resolve(assert(false,'longestTextNoWrapTruncateAtWordClipH2V0 Promise rejection received'));
+       });
+     });
    }
+
  }
 
 module.exports.beforeStart = beforeStart;
