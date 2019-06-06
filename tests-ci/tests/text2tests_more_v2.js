@@ -333,6 +333,7 @@ var expectedValuesMeasure = {
   "continuousTextWrapTruncateClipEllipsisH1V1XY":[12,181,408,239,12,201,346,230], //continuousTextWrapTruncateClipEllipsisH1V1XY
   "continuousLongTextWrapTruncateClipEllipsisH1V1XY":[10.5,21.5,409.5,398.5,12,41.5,405.5,389.5], //continuousLongTextWrapTruncateClipEllipsisH1V1XY
   "multilinesTextWrapTruncateClipEllipsisH1V1XY":[10,79.5,410,340.5,32.5,99.5,277.5,331.5], //multilinesTextWrapTruncateClipEllipsisH1V1XY
+  
 };
 
 var textMeasurementResults = function(values) {
@@ -1486,7 +1487,6 @@ var tests = {
        });
      });
    }
-   
  }
 
 module.exports.beforeStart = beforeStart;
