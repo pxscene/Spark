@@ -123,8 +123,10 @@ px.import({
     this.consoleTxt;
     this.history    = [];
 
-    this.renderDefer = Promise.defer();
-    this.renderReady = this.renderDefer.promise;
+    //this.renderDefer = Promise.defer();
+    let p = {};
+    p.promise = new Promise((a, b) => { p.resolve = a; p.reject = b; });
+    this.renderDefer = p;
 
     this.container = scene.create({
       t: "object",
@@ -138,8 +140,10 @@ px.import({
     Object.defineProperty(this, 'url', {
       set: function(url) {
         this._url = url;
-        this.renderDefer = Promise.defer();
-        this.renderReady = this.renderDefer.promise;
+        //this.renderDefer = Promise.defer();
+        let p = {};
+        p.promise = new Promise((a, b) => { p.resolve = a; p.reject = b; });
+        this.renderDefer = p;
 
         console.log('start to fetch txt file ' + url);
         px.getFile(url)
