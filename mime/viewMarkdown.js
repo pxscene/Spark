@@ -68,8 +68,10 @@ px.import({
     this.scrollable;
     this.markdown;
 
-    this.renderDefer = Promise.defer();
-    this.renderReady = this.renderDefer.promise;
+    //this.renderDefer = Promise.defer();
+    let p = {};
+    p.promise = new Promise((a, b) => { p.resolve = a; p.reject = b; });
+    this.renderDefer = p;
 
     this.container = scene.create({
       t: "object",
@@ -89,8 +91,10 @@ px.import({
         var separator = separatorMatch ? separatorMatch[0] : '/';
         this.basePath = url.split(separator).slice(0, -1).join(separator) + separator;
 
-        this.renderDefer = Promise.defer();
-        this.renderReady = this.renderDefer.promise;
+        //this.renderDefer = Promise.defer();
+        let p = {};
+        p.promise = new Promise((a, b) => { p.resolve = a; p.reject = b; });
+        this.renderDefer = p;
 
         px.getFile(url)
           .then((markdownSource) => {
@@ -107,7 +111,7 @@ px.import({
     // ready
     Object.defineProperty(this, 'ready', {
       get: function () {
-        return this.renderReady;
+        return this.renderDefer.promise;
       },
     });
 
