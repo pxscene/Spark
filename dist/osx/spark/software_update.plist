@@ -9,7 +9,7 @@
       <key>Predicate</key>
       <string>Ticket.version != '1.7.1.1'</string>
       <key>Codebase</key>
-      <string>http://www.pxscene.org/dist/osx/pxscene/Spark.dmg</string>
+      <string>http://www.sparkui.org/dist/osx/spark/Spark.dmg</string>
       <key>Hash</key>
       <string>UhNv4aHdWGxPrXag8vFinNbQl1g=</string>
       <key>Size</key>
