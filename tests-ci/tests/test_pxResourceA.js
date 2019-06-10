@@ -43,7 +43,7 @@ var tests = {
     var imageARes = scene.create({t:"imageAResource",parent:root, url:url});
     var results = []; 
     imageARes.ready.then(function()  {
-      console.log("test1: imageARes ready");
+      console.log("test_imageAResource_sourceType: imageARes ready");
     
         // check value 
         var loadStatus = imageARes.loadStatus;
@@ -53,7 +53,7 @@ var tests = {
         results.push(assert(imageARes.h != 0,"image height is 0"));
         resolve(results);
       }, function(o){
-        console.log("test1: imageARes rejection");
+        console.log("test_imageAResource_sourceType: imageARes rejection");
         var loadStatus = imageARes.loadStatus;
         results.push(assert(loadStatus["statusCode"]==0,"status code is not correct; code is "+loadStatus["statusCode"]));
         results.push(assert(false,"imageA promise rejection was unexpected!"));
@@ -77,7 +77,7 @@ var tests = {
       var imageA = scene.create({t:"imageA",parent:root, url:url});
       var results = [];
       imageA.ready.then(function()  {
-        console.log("test2: imageA ready");
+        console.log("test_imageA_url: imageA ready");
         var res = imageA.resource;
         var loadStatus = res.loadStatus;
         // check value 
@@ -86,43 +86,11 @@ var tests = {
         results.push(assert(loadStatus["sourceType"]=="file","load type is not correct"));
         resolve(results);
       }, function(o){
-        console.log("test2: imageA rejection");
+        console.log("test_imageA_url: imageA rejection");
         var res = imageA.resource;
         var loadStatus = res.loadStatus;
         results.push(assert(loadStatus["statusCode"]==0,"status code is not correct; code is "+loadStatus["statusCode"]));
         results.push(assert(false,"image promise rejection was unexpected!"));
-        reject(results);
-        });
-      });
-    }
-  },
-
-  test3: function() {
-  if (!isGifLoaderEnabled)
-	{   
-			console.log(scene.capabilities.graphics.gif == undefined ? "No GIF support in this Spark build!" : "GIF version support is not compatible with this example; example requires at least version 2")
-			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
-		});
-	}
-	else 
-	{
-    return new Promise(function(resolve, reject) {
-      var url = basePackageUri + "/images/Spark_equalizerSVG.gif";
-      var imageA = scene.create({t:"imageA",parent:root, url:url});
-      var results = [];
-      imageA.ready.then(function()  {
-        console.log("test3: imageA ready");
-        var res = imageA.resource;
-        var loadStatus = res.loadStatus;
-        // check value 
-        results.push(assert(imageA.url==url,"url is not correct"));
-        resolve(results);
-      }, function(o){
-        console.log("test3: imageA rejection");
-        var res = imageA.resource;
-        var loadStatus = res.loadStatus;
-        results.push(assert(loadStatus["statusCode"]==0,"status code is not correct; code is "+loadStatus["statusCode"]));
-        results.push(assert(false,"imageA promise rejection was unexpected!"));
         reject(results);
         });
       });
