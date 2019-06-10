@@ -35,7 +35,8 @@ px.import({
     this.scrollable = new Scrollable(this.scene, this.container, {blank: this.options.args.from === 'markdown'});
 
     //var mimeURL = this.options.mimeType.url.split('/');
-    var mimeURL = 'https://www.sparkui.org/mime/';
+    //var mimeURL = 'https://www.pxscene.org/mime/';
+    var mimeURL = px.getPackageBaseFilePath()+'/'
     //mimeURL.pop();
     this.markdown = new Markdown(this.scene, this.scrollable, {
       basePath: this.basePath,
@@ -103,10 +104,17 @@ px.import({
           .catch((err) => {
             console.log(err);
             console.log("get Markdown failed ####" + url);
-            renderMarkdown.call(this, "#### Load markdown file failed");
+            //renderMarkdown.call(this, "#### Load markdown file failed");
           });
       }
     });
+
+    Object.defineProperty(this, 'content', {
+      set: function(c) {
+        console.log('&&&&&&&&&&& before renderMarkdown call', c)
+        renderMarkdown.call(this, c)
+      }
+    })
 
     // ready
     Object.defineProperty(this, 'ready', {
@@ -195,6 +203,12 @@ px.import({
   scene.on("onResize", function(e) { updSize(e.w,e.h) })
 
   updSize(scene.w,scene.h)
+
+  console.log('~~~~~~~~~~~~~~~~~ exposing setContent')
+  module.exports.setContent = function(c) {
+    console.log('!!!!!!!!!!! trying to set content')
+    r.content = c
+  }
 
   //module.exports.MarkdownMimeRenderer = MarkdownMimeRenderer;
   //module.exports.createRenderer = createRenderer;
