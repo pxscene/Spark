@@ -103,7 +103,7 @@ px.import({
           .catch((err) => {
             console.log(err);
             console.log("get Markdown failed ####" + url);
-            renderMarkdown.call(this, "#### Load markdown file failed");
+            //renderMarkdown.call(this, "#### Load markdown file failed");
           });
       }
     });
