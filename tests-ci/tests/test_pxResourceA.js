@@ -26,7 +26,8 @@ module.exports.beforeStart = function() {
 }
 
 var tests = {
-  test1: function() {
+// Testing pxResourceA with local file paths like /Users/../ or file:/Users/../
+  test_imageAResource_sourceType: function() {
       
   if (!isGifLoaderEnabled)
 	{   
@@ -61,8 +62,8 @@ var tests = {
       });
     }
   },
-
-  test2: function() {
+  // Testing imageA url isnt altered in the process
+  test_imageA_url: function() {
   if (!isGifLoaderEnabled)
 	{   
 			console.log(scene.capabilities.graphics.gif == undefined ? "No GIF support in this Spark build!" : "GIF version support is not compatible with this example; example requires at least version 2")
