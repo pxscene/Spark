@@ -117,8 +117,49 @@
          <h3 class="section__title">Release Highlights</h3>
          <div class="changelog__item">
           <div class="changelog__meta">
+            <h4 class="changelog__title">v1.7.1.1</h4>
+            <small class="changelog__date">07Jun2019</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>GIF Support for Mac desktop builds. Use imageA and imageAResource to use GIFs in a Spark application. Check for <code>(scene.capabilities.graphics.gif >= 1)</code> in a Spark application to confirm GIF support is available.</li>
+              </ul>
+          </div>
+        </div>
+         <div class="changelog__item">
+            <div class="changelog__meta">
+              <h4 class="changelog__title">v1.7.0.1</h4>
+              <small class="changelog__date">22May2019</small>
+            </div>
+            <div class="changelog__detail">
+              <ul>
+                  <li>GIF Support - <em>for Linux builds only</em>. <ul>Use imageA and imageAResource to use GIFs in a Spark application.</ul></li>
+                  <li>Bug fix: ImageAResource width and height were replacing any authored width and height for imageA objects using the resource. 
+                    <ul>This would result in an inability to stretch an imageA to a desired width and height other than the resource's actual width and height.  Check 
+                      <code>(scene.capabilities.graphics.imageAResource &gt;= 2)</code> to detect if this fix is available.</ul></li>
+                </ul>
+            </div>
+          </div>
+         <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v1.6.0.2</h4>
+            <small class="changelog__date">25Apr2019</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Allow Spark apps to suspend cleanly with Optimus API </li>
+              <li>Improve Performance, Memory Usage &amp; Management<ul>
+                <li>Improvements to update </li>
+                <li>Reduce Spark's RAM Footprint for Cached Image Items </li>
+                <li>Spark Texture Memory Management</li>
+                </ul>
+              </ul>
+          </div>
+        </div>
+         <div class="changelog__item">
+          <div class="changelog__meta">
             <h4 class="changelog__title">v1.6.0.1</h4>
-            <small class="changelog__date">14March2019</small>
+            <small class="changelog__date">14Mar2019</small>
           </div>
           <div class="changelog__detail">
             <ul>
@@ -138,35 +179,7 @@
             </ul>
           </div>
         </div>
-         <div class="changelog__item">
-          <div class="changelog__meta">
-            <h4 class="changelog__title">v1.5.0.0</h4>
-            <small class="changelog__date">08February2019</small>
-          </div>
-          <div class="changelog__detail">
-            <ul>
-              <li>Spark support for RT services</li>
-              <li>Downloading and launch performance updates</li>
-              <li>Ignore CORS checks for localhost requests</li>
-            </ul>
-          </div>
-        </div>
 
-         <div class="changelog__item">
-            <div class="changelog__meta">
-              <h4 class="changelog__title">v1.4.0.1</h4>
-              <small class="changelog__date">29January2019</small>
-            </div>
-            <div class="changelog__detail">
-              <ul>
-                <li>Add scene.info.build.os property</li>
-                <li>Enable CORS for Spark by Default</li>
-                <li>Fixed : Shortcut for Debug Logging from Spark browser</li>
-                <li>Fixed : Promise creation should only happen once for most pxObjects</li>
-                <li>Fixed : TextBox related issues to do with alignment and newlines </li>
-              </ul>
-            </div>
-          </div>
         <div class="changelog__callout">
           <a href="docs/releaseNotes/notes.html" class="button--secondary">Checkout Full Release Notes</a>
         </div>
