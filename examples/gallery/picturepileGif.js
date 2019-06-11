@@ -50,5 +50,5 @@ function getImageURL() {
   });
   
 }).catch(function (e) {
-  console.error("Import failed for fancy.js: " + e);
+  console.error("Import failed for picturepileGif.js: " + e);
 });
