@@ -48,7 +48,6 @@ var tests = {
         // check value 
         var loadStatus = imageARes.loadStatus;
         results.push(assert(loadStatus["statusCode"]==0,"status code is not correct"));
-        results.push(assert(loadStatus["sourceType"]=="file","load type is not correct"));
         results.push(assert(imageARes.w != 0 ,"image width is 0"));
         results.push(assert(imageARes.h != 0,"image height is 0"));
         resolve(results);
@@ -83,7 +82,6 @@ var tests = {
         // check value 
         results.push(assert(imageA.url==url,"url is not correct"));
         results.push(assert(loadStatus["statusCode"]==0,"status code is not correct"));
-        results.push(assert(loadStatus["sourceType"]=="file","load type is not correct"));
         resolve(results);
       }, function(o){
         console.log("test_imageA_url: imageA rejection");
