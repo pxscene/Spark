@@ -8,7 +8,7 @@ var root = scene.root;
 var assert = imports.assert.assert;
 var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined ? 0 : scene.capabilities.graphics.gif >= 2;
+var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined;
 var doScreenshot = shots.getScreenshotEnabledValue();
 var testPlatform=scene.info.build.os;
 
@@ -66,7 +66,7 @@ var tests = {
 		  }, timeoutForScreenshot);
 	      } 
 	      else 
-		resolve(assert(isGifLoaderEnabled) , "test_downsizedGifLoader: Failed to load file");
+		resolve(assert(isGifLoaderEnabled && img.resource.w !=0 && img.resource.h !=0) , "test_downsizedGifLoader: Failed to load file");
 	    });
 	  });
 	}
@@ -94,7 +94,7 @@ test2: function() {
 					}, timeoutForScreenshot);
 						} 
 						else 
-							resolve(assert(isGifLoaderEnabled) , "test_downsizedGifLoader: Failed to load file");
+							resolve(assert(isGifLoaderEnabled && img.resource.w!=0 && img.resource.h!=0) , "test_downsizedGifLoader: Failed to load file");
 					});
 				});
 			}
