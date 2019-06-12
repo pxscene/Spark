@@ -103,8 +103,14 @@ px.import({
           .catch((err) => {
             console.log(err);
             console.log("get Markdown failed ####" + url);
-            renderMarkdown.call(this, "#### Load markdown file failed");
+            //renderMarkdown.call(this, "#### Load markdown file failed");
           });
+      }
+    });
+
+    Object.defineProperty(this, 'content', {
+      set: function(c) {
+        renderMarkdown.call(this, c)
       }
     });
 
@@ -195,6 +201,10 @@ px.import({
   scene.on("onResize", function(e) { updSize(e.w,e.h) })
 
   updSize(scene.w,scene.h)
+
+  module.exports.setContent = function(c) {
+    r.content = c
+  }
 
   //module.exports.MarkdownMimeRenderer = MarkdownMimeRenderer;
   //module.exports.createRenderer = createRenderer;
