@@ -1,117 +1,111 @@
+"use strict";
 px.import({scene:"px:scene.1.js",
            assert:"../test-run/assert.js",
-           shots:"../test-run/tools_screenshot.js",
            manual:"../test-run/tools_manualTests.js"}).then( function ready(imports) {
 
 var scene = imports.scene;
-var root = scene.root;
+var root = imports.scene.root;
 var assert = imports.assert.assert;
-var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined;
-var doScreenshot = shots.getScreenshotEnabledValue();
-var testPlatform=scene.info.build.os;
+var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined ? 0 : scene.capabilities.graphics.gif >= 2;
 
 var manualTest = manual.getManualTestValue();
-var timeoutForScreenshot = 40;
+
+root.w = 800;
+root.h = 300;
 
 var basePackageUri = px.getPackageBaseFilePath();
 
-var url = basePackageUri + "/images/downsizedGif_1.gif";
 
-/**********************************************************************/
-/**                                                                   */
-/**            pxscene tests go in this section                       */
-/**                                                                   */
-/**********************************************************************/
-var beforeStart = function() {
-  return new Promise(function(resolve, reject) {
-    resolve("test_downsizedGifLoader.js beforeStart");
+module.exports.beforeStart = function() {
+  console.log("test_downsizedGifLoader beforeStart()!");
+  var promise = new Promise(function(resolve,reject) {
+    resolve("beforeStart");
   });
+  return promise;
 }
 
-var doScreenshotComparison = function(name, resolve, reject) 
-{
-  testText.text="ScreenShot"+name;
-    var results = rectMeasurementResults();
-    shots.validateScreenshot(basePackageUri+"/images/screenshot_results/"+testPlatform+"/downsizedGifLoader_test"+name+".png", false).then(function(match){
-        console.log("test result is match: "+match);
-        results.push(assert(match == true, "screenshot comparison for "+name+" failed\n"+basePackageUri+"/images/screenshot_results/downsizedGifLoader_tests_"+name+".png"));
-        resolve(results);
-     // });
-    }).catch(function(err) {
-        results.push(assert(false, "screenshot comparison for "+name+" failed due to error: "+err));
-        resolve(results);
-    });
-}
 var tests = {
-
-  test1: function() {
-	if (!isGifLoaderEnabled)
+// Testing downsizedGifLoader with local file paths like /Users/../ or file:/Users/../
+  test_imageAResource_sourceType: function() {
+      
+  if (!isGifLoaderEnabled)
+	{   
+			console.log("No GIF support in this Spark build!");
+			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
+		});
+	}
+	else 
+	{
+  return new Promise(function(resolve, reject) {
+      
+   var url = basePackageUri + "/images/downsizedGif_1.gif";
+    var imageARes = scene.create({t:"imageAResource",parent:root, url:url});
+    var results = []; 
+    imageARes.ready.then(function()  {
+      console.log("test_imageAResource_sourceType: imageARes ready");
+    
+        // check value 
+        var loadStatus = imageARes.loadStatus;
+        results.push(assert(loadStatus["statusCode"]==0,"status code is not correct"));
+        results.push(assert(loadStatus["sourceType"]=="file","load type is not correct"));
+        results.push(assert(imageARes.w != 0 ,"image width is 0"));
+        results.push(assert(imageARes.h != 0,"image height is 0"));
+        resolve(results);
+      }, function(o){
+        console.log("test_imageAResource_sourceType: imageARes rejection");
+        var loadStatus = imageARes.loadStatus;
+        results.push(assert(loadStatus["statusCode"]==0,"status code is not correct; code is "+loadStatus["statusCode"]));
+        results.push(assert(false,"imageA promise rejection was unexpected!"));
+        reject(results);
+        });
+      });
+    }
+  },
+  // Testing imageA url isnt altered in the process
+  test_imageA_url: function() {
+  if (!isGifLoaderEnabled)
 	{   
 			console.log("No GIF support in this Spark build!")
 			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
 		});
 	}
-	else
+	else 
 	{
-  	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
-
-	return new Promise(function(resolve, reject) {
-	    img.ready.then(function() {
-	      if(doScreenshot) 
-	      {
-		  setTimeout( function() {
-		    doScreenshotComparison("test1", resolve)
-		  }, timeoutForScreenshot);
-	      } 
-	      else 
-		resolve(assert(isGifLoaderEnabled && img.resource.w !=0 && img.resource.h !=0) , "test_downsizedGifLoader: Failed to load file");
-	    });
-	  });
-	}
-     },
-test2: function() {
-	if (!isGifLoaderEnabled)
-	{   
-		console.log("No GIF support in this Spark build!")
-		return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
-			});
-	}
-	else
-	{
-      var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
-  
-			var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
-					
-			return new Promise(function(resolve, reject) {
-					img.ready.then(function() {
-
-									if(doScreenshot) 
-						{
-					setTimeout( function() {
-						doScreenshotComparison("test2", resolve)
-					}, timeoutForScreenshot);
-						} 
-						else 
-							resolve(assert(isGifLoaderEnabled && img.resource.w!=0 && img.resource.h!=0) , "test_downsizedGifLoader: Failed to load file");
-					});
-				});
-			}
-     }
-
- }
-
-module.exports.beforeStart = beforeStart;
+    return new Promise(function(resolve, reject) {
+      var url = basePackageUri + "/images/downsizedGif_3.gif";
+      var imageA = scene.create({t:"imageA",parent:root, url:url});
+      var results = [];
+      imageA.ready.then(function()  {
+        console.log("test_imageA_url: imageA ready");
+        var res = imageA.resource;
+        var loadStatus = res.loadStatus;
+        // check value 
+        results.push(assert(imageA.url==url,"url is not correct"));
+        results.push(assert(loadStatus["statusCode"]==0,"status code is not correct"));
+        results.push(assert(loadStatus["sourceType"]=="file","load type is not correct"));
+        resolve(results);
+      }, function(o){
+        console.log("test_imageA_url: imageA rejection");
+        var res = imageA.resource;
+        var loadStatus = res.loadStatus;
+        results.push(assert(loadStatus["statusCode"]==0,"status code is not correct; code is "+loadStatus["statusCode"]));
+        results.push(assert(false,"image promise rejection was unexpected!"));
+        reject(results);
+        });
+      });
+    }
+  }
+}
 module.exports.tests = tests;
-
 
 if(manualTest === true) {
 
-  manual.runTestsManually(tests, beforeStart);
+  manual.runTestsManually(tests, module.exports.beforeStart);
 
 }
 
 }).catch( function importFailed(err){
-  console.error("Import failed for test_downsizedGifLoader.js: " + err)
+  console.log("err: "+err);
+  console.error("Import for test_downsizedGifLoader.js failed: " + err)
 });
