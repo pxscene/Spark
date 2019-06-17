@@ -67,7 +67,10 @@ var tests = {
 	      } 
 	      else 
 		resolve(assert(isGifLoaderEnabled) , "test_gifLoader_pxImage: Failed to load file");
-	    });
+	    },
+		function(msg){ // reject
+			resolve(assert(false, "test_gifLoader_pxImage: Failed to load file") );
+		});
 	  });
 	}
      },
@@ -95,6 +98,9 @@ test2: function() {
 						} 
 						else 
 							resolve(assert(isGifLoaderEnabled) , "test_gifLoader_pxImage: Failed to load file");
+					},
+					function(msg){ // reject
+						resolve(assert(false, "test_gifLoader_pxImage: Failed to load file") );
 					});
 				});
 			}
