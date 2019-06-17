@@ -68,10 +68,12 @@ var tests = {
 	      } 
 	      else 
 		resolve(assert(isGifLoaderEnabled) , "test_transparentGifLoader: Failed to load file");
+	    },function(msg){ // reject
+                    resolve(assert(false, "test_transparentGifLoader: Failed to load file") );
+                });
 	    });
-	  });
-	}
-     },
+	  }
+  },
 test2: function() {
 	if (!isGifLoaderEnabled)
 	{   
@@ -97,6 +99,9 @@ test2: function() {
 						} 
 						else 
 							resolve(assert(isGifLoaderEnabled) , "test_transparentGifLoader: Failed to load file");
+					},
+					function(msg){ // reject
+						resolve(assert(false, "test_transparentGifLoader: Failed to load file") );
 					});
 				});
 			}
