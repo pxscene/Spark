@@ -47,14 +47,14 @@ var doScreenshotComparison = function(name, resolve, reject)
 var tests = {
 
   test1: function() {
-	if (!isGifLoaderEnabled)
-	{   
-			console.log("No GIF support in this Spark build!")
-			return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
-		});
-	}
-	else
-	{
+   if (!isGifLoaderEnabled)
+    {
+        console.log("No GIF support in this Spark build!")
+        return new Promise(function(resolve, reject) { resolve(assert(!isGifLoaderEnabled));
+        });
+    }
+   else
+   {
 	var url = basePackageUri + "/images/transparentGif.gif";
   	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
 
@@ -83,28 +83,26 @@ test2: function() {
 	}
 	else
 	{
-		var url = basePackageUri + "/images/transparentGif.gif";
-      var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
+        var url = basePackageUri + "/images/transparentGif.gif";
+        var imgres = scene.create({t:'imageAResource', url:url, parent: scene.root});
   
-			var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
-					
-			return new Promise(function(resolve, reject) {
-					img.ready.then(function() {
-
-									if(doScreenshot) 
-						{
-					setTimeout( function() {
-						doScreenshotComparison("test2", resolve)
-					}, timeoutForScreenshot);
-						} 
-						else 
-							resolve(assert(isGifLoaderEnabled) , "test_transparentGifLoader: Failed to load file");
-					},
-					function(msg){ // reject
-						resolve(assert(false, "test_transparentGifLoader: Failed to load file") );
-					});
-				});
-			}
+        var img = scene.create({ t: "imageA", resource:imgres, parent: scene.root });
+        return new Promise(function(resolve, reject) {
+                img.ready.then(function() {
+                if(doScreenshot)
+                {
+                setTimeout( function() {
+                doScreenshotComparison("test2", resolve)
+                }, timeoutForScreenshot);
+                }
+                else
+                    resolve(assert(isGifLoaderEnabled) , "test_transparentGifLoader: Failed to load file");
+                },
+                function(msg){ // reject
+                    resolve(assert(false, "test_transparentGifLoader: Failed to load file") );
+                });
+            });
+        }
      }
  }
 
