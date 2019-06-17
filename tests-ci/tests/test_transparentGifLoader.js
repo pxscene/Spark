@@ -8,7 +8,7 @@ var root = scene.root;
 var assert = imports.assert.assert;
 var shots = imports.shots;
 var manual = imports.manual;
-var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined;
+var isGifLoaderEnabled = scene.capabilities.graphics.gif == undefined ? 0 : scene.capabilities.graphics.gif >= 1;
 var doScreenshot = shots.getScreenshotEnabledValue();
 var testPlatform=scene.info.build.os;
 
