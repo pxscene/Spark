@@ -15,7 +15,7 @@ var testPlatform=scene.info.build.os;
 var manualTest = manual.getManualTestValue();
 var timeoutForScreenshot = 40;
 
-var basePackageUri = px.getPackageBaseFilePath();
+var basePackageUri = "https://www.sparkui.org/tests-ci/tests"; //px.getPackageBaseFilePath();
 
 var url = basePackageUri + "/images/Spark_equalizerSVG.gif";
 
@@ -57,19 +57,22 @@ var tests = {
 	{
   	var img = scene.create({ t: "imageA", url: url, parent: scene.root });
 
-	return new Promise(function(resolve, reject) {
-	    img.ready.then(function() {
-	      if(doScreenshot) 
-	      {
-		  setTimeout( function() {
-		    doScreenshotComparison("test1", resolve)
-		  }, timeoutForScreenshot);
-	      } 
-	      else 
-		resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
-	    });
-	  });
-	}
+		return new Promise(function(resolve, reject) {
+				img.ready.then(function() {
+					if(doScreenshot) 
+					{
+						setTimeout( function() {
+							doScreenshotComparison("test1", resolve)
+						}, timeoutForScreenshot);
+					} 
+					else 
+						resolve(assert(isGifLoaderEnabled, "test_gifLoader: Failed to load file") );
+				},
+				function(msg){ // reject
+					resolve(assert(false, "test_gifLoader: Failed to load file") );
+				});
+			});
+		}
      },
 test2: function() {
 	if (!isGifLoaderEnabled)
@@ -89,12 +92,15 @@ test2: function() {
 
 									if(doScreenshot) 
 						{
-					setTimeout( function() {
-						doScreenshotComparison("test2", resolve)
-					}, timeoutForScreenshot);
+							setTimeout( function() {
+								doScreenshotComparison("test2", resolve)
+							}, timeoutForScreenshot);
 						} 
 						else 
 							resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
+					},
+					function(msg){ // reject
+						resolve(assert(false, "test_gifLoader: Failed to load file") );
 					});
 				});
 			}
