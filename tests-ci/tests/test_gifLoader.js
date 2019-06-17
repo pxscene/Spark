@@ -67,10 +67,7 @@ var tests = {
 	      } 
 	      else 
 		resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
-	    },
-		function(msg){ // reject
-			resolve(assert(false, "test_gifLoader: Failed to load file") );
-		});
+	    });
 	  });
 	}
      },
@@ -89,17 +86,15 @@ test2: function() {
 					
 			return new Promise(function(resolve, reject) {
 					img.ready.then(function() {
-						if(doScreenshot) 
+
+									if(doScreenshot) 
 						{
-						setTimeout( function() {
-							doScreenshotComparison("test2", resolve)
-						}, timeoutForScreenshot);
+					setTimeout( function() {
+						doScreenshotComparison("test2", resolve)
+					}, timeoutForScreenshot);
 						} 
 						else 
 							resolve(assert(isGifLoaderEnabled) , "test_gifLoader: Failed to load file");
-					},
-					function(msg){ // reject
-						resolve(assert(false, "test_gifLoader: Failed to load file") );
 					});
 				});
 			}
