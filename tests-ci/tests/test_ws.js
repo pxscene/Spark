@@ -27,17 +27,25 @@ const timeout_ms = 5000;
 module.exports.tests = {};
 
 /**
- * WS echo server sends correct message.
+ * WS echo server sends correct message, socket closes correctly.
  * @returns {Promise<string>}
  */
 module.exports.tests.test_echo = () => {
   return new Promise(resolve => {
+    let got_message = false;
     setTimeout(() => resolve(imports.assert(false, 'timeout')), timeout_ms);
 
     const s = new imports.ws(echo_server_url);
     s.on('open', () => s.send(echo_message));
-    s.on('message', data => resolve(imports.assert(data === echo_message, `message: ${data}`)));
-    s.on('close', () => resolve(imports.assert(false, 'disconnected')));
+    s.on('message', data => {
+      if (data !== echo_message) {
+        resolve(imports.assert(false, `message: ${data}`))
+      } else {
+        got_message = true;
+        s.closeimmediate();
+      }
+    });
+    s.on('close', () => resolve(imports.assert(got_message, 'disconnected')));
     s.on('error', e => resolve(imports.assert(false, `error: ${e}`)));
   });
 };
