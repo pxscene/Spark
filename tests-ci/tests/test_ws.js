@@ -22,7 +22,7 @@ importsPromise.then(im => {
 const child_url = `${px.getPackageBaseFilePath()}/helpers/test_childAppWs.js`;
 const echo_server_url = 'wss://echo.websocket.org';
 const echo_message = 'something';
-const timeout_ms = 5000;
+const timeout_ms = 30000;
 
 module.exports.tests = {};
 
