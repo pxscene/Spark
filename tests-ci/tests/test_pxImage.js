@@ -50,9 +50,9 @@ var tests = {
           results.push(assert(objs[i].url === urls[i], "image url is not correct when queried"));
         }
       }, function(obj) {//rejected
-        results.push(assert(false, "image load failed : "+obj));
+        results.push(assert(false, "image load failed - promise rejected : "+obj.url));
       }).catch(function(obj) {
-          results.push(assert(false, "image load failed : "+obj));       
+          results.push(assert(false, "image load failed - exception caught : "+obj));       
       }).then(function() {
         container.removeAll();
         resolve(results);
