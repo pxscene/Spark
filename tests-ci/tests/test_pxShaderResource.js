@@ -96,87 +96,78 @@ px.import({scene: "px:scene.1.js",
 
   var tests =
   {
-    test_pxShaderResrouces: function()
+    test_directConfig: function()
     {
+      var results  = [];
       return new Promise(function(resolve, reject)
       {
-        var promises = [];
-        var results  = [];
-
-        promises.push(new Promise(function(resolve, reject)
+        setTimeout( () =>
         {
-          setTimeout( () =>
+          direct.ready.then(() =>
           {
-            direct.ready.then(() =>
-            {
-              // Use 'screenshot' of child scene to verify visual output of shader...
-              // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-              //
-              var screenshot = direct.screenshot("image/png;base64");
+            // Use 'screenshot' of child scene to verify visual output of shader...
+            // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+            //
+            var screenshot = direct.screenshot("image/png;base64");
 
-              direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-              direct_res.draw = true;
+            direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+            direct_res.draw = true;
 
-              results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
+            results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
 
-              // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
-              resolve();
-            })
-          },200); //timeout
-        }));
+            // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
+            resolve(results);
+          })
+        },250);// allow shader draw !
+      });
+    },
 
-        promises.push(new Promise(function(resolve, reject)
+    test_singleConfig: function()
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        single.ready.then(() =>
         {
-          setTimeout( () =>
-          {
-            single.ready.then(() =>
-            {
-              // Use 'screenshot' of child scene to verify visual output of shader...
-              // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-              //
-              var screenshot = single.screenshot("image/png;base64");
+          // Use 'screenshot' of child scene to verify visual output of shader...
+          // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+          //
+          var screenshot = single.screenshot("image/png;base64");
 
-              single_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-              single_res.draw = true;
+          single_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+          single_res.draw = true;
 
-              results.push(assert( (screenshot == PASSED) ,"SINGLE >> Shader config " + single_res.text));
+          results.push(assert( (screenshot == PASSED) ,"SINGLE >> Shader config " + single_res.text));
 
-              // console.log("#########  TEST 2 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
-              resolve();
-            })
-          },200);//timeout
-        }));
-
-        promises.push(new Promise(function(resolve, reject)
-        {
-          setTimeout( () =>
-          {
-            multi.ready.then(() =>
-            {
-              // Use 'screenshot' of child scene to verify visual output of shader...
-              // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-              //
-              var screenshot = multi.screenshot("image/png;base64");
-
-              multi_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-              multi_res.draw = true;
-
-              results.push(assert( (screenshot == PASSED) ,"MULTI  >> Shader config " + multi_res.text));
-
-              // console.log("#########  TEST 3 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
-              resolve();
-            })
-          },200);//timeout
-        }));
-
-        Promise.all(promises).then( () =>
-        {
-          results.push(assert( (results.length == 3) ,"ALL 3 >> Shader config complete: " + (results.length == 3) ? "No Failure" : "FAILURE" ));
-          // console.log("#########  TEST ALL - results.length: " + results.length);
+          // console.log("#########  TEST 2 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
           resolve(results);
-        });
+        })
+      });
+    },
+
+    test_multiConfig: function()
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        multi.ready.then(() =>
+        {
+          // Use 'screenshot' of child scene to verify visual output of shader...
+          // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+          //
+          var screenshot = multi.screenshot("image/png;base64");
+
+          multi_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+          multi_res.draw = true;
+
+          results.push(assert( (screenshot == PASSED) ,"MULTI  >> Shader config " + multi_res.text));
+
+          // console.log("#########  TEST 3 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
+          resolve(results);
+        })
       });
     }
+
   }//tests
 
   module.exports.tests = tests;
