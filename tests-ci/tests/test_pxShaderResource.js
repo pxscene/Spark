@@ -118,7 +118,7 @@ px.import({scene: "px:scene.1.js",
             // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
             resolve(results);
           })
-        },250);// allow shader draw !
+        },1000);// allow shader draw !
       });
     },
 
