@@ -103,7 +103,8 @@ px.import({scene: "px:scene.1.js",
       {
           direct.ready.then(() =>
           {
-            setTimeout( () =>
+            // When the shader has been applied, take a screenshot to compare
+            direct.api.reallyReady().then(() =>
             {
               // Use 'screenshot' of child scene to verify visual output of shader...
               // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
@@ -115,10 +116,9 @@ px.import({scene: "px:scene.1.js",
 
               results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
 
-              // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
               resolve(results);
-            },100);// allow shader draw !
-          })
+            })
+        })
       });
     },
 

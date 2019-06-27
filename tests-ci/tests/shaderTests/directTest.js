@@ -20,26 +20,32 @@ px.import({       scene: 'px:scene.1.js'
                         }
                     });
 
-  //var drawn = false;
-
-  fx.ready.then( () =>
+  module.exports.reallyReady = function(value)
   {
-    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    return new Promise(function(resolve, reject)
+    {
+        console.log(">>>>>>>>>>>>  direct.ready  ")
+        fx.ready.then( () =>
+        {
+          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    fx.u_colorVec4 = [0.0, 1.0, 1.0, 1.0];   // #0F0   GREEN
+          fx.u_colorVec4 = [0.0, 1.0, 1.0, 1.0];   // #0F0   GREEN
 
-    rect.effect = fx; // force redraw
+          rect.effect = fx; // force redraw
 
-    // drawn = true;
+          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          //
+          //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
+          //
+          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        }); // READY
 
-    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    //
-    //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
-    //
-    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  }); // READY
-
-  //  module.exports.hasDrawn = function() { return drawn; };
+        setTimeout( () =>
+        {
+          resolve();
+        },100); // allow the shader to render
+      });
+    }//reallyReady()
 
 }).catch(function importFailed(err) {
   console.error('Import for directTest.js failed: ' + err);
