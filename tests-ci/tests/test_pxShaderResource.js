@@ -101,24 +101,24 @@ px.import({scene: "px:scene.1.js",
       var results  = [];
       return new Promise(function(resolve, reject)
       {
-        setTimeout( () =>
-        {
           direct.ready.then(() =>
           {
-            // Use 'screenshot' of child scene to verify visual output of shader...
-            // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-            //
-            var screenshot = direct.screenshot("image/png;base64");
+            setTimeout( () =>
+            {
+              // Use 'screenshot' of child scene to verify visual output of shader...
+              // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+              //
+              var screenshot = direct.screenshot("image/png;base64");
 
-            direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-            direct_res.draw = true;
+              direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+              direct_res.draw = true;
 
-            results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
+              results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
 
-            // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
-            resolve(results);
+              // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
+              resolve(results);
+            },500);// allow shader draw !
           })
-        },1000);// allow shader draw !
       });
     },
 
