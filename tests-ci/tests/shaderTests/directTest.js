@@ -24,20 +24,20 @@ px.import({       scene: 'px:scene.1.js'
 
   fx.ready.then( () =>
   {
-      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-      fx.u_colorVec4 = [0.0, 1.0, 1.0, 1.0];   // #0F0   GREEN
+    fx.u_colorVec4 = [0.0, 1.0, 1.0, 1.0];   // #0F0   GREEN
 
-      rect.effect = fx; // force redraw
+    rect.effect = fx; // force redraw
 
-//      drawn = true;
+    // drawn = true;
 
-      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      //
-      //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
-      //
-      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    }); // READY
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    //
+    //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
+    //
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  }); // READY
 
   //  module.exports.hasDrawn = function() { return drawn; };
 
