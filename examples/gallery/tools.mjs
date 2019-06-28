@@ -3,10 +3,12 @@
     static getTexture (scene, obj) {
         return obj;// scene.createTexture(obj);
     }
+    
     static getRoundRect (scene, w, h, radius, strokeWidth, strokeColor, fill, fillColor) {
         var obj = this.createRoundRect(scene, w, h, radius, strokeWidth, strokeColor, fill, fillColor);
         return obj;//getTexture(scene, obj);
     }
+
     static createRoundRect (scene, w, h, radius, strokeWidth, strokeColor, fill, fillColor) {
         fillColor = fill ? fillColor : "none";
         var boundW = w;
@@ -19,10 +21,12 @@
     
         return obj;
     }
+
     static getSvgTexture (scene, url, w, h) {
         var obj = this.createSvg(scene, url, w, h);
         return obj;//getTexture(scene, obj);
     }
+
     static createSvg (scene, url, w, h) {
         return scene.create({ t: "image", url: url, w:w, h:h, parent: scene.root, stretchX: 1, stretchY: 1 });
     }
@@ -31,6 +35,7 @@
         var obj = this.createShadowRect(scene, w, h, radius, blur, margin);
         return obj;//getTexture(scene, obj);
     }
+
     static createShadowRect (scene, w, h, radius, blur, margin) {
         var boundW = w + margin * 2;
         var boundH = h + margin * 2;
