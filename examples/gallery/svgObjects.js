@@ -3,10 +3,11 @@ px.import({scene:"px:scene.1.js",
   tools:"tools.mjs"}).then( function ready(imports) {
 
   var scene = imports.scene;
-  var tools = imports.tools;
+  var tools = imports.tools.Tools;
+  
   var basePackageUri = px.getPackageBaseFilePath();
   var url = basePackageUri + "/SVG/android.svg";
- 
+   
   var svg = tools.getSvgTexture(scene, url, 400, 400);
   svg.ready.then(function () {
     svg.x=0;
