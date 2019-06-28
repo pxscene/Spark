@@ -33,17 +33,17 @@ px.import({       scene: 'px:scene.1.js'
 
           rect.effect = fx; // force redraw
 
+          rect.painting = false; // force redraw
+          rect.painting = true;  // force redraw
+
+          resolve(); // signal that redraw complete
+
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           //
           //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
           //
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         }); // READY
-
-        setTimeout( () =>
-        {
-          resolve();
-        },100); // allow the shader to render
       });
     }//reallyReady()
 
