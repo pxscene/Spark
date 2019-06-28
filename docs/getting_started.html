@@ -37,7 +37,7 @@
           <p>To get started, download and install the Spark binary for your platform. Then follow the instructions to run a few simple Spark applications.</p>
           <h3 class="section__title">Download</h3>
           <p>Two different flavors of Spark builds are available: stable and edge. <br/>
-            <ul class="content__ul__circle">  
+            <ul class="content__ul__circle">
               <li><i>Release</i> builds are release builds that have been tested and verified. </li>
               <li><i>Edge</i> builds are built daily by a cron job, so they represent the bleeding-edge of the latest Spark code.</li>
             </ul>
@@ -53,38 +53,38 @@
                 <pre class="nohighlight code">
                   <code class="tab__pane active mac" >
                     <div ></div>
-                    <strong>Minimum System Requirements:</strong> 
-                      <br/> &nbsp;OS: Macbook Pro (macOS Sierra) 
-                      <br/> &nbsp;RAM: 256 MB 
-                      <br/> &nbsp;Disk Space: 24 MB 
+                    <strong>Minimum System Requirements:</strong>
+                      <br/> &nbsp;OS: Macbook Pro (macOS Sierra)
+                      <br/> &nbsp;RAM: 256 MB
+                      <br/> &nbsp;Disk Space: 24 MB
                       <br/> &nbsp;Processor Speed:1 GHz
                     <br/>
                     <br/>
                     <strong>
-                      <a href="https://github.com/pxscene/pxCore/releases/download/1.8.0.1/Spark.dmg" class="link link--light"><img src="images/Spark128.png" height="50" align="middle">&nbsp;Spark - release</a>
+                      <a href="https://github.com/pxscene/pxCore/releases/download/1.8.0.3/Spark.dmg" class="link link--light"><img src="images/Spark128.png" height="50" align="middle">&nbsp;Spark - release</a>
                     </strong>
                     &nbsp;&nbsp;
-                  
+
                     <strong>
                       <a href="http://96.116.56.119/edge/osx/artifacts/SparkEdge.dmg" class="link link--light"><img src="images/SparkEdge128.png" height="50" align="middle">&nbsp;Spark - edge</a>
                     </strong>
                     <br/>
                     <br/>
-      
+
 
                    </code>
                   <code class="tab__pane linux">No installer available.  See <a href="https://github.com/pxscene/pxCore/blob/master/examples/pxScene2d/README.md"class="link link--light">Git Hub</a> for Spark build instructions.</code>
-                  <code class="tab__pane win">    
-                    <strong>Minimum System Requirements:</strong> 
-                      <br/>&nbsp; OS: Windows 10 
-                      <br/>&nbsp; RAM: 128 MB 
+                  <code class="tab__pane win">
+                    <strong>Minimum System Requirements:</strong>
+                      <br/>&nbsp; OS: Windows 10
+                      <br/>&nbsp; RAM: 128 MB
                       <br/>&nbsp; Disk Space: 24 MB
-                      <br/>&nbsp; Processor Speed:1 GHz 
+                      <br/>&nbsp; Processor Speed:1 GHz
                     <br/>
-                    <br/>     
-                    
-                    <strong><a href="https://github.com/pxscene/pxCore/releases/download/1.8.0.1/spark-setup.exe.zip" class="link link--light"><img src="images/Spark128.png" height="50"  align="middle">&nbsp;Spark - release</a></strong>&nbsp;&nbsp;
-                    
+                    <br/>
+
+                    <strong><a href="https://github.com/pxscene/pxCore/releases/download/1.8.0.3/spark-setup.exe.zip" class="link link--light"><img src="images/Spark128.png" height="50"  align="middle">&nbsp;Spark - release</a></strong>&nbsp;&nbsp;
+
                     <strong><a href="http://96.116.56.119/edge/windows/sparkEdge-setup.exe" class="link link--light"><img src="images/SparkEdge128.png"  height="50"  align="middle">&nbsp;Spark - edge</a></strong>
                     <br/>
                     <br/>
@@ -116,7 +116,7 @@
                     </ol>
                   </code>
                   <code class="tab__pane linux">N/A.  Please see TBD for instructions to build Spark for linux platforms.</code>
-                  <code class="tab__pane win">    
+                  <code class="tab__pane win">
                     <ol>
                       <li>Expand the downloaded zip file</li>
                       <li>Double-click the exe installer and click &quot;Allow&quot; at the pop-up prompt asking for permission to edit local machine.</li>
@@ -135,10 +135,10 @@
             <h5>Option 1: (This is the preferred method for running Spark applications.)</h5>
             <ol class="content__ol">
                 <li>Open the installed Spark application</li>
-                <li>In the Spark browser window that opens, type in or paste the path to a js file to run.  
+                <li>In the Spark browser window that opens, type in or paste the path to a js file to run.
                     If not a fully qualified path name, the browser will search in <strong><a href="http://www.pxscene.org/examples/px-reference/gallery" class="link link--dark">pxscene.org</a></strong>
-                    for the file name entered.  Source for this location can be found in this github repo: 
-                    <strong><a href="https://github.com/pxscene/pxscene/tree/gh-pages" class="link link--dark">pxscene/pxscene</a></strong>  
+                    for the file name entered.  Source for this location can be found in this github repo:
+                    <strong><a href="https://github.com/pxscene/pxscene/tree/gh-pages" class="link link--dark">pxscene/pxscene</a></strong>
                     Examples to try:
                     <ul class="content__ul__circle">
                       <li><i>fancy.js</i>  - a bouncing, animated soccer ball</li>
@@ -149,7 +149,7 @@
 
                     </ul>
                   </li>
-            </ol> 
+            </ol>
             <h5>Option 2: Command line</h5>
             <ol class="content__ol">
                 <li>Use the start up script to start Spark and pass the path to the js file to run</li>
@@ -171,7 +171,7 @@
                           cd pxCore/examples/pxScene2d/src <br/>
                           ./spark.sh {path_to_javascript_file_name}.js
                         </code>
-                        <code class="tab__pane win">    
+                        <code class="tab__pane win">
                           cd C:\Program Files (x86)\pxscene <br/>
                           pxscene.exe {path_to_javascript_file_name}.js
                         </code>
@@ -186,11 +186,11 @@
                     <li><pre class="nohighlight code" style="font-family:'Courier New'; font-size:12px">./spark.sh http://www.pxscene.org/examples/px-reference/gallery/gallery.js</pre></li>
                   </ul>
                 </li>
-                <li>Running ./pxscene.sh without a parameter will load the Spark browser (just as if starting the app directly), allowing you to type URLs to load 
+                <li>Running ./pxscene.sh without a parameter will load the Spark browser (just as if starting the app directly), allowing you to type URLs to load
                   into the browser input field.
                 </li>
 
-            </ol> 
+            </ol>
         </section>
 
       </article>
@@ -199,6 +199,6 @@
     <footer class="footer">Spark is an open source project in github <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="scripts/sparkScript.js"></script> 
+    <script src="scripts/sparkScript.js"></script>
   </body>
 </html>
