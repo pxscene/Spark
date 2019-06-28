@@ -9,7 +9,7 @@ var assert = imports.assert.assert;
 var manual = imports.manual;
 
 var basePackageUri = px.getPackageBaseFilePath();
-var url = basePackageUri + "/SVG/android.svg";
+var url = basePackageUri + "/images/android.svg";
 
 var manualTest = manual.getManualTestValue();
 
