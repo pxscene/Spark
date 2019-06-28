@@ -9,7 +9,7 @@ var assert = imports.assert.assert;
 var manual = imports.manual;
 
 var basePackageUri = px.getPackageBaseFilePath();
-var url = basePackageUri + "/test_rect.js";
+var url = basePackageUri + "/helpers/test_rect.js";
 
 var manualTest = manual.getManualTestValue();
 
