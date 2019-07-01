@@ -118,10 +118,10 @@ var tests = {
       });
 
       }, function failure() {
-        console.log(assert(false,"test_pxScreenshot:testPngScreenShot failed!"));
-        results.push(assert(false,"test_pxScreenshot:testPngScreenShot failed!"));
+        console.log(assert(false,"test_pxScreenshot:testScreenShotPng failed!"));
+        results.push(assert(false,"test_pxScreenshot:testScreenShotPng failed!"));
       }).then(function(error) {
-        console.log(assert(false,"test_pxScreenshot:testPngScreenShot failed!"));
+        console.log(assert(false,"test_pxScreenshot:testScreenShotPng failed!"));
         resolve(results);
       });
     });
