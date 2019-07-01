@@ -47,14 +47,13 @@ var tests = {
       var url = basePackageUri + "/helpers/test_rect.js";
       var stage = scene.create({ t: 'scene', parent: root, x:0, y:0, w: scene.w, h: scene.h, sx: 1, sy: 1, url: url, interactive: false, clip: true, stretchX: 1, stretchY: 1 });
       stage.ready.then( function(obj) {
-       
-        if(doScreenshot) 
-					{
-						setTimeout( function() {
-							doScreenshotComparison("test1", resolve)
-						}, timeoutForScreenshot);
-					} 
-					else 
+          if(doScreenshot) 
+          {
+            setTimeout( function() {
+              doScreenshotComparison("test1", resolve)
+            }, timeoutForScreenshot);
+          } 
+          else 
           {
             var base64String = stage.screenshot("image/png;base64");
             var expected64String="data:image/png;base64";
