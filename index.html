@@ -29,7 +29,7 @@
         <div class="callout">
           <a href="docs/getting_started.html" class="button--primary">Get Spark!</a>
         </div>
-      </p>   
+      </p>
     </div>
     <!--<div>
       <h3>Scene graph API exposed to a Javascript engine</h3>
@@ -115,6 +115,51 @@
     <div class="changelog">
        <div class="wrapper">
          <h3 class="section__title">Release Highlights</h3>
+
+         <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v1.8.0.3</h4>
+            <small class="changelog__date">19Jun2019</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>GIF support for Mac</li>
+              <li>Fall back to node 6 for stability.</li>
+            </ul>
+          </div>
+        </div>
+
+         <div class="changelog__item">
+          <div class="changelog__meta">
+            <h4 class="changelog__title">v1.8.0.1</h4>
+            <small class="changelog__date">13Jun2019</small>
+          </div>
+          <div class="changelog__detail">
+            <ul>
+              <li>Support for local storage in Spark applications<ul>
+                <li>Spark local storage is modeled after Web Storage's localStorage.  </li>
+                <li>The ability to use localStorage is managed by application permissions.</li>
+                <li>See TBD for more details</li>
+              </ul>
+            </li>
+            <li>Node 8 support (off by default)</li>
+           </ul>
+          </div>
+        </div>
+         <div class="changelog__item">
+            <div class="changelog__meta">
+              <h4 class="changelog__title">v1.7.0.1</h4>
+              <small class="changelog__date">22May2019</small>
+            </div>
+            <div class="changelog__detail">
+              <ul>
+                  <li>GIF Support - <em>for Linux builds only</em>. <ul>Use imageA and imageAResource to use GIFs in a Spark application.</ul></li>
+                  <li>Bug fix: ImageAResource width and height were replacing any authored width and height for imageA objects using the resource.
+                    <ul>This would result in an inability to stretch an imageA to a desired width and height other than the resource's actual width and height.  Check 
+                      <code>(scene.capabilities.graphics.imageAResource &gt;= 2)</code> to detect if this fix is available.</ul></li>
+                </ul>
+            </div>
+          </div>
          <div class="changelog__item">
           <div class="changelog__meta">
             <h4 class="changelog__title">v1.7.1.1</h4>
@@ -134,51 +179,12 @@
             <div class="changelog__detail">
               <ul>
                   <li>GIF Support - <em>for Linux builds only</em>. <ul>Use imageA and imageAResource to use GIFs in a Spark application.</ul></li>
-                  <li>Bug fix: ImageAResource width and height were replacing any authored width and height for imageA objects using the resource. 
+                  <li>Bug fix: ImageAResource width and height were replacing any authored width and height for imageA objects using the resource.
                     <ul>This would result in an inability to stretch an imageA to a desired width and height other than the resource's actual width and height.  Check 
                       <code>(scene.capabilities.graphics.imageAResource &gt;= 2)</code> to detect if this fix is available.</ul></li>
                 </ul>
             </div>
           </div>
-         <div class="changelog__item">
-          <div class="changelog__meta">
-            <h4 class="changelog__title">v1.6.0.2</h4>
-            <small class="changelog__date">25Apr2019</small>
-          </div>
-          <div class="changelog__detail">
-            <ul>
-              <li>Allow Spark apps to suspend cleanly with Optimus API </li>
-              <li>Improve Performance, Memory Usage &amp; Management<ul>
-                <li>Improvements to update </li>
-                <li>Reduce Spark's RAM Footprint for Cached Image Items </li>
-                <li>Spark Texture Memory Management</li>
-                </ul>
-              </ul>
-          </div>
-        </div>
-         <div class="changelog__item">
-          <div class="changelog__meta">
-            <h4 class="changelog__title">v1.6.0.1</h4>
-            <small class="changelog__date">14Mar2019</small>
-          </div>
-          <div class="changelog__detail">
-            <ul>
-              <li>Enhanced Drag and Drop support (macOS)
-                <ul>
-                  <li>Now just drag and drop a javascript file into the body of the Spark browser, and Spark will load the file. </li>
-                  <li>Drag and drop a file into the URL box to get the URL of the file to replace selected text or be added to text that's already there.</li>
-                </ul>
-              </li>
-              <li>Use RT_LOG_LEVEL to control mouse and keyboard logging from shell.js</li>
-              <li>Add metrics logging for download thread performance details</li>
-              <li>remove pxObject's matrix props to reduce size of pxObject</li>
-              <li>Web/CSS color support for pxRectangle and pxText. See sample usage in these two files: <a href="http://www.sparkui.org/tests-ci/tests/test_pxWebColors.js">test_pxWebColors.js</a> and <a href="http://www.sparkui.org/tests-ci/tests/test_pxColorNames.js">test_pxColorNames.js</a></li>
-              <li>Change pxCore CI builds to use the new testRunner and tests from <a href="http://sparkui.org">sparkui.org</a></li>
-              <li>Fixed: double downloads for image and image9</li>
-              <li>Fixed: MASK does not respect Alpha of parent object</li>
-            </ul>
-          </div>
-        </div>
 
         <div class="changelog__callout">
           <a href="docs/releaseNotes/notes.html" class="button--secondary">Checkout Full Release Notes</a>
