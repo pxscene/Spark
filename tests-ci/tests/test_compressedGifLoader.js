@@ -63,7 +63,7 @@ var tests = {
         var loadStatus = imageARes.loadStatus;
         results.push(assert(loadStatus["statusCode"]==0,"status code is not correct; code is "+loadStatus["statusCode"]));
         results.push(assert(false,"imageA promise rejection was unexpected!"));
-        reject(results);
+        resolve(results);
         });
       });
     }
@@ -97,7 +97,7 @@ var tests = {
         var loadStatus = res.loadStatus;
         results.push(assert(loadStatus["statusCode"]==0,"status code is not correct; code is "+loadStatus["statusCode"]));
         results.push(assert(false,"image promise rejection was unexpected!"));
-        reject(results);
+        resolve(results);
         });
       });
     }
