@@ -1,6 +1,6 @@
 "use strict";
 px.import({scene:"px:scene.1.js", 
-  tools:"tools.mjs"}).then( function ready(imports) {
+  tools:"tools.js"}).then( function ready(imports) {
 
   var scene = imports.scene;
   var tools = imports.tools.Tools;
