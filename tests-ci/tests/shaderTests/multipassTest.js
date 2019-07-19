@@ -20,37 +20,33 @@ px.import({       scene: 'px:scene.1.js'
                         }
                     });
 
-  // setTimeout( () =>
-  // {
-        fx.ready.then( () =>
-        {
-          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          rect.effect =
-          [
-            {
-                  name: "Pass R",
-                shader: fx,
-              uniforms: {  u_colorVec4: [1.0, 0.0, 0.0, 1.0] }  // #F00   RED
-            },
-            {
-                  name: "Pass G",
-                shader: fx,
-              uniforms: { u_colorVec4: [0.0, 1.0, 0.0, 1.0] }   // #0F0   GREEN
-            },
-            {
-                  name: "Pass B",
-                shader: fx,
-              uniforms: { u_colorVec4: [0.0, 0.0, 1.0, 1.0] }   // #00F   BLUE
-            }
-          ];
-          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          //
-          //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
-          //
-          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-         }); // READY
-
-    // }, 1500); // timeout
+  fx.ready.then( () =>
+  {
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    rect.effect =
+    [
+      {
+            name: "Pass R",
+          shader: fx,
+        uniforms: {  u_colorVec4: [1.0, 0.0, 0.0, 1.0] }  // #F00   RED
+      },
+      {
+            name: "Pass G",
+          shader: fx,
+        uniforms: { u_colorVec4: [0.0, 1.0, 0.0, 1.0] }   // #0F0   GREEN
+      },
+      {
+            name: "Pass B",
+          shader: fx,
+        uniforms: { u_colorVec4: [0.0, 0.0, 1.0, 1.0] }   // #00F   BLUE
+      }
+    ];
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    //
+    //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
+    //
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    }); // READY
 
 }).catch(function importFailed(err) {
   console.error('Import for colorMultipass.js failed: ' + err);

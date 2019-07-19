@@ -34,11 +34,11 @@ px.import({scene: "px:scene.1.js",
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var direct_URL = base + "/shaderTests/directTest.js"
-  var single_URL = base + "/shaderTests/singlepassTest.js"
-  var multi_URL  = base + "/shaderTests/multipassTest.js"
-
-  var uniforms_URL  = base + "/shaderTests/UniformsTest.js"
+  var direct_URL   = base + "/shaderTests/directTest.js"
+  var single_URL   = base + "/shaderTests/singlepassTest.js"
+  var multi_URL    = base + "/shaderTests/multipassTest.js"
+  var uniforms_URL = base + "/shaderTests/UniformsTest.js"
+  var bind_URL     = base + "/shaderTests/bindTest.js"
 
   var PASSED = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAACHCAYAAAAoctTrAAABp0lEQVR4nO3VsQ2DUBAFQWPRM5QAVePUIcJCn5Vn4gtesrrXCwAAAAAAAAAAgN9Mpy+37bhxB/BtXU+1+b57B3AfAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBA2jx7wBMeyjJ7ABdO+j54wnA8MYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjC5tEDnmDa99ET4BIfGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABAwAAAAAAAAAAAH/sA3PtB/2R0gFhAAAAAElFTkSuQmCC";
 
@@ -118,6 +118,15 @@ px.import({scene: "px:scene.1.js",
 
   var uniforms_res = scene.create({ t: 'text', parent: root, x: uniforms_bg.x + uniforms.w/2 - 22, y: uniforms_bg.y + uniforms_bg.h/2 - 10, w: 300, h: 20,
                                       pixelSize: 24,  textColor: '#000',  text:  '####', interactive: false, draw: false });
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var bindTest_bg  = scene.create({ t: 'rect',    parent:          bg, x: xx - ww/2, y: yy, w: ww, h: hh, fillColor: "#888", lineColor: "#fff", lineWidth: 2 });
+  var bindTest     = scene.create({ t: 'scene',   parent: bindTest_bg, x:    0, y:  0,        w: ww, h: hh, url: bind_URL, interactive: false });
+
+  var bind_title = scene.create({ t: 'text', parent:    root,  x: bindTest_bg.x + 90, y: bindTest_bg.y - 25, w: 300, h: 20,
+  pixelSize: 18,  textColor: '#fff',  text: 'Bind Test', interactive: false });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
