@@ -39,7 +39,7 @@ var tests = {
         results.push(assert(isValid,"screen shot base64String!=expected64String"));
       }, function failure() {
         console.log("test_pxScreenshot failed!");
-        results.push("test_pxScreenshot failed!");
+        results.push(assert(false,"test_pxScreenshot failed!"));
       }).then(function(error) {
         console.log("returning result");
         resolve(results);
