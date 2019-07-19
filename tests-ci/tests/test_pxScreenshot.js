@@ -33,6 +33,9 @@ var tests = {
         var expected64String="data:image/png;base64";
         console.log("test_pxScreenshot:"+base64String);
         var isValid = ( base64String.indexOf(expected64String) == 0);
+        if (false == isValid)
+          console.log("screen shot base64String!=expected64String");
+
         results.push(assert(isValid,"screen shot base64String!=expected64String"));
       }, function failure() {
         console.log("test_pxScreenshot failed!");
