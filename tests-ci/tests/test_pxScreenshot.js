@@ -32,15 +32,16 @@ var tests = {
         var base64String = stage.screenshot("image/png;base64");
         var expected64String="data:image/png;base64";
         console.log("test_pxScreenshot:"+base64String);
-        var isValid = ( base64String.indexOf(expected64String) == 0)
-        console.log(assert(isValid,"screen shot base64String!=expected64String"));
-      
+        var isValid = ( base64String.indexOf(expected64String) == 0);
+        if (false == isValid)
+          console.log("screen shot base64String!=expected64String");
+
         results.push(assert(isValid,"screen shot base64String!=expected64String"));
       }, function failure() {
-        console.log(assert(false,"test_pxScreenshot failed!"));
+        console.log("test_pxScreenshot failed!");
         results.push(assert(false,"test_pxScreenshot failed!"));
       }).then(function(error) {
-        console.log(assert(false,"test_pxScreenshot failed!"));
+        console.log("returning result");
         resolve(results);
       });
     });
