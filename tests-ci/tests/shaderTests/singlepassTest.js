@@ -15,8 +15,8 @@ px.import({       scene: 'px:scene.1.js'
                         fragment: base + "/shaderTest.frg",
                         uniforms:
                         {
-                            "u_colorVec4" : "vec4",
-                            "s_texture"   : "sampler2D"
+                            u_colorVec4 : "vec4",
+                            s_texture   : "sampler2D"
                         }
                     });
 
@@ -26,13 +26,13 @@ px.import({       scene: 'px:scene.1.js'
         {
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           rect.effect =
-          [
+          //[
             {
                   name: "Add G",
                 shader: fx,
               uniforms: { u_colorVec4: [0.0, 1.0, 0.0, 1.0] }   // #0F0   BLUE
             }
-          ];
+          //];
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           //
           //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF

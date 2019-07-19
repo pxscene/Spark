@@ -91,7 +91,7 @@ px.import({       scene: 'px:scene.1.js'
       var screenshot = direct.screenshot("image/png;base64");
 
       // console.log("direct = " + screenshot)
-      direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+      direct_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
       direct_res.draw = true;
     })
 
@@ -100,7 +100,7 @@ px.import({       scene: 'px:scene.1.js'
       var screenshot = single.screenshot("image/png;base64");
 
       // console.log("single = " + screenshot)
-      single_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+      single_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
       single_res.draw = true;
     })
 
@@ -109,7 +109,7 @@ px.import({       scene: 'px:scene.1.js'
       var screenshot = multi.screenshot("image/png;base64");
 
       // console.log("multi = " + screenshot)
-      multi_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+      multi_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
       multi_res.draw = true;
     })
 

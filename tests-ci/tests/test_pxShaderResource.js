@@ -5,6 +5,11 @@ px.import({scene: "px:scene.1.js",
           manual: "../test-run/tools_manualTests.js"
         }).then( function ready(imports)
 {
+  module.exports.wantsClearscreen = function()
+  {
+    return true; // return 'false' to skip system black/blank draw
+  };
+
   var scene  = imports.scene;
   var root   = imports.scene.root;
   var base   = px.getPackageBaseFilePath();
@@ -33,6 +38,8 @@ px.import({scene: "px:scene.1.js",
   var single_URL = base + "/shaderTests/singlepassTest.js"
   var multi_URL  = base + "/shaderTests/multipassTest.js"
 
+  var uniforms_URL  = base + "/shaderTests/UniformsTest.js"
+
   var PASSED = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAACHCAYAAAAoctTrAAABp0lEQVR4nO3VsQ2DUBAFQWPRM5QAVePUIcJCn5Vn4gtesrrXCwAAAAAAAAAAgN9Mpy+37bhxB/BtXU+1+b57B3AfAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBA2jx7wBMeyjJ7ABdO+j54wnA8MYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjC5tEDnmDa99ET4BIfGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABAwAAAAAAAAAAAH/sA3PtB/2R0gFhAAAAAElFTkSuQmCC";
 
   // Smaller image ... smaller Base64 result string.
@@ -40,9 +47,9 @@ px.import({scene: "px:scene.1.js",
   var hh = 270/2;
 
   var xx = (1280)/2;
-  var yy = ( 720)/3;
+  var yy = ( 720) * 0.10;
 
-  var bg           = scene.create({ t: 'rect',    parent: root, x: 10, y: 10, w: 1260, h: 700, fillColor: '#111', interactive: false});
+  var bg = scene.create({ t: 'object', parent: root, x: 10, y: 10, w: 1260, h: 700, fillColor: '#111', interactive: false});
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -92,6 +99,27 @@ px.import({scene: "px:scene.1.js",
   var direct_res = scene.create({ t: 'text', parent: root, x: direct_bg.x + direct.w/2 - 22, y: direct_bg.y + direct_bg.h/2 - 10, w: 300, h: 20,
                       pixelSize: 24,  textColor: '#000',  text:  '####', interactive: false, draw: false });
 
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  yy = ( 720) * 0.50;
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var uniforms_bg  = scene.create({ t: 'rect',    parent:        bg, x: xx/2 - ww/2, y: yy, w: ww, h: hh, fillColor: "#888", lineColor: "#fff", lineWidth: 2 });
+  var uniforms     = scene.create({ t: 'scene',   parent: uniforms_bg, x:    0, y:  0,        w: ww, h: hh, url: uniforms_URL, interactive: false });
+
+  var uniforms_title = scene.create({ t: 'text', parent:    root,  x: uniforms_bg.x + 60, y: uniforms_bg.y - 25, w: 300, h: 20,
+                                        pixelSize: 18,  textColor: '#fff',  text: 'Set UNIFORMS', interactive: false });
+
+  var uniforms_txt = scene.create({ t: 'text', parent:    root,  x: uniforms_bg.x + 20, y: uniforms_bg.y + uniforms_bg.h + 15, w: 300, h: 20,
+                                      pixelSize: 24,  textColor: '#fff',  text: 'Expected Color: ', interactive: false });
+
+  var uniforms_ans = scene.create({ t: 'rect', parent: bg, x: uniforms_txt.x + uniforms_txt.w + 10, y: uniforms_txt.y, w: 20, h: 20, fillColor: "#fff", lineColor: "#888", lineWidth: 2 });
+
+  var uniforms_res = scene.create({ t: 'text', parent: root, x: uniforms_bg.x + uniforms.w/2 - 22, y: uniforms_bg.y + uniforms_bg.h/2 - 10, w: 300, h: 20,
+                                      pixelSize: 24,  textColor: '#000',  text:  '####', interactive: false, draw: false });
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   var tests =
@@ -166,8 +194,33 @@ px.import({scene: "px:scene.1.js",
           resolve(results);
         })
       });
-    }
+    },
 
+
+    test_uniforms: function()
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        uniforms.ready.then(() =>
+        {
+          // When the shader has been applied, take a screenshot to compare
+          // Use 'screenshot' of child scene to verify visual output of shader...
+          // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+          //
+          var screenshot = uniforms.screenshot("image/png;base64");
+
+          uniforms_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+          uniforms_res.draw = true;
+
+          results.push(assert( (screenshot == PASSED) ,"niformINT  >> Shader config " + uniforms_res.text));
+
+          // console.log("#########  TEST 4 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
+          resolve(results);
+
+        })
+      });
+    }
   }//tests
 
   module.exports.tests = tests;
