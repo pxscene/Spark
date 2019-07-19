@@ -205,21 +205,19 @@ px.import({scene: "px:scene.1.js",
         uniforms.ready.then(() =>
         {
           // When the shader has been applied, take a screenshot to compare
-          uniforms.api.reallyReady().then(() =>
-          {
-            // Use 'screenshot' of child scene to verify visual output of shader...
-            // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-            //
-            var screenshot = uniforms.screenshot("image/png;base64");
+          // Use 'screenshot' of child scene to verify visual output of shader...
+          // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+          //
+          var screenshot = uniforms.screenshot("image/png;base64");
 
-            uniforms_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-            uniforms_res.draw = true;
+          uniforms_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+          uniforms_res.draw = true;
 
-            results.push(assert( (screenshot == PASSED) ,"niformINT  >> Shader config " + uniforms_res.text));
+          results.push(assert( (screenshot == PASSED) ,"niformINT  >> Shader config " + uniforms_res.text));
 
-            // console.log("#########  TEST 4 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
-            resolve(results);
-          });
+          // console.log("#########  TEST 4 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
+          resolve(results);
+
         })
       });
     }

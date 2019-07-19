@@ -35,7 +35,7 @@ px.import({       scene: 'px:scene.1.js'
           rect.painting = false; // force redraw
           rect.painting = true;  // force redraw
 
-          setTimeout( () => { resolve();  }, 700);  // signal that redraw complete
+          resolve(); // signal that redraw complete
 
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           //
@@ -44,7 +44,7 @@ px.import({       scene: 'px:scene.1.js'
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         }); // READY
       });
-    }//reallyReady()
+  }//reallyReady()
 
 }).catch(function importFailed(err) {
   console.error('Import for directTest.js failed: ' + err);
