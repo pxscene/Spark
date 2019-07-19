@@ -40,7 +40,7 @@ var tests = {
         console.log(assert(false,"test_pxScreenshot failed on loading stage!"));
         results.push(assert(false,"test_pxScreenshot failed on loading stage!"));
       }).then(function(error) {
-        console.log(assert(false,"test_pxScreenshot failed!"));
+        console.log("returning result");
         resolve(results);
       });
     });
