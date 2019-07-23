@@ -1,402 +1,383 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spark: shaderResource</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="../stylesheets/spark-global.css">
+    <link rel="stylesheet" href="../stylesheets/spark-doc.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <div class="logo_svg"></div>
+      <h1 class="logo"> Spark <span class="logo__thin">Doc</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="https://github.com/pxscene/Spark" class="link link--dark"><i class="fa fa-github"></i> GitHub</a></li>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-home"></i> Docs Home</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper__doc">
+      <aside class="doc__nav">
+        <ul class="fixed">
+          <li class="js-btn selected">Overview</li>
+          <li class="js-btn">Creating the Shader Resource</li>
+          <li class="js-btn">Using the Shader Resource</li>
+          <li class="js-btn">Shader Configuration</li>
+          <li class="js-btn">Inline Source Code</li>
+          <li class="js-btn">Internal Variables</li>
+          <li class="js-btn">Flattened Composition</li>
+          <li class="js-btn">Capability</li>
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
 
-<head>
-<title>Spark - Scene Graph API</title>
-<link href="./style/style.css" media="screen" rel="stylesheet" type="text/css" />
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/fontawesome.min.css"> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+          <br><br>
+            <div style="display: grid; grid-template-columns: 120px auto">
+                <div style="grid-column: 1"><img src="images/OpenGL.svg"
+                  alt="OpenGL Logo" height="70" width="100"></img> </div>
+                <div style="grid-column: 2"><h2>Shader Resource</h2></div>
+                <div style="grid-column: 3" alt="spacer"></div>
+            </div>
 
-<body>
-<div id="container">
+          <h3 class="section__title">Overview</h3>
+          <p>When authoring Spark applications, there are many things to consider, such as caching and bundling applications and their resources.
+          In addition, there are many Tips and Tricks that may be helpful when getting up and running with Spark for the first time. </p>
 
+          <div style="text-align: center" >
+              <img src="images/pxShaderResource.gif" style="display: block;  margin-left: auto; margin-right: auto"
+                      alt="SVG Logo" width="400" height="225"></img>
+          </div>
 
-<br>
-<br>
+        </section>
+        <hr />
+        <section class="js-section">
+            <h3 class="section__title">Shader Resource</h3>
 
-<div style="background-color:#eee;padding:10px;border-radius:7px; display: grid">
-    <div style="grid-column: 1"><img src="images/OpenGL.svg"
-      alt="OpenGL Logo" height="50" width="100"></img> </div>
-    <div style="grid-column: 2"><h1>Shader Resource</h1></div>
+            <p>Spark now supports OpenGL Shaders via the <b>shaderResource</b>.
 
-    <div style="grid-column: 3" alt="spacer"></div>
-</div>
+              Shaders are written in <a href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">GLSL</a> - GL Shader language.
+            </p>
 
-<br>
-<br>
-<div style="text-align: center" >
-<img src="images/pxShaderResource.gif" style="display: block;  margin-left: auto; margin-right: auto"
-        alt="SVG Logo" width="400" height="225"></img>
-      </div>
-<br>
+          </section>
+        <hr />
+        <section class="js-section">
+          <div style="display: grid; grid-template-columns: 50px auto">
+            <div style="grid-column: 1;"><i class="fa fa-plus-square" style="font-size: 2em;"></i> </div>
+            <div style="grid-column: 2;line-height: 0.0em;"><h3 class="section__title">Creating the Shader Resource</h3></div>
+          </div>
+          <br>
 
+          The following example shows how to create a Shader Resource -
 
-<br>
-Spark now supports OpenGL Shaders via the <b>shaderResource</b>.
-
-Shaders are written in <a href="https://en.wikipedia.org/wiki/OpenGL_Shading_Language">GLSL</a> - GL Shader language.
-<br>
-<br>
-The reader is assumed to be knowledgeable in GLSL programming. Minimal discussion of GLSL will be made here, only as pertinent to the API.
-<br>
-<br>
-The following is the <b>shaderResource</b> API ...
-<br>
-
-<hr>
-<br>
-<h1>Spark - Shader Resource </h1>
-<br>
-<h2><a name="Scene"></a><code>Scene</code> shaderResource</h2>
-<h3>Properties</h3>
-<dl>
-  <dt class="string">name</dt> <dd>Name of this shader. (Optional)</dd>
-  <dt class="object">fragment</dt> <dd>URL or Data URL of GLSL <i>fragment shader</i> source code</dd>
-  <dt class="object">vertex</dt>   <dd>URL or Data URL of GLSL <i>vertex shader</i> source code</dd>
-  <dt class="object">uniforms</dt> <dd>List of Uniform variables and types needed</dd>
-</dl>
-
-<br><br><br><br><br><br><br><br><br><br>
-
-
-<br>
-<hr>
-<div style="display: grid; grid-template-columns: 60px auto">
-  <div style="grid-column: 1;"><i class="fa fa-plus-square" style="font-size: 4em"></i> </div>
-  <div style="grid-column: 2;"><h1>Creating the Shader Resource</h1></div>
-</div>
-<br>
-
-The following example shows how to create a Shader Resource -
-
-<br><br>
+          <br><br>
 
 <codeblock>
-var tintShader = scene.create({  t: 'shaderResource',
-                          fragment: frag_src,
-                            vertex: vert_src,
-                          uniforms:
-                          {
-                            s_texture: "sampler2D",
-                               u_time: "float"
-                              u_color: "vec4"
-                          }
-                        });
+    var tintShader = scene.create({  t: 'shaderResource',
+                              fragment: frag_src,
+                                vertex: vert_src,
+                              uniforms:
+                              {
+                                s_texture: "sampler2D",
+                                    u_time: "float"
+                                  u_color: "vec4"
+                              }
+                            });
 </codeblock>
-<center><b>GLSL Shader creation</b></center><br><br>
 
-We pass the Shader Resource <b>frag_src</b> and <b>vert_src</b> which are GLSL source code.
+          <div class="caption">GLSL Shader creation</div>
 
-Additionally, we declare <b>uniforms</b> that we will use.<br><br>
+          We pass the Shader Resource <b>frag_src</b> and <b>vert_src</b> which are GLSL source code.
 
-In this case,
+          Additionally, we declare <b>uniforms</b> that we will use.<br><br>
 
-<ul>
-  <li><b>s_texture</b> an image bound to </li>
-  <li><b>u_time</b>    a floating-point time value </li>
-  <li><b>u_color</b>   an RGBA color value  value.</li>
-</ul>
+          In this case,
 
-
-<br>
-The <b>frag_src</b> and <b>vert_src</b> GLSL source programs can be URL's to the source files, or can be Data URL's of the form - <br><br>
-<br>
-<br>
-
-<hr>
-<div style="display: grid; grid-template-columns: 60px auto">
-  <div style="grid-column: 1;"><i class="fa fa-paint-brush" style="font-size: 4em"></i> </div>
-  <div style="grid-column: 2;"><h1>Using the Shader Resource</h1></div>
-</div>
-<br>
-
-
+          <ul>
+            <li><b>s_texture</b> an image bound to </li>
+            <li><b>u_time</b>    a floating-point time value </li>
+            <li><b>u_color</b>   an RGBA color value  value.</li>
+          </ul>
+        </section>
+        <hr />
+        <section class="js-section">
+          <div style="display: grid; grid-template-columns: 50px auto">
+              <div style="grid-column: 1;"><i class="fa fa-paint-brush" style="font-size: 2em;"></i> </div>
+              <div style="grid-column: 2;line-height: 0.0em;"><h3 class="section__title">Using the Shader Resource</h3></div>
+          </div>
+          <p>
 <codeblock>
-tintShader.ready.then( () =>
-{
-  image.effect =
-  {
-      name:  "My Color Tint",
-      shader: tintShader,
-      uniforms:
+    tintShader.ready.then( () =>
+    {
+      image.effect =
       {
-        u_color: [1.0, 1.0, 0.0, 1.0] // YELLOW  // #ff0
-      }
-  };
-});
+          name:  "My Color Tint",
+          shader: tintShader,
+          uniforms:
+          {
+            u_color: [1.0, 1.0, 0.0, 1.0] // YELLOW  // #ff0
+          }
+      };
+    });
 </codeblock>
-<center><b>Shader Config JSON</b></center><br><br>
+              <div class="caption">Shader Config JSON</div>
 
-The Shader Resource will return a <i>promise</i> to indicate when it's ready. The promise will resolve when the shader code is downloaded and compiled successfullly by OpenGL.<br><br>
+              The Shader Resource will return a <i>promise</i> to indicate when it's ready. The promise will resolve when the shader code is downloaded and compiled successfullly by OpenGL.<br><br>
 
-When it's ready, the Shader Resource is attached to the <code>.effect</code> property of our Image object <code>image</code>.<br><br>
+              When it's ready, the Shader Resource is attached to the <code>.effect</code> property of our Image object <code>image</code>.<br><br>
 
-It can be attached to any Spark object:-  <code>object, rectangle, image</code> etc.<br><br>
+              It can be attached to any Spark object:-  <code>object, rectangle, image</code> etc.<br><br>
 
-The configuration for our Shader Resource is assigned as a JSON object as shown above.<br><br>
+              The configuration for our Shader Resource is assigned as a JSON object as shown above.<br><br>
 
-We configure <b>uniform</b> values here also.<br><br>
+              We configure <b>uniform</b> values here also.<br>
 
-<br>
-<br>
+              </p>
 
-<br>
-<hr>
-<div style="display: grid; grid-template-columns: 60px auto">
-  <div style="grid-column: 1;"><i class="fa fa-list-alt" style="font-size: 4em"></i> </div>
-  <div style="grid-column: 2;"><h1>Shader Configuration</h1></div>
-</div>
-<br>
+        </section>
+        <hr />
+        <section class="js-section">
+          <div style="display: grid; grid-template-columns: 50px auto">
+              <div style="grid-column: 1;"><i class="fa fa-list-alt" style="font-size: 2em;"></i> </div>
+              <div style="grid-column: 2;line-height: 0.0em;"><h3 class="section__title">Shader Configuration</h3></div>
+          </div>
+
+          <p>
 
 3 methods of configuration are available.
 
-  <ul>
-    <li>Direct Uniform Configuration</li>
-    <li>Configuration Object  - SINGLE</li>
-    <li>Configuration Objects - ARRAY </li>
-  </ul>
-
+<ul>
+  <li>Direct Uniform Configuration</li>
+  <li>Configuration Object  - SINGLE</li>
+  <li>Configuration Objects - ARRAY </li>
+</ul>
 <br>
-<hr>
+<div style="padding: 0.0em 2.5em 2.5em 2.5em;"> <!-- section -->
 
-<div style="padding: 2.5em; background-color: #e5e5fa"> <!-- section -->
+<div style="display: grid; grid-template-columns: 50px auto">
+  <div style="grid-column: 1; padding-top: 1.0em;"><i class="fa fa-list-ul" style="font-size: 2em"></i> </div>
+  <div style="grid-column: 2;"><h3 class="section__title">Direct Uniform Configuration</h3></div>
+</div>
+<br>
 
-  <div style="display: grid; grid-template-columns: 40px auto">
-    <div style="grid-column: 1; padding-top: 1.1em;"><i class="fa fa-list-ul" style="font-size: 2em"></i> </div>
-    <div style="grid-column: 2;"><h2>Direct Uniform Configuration</h2></div>
-  </div>
-  <br>
+Using the uniform variable name directly on the Shader Resource object.  <br><br>
 
-  Using the uniform variable name directly on the Shader Resource object.  <br><br>
+For example:- <br><br>
 
-  For example:- <br><br>
-
-  <codeblock>
+<codeblock>
     myShader.ready.then( () =>
     {
       myShader.u_color = [1.0, 1.0, 0.0, 1.0] // YELLOW  // #ff0
     });
-  </codeblock>
+
+</codeblock>
 
 </div> <!-- section -->
 
+<div style="padding: 0.0em 2.5em 2.5em 2.5em;"> <!-- section -->
+
+<div style="display: grid; grid-template-columns: 50px auto">
+    <div style="grid-column: 1; padding-top: 1.0em;"><i class="fa fa-cog" style="font-size: 2em"></i> </div>
+    <div style="grid-column: 2;"><h3 class="section__title">Configuration Object  - SINGLE</h3></div>
+</div>
 <br>
-<hr>
-
-<div style="padding: 2.5em; background-color: #e5e5fa"> <!-- section -->
-
-  <div style="display: grid; grid-template-columns: 40px auto">
-    <div style="grid-column: 1; padding-top: 1.1em;"><i class="fa fa-cog" style="font-size: 2em"></i> </div>
-    <div style="grid-column: 2;"><h2>Configuration Object  - SINGLE</h2></div>
-  </div>
-  <br>
 
 Attach a <b>SINGLE</b> JSON configuration object with the <code>'shader'</code> Shader Resource object and <code>'uniforms'</code> to the Spark object via  <code>.effect</code>.  <br><br>
 
 For example:- <br><br>
 
 <codeblock>
-  image.effect =
-  {
-      name:  "My Color Tint",
-      shader: tintShader,
-      uniforms:
-      {
-        u_color1: [1.0, 1.0, 0.0, 1.0] // YELLOW   // #ff0
-        u_color2: [1.0, 0.0, 1.0, 1.0] // MAGENTA  // #f0f
-      }
-  };
+    image.effect =
+    {
+        name:  "My Color Tint",
+        shader: tintShader,
+        uniforms:
+        {
+          u_color1: [1.0, 1.0, 0.0, 1.0] // YELLOW   // #ff0
+          u_color2: [1.0, 0.0, 1.0, 1.0] // MAGENTA  // #f0f
+        }
+    };
 </codeblock>
 
 </div> <!-- section -->
 
+<div style="padding: 0.0em 2.5em 2.5em 2.5em;"> <!-- section -->
 
+<div style="display: grid; grid-template-columns: 50px auto">
+    <div style="grid-column: 1; padding-top: 1.0em;"><i class="fa fa-cogs" style="font-size: 2em"></i> </div>
+    <div style="grid-column: 2;"><h3 class="section__title">Configuration Objects  - ARRAY</h3></div>
+</div>
 <br>
-<hr>
-
-<div style="padding: 2.5em; background-color: #e5e5fa"> <!-- section -->
-
-  <div style="display: grid; grid-template-columns: 40px auto">
-    <div style="grid-column: 1; padding-top: 1.1em;"><i class="fa fa-cogs" style="font-size: 2em"></i> </div>
-    <div style="grid-column: 2;"><h2>Configuration Objects  - ARRAY</h2></div>
-  </div>
-  <br>
 
 Attach an <b>ARRAY</b> of JSON configuration objects with the <code>'shader'</code> Shader Resource object and <code>'uniforms'</code> to the Spark object via  <code>.effect</code>.  <br><br>
 
 For example:- <br><br>
 
 <codeblock>
-  image.effect =
-    [
-      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-      {
-          name: "Pass 1",
-        shader: blurShader,
-      uniforms: {
-                  u_kernelRadius: kernelRadius,
-                  u_direction:    [blurAmount, 0]  // HORIZONTAL
-                }
-      },
-      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-      {
-          name: "Pass 2",
-        shader: blurShader,
-      uniforms: {
-                  u_kernelRadius: kernelRadius,
-                  u_direction:    [0, blurAmount]  // VERTICAL
-                }
-      }
-      // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-    ];
+    image.effect =
+      [
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        {
+            name: "Pass 1",
+          shader: blurShader,
+        uniforms: {
+                    u_kernelRadius: kernelRadius,
+                    u_direction:    [blurAmount, 0]  // HORIZONTAL
+                  }
+        },
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        {
+            name: "Pass 2",
+          shader: blurShader,
+        uniforms: {
+                    u_kernelRadius: kernelRadius,
+                    u_direction:    [0, blurAmount]  // VERTICAL
+                  }
+        }
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      ];
 
 </codeblock>
 
-</div> <!-- section -->
+          </div> <!-- section -->
+        </section>
 
-<br><br><br>
-<hr>
-<div style="display: grid; grid-template-columns: 60px auto">
-  <div style="grid-column: 1;"><i class="fa fa-file" style="font-size: 4em"></i> </div>
-  <div style="grid-column: 2;"><h1>Inline Source Code</h1></div>
-</div>
-<br>
+        <section class="js-section">
 
-Using Data URL's - the shader source code can be embedded in the Javascript source - and remove the need for extra files / downloads.
-<br><br>
+            <div style="display: grid; grid-template-columns: 50px auto">
+              <div style="grid-column: 1; padding-top: 1.0em;"><i class="fa fa-file" style="font-size: 2em"></i> </div>
+              <div style="grid-column: 2;"><h3 class="section__title">Inline Source Code</h3></div>
+            </div>
+
+            <br>
+
+            Using Data URL's - the shader source code can be embedded in the Javascript source - and remove the need for extra files / downloads.
+            <br><br>
 
 <codeblock>
-  var src = `data:text/plain,
+    var src = `data:text/plain,
 
-              varying vec2 v_uv;
+                varying vec2 v_uv;
 
-              uniform vec4        u_color;
-              uniform sampler2D   s_texture;
+                uniform vec4        u_color;
+                uniform sampler2D   s_texture;
 
-              void main(void)
-              {
-                // Pixels from Source texture...
-                vec4 px = texture2D(s_texture, v_uv);
+                void main(void)
+                {
+                  // Pixels from Source texture...
+                  vec4 px = texture2D(s_texture, v_uv);
 
-                vec3 clr = u_color.rgb * px.a;     // pre-multiplied Alpha
+                  vec3 clr = u_color.rgb * px.a;     // pre-multiplied Alpha
 
-                // Mix image and colors...
-                vec4 mixed = mix( px, vec4(clr, 1.0), 0.5); // lerp
+                  // Mix image and colors...
+                  vec4 mixed = mix( px, vec4(clr, 1.0), 0.5); // lerp
 
-                mixed.a *= px.a; // pre-multiplied Alpha
+                  mixed.a *= px.a; // pre-multiplied Alpha
 
-                gl_FragColor = vec4(mixed);
-              }
+                  gl_FragColor = vec4(mixed);
+                }
 
-`;  // <<<<<<<< NOTE THE BACK TICK
+    `;  // <<<<<<<< NOTE THE BACK TICK
 
 </codeblock>
-<center><b>GLSL Source as a Javascript string</b></center><br><br>
+            <div class="caption">GLSL Source as a Javascript string</div>
+            <br>
+            <b>NOTE:</b>  The use of "back ticks" >> <code>` code `</code> << in JS code to capture source code as a string.
+            <br>
+            <br>
+            There is quite a bit going on above.
+            <br><br>
 
-<b>NOTE:</b>  The use of "back ticks" >> <code>` code `</code> << in JS code to capture source code as a string.
-<br>
-<br>
-There is quite a bit going on above.
-<br><br>
+          </section>
+          <section class="js-section">
 
+              <div style="display: grid; grid-template-columns: 50px auto">
+                <div style="grid-column: 1; padding-top: 1.0em;"><i class="fa fa-user-secret" style="font-size: 2em"></i> </div>
+                <div style="grid-column: 2;"><h3 class="section__title">Internal Variables</h3></div>
+              </div>
 
-<br>
-<br>
+              <b>NOTE: </b>  The following GLSL variables are provided by Spark - their names are reserved and should be avoided.
+              <br><br>
 
-<br>
-<hr>
-<div style="display: grid; grid-template-columns: 60px auto">
-  <div style="grid-column: 1;"><i class="fa fa-user-secret" style="font-size: 4em"></i> </div>
-  <div style="grid-column: 2;"><h1>Internal Variables</h1></div>
-</div>
-<br>
+              <section style="display: grid" >
+                <div style="grid-column: 1">
+                <code>u_texture</code> <br>
+                <code>u_resolution</code><br>
+                <code>u_time</code><br>
+                </div>
 
-<b>NOTE: </b>  The following GLSL variables are provided by Spark - their names are reserved and should be avoided.
-<br><br>
+                <div style="grid-column: 2">
+                The texture of the Spark object upon which the shader is applied.<br>
+                The resolution / dimensions of the object upon which the shader is applied.<br>
+                A monotonic increasing, floating-point clock value.
+                </div>
 
-<section style="display: grid" >
-  <div style="grid-column: 1">
-  <code>u_texture</code> <br>
-  <code>u_resolution</code><br>
-  <code>u_time</code><br>
-  </div>
+            </section>
+            <br><br>
+            <section class="js-section">
 
-  <div style="grid-column: 2">
-  The texture of the Spark object upon which the shader is applied.<br>
-  The resolution / dimsneions of the object upon which the shader is applied.<br>
-  A monotonic increasing, floating-point clock value.
-  </div>
-</section>
-<br>
-<br>
+                <div style="display: grid; grid-template-columns: 50px auto">
+                  <div style="grid-column: 1; padding-top: 1.0em;"><i class="fa fa-bars" style="font-size: 2em"></i> </div>
+                  <div style="grid-column: 2;"><h3 class="section__title">Flattened Composition - <code>u_texture</code> </h3></div>
+                </div>
 
+                The Shader Resource will provide a texture of flattened/compositied of the Object and its Children to which shader is applied.<br><br>
 
+                In this case the blue background rounded <code>rectangle</code> or <code>image</code>, text and logo <code>image</code> are rendered to a texture bound to <code><b>u_texture</b></code>.<br><br>
 
+                This texture is accessed in Shader code via <code><b>u_texture</b></code> and may be used in fragment operations.
 
-<hr>
-<div style="display: grid; grid-template-columns: 60px auto">
-  <div style="grid-column: 1;"><i class="fa fa-bars" style="font-size: 4em"></i> </div>
-  <div style="grid-column: 2;"><h1> Flattened Composition - <code>u_texture</code> </h1></div>
-</div>
-<br>
-<hr>
+                <div style="text-align: center" >
+                  <img src="images/ShaderResource_exploded.png" style="display: block;  margin-left: auto; margin-right: auto"
+                          alt="Shader Resource Exploded" width="400" height="auto"></img>
+                          <div class="caption">Components</div>
+                </div>
+                <br>
 
+                The resulting texture <code><b>u_texture</b></code>  can use in fragment sampling operations.
+                <br>
+                <br>
 
-The Shader Resource will provide a texture of flattened/compositied of the Object and its Children to which shader is applied.<br><br>
+                <div style="text-align: center" >
+                  <img src="images/ShaderResource_view.png" style="display: block;  margin-left: auto; margin-right: auto"
+                          alt="Shader Resource View" width="400" height="auto"></img>
+                          <div class="caption">Flattened/Compositied</div>
+                </div>
+              </section>
+              <br>
+              <section class="js-section">
 
-In this case the blue background rounded <code>rectangle</code> or <code>image</code>, text and logo <code>image</code> are rendered to a texture bound to <code><b>u_texture</b></code>.<br><br>
+                <div style="display: grid; grid-template-columns: 50px auto">
+                  <div style="grid-column: 1; padding-top: 1.0em;"><i class="fa fa-question-circle" style="font-size: 2em"></i> </div>
+                  <div style="grid-column: 2;"><h3 class="section__title">Capability</h3></div>
+                </div>
 
-This texture is accessed in Shader code via <code><b>u_texture</b></code> and may be used in fragment operations.
+                The following code shows how to test the supported capability of SVG in Spark releases.
+                <br>
+                <br>
+                <codeblock>
+                    if( scene.capabilities                  == undefined ||
+                        scene.capabilities.graphics         == undefined ||
+                        scene.capabilities.graphics.shaders == undefined)
+                    {
+                        console.log("Oh NO ... Shader Resource is not supported in this build.");
+                    }
+                </codeblock>
+              </section>
+        <hr />
 
-<div style="text-align: center" >
-  <img src="images/ShaderResource_exploded.png" style="display: block;  margin-left: auto; margin-right: auto"
-          alt="Shader Resource Exploded" width="400" height="auto"></img>
-          <center><b>Components</b></center>
-</div>
-<br>
+      </article>
+    </div>
 
-The resulting texture <code><b>u_texture</b></code>  can use in fragment sampling operations.
-<br>
-<br>
-
-<div style="text-align: center" >
-  <img src="images/ShaderResource_view.png" style="display: block;  margin-left: auto; margin-right: auto"
-          alt="Shader Resource View" width="400" height="auto"></img>
-          <center><b>Flattened/Compositied</b></center>
-</div>
-<br>
-
-
-<hr>
-<div style="display: grid; grid-template-columns: 60px auto">
-  <div style="grid-column: 1;"><i class="fa fa-question-circle" style="font-size: 4em"></i> </div>
-  <div style="grid-column: 2;"><h1>Capability</h1></div>
-</div>
-<br>
-
-<div style="font: 11px/18px Lucida Grande, Arial, sans-serif;">
-The following code shows how to test the supported capability of SVG in Spark releases.
-<br>
-<br>
-<codeblock>
-    if( scene.capabilities                  == undefined ||
-        scene.capabilities.graphics         == undefined ||
-        scene.capabilities.graphics.shaders == undefined)
-    {
-        console.log("Oh NO ... Shader Resource is not supported in this build.");
-    }
-</codeblock>
-</div>
-<hr>
-<br>
-
-
-<div style="background-color:#eee;padding:10px;border-radius:7px;"><a href="http://johnrobinsn.github.io/pxScene2d/docs/">Version: Bleeding Edge</a>.
-</div>
-
-
-<br/>
-</div><!-- container -->
-</body>
+    <footer class="footer">Spark is an open source project in github <a href="https://github.com/pxscene/pxCore" target="_blank" class="link link--light">GitHub</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scripts/sparkScript.js"></script>
+  </body>
 </html>
