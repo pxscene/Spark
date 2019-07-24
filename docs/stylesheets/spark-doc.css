@@ -183,7 +183,7 @@ color: rgb(13, 7, 70);
 {
   font-size: 1.5em;
   font-family:Lobster,Tahoma,Arial;
-  color: rgb(236, 155, 4);
+  color: var(--title-color-docs);
   display: inline-block;
 }
 
