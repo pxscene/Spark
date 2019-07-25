@@ -118,22 +118,31 @@
           </div>
           <p>
 <codeblock>
-    tintShader.ready.then( () =>
-    {
-      image.effect =
+    tintShader.ready
+      .then(
+      (resolve) =>
       {
-          name:  "My Color Tint",
-          shader: tintShader,
-          uniforms:
-          {
-            u_color: [1.0, 1.0, 0.0, 1.0] // YELLOW  // #ff0
-          }
-      };
-    });
+        image.effect =
+        {
+            name:  "My Color Tint",
+            shader: tintShader,
+            uniforms:
+            {
+              u_color: [1.0, 1.0, 0.0, 1.0] // YELLOW  // #ff0
+            }
+        };
+      },
+      (reject) =>
+      {
+        console.log("SHADER ERROR:  " + tintShader.loadStatus.glError );
+      });
+
 </codeblock>
               <div class="caption">Shader Config JSON</div>
               <p>
-              The Shader Resource will return a <i>promise</i> to indicate when it's ready. The promise will resolve when the shader code is downloaded and compiled successfullly by OpenGL.<br><br>
+              The Shader Resource will return a <i>promise</i> to indicate when it's ready. The promise will <b>resolve</b> when the shader code is downloaded and compiled successfullly by OpenGL.<br><br>
+
+              In the case of an error, the promise will <b>reject</b>, and additional details will be available through <code>loadStatus.glError</code>. <br><br>
 
               When it's ready, the Shader Resource is attached to the <code>.effect</code> property of our Image object <code>image</code>.<br><br>
 
