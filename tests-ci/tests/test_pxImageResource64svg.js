@@ -106,7 +106,7 @@ var tests = {
       {
         console.log("IMAGE 64 >> url: " + o.url)
 
-        var ans = scene.capabilities.graphics.svg > 2 ? svgData : "md5sum/png;base64,8097B693B49E144DB3508E099C0C07EB"
+        var ans = scene.capabilities.graphics.svg > 2 ? base64data : "md5sum/png;base64,8097B693B49E144DB3508E099C0C07EB"
 
         results.push(assert(o.url        === ans, "IMAGE 64 >> image url is not correct when queried"));
         results.push(assert(o.w          ===  -1, "IMAGE 64 >> image.w is not correct when queried"));
@@ -139,7 +139,7 @@ var tests = {
       Promise.all([res.ready, img.ready]).then(function(o)
       {
         console.log("IMAGE 64 RESOURCE >> url: " + img.url)
-        var ans = scene.capabilities.graphics.svg > 2 ? svgData : "md5sum/png;base64,8097B693B49E144DB3508E099C0C07EB"
+        var ans = scene.capabilities.graphics.svg > 2 ? base64data : "md5sum/png;base64,8097B693B49E144DB3508E099C0C07EB"
 
         results.push(assert(img.url        === ans, "IMAGE 64 RESOURCE >> image url is not correct when queried"));
         results.push(assert(img.w          ===  -1, "IMAGE 64 RESOURCE >> image.w is not correct when queried"));
