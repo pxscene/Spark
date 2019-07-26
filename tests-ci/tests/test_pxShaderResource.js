@@ -222,8 +222,13 @@ px.import({scene: "px:scene.1.js",
           uniforms_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
           uniforms_res.draw = true;
 
-          results.push(assert( (screenshot == PASSED) ,"niformINT  >> Shader config " + uniforms_res.text));
+          results.push(assert( (screenshot == PASSED) ,"uniformINT  >> Shader config " + uniforms_res.text));
 
+          if(screenshot != PASSED)
+          {
+            console.log("UNIFORM SHADER Failing Screenshot ...");
+            console.log("screenshot = " + screenshot);
+          }
           // console.log("#########  TEST 4 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
           resolve(results);
 

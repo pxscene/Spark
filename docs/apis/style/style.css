@@ -88,12 +88,18 @@ codeblock {
   padding: 1em 1.5em;
   display: block;
   word-wrap: break-word;
+  font-family: monospace;
+  white-space: pre;
 }
 
 code { 
-font-weight: 400;
+font-weight: 200;
 font-family: Monaco, monospace;
 color: #333;
+}
+
+img {
+  padding-bottom: 10px;
 }
 
 dt:after { 
