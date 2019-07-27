@@ -20,7 +20,8 @@ px.import({       scene: 'px:scene.1.js'
                         }
                     });
 
-  fx.ready.then( () =>
+  Promise.all([fx.ready, bg.ready, rect.ready])
+  .then( () =>
   {
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     rect.effect =
