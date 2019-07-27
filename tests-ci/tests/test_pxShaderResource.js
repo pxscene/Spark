@@ -226,10 +226,9 @@ px.import({scene: "px:scene.1.js",
 
           if(screenshot != PASSED)
           {
-            console.log("UNIFORM SHADER Failing Screenshot ...");
-            console.log("screenshot = " + screenshot);
+            console.log("\n######### test_uniforms: FAIL ... Screenshot - Shader color-codes the uniform type failing.\n");
+            console.log("screenshot = " + screenshot + "\n\n");
           }
-          // console.log("#########  TEST 4 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
           resolve(results);
 
         })
