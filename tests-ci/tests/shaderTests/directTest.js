@@ -24,7 +24,8 @@ px.import({       scene: 'px:scene.1.js'
   {
     return new Promise(function(resolve, reject)
     {
-        fx.ready.then( () =>
+        Promise.all([fx.ready, bg.ready, rect.ready])
+        .then( () =>
         {
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

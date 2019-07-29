@@ -114,8 +114,7 @@ px.import({scene: "px:scene.1.js",
   var uniforms_txt = scene.create({ t: 'text', parent:    root,  x: uniforms_bg.x + 20, y: uniforms_bg.y + uniforms_bg.h + 15, w: 300, h: 20,
                                       pixelSize: 24,  textColor: '#fff',  text: 'Expected Color: ', interactive: false });
 
-  var uniforms_ans = scene.create({ t: 'rect', parent: bg, x: uniforms_txt.x + uniforms_txt.w + 10, y: uniforms_txt.y, w: 20, h: 20, fillColor: "#fff", lineColor: "#888", lineWidth: 2 });
-
+  var uniforms_ans = scene.create({ t: 'rect', parent: bg,   x: uniforms_txt.x + uniforms_txt.w + 10, y: uniforms_txt.y, w: 20, h: 20, fillColor: "#fff", lineColor: "#888", lineWidth: 2 });
   var uniforms_res = scene.create({ t: 'text', parent: root, x: uniforms_bg.x + uniforms.w/2 - 22, y: uniforms_bg.y + uniforms_bg.h/2 - 10, w: 300, h: 20,
                                       pixelSize: 24,  textColor: '#000',  text:  '####', interactive: false, draw: false });
 
@@ -124,8 +123,7 @@ px.import({scene: "px:scene.1.js",
 
   var bindTest_bg  = scene.create({ t: 'rect',    parent:          bg, x: xx - ww/2, y: yy, w: ww, h: hh, fillColor: "#888", lineColor: "#fff", lineWidth: 2 });
   var bindTest     = scene.create({ t: 'scene',   parent: bindTest_bg, x:    0, y:  0,        w: ww, h: hh, url: bind_URL, interactive: false });
-
-  var bind_title = scene.create({ t: 'text', parent:    root,  x: bindTest_bg.x + 90, y: bindTest_bg.y - 25, w: 300, h: 20,
+  var bind_title   = scene.create({ t: 'text', parent:    root,        x: bindTest_bg.x + 90, y: bindTest_bg.y - 25, w: 300, h: 20,
   pixelSize: 18,  textColor: '#fff',  text: 'Bind Test', interactive: false });
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -138,24 +136,24 @@ px.import({scene: "px:scene.1.js",
       var results  = [];
       return new Promise(function(resolve, reject)
       {
-          direct.ready.then(() =>
+          Promise.all([ direct_bg.ready, direct_title.ready, direct_txt.ready,
+                        direct_ans.ready, direct_res.ready,
+                        direct.ready,
+                        direct.api.reallyReady() // When the shader has been applied, take a screenshot to compare
+                      ]).then( () =>
           {
-            // When the shader has been applied, take a screenshot to compare
-            direct.api.reallyReady().then(() =>
-            {
-              // Use 'screenshot' of child scene to verify visual output of shader...
-              // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-              //
-              var screenshot = direct.screenshot("image/png;base64");
+            // Use 'screenshot' of child scene to verify visual output of shader...
+            // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+            //
+            var screenshot = direct.screenshot("image/png;base64");
 
-              direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-              direct_res.draw = true;
+            direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+            direct_res.draw = true;
 
-              results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
+            results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
 
-              resolve(results);
-            })
-        })
+            resolve(results);
+          })//ready
       });
     },
 
@@ -164,7 +162,10 @@ px.import({scene: "px:scene.1.js",
       var results  = [];
       return new Promise(function(resolve, reject)
       {
-        single.ready.then(() =>
+        Promise.all([ single_bg.ready, single_title.ready, single_txt.ready,
+                      single_ans.ready, single_res.ready,
+                      single.ready
+        ]).then( () =>
         {
           // Use 'screenshot' of child scene to verify visual output of shader...
           // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
@@ -187,7 +188,10 @@ px.import({scene: "px:scene.1.js",
       var results  = [];
       return new Promise(function(resolve, reject)
       {
-        multi.ready.then(() =>
+        Promise.all([ multi_bg.ready,  multi_title.ready, multi_txt.ready,
+                      multi_ans.ready, multi_res.ready,
+                      multi.ready
+        ]).then( () =>
         {
           // Use 'screenshot' of child scene to verify visual output of shader...
           // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
@@ -211,7 +215,10 @@ px.import({scene: "px:scene.1.js",
       var results  = [];
       return new Promise(function(resolve, reject)
       {
-        uniforms.ready.then(() =>
+        Promise.all([ uniforms_bg.ready,  uniforms_title.ready, uniforms_txt.ready,
+                      uniforms_ans.ready, uniforms_res.ready,
+                      uniforms.ready
+          ]).then( () =>
         {
           // When the shader has been applied, take a screenshot to compare
           // Use 'screenshot' of child scene to verify visual output of shader...
@@ -226,12 +233,10 @@ px.import({scene: "px:scene.1.js",
 
           if(screenshot != PASSED)
           {
-            console.log("UNIFORM SHADER Failing Screenshot ...");
-            console.log("screenshot = " + screenshot);
+            console.log("\n######### test_uniforms: FAIL ... Screenshot - Shader color-codes the uniform type failing.\n");
+            console.log("screenshot = " + screenshot + "\n\n");
           }
-          // console.log("#########  TEST 4 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
           resolve(results);
-
         })
       });
     }
