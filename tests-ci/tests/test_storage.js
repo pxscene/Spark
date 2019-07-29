@@ -36,11 +36,12 @@ module.exports.tests.test01_getStorage = () => {
 
 /**
  * 'setItem' / 'getItem'.
- * Set items via 'setItem'. Get items via 'getItem', got the same values as set, for non existing - ''.
+ * Set items via 'setItem'. Get items via 'getItem', got the same values as set, for non existing - <noValue>.
  * @returns {Promise<string>}
  */
 module.exports.tests.test02_setItem_getItem = () => {
   const storage = imports.scene.storage;
+  const noValue = imports.scene.capabilities.storage === 1 ? "" : undefined;
 
   storage.setItem('key1', 'value1');
   storage.setItem('key2', 'value2');
@@ -49,7 +50,7 @@ module.exports.tests.test02_setItem_getItem = () => {
   const valueNotExisting = storage.getItem('keyNotExisting');
 
   return Promise.resolve(imports.assert(
-    value1 === 'value1' && value2 === 'value2' && valueNotExisting === '',
+    value1 === 'value1' && value2 === 'value2' && valueNotExisting === noValue,
     'setItem/getItem doesn\'t work'));
 };
 
@@ -77,11 +78,12 @@ module.exports.tests.test03_updateItems = () => {
 
 /**
  * 'clear'.
- * Set items via 'setItem'. Clear all via 'clear'. Get items via 'getItem', all are ''.
+ * Set items via 'setItem'. Clear all via 'clear'. Get items via 'getItem', all are <noValue>.
  * @returns {Promise<string>}
  */
 module.exports.tests.test04_clear = () => {
   const storage = imports.scene.storage;
+  const noValue = imports.scene.capabilities.storage === 1 ? "" : undefined;
 
   storage.setItem('key1', 'value1');
   storage.setItem('key2', 'value2');
@@ -94,17 +96,18 @@ module.exports.tests.test04_clear = () => {
   const value4 = storage.getItem('key4');
 
   return Promise.resolve(imports.assert(
-    value1 === '' && value2 === '' && value3 === '' && value4 === '',
+    value1 === noValue && value2 === noValue && value3 === noValue && value4 === noValue,
     'clear doesn\'t work'));
 };
 
 /**
  * 'removeItem'.
- * Clear. Set items via 'setItem'. Remove some via 'removeItem'. Get items via 'getItem', removed are ''.
+ * Clear. Set items via 'setItem'. Remove some via 'removeItem'. Get items via 'getItem', removed are <noValue>.
  * @returns {Promise<string>}
  */
 module.exports.tests.test05_removeItem = () => {
   const storage = imports.scene.storage;
+  const noValue = imports.scene.capabilities.storage === 1 ? "" : undefined;
 
   storage.clear();
   storage.setItem('key1', 'value1');
@@ -119,7 +122,7 @@ module.exports.tests.test05_removeItem = () => {
   const value4 = storage.getItem('key4');
 
   return Promise.resolve(imports.assert(
-    value1 === '' && value2 === 'value2' && value3 === '' && value4 === 'value4',
+    value1 === noValue && value2 === 'value2' && value3 === noValue && value4 === 'value4',
     'removeItem doesn\'t work'));
 };
 
@@ -174,7 +177,9 @@ module.exports.tests.test07_getItemsPrefix = () => {
 module.exports.tests.test08_capabilities = () => {
   const capabilities = imports.scene.capabilities;
 
-  return Promise.resolve(imports.assert(capabilities && capabilities.storage === 1, 'capabilities wrong'));
+  return Promise.resolve(imports.assert(capabilities &&
+    (capabilities.storage === 1 || capabilities.storage === 2),
+    'capabilities wrong'));
 };
 
 /**
@@ -217,6 +222,7 @@ module.exports.tests.test09_childAppUsesSameStorage = () => {
  */
 module.exports.tests.test10_childAppStoragePermissions = () => {
   const storage = imports.scene.storage;
+  const noValue = imports.scene.capabilities.storage === 1 ? "" : undefined;
 
   storage.clear();
   storage.setItem('key1', 'abc');
@@ -251,7 +257,7 @@ module.exports.tests.test10_childAppStoragePermissions = () => {
     const value3 = child.getItem('key3');
 
     return imports.assert(
-      value1 === 'abc' && value2 === 'def' && value3 === '',
+      value1 === 'abc' && value2 === 'def' && value3 === noValue,
       'child app storage differs');
   }).catch(() => imports.assert(false, 'child app permissions quota test failed'));
 };
@@ -335,4 +341,40 @@ module.exports.tests.test12_quota = () => {
 
     return imports.assert(true);
   }).catch(() => imports.assert(false, 'child app quota test failed'));
+};
+
+/**
+ * Dot/bracket notation.
+ * 'setItem'/'getItem' can be replaced with Dot/bracket notation.
+ * @returns {Promise<string>}
+ */
+module.exports.tests.test13_dot_bracket_notation = () => {
+  const storage = imports.scene.storage;
+  const noValue = imports.scene.capabilities.storage === 1 ? "" : undefined;
+
+  if (imports.scene.capabilities.storage === 1) {
+    return Promise.resolve(imports.assert(true));
+  }
+
+  storage.clear();
+  storage['k1'] = 123;
+  storage.k2 = "456";
+  delete storage.k2;
+  storage.k3 = "";
+  storage['k4'] = " ";
+  storage.k5 = null;
+  storage['k6'] = [1,2];
+  storage.k7 = {a:1,b:2};
+
+  return Promise.resolve(imports.assert(
+    storage.k1 === '123' &&
+    storage['k2'] === '456' &&
+    storage.k3 === '' &&
+    storage['k4'] === ' ' &&
+    storage['k5'] === '' &&
+    storage.k6 === '' &&
+    storage['k7'] === '' &&
+    storage['NO SUCH'] === noValue &&
+    storage.NO_SUCH === noValue,
+    'Dot/bracket notation doesn\'t work'));
 };
