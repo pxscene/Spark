@@ -138,23 +138,25 @@ px.import({scene: "px:scene.1.js",
       {
           Promise.all([ direct_bg.ready, direct_title.ready, direct_txt.ready,
                         direct_ans.ready, direct_res.ready,
-                        direct.ready,
-                        direct.api.reallyReady() // When the shader has been applied, take a screenshot to compare
+                        direct.ready
                       ]).then( () =>
           {
-            // Use 'screenshot' of child scene to verify visual output of shader...
-            // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-            //
-            var screenshot = direct.screenshot("image/png;base64");
+            direct.api.reallyReady().then( () => // When the shader has been applied, take a screenshot to compare
+            {
+              // Use 'screenshot' of child scene to verify visual output of shader...
+              // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+              //
+              var screenshot = direct.screenshot("image/png;base64");
 
-            direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-            direct_res.draw = true;
+              direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+              direct_res.draw = true;
 
-            results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
+              results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
 
-            resolve(results);
-          })//ready
-      });
+              resolve(results);
+            }) ; //really
+          });
+        });
     },
 
     test_singleConfig: function()
