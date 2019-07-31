@@ -222,7 +222,7 @@ px.import({scene: "px:scene.1.js",
                       uniforms.ready
           ]).then( () =>
         {
-          direct.api.reallyReady().then( () => // When the shader has been applied, take a screenshot to compare
+          uniforms.api.reallyReady().then( () => // When the shader has been applied, take a screenshot to compare
           {
             // When the shader has been applied, take a screenshot to compare
             // Use 'screenshot' of child scene to verify visual output of shader...
