@@ -28,8 +28,10 @@ px.import({       scene: 'px:scene.1.js'
                       }
                   });
 
-  return new Promise(function(resolve, reject)
+  module.exports.reallyReady = function(value)
   {
+    return new Promise(function(resolve, reject)
+    {
       Promise.all([fx.ready, bg.ready, rect.ready])
       .then( () =>
       {
@@ -65,7 +67,8 @@ px.import({       scene: 'px:scene.1.js'
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       }); // READY
     });
+  }//reallyReady()
 
 }).catch(function importFailed(err) {
-  console.error('Import for directTest.js failed: ' + err);
+  console.error('Import for UniformsTest.js failed: ' + err);
 });

@@ -222,23 +222,26 @@ px.import({scene: "px:scene.1.js",
                       uniforms.ready
           ]).then( () =>
         {
-          // When the shader has been applied, take a screenshot to compare
-          // Use 'screenshot' of child scene to verify visual output of shader...
-          // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-          //
-          var screenshot = uniforms.screenshot("image/png;base64");
-
-          uniforms_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-          uniforms_res.draw = true;
-
-          results.push(assert( (screenshot == PASSED) ,"uniformINT  >> Shader config " + uniforms_res.text));
-
-          if(screenshot != PASSED)
+          direct.api.reallyReady().then( () => // When the shader has been applied, take a screenshot to compare
           {
-            console.log("\n######### test_uniforms: FAIL ... Screenshot - Shader color-codes the uniform type failing.\n");
-            console.log("screenshot = " + screenshot + "\n\n");
-          }
-          resolve(results);
+            // When the shader has been applied, take a screenshot to compare
+            // Use 'screenshot' of child scene to verify visual output of shader...
+            // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+            //
+            var screenshot = uniforms.screenshot("image/png;base64");
+
+            uniforms_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+            uniforms_res.draw = true;
+
+            results.push(assert( (screenshot == PASSED) ,"uniformINT  >> Shader config " + uniforms_res.text));
+
+            if(screenshot != PASSED)
+            {
+              console.log("\n######### test_uniforms: FAIL ... Screenshot - Shader color-codes the uniform type failing.\n");
+              console.log("screenshot = " + screenshot + "\n\n");
+            }
+            resolve(results);
+          }) ; //really
         })
       });
     }
