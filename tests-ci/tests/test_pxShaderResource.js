@@ -251,35 +251,26 @@ px.import({scene: "px:scene.1.js",
       var results  = [];
       return new Promise(function(resolve, reject)
       {
-          if(scene.capabilities.graphics.shaders == 2)
-          {
-            var fx = scene.create({
-                          t:'shaderResource',
-                  fragment: base + "/shaderTests/shaderBugs.frg",
-                  uniforms:
-                  {
-                      u_colorVec4 : "vec4",
-                      s_texture   : "sampler2D"
-                  }
-                });
-
-            fx.ready.then(
-            () =>
-            {
-              // shoud not get here... shader compile will fail
-            },
-            () =>
-            {
-              results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile did NOT fail " + uniforms_res.text));
-              resolve(results);
+        var fx = scene.create({
+                      t:'shaderResource',
+              fragment: base + "/shaderTests/shaderBugs.frg",
+              uniforms:
+              {
+                  u_colorVec4 : "vec4",
+                  s_texture   : "sampler2D"
+              }
             });
-          }
-          else
-          {
-              // Free PASS ... skip this test for older version - need (statusCode == 4) ... PX_RESOURCE_STATUS_DECODE_FAILURE
-              results.push(assert( true ,"Buggy Shader compile test skipped " + uniforms_res.text));
-              resolve(results);
-          }
+
+        fx.ready.then(
+        () =>
+        {
+          // shoud not get here... shader compile will fail
+        },
+        () =>
+        {
+          results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile did NOT fail " + uniforms_res.text));
+          resolve(results);
+        });
       });
     }
 
