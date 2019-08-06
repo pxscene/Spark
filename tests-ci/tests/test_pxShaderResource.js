@@ -131,7 +131,7 @@ px.import({scene: "px:scene.1.js",
 
   var tests =
   {
-    test_directConfig: function()
+    test_directConfig: function()   // TEST 0
     {
       var results  = [];
       return new Promise(function(resolve, reject)
@@ -159,7 +159,7 @@ px.import({scene: "px:scene.1.js",
         });
     },
 
-    test_singleConfig: function()
+    test_singleConfig: function()   // TEST 1
     {
       var results  = [];
       return new Promise(function(resolve, reject)
@@ -179,13 +179,13 @@ px.import({scene: "px:scene.1.js",
 
           results.push(assert( (screenshot == PASSED) ,"SINGLE >> Shader config " + single_res.text));
 
-          // console.log("#########  TEST 2 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
+          // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
           resolve(results);
         })
       });
     },
 
-    test_multiConfig: function()
+    test_multiConfig: function()   // TEST 2
     {
       var results  = [];
       return new Promise(function(resolve, reject)
@@ -205,14 +205,14 @@ px.import({scene: "px:scene.1.js",
 
           results.push(assert( (screenshot == PASSED) ,"MULTI  >> Shader config " + multi_res.text));
 
-          // console.log("#########  TEST 3 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
+          // console.log("#########  TEST 2 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
           resolve(results);
         })
       });
     },
 
 
-    test_uniforms: function()
+    test_uniforms: function()   // TEST 3
     {
       var results  = [];
       return new Promise(function(resolve, reject)
@@ -244,7 +244,45 @@ px.import({scene: "px:scene.1.js",
           }) ; //really
         })
       });
+    },
+
+    test_compileError: function()   // TEST 4
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+          if(scene.capabilities.graphics.shaders == 2)
+          {
+            var fx = scene.create({
+                          t:'shaderResource',
+                  fragment: base + "/shaderTests/shaderBugs.frg",
+                  uniforms:
+                  {
+                      u_colorVec4 : "vec4",
+                      s_texture   : "sampler2D"
+                  }
+                });
+
+            fx.ready.then(
+            () =>
+            {
+              // shoud not get here... shader compile will fail
+            },
+            () =>
+            {
+              results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile did NOT fail " + uniforms_res.text));
+              resolve(results);
+            });
+          }
+          else
+          {
+              // Free PASS ... skip this test for older version - need (statusCode == 4) ... PX_RESOURCE_STATUS_DECODE_FAILURE
+              results.push(assert( true ,"Buggy Shader compile test skipped " + uniforms_res.text));
+              resolve(results);
+          }
+      });
     }
+
   }//tests
 
   module.exports.tests = tests;
