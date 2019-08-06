@@ -264,7 +264,9 @@ px.import({scene: "px:scene.1.js",
         fx.ready.then(
         () =>
         {
-          // shoud not get here... shader compile will fail
+          // should not get here... shader compile will fail
+          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Buggy Shader compile SHOULD fail " + uniforms_res.text));
+          resolve(results);
         },
         () =>
         {
