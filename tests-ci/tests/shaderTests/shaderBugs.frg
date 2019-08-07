@@ -5,9 +5,9 @@ uniform vec2         u_resolution;
 uniform vec4         u_colorVec4;
 uniform sampler2D    s_texture;
 
-oops_deliberate_bug_test - THIS IS A DELIBERATE ERROR !!
-oops_deliberate_bug_test - THIS IS A DELIBERATE ERROR !!
-oops_deliberate_bug_test - THIS IS A DELIBERATE ERROR !!
+oops_deliberate_FRAGMENT_bug_test - THIS IS A DELIBERATE ERROR !!
+oops_deliberate_FRAGMENT_bug_test - THIS IS A DELIBERATE ERROR !!
+oops_deliberate_FRAGMENT_bug_test - THIS IS A DELIBERATE ERROR !!
 
 void main()
 {
