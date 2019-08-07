@@ -254,6 +254,7 @@ px.import({scene: "px:scene.1.js",
         var fx = scene.create({
                       t:'shaderResource',
               fragment: base + "/shaderTests/shaderBugs.frg",
+              vertex:   base + "/shaderTests/shaderBugs.vtx",
               uniforms:
               {
                   u_colorVec4 : "vec4",
@@ -261,17 +262,21 @@ px.import({scene: "px:scene.1.js",
               }
             });
 
-        fx.ready.then(
+        fx.ready
+        .then(
         () =>
         {
           // should not get here... shader compile will fail
-          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Buggy Shader compile SHOULD fail " + uniforms_res.text));
+          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Buggy Shader compile SHOULD fail - but did NOT" + uniforms_res.text));
           resolve(results);
         },
         () =>
         {
-          results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile did NOT fail " + uniforms_res.text));
+          results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile should FAIL" + uniforms_res.text));
           resolve(results);
+        })
+        .catch(function importFailed(err) {
+          console.log("CATCH ... Something went wrong >> Huh ???... err: " + err);
         });
       });
     }
