@@ -34,6 +34,41 @@ px.import({scene: "px:scene.1.js",
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  var frgShaderSrc =
+  `
+    #ifdef GL_ES \n
+      precision mediump float; \n
+    #endif \n
+    uniform float u_alpha;
+    uniform vec4 a_color;
+    void main()
+    {
+      gl_FragColor = a_color*u_alpha;
+    }
+  `;
+
+  var vtxShaderSrc =
+  `
+    uniform vec2 u_resolution;
+    uniform mat4 amymatrix;
+    attribute vec2 pos;
+    attribute vec2 uv;
+    varying vec2 v_uv;
+    void main()
+    {
+      // map from "pixel coordinates
+      vec4 p = amymatrix * vec4(pos, 0, 1);
+      vec4 zeroToOne = p / vec4(u_resolution, u_resolution.x, 1);
+      vec4 zeroToTwo = zeroToOne * vec4(2.0, 2.0, 1, 1);
+      vec4 clipSpace = zeroToTwo - vec4(1.0, 1.0, 0, 0);
+      clipSpace.w = 1.0+clipSpace.z;
+      gl_Position =  clipSpace * vec4(1, -1, 1, 1);
+      v_uv = uv;
+    }
+  `;
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
   var direct_URL   = base + "/shaderTests/directTest.js"
   var single_URL   = base + "/shaderTests/singlepassTest.js"
   var multi_URL    = base + "/shaderTests/multipassTest.js"
@@ -131,6 +166,8 @@ px.import({scene: "px:scene.1.js",
 
   var tests =
   {
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     test_directConfig: function()   // TEST 0
     {
       var results  = [];
@@ -158,6 +195,7 @@ px.import({scene: "px:scene.1.js",
           });
         });
     },
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     test_singleConfig: function()   // TEST 1
     {
@@ -184,6 +222,7 @@ px.import({scene: "px:scene.1.js",
         })
       });
     },
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     test_multiConfig: function()   // TEST 2
     {
@@ -210,7 +249,7 @@ px.import({scene: "px:scene.1.js",
         })
       });
     },
-
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     test_uniforms: function()   // TEST 3
     {
@@ -245,8 +284,9 @@ px.import({scene: "px:scene.1.js",
         })
       });
     },
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-    test_compileError: function()   // TEST 4
+    test_compileError1: function()   // TEST 4
     {
       var results  = [];
       return new Promise(function(resolve, reject)
@@ -279,7 +319,217 @@ px.import({scene: "px:scene.1.js",
           console.log("CATCH ... Something went wrong >> Huh ???... err: " + err);
         });
       });
+    },
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    test_sourcePermutation1: function()   // TEST 5 ... Frg: dataURL, Vtx: dataURL
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        var fx = scene.create({
+                      t:'shaderResource',
+              fragment: "data:text/plain," + frgShaderSrc,
+              vertex:   "data:text/plain," + vtxShaderSrc,
+              uniforms:
+              {
+                  u_colorVec4 : "vec4",
+                  s_texture   : "sampler2D"
+              }
+            });
+
+        fx.ready
+        .then(
+        () =>
+        {
+          // should not get here... shader compile should not fail
+          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Shader from DATA url SHOULD *not* fail - but did  >> " + fx.loadStatus.statusCode));
+          resolve(results);
+        },
+        () =>
+        {
+          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Shader from DATA url compilation failed  >> " + fx.loadStatus.statusCode));
+          resolve(results);
+        })
+      });
+    },
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    test_sourcePermutation2: function()   // TEST 5 ... Frg: dataURL, Vtx: (default)
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        var fx = scene.create({
+                      t:'shaderResource',
+              fragment: "data:text/plain," + frgShaderSrc,
+              // vertex:   "data:text/plain," + vtxShaderSrc,       <<<<<<  USE THE DEFAULT "BUILT-IN" VERTEX SHADER
+              uniforms:
+              {
+                  u_colorVec4 : "vec4",
+                  s_texture   : "sampler2D"
+              }
+            });
+
+        fx.ready
+        .then(
+        () =>
+        {
+          // should not get here... shader compile should not fail
+          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Shader SHOULD *not* fail - but did  >> " + fx.loadStatus.statusCode));
+          resolve(results);
+        },
+        () =>
+        {
+          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Shader compilation failed >> " + fx.loadStatus.statusCode));
+          resolve(results);
+        })
+      });
+    },
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    test_sourcePermutation3: function()   // TEST 6 ... Frg: URL, Vtx: (default)
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        var fx = scene.create({
+                      t:'shaderResource',
+              fragment: base + "/shaderTests/shaderTest.frg",
+              // vertex:   "data:text/plain," + vtxShaderSrc,       <<<<<<  USE THE DEFAULT "BUILT-IN" VERTEX SHADER
+              uniforms:
+              {
+                  u_colorVec4 : "vec4",
+                  s_texture   : "sampler2D"
+              }
+            });
+
+        fx.ready
+        .then(
+        () =>
+        {
+          // should not get here... shader compile should not fail
+          results.push(assert( (fx.loadStatus.statusCode == 0) ,"Shader SHOULD *not* fail - but did  >> " + fx.loadStatus.statusCode));
+          resolve(results);
+        },
+        () =>
+        {
+          results.push(assert( (fx.loadStatus.statusCode == 0) ,"Shader compilation failed  >> "  + fx.loadStatus.statusCode));
+          resolve(results);
+        })
+        .catch(function importFailed(err) {
+          console.log("CATCH ... Something went wrong >> Huh ???... err: " + err);
+        });
+      });
+    },
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    test_sourcePermutation4: function()   // TEST 7 ... Frg: URL, Vtx: URL
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        var fx = scene.create({
+                      t:'shaderResource',
+              fragment: base + "/shaderTests/shaderTest.frg",
+              vertex:   base + "/shaderTests/shaderTest.vtx",
+              uniforms:
+              {
+                  u_colorVec4 : "vec4",
+                  s_texture   : "sampler2D"
+              }
+            });
+
+        fx.ready
+        .then(
+        () =>
+        {
+          // should not get here... shader compile should not fail
+          results.push(assert( (fx.loadStatus.statusCode == 0) ,"Shader SHOULD *not* fail - but did  >> " + fx.loadStatus.statusCode));
+          resolve(results);
+        },
+        () =>
+        {
+          results.push(assert( (fx.loadStatus.statusCode == 0) ,"Shader compilation failed  >> "  + fx.loadStatus.statusCode));
+          resolve(results);
+        })
+      });
+    },
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    test_sourcePermutation5: function()   // TEST 8 ... Frg: URL, Vtx: URL
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        var fx = scene.create({
+                      t:'shaderResource',
+              fragment: "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/shaderTest.frg",
+              vertex:   "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/shaderTest.vtx",
+              uniforms:
+              {
+                  u_colorVec4 : "vec4",
+                  s_texture   : "sampler2D"
+              }
+            });
+
+        fx.ready
+        .then(
+        () =>
+        {
+          // should not get here... shader compile should not fail
+          results.push(assert( (fx.loadStatus.statusCode == 0) ,"Shader SHOULD *not* fail - but did  >> " + fx.loadStatus.statusCode));
+          resolve(results);
+        },
+        () =>
+        {
+          results.push(assert( (fx.loadStatus.statusCode == 0) ,"Shader compilation failed  >> "  + fx.loadStatus.statusCode));
+          resolve(results);
+        })
+        .catch(function importFailed(err) {
+          console.log("CATCH: test_sourcePermutation3 >> ... Something went wrong >> Huh ???... err: " + err);
+        });
+      });
+    },
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    test_sourcePermutation6: function()   // TEST 8 ... Frg: Bogus URL, Vtx: Bogus URL
+    {
+      var results  = [];
+      return new Promise(function(resolve, reject)
+      {
+        var fx = scene.create({
+                      t:'shaderResource',
+              fragment: "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/bogusShader.frg",
+              vertex:   "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/bogusShader.vtx",
+              uniforms:
+              {
+                  u_colorVec4 : "vec4",
+                  s_texture   : "sampler2D"
+              }
+            });
+
+        fx.ready
+        .then(
+        () =>
+        {
+          // should not get here... shader compile should not fail
+          results.push(assert( (fx.loadStatus.statusCode != 0) ,"Shader SHOULD  fail - but did NOT>> " + fx.loadStatus.statusCode));
+          resolve(results);
+        },
+        () =>
+        {
+          results.push(assert( (fx.loadStatus.statusCode != 0) ,"Shader compilation DID fail  >> "  + fx.loadStatus.statusCode));
+          resolve(results);
+        })
+        .catch(function importFailed(err) {
+          console.log("CATCH: test_sourcePermutation3 >> ... Something went wrong >> Huh ???... err: " + err);
+        });
+      });
     }
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   }//tests
 
