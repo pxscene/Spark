@@ -34,9 +34,9 @@ var tests = {
       var app = scene.create({t:"scene", parent:root, w: root.w, h: root.h, url:"http://www.sparkUi.org/examples/gallery/mousetest2.js", focus:true});
       optimus.setScene(scene);
       const partnerApp = optimus.createApplication(app);
-        optimus.primaryApp = partnerApp;
-        partnerApp.moveToFront();
-        partnerApp.setFocus(true);
+      optimus.primaryApp = partnerApp;
+      partnerApp.moveToFront();
+      partnerApp.setFocus(true);
       var results = [];
       //partnerApp.ready.then( function(obj) {
         partnerApp.suspend();
