@@ -1,0 +1,14 @@
+{
+   "frameworkType":"sparkGL",
+   "applicationURL":"https://www.sparkui.org/tests-ci/tests/helpers/test_bootstrapApp.js",
+   "frameworkURL":"https://www.sparkui.org/tests-ci/tests/helpers/test_bootstrapFramework.js",
+   "options":{
+      "initOptions":{
+         "width":1280,
+         "height":720,
+         "title":"",
+         "fullscreen":false
+      },
+      "interval":1000
+   }
+}
