@@ -33,7 +33,7 @@ var tests = {
     {
       var app = scene.create({t:"scene", parent:root, w: root.w, h: root.h, url:"http://www.sparkUi.org/examples/gallery/mousetest2.js", focus:true});
       var results = [];
-      //partnerApp.ready.then( function(obj) {
+      app.ready.then( function(obj) {
           var status = app.suspend() == true ? "SUSPENDED" : "RUNNING";
           console.log("STATE:"+status);
           results.push(assert(status == "SUSPENDED", "test_pxSuspendAndResume: application is failed to SUSPEND"));
@@ -43,7 +43,7 @@ var tests = {
           results.push(assert(status == "RUNNING", "test_pxSuspendAndResume: application is failed to RESUME"));
           
           resolve(results);
-     // });// test promise()
+      });// test promise()
     });
   }
 }
