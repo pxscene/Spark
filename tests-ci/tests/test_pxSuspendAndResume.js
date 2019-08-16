@@ -32,20 +32,13 @@ var tests = {
     return new Promise(function(resolve, reject)
     {
       var app = scene.create({t:"scene", parent:root, w: root.w, h: root.h, url:"http://www.sparkUi.org/examples/gallery/mousetest2.js", focus:true});
-      optimus.setScene(scene);
-      const partnerApp = optimus.createApplication(app);
-      optimus.primaryApp = partnerApp;
-      partnerApp.moveToFront();
-      partnerApp.setFocus(true);
       var results = [];
       //partnerApp.ready.then( function(obj) {
-        partnerApp.suspend();
-          var status = partnerApp.state();
+          var status = app.suspend() == true ? "SUSPENDED" : "RUNNING";
           console.log("STATE:"+status);
           results.push(assert(status == "SUSPENDED", "test_pxSuspendAndResume: application is failed to SUSPEND"));
           
-          partnerApp.resume();
-          status = partnerApp.state();
+          status = app.resume() == true ? "RUNNING" : "SUSPENDED";
           console.log("STATE:"+status);
           results.push(assert(status == "RUNNING", "test_pxSuspendAndResume: application is failed to RESUME"));
           
