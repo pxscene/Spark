@@ -22942,4 +22942,8 @@ sparkview.on('onKeyDown', function(e) {
     launcher._handleKey(e);
 });
 
+sparkscene.on('onClose', function(e) {
+    launcher._stopApp();
+});
+
 launcher.launch(MyApp, {debug:false}, {useInspector: false});
