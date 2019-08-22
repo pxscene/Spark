@@ -23090,6 +23090,11 @@ class DevLauncher {
         this._ui.startApp(this._appType);
     }
 
+    _stopApp() {
+        this._ui.destroy();
+        this._ui = null;
+    }
+
     _loadInspector() {
         if (this._options.useInspector) {
             /* Attach the inspector to create a fake DOM that shows where lightning elements can be found. */
