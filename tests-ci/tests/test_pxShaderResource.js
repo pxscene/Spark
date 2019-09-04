@@ -25,10 +25,8 @@ px.import({scene: "px:scene.1.js",
       scene.capabilities.graphics.shaders < 1)
   {
     // Shader is not supported...
-    var results = [];
-    results.push(assert( false ,"DIRECT >> scene.capabilities.graphics.shaders ... shaderResource is NOT supporte"));
+    console.error("DIRECT >> scene.capabilities.graphics.shaders ... shaderResource is NOT supported");
 
-    resolve(results);
     return;
   }
 
