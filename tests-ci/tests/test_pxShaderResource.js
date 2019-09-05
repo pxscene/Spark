@@ -318,6 +318,7 @@ px.import({scene: "px:scene.1.js",
         });
       });
     },
+/* */
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     test_sourcePermutation1: function()   // TEST 5 ... Frg: dataURL, Vtx: dataURL
@@ -463,8 +464,10 @@ px.import({scene: "px:scene.1.js",
       {
         var fx = scene.create({
                       t:'shaderResource',
-              fragment: "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/shaderTest.frg",
-              vertex:   "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/shaderTest.vtx",
+              // fragment: "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/shaderTest.frg",
+              // vertex:   "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/shaderTest.vtx",
+              fragment: base + "/shaderTests/shaderTest.frg",
+              vertex:   base + "/shaderTests/shaderTest.vtx",
               uniforms:
               {
                   u_colorVec4 : "vec4",
