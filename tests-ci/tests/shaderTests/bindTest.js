@@ -80,7 +80,8 @@ px.import({       scene: 'px:scene.1.js'
                   }
                   `;
 
-  var frag_src     = "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/bindTest.frg";
+  // var frag_src     = "https://raw.githubusercontent.com/pxscene/Spark/master/tests-ci/tests/shaderTests/bindTest.frg";
+  var frag_src     = base + "/bindTest.frg";
 
   var texture0_URL = "http://sparkui.org/examples/gallery/images/gold_star.png";
   var texture1_URL = "http://sparkui.org/examples/gallery/images/banana.png";
