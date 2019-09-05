@@ -1304,11 +1304,25 @@ px.import({
         }
     }
 
+    let needsRender = false;
+    let deferredRender = null;
     this.options.emitter.on('onContainerResize', function() {
-      if (!container.resizeable) return;
+      if (!container.resizeable)
+        return;
       container.w = options.parent.w - offsetLeft;
-
-      renderInlineBlocks();
+      if (!deferredRender) {
+        renderInlineBlocks();
+        needsRender = false;
+        deferredRender = setTimeout(() => {
+          if (needsRender) {
+            renderInlineBlocks();
+            needsRender = false;
+          }
+          deferredRender = null;
+        }, 200);
+      } else {
+        needsRender = true;
+      }
     });
     
     renderInlineBlocks();
