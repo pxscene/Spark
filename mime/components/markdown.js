@@ -825,7 +825,10 @@ px.import({
     });
 
     function updateSize() {
-      container.w = options.parent.w - offsetLeft;
+      let newW = options.parent.w - offsetLeft;
+      if (newW < 0)
+        return; // do not set negative width
+      container.w = newW;
       decor.w = container.w;
       textBox.w = decor.w
         - (options.styles.code.paddingLeft || 0)
@@ -1206,6 +1209,7 @@ px.import({
             // put block back to the list, to draw on the new line
             blocksToRender.unshift(someBlock);
           } else {
+            // block fits into the line
             someBlock.x = x;
             someBlock.y = y;
             someBlock.parent = container;
@@ -1216,6 +1220,7 @@ px.import({
           continue;
         }
 
+        // block does not fit into the line, split into words
         var inlineBlock = copy(someBlock);
 
         var currentBlockWords = inlineBlock.text.split(' ');
@@ -1226,10 +1231,13 @@ px.import({
         if (currentBlockWords.length <= 1 && x + inlineBlock.w > container.w) {
           var newWord = '';
           while (x + inlineBlock.w > container.w) {
+            if (inlineBlock.text.length <= 1)
+              break; // prevent infinite loop
             newWord = inlineBlock.text.substring(inlineBlock.text.length-1) + newWord;
             inlineBlock.text = inlineBlock.text.substring(0,inlineBlock.text.length-1);
           }
-          newBlockWords = [newWord];
+          if (newWord)
+            newBlockWords = [newWord];
         }
 
         while (x + inlineBlock.w > container.w && currentBlockWords.length > 0) {
@@ -1304,11 +1312,28 @@ px.import({
         }
     }
 
+    let needsRender = false;
+    let deferredRender = null;
     this.options.emitter.on('onContainerResize', function() {
-      if (!container.resizeable) return;
-      container.w = options.parent.w - offsetLeft;
-
-      renderInlineBlocks();
+      if (!container.resizeable)
+        return;
+      let newW = options.parent.w - offsetLeft;
+      if (newW < 0)
+        return; // do not set negative width
+      container.w = newW;
+      if (!deferredRender) {
+        renderInlineBlocks();
+        needsRender = false;
+        deferredRender = setTimeout(() => {
+          if (needsRender) {
+            renderInlineBlocks();
+            needsRender = false;
+          }
+          deferredRender = null;
+        }, 200);
+      } else {
+        needsRender = true;
+      }
     });
     
     renderInlineBlocks();
