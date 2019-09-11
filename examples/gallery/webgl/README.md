@@ -9,19 +9,22 @@ Provides a WebGL rendering context for nodejs. It is displayed in a window or fu
 
 ## Building with npm (this will work for all platforms after setup is complete)
 1. Build **application**
+ ~~~~
     npm i
     npm run release-spark
     cd dist/spark
     npm i
-    
+~~~~
  2. Install Spark app or build spark locally
-     
+~~~~
     https://github.com/pxscene/pxCore/blob/master/examples/pxScene2d/README.md
+~~~~
  
  3. Run a sample script
- 
+  ~~~~
     ./spark.sh gl:../examples/gallery/webgl/dist/spark/lightning-demo-spark.js 
-    
+ ~~~~
+ 
     
  
  
