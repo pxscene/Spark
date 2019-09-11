@@ -7,6 +7,7 @@ export default class MyApp extends ux.App {
             Text1: {color: 0xff00B74F, text: {text: "Hello World"}},
             Text2: {color: 0xff00B74F, text: {text: "Hello World with mode 1"}, mode: 0, x:500},
             Text3: {color: 0xff00B74F, text: {text: "Hello World with mode 0"}, mode: 1, y:500},
+            Circle: {src: MyApp.getPath("pebbles.jpg"), color: 0xFFAAAAAA, shader: {type: lng.WaterWaveShader}, pivot: 0, scale: 1, w: 450, h: 450, x:500, y:500}
         };
     }
 }
