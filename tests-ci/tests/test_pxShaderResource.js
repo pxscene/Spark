@@ -178,7 +178,7 @@ px.import({scene: "px:scene.1.js",
           Promise.all([ direct_bg.ready, direct_title.ready, direct_txt.ready,
                         direct_ans.ready, direct_res.ready,
                         direct.ready
-                      ]).then( () =>
+          ]).then( () =>
           {
             direct.api.reallyReady().then( () => // When the shader has been applied, take a screenshot to compare
             {
@@ -187,7 +187,7 @@ px.import({scene: "px:scene.1.js",
               //
               var screenshot = direct.screenshot("image/png;base64");
 
-              direct_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+              direct_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
               direct_res.draw = true;
 
               results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
@@ -209,19 +209,21 @@ px.import({scene: "px:scene.1.js",
                       single.ready
         ]).then( () =>
         {
-          // Use 'screenshot' of child scene to verify visual output of shader...
-          // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
-          //
-          var screenshot = single.screenshot("image/png;base64");
+          single.api.reallyReady().then( () => // When the shader has been applied, take a screenshot to compare
+          {
+            // Use 'screenshot' of child scene to verify visual output of shader...
+            // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
+            //
+            var screenshot = single.screenshot("image/png;base64");
 
-          single_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
-          single_res.draw = true;
+            single_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
+            single_res.draw = true;
 
-          results.push(assert( (screenshot == PASSED) ,"SINGLE >> Shader config " + single_res.text));
+            results.push(assert( (screenshot == PASSED) ,"SINGLE >> Shader config " + single_res.text));
 
-          // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
-          resolve(results);
-        })
+            // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
+            resolve(results);
+          }) ; //really
       });
     },
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -241,7 +243,7 @@ px.import({scene: "px:scene.1.js",
           //
           var screenshot = multi.screenshot("image/png;base64");
 
-          multi_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+          multi_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
           multi_res.draw = true;
 
           results.push(assert( (screenshot == PASSED) ,"MULTI  >> Shader config " + multi_res.text));
@@ -271,7 +273,7 @@ px.import({scene: "px:scene.1.js",
             //
             var screenshot = uniforms.screenshot("image/png;base64");
 
-            uniforms_res.text = (screenshot == PASSED) ? "PASS" :  "FAIL";
+            uniforms_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
             uniforms_res.draw = true;
 
             results.push(assert( (screenshot == PASSED) ,"uniformINT  >> Shader config " + uniforms_res.text));

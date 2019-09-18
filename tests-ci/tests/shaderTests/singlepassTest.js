@@ -20,21 +20,34 @@ px.import({       scene: 'px:scene.1.js'
                         }
                     });
 
-    fx.ready.then( () =>
+  module.exports.reallyReady = function(value)
+  {
+    return new Promise(function(resolve, reject)
     {
-      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      rect.effect =
-      {
-            name: "Add G",
-          shader: fx,
-        uniforms: { u_colorVec4: [0.0, 1.0, 0.0, 1.0] }   // #0F0   BLUE
-      }
-      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      //
-      //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
-      //
-      //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    }); // READY
+        Promise.all([fx.ready, bg.ready, rect.ready])
+        .then( () =>
+        {
+          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          rect.effect =
+          {
+                name: "Add G",
+              shader: fx,
+            uniforms: { u_colorVec4: [0.0, 1.0, 0.0, 1.0] }   // #0F0   BLUE
+          }
+
+          rect.painting = false; // force redraw
+          rect.painting = true;  // force redraw
+
+          resolve(); // signal that redraw complete
+
+          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          //
+          //   RESULT:  #FFF ... by accumulatiing each pass: R #F00 + G #0F0 + B #00F =  #FFF
+          //
+          //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        }); // READY
+      });
+  }//reallyReady()
 
 }).catch(function importFailed(err) {
   console.error('Import for singlepassTest.js failed: ' + err);
