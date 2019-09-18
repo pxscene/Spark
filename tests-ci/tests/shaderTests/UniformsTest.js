@@ -58,7 +58,10 @@ px.import({       scene: 'px:scene.1.js'
         rect.painting = false; // force redraw
         rect.painting = true;  // force redraw
 
-        resolve();
+        setTimeout(()=>
+        {
+          resolve("REALLY READY (UniformsTests.js) "); // signal that  complete
+        }, 1);
 
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         //
