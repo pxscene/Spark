@@ -38,7 +38,10 @@ px.import({       scene: 'px:scene.1.js'
           rect.painting = false; // force redraw
           rect.painting = true;  // force redraw
 
-          resolve(); // signal that redraw complete
+          setTimeout(()=>
+          {
+            resolve("REALLY READY (singlepassTests.js) "); // signal that redraw complete
+          }, 1);
 
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           //
