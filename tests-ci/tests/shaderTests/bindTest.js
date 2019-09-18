@@ -9,6 +9,9 @@ px.import({       scene: 'px:scene.1.js'
   var hh    = scene.h - 20;
 
   var vert_src = `data:text/plain,
+                    #ifdef GL_ES
+                      precision mediump float;
+                    #endif
                     uniform vec2 u_resolution;
                     uniform mat4 amymatrix;
                     attribute vec2 pos;
@@ -29,6 +32,10 @@ px.import({       scene: 'px:scene.1.js'
   // FROM: https://www.shadertoy.com/view/Ms3SRf
   var frag_src1 =
                   `data:text/plain,
+
+                  #ifdef GL_ES
+                    precision mediump float;
+                  #endif
 
                   varying vec2 v_uv;
 
