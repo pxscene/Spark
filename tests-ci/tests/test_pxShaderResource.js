@@ -209,7 +209,7 @@ px.import({scene: "px:scene.1.js",
                       single.ready
         ]).then( () =>
         {
-          single.api.reallyReady().then( () => // When the shader has been applied, take a screenshot to compare
+          single.api.reallyReady().then( (o) => // When the shader has been applied, take a screenshot to compare
           {
             // Use 'screenshot' of child scene to verify visual output of shader...
             // ...  via base64 encoded image as a string - in string comparison with 'PASSED'
