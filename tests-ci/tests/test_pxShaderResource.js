@@ -47,6 +47,10 @@ px.import({scene: "px:scene.1.js",
 
   var vtxShaderSrc =
   `
+    #ifdef GL_ES \n
+      precision mediump float; \n
+    #endif \n
+
     uniform vec2 u_resolution;
     uniform mat4 amymatrix;
     attribute vec2 pos;
