@@ -32,16 +32,16 @@ px.import({       scene: 'px:scene.1.js'
           {
                 name: "Add G",
               shader: fx,
-            uniforms: { u_colorVec4: [0.0, 1.0, 0.0, 1.0] }   // #0F0   BLUE
+            uniforms: { u_colorVec4: [0.0, 1.0, 0.0, 1.0] }   // #0F0   GREEN
           }
 
-          rect.painting = false; // force redraw
-          rect.painting = true;  // force redraw
+          rect.draw = false; // force redraw
+          rect.draw = true;  // force redraw
 
           setTimeout(()=>
           {
             resolve("REALLY READY (singlepassTests.js) "); // signal that redraw complete
-          }, 1);
+          }, 100);
 
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           //

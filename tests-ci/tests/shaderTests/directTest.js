@@ -33,13 +33,13 @@ px.import({       scene: 'px:scene.1.js'
 
           rect.effect = fx;
 
-          rect.painting = false; // force redraw
-          rect.painting = true;  // force redraw
+          rect.draw = false; // force redraw
+          rect.draw = true;  // force redraw
 
           setTimeout(()=>
           {
             resolve("REALLY READY (directTests.js) "); // signal that redraw complete
-          }, 1);
+          }, 100);
 
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           //
