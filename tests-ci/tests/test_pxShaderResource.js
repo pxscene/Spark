@@ -189,10 +189,16 @@ px.import({scene: "px:scene.1.js",
               //
               var screenshot = direct.screenshot("image/png;base64");
 
-              direct_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
+              var result = (screenshot == PASSED);
+              if(result == false)
+              {
+                console.log("DEBUG: test_directConfig >> FAILED ... screenshot: " + screenshot);
+              }
+
+              direct_res.text = result ? "PASS" : "FAIL";
               direct_res.draw = true;
 
-              results.push(assert( (screenshot == PASSED) ,"DIRECT >> Shader config " + direct_res.text));
+              results.push(assert( result ,"DIRECT >> Shader config " + direct_res.text));
 
               resolve(results);
             }) ; //really
@@ -220,10 +226,16 @@ px.import({scene: "px:scene.1.js",
             //
             var screenshot = single.screenshot("image/png;base64");
 
-            single_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
+            var result = (screenshot == PASSED);
+            if(result == false)
+            {
+              console.log("DEBUG: test_singleConfig >> FAILED ... screenshot: " + screenshot);
+            }
+
+            single_res.text = result ? "PASS" : "FAIL";
             single_res.draw = true;
 
-            results.push(assert( (screenshot == PASSED) ,"SINGLE >> Shader config " + single_res.text));
+            results.push(assert( result ,"SINGLE >> Shader config " + single_res.text));
 
             // console.log("#########  TEST 1 - results.length: " + results.length + "   ans: " + (screenshot == PASSED));
             resolve(results);
@@ -248,7 +260,13 @@ px.import({scene: "px:scene.1.js",
           //
           var screenshot = multi.screenshot("image/png;base64");
 
-          multi_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
+          var result = (screenshot == PASSED);
+          if(result == false)
+          {
+            console.log("DEBUG: test_multiConfig >> FAILED ... screenshot: " + screenshot);
+          }
+
+          multi_res.text = result ? "PASS" : "FAIL";
           multi_res.draw = true;
 
           results.push(assert( (screenshot == PASSED) ,"MULTI  >> Shader config " + multi_res.text));
@@ -280,12 +298,18 @@ px.import({scene: "px:scene.1.js",
             //
             var screenshot = uniforms.screenshot("image/png;base64");
 
-            uniforms_res.text = (screenshot == PASSED) ? "PASS" : "FAIL";
+            var result = (screenshot == PASSED);
+            if(result == false)
+            {
+              console.log("DEBUG: test_uniforms >> FAILED ... screenshot: " + screenshot);
+            }
+
+            uniforms_res.text = result ? "PASS" : "FAIL";
             uniforms_res.draw = true;
 
-            results.push(assert( (screenshot == PASSED) ,"uniformINT  >> Shader config " + uniforms_res.text));
+            results.push(assert( result ,"uniformINT  >> Shader config " + uniforms_res.text));
 
-            if(screenshot != PASSED)
+            if(result == false) // FAILED
             {
               console.log("\n######### test_uniforms: FAIL ... Screenshot - Shader color-codes the uniform type failing.\n");
               console.log("screenshot = " + screenshot + "\n\n");
