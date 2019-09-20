@@ -39,7 +39,7 @@ px.import({       scene: 'px:scene.1.js'
           setTimeout(()=>
           {
             resolve("REALLY READY (directTests.js) "); // signal that redraw complete
-          }, 100);
+          }, 300);
 
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           //
