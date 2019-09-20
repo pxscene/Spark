@@ -41,7 +41,7 @@ px.import({       scene: 'px:scene.1.js'
           setTimeout(()=>
           {
             resolve("REALLY READY (singlepassTests.js) "); // signal that redraw complete
-          }, 100);
+          }, 300);
 
           //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           //
