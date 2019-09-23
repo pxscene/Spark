@@ -342,12 +342,12 @@ px.import({scene: "px:scene.1.js",
         () =>
         {
           // should not get here... shader compile will fail
-          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Buggy Shader compile SHOULD fail - but did NOT" + uniforms_res.text));
+          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Buggy Shader compile SHOULD fail - but did NOT  " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode));
           resolve(results);
         },
         () =>
         {
-          results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile should FAIL" + uniforms_res.text));
+          results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile should FAIL  " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode));
           resolve(results);
         })
         .catch(function importFailed(err) {
