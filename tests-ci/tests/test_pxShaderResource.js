@@ -339,15 +339,18 @@ px.import({scene: "px:scene.1.js",
 
         fx.ready
         .then(
-        () =>
+        (resolve) =>
         {
           // should not get here... shader compile will fail
-          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Buggy Shader compile SHOULD fail - but did NOT  " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode));
+          results.push(assert( (fx.loadStatus.statusCode != 4) ,"Buggy Shader compile SHOULD fail - but did NOT  " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode + "  "));
           resolve(results);
         },
-        () =>
+        (reject) =>
         {
-          results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile should FAIL  " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode));
+          // #define PX_RESOURCE_STATUS_OK             0           <<<<< GLSL Compiler Result - OK
+          // #define PX_RESOURCE_STATUS_DECODE_FAILURE 4           <<<<< GLSL Compiler Result - ERROR (expected)
+
+          results.push(assert( (fx.loadStatus.statusCode == 4) ,"Buggy Shader compile should FAIL  " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode + "  "));
           resolve(results);
         })
         .catch(function importFailed(err) {
