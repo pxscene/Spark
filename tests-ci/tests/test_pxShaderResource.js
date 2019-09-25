@@ -275,7 +275,7 @@ px.import({scene: "px:scene.1.js",
           var ans = (screenshot == PASSED);
           if(ans == false)
           {
-            console.log("DEBUG: test_multiConfig(resolve) >> FAILED ... screenshot: " + screenshot);
+            console.log("DEBUG: test_multiConfig(resolve) >> INFO ... screenshot: " + screenshot);
           }
 
           ans = true;  // TODO: Re-enable assert after further investigation
