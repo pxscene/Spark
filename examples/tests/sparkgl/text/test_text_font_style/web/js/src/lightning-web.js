@@ -1,5 +1,5 @@
 /**
- * Lightning v1.0.8
+ * Lightning v1.1.0
  *
  * https://github.com/WebPlatformForEmbedded/Lightning
  */
@@ -6475,6 +6475,22 @@ var lng = (function () {
                 wordWrapWidth = innerWidth;
             }
 
+            // Text overflow
+            if (this._settings.textOverflow && !this._settings.wordWrap) {
+                let suffix;
+                switch (this._settings.textOverflow) {
+                    case 'clip':
+                        suffix = '';
+                        break;
+                    case 'ellipsis':
+                        suffix = this._settings.maxLinesSuffix;
+                        break;
+                    default:
+                        suffix = this._settings.textOverflow;
+                }
+                this._settings.text = this.wrapWord(this._settings.text, wordWrapWidth, suffix);
+            }
+
             // word wrap
             // preserve original text
             let linesInfo;
@@ -6663,6 +6679,49 @@ var lng = (function () {
             this.renderInfo = renderInfo;
         };
 
+        wrapWord(word, wordWrapWidth, suffix) {
+            const suffixWidth = this._context.measureText(suffix).width;
+            const wordLen = word.length;
+            const wordWidth = this._context.measureText(word).width;
+
+            /* If word fits wrapWidth, do nothing */
+            if (wordWidth <= wordWrapWidth) {
+                return word;
+            }
+
+            /* Make initial guess for text cuttoff */
+            let cutoffIndex = Math.floor((wordWrapWidth * wordLen) / wordWidth);
+            let truncWordWidth = this._context.measureText(word.substring(0, cutoffIndex)).width + suffixWidth;
+
+            /* In case guess was overestimated, shrink it letter by letter. */
+            if (truncWordWidth > wordWrapWidth) {
+                while (cutoffIndex > 0) {
+                    truncWordWidth = this._context.measureText(word.substring(0, cutoffIndex)).width + suffixWidth;
+                    if (truncWordWidth > wordWrapWidth) {
+                        cutoffIndex -= 1;
+                    } else {
+                        break;
+                    }
+                }
+
+            /* In case guess was underestimated, extend it letter by letter. */
+            } else {
+                while (cutoffIndex < wordLen) {
+                    truncWordWidth = this._context.measureText(word.substring(0, cutoffIndex)).width + suffixWidth;
+                    if (truncWordWidth < wordWrapWidth) {
+                        cutoffIndex += 1;
+                    } else {
+                        // Finally, when bound is crossed, retract last letter.
+                        cutoffIndex -=1;
+                        break;
+                    }
+                }
+            }
+
+            /* If wrapWidth is too short to even contain suffix alone, return empty string */
+            return word.substring(0, cutoffIndex) + (wordWrapWidth >= suffixWidth ? suffix : '');
+        }
+
         /**
          * Applies newlines to a string to have it optimally fit into the horizontal
          * bounds set by the Text object's wordWrapWidth property.
@@ -6807,6 +6866,17 @@ var lng = (function () {
         set wordWrapWidth(v) {
             if (this._wordWrapWidth !== v) {
                 this._wordWrapWidth = v;
+                this._changed();
+            }
+        }
+
+        get textOverflow() {
+            return this._textOverflow;
+        }
+
+        set textOverflow(v) {
+            if (v != this._textOverflow) {
+                this._textOverflow = v;
                 this._changed();
             }
         }
@@ -7101,6 +7171,7 @@ var lng = (function () {
             if (this.fontFace !== null) parts.push("ff" + (Array.isArray(this.fontFace) ? this.fontFace.join(",") : this.fontFace));
             if (this.wordWrap !== true) parts.push("wr" + (this.wordWrap ? 1 : 0));
             if (this.wordWrapWidth !== 0) parts.push("ww" + this.wordWrapWidth);
+            if (this.textOverflow != "") parts.push("to" + this.textOverflow);
             if (this.lineHeight !== null) parts.push("lh" + this.lineHeight);
             if (this.textBaseline !== "alphabetic") parts.push("tb" + this.textBaseline);
             if (this.textAlign !== "left") parts.push("ta" + this.textAlign);
@@ -7147,12 +7218,13 @@ var lng = (function () {
 
                 if (p) {
                     p.then(() => {
-                        cb(null, Object.assign({renderInfo: renderer.renderInfo}, this.stage.platform.getTextureOptionsForDrawingCanvas(canvas)));
+                        /* FIXME: on some platforms (e.g. RPI), throttling text textures cause artifacts */
+                        cb(null, Object.assign({renderInfo: renderer.renderInfo, throttle: false}, this.stage.platform.getTextureOptionsForDrawingCanvas(canvas)));
                     }).catch((err) => {
                         cb(err);
                     });
                 } else {
-                    cb(null, Object.assign({renderInfo: renderer.renderInfo}, this.stage.platform.getTextureOptionsForDrawingCanvas(canvas)));
+                    cb(null, Object.assign({renderInfo: renderer.renderInfo, throttle: false}, this.stage.platform.getTextureOptionsForDrawingCanvas(canvas)));
                 }
             }
         }
@@ -7167,6 +7239,7 @@ var lng = (function () {
             if (this.fontFace !== null) nonDefaults["fontFace"] = this.fontFace;
             if (this.wordWrap !== true) nonDefaults["wordWrap"] = this.wordWrap;
             if (this.wordWrapWidth !== 0) nonDefaults["wordWrapWidth"] = this.wordWrapWidth;
+            if (this.textOverflow != "") nonDefaults["textOverflow"] = this.textOverflow;
             if (this.lineHeight !== null) nonDefaults["lineHeight"] = this.lineHeight;
             if (this.textBaseline !== "alphabetic") nonDefaults["textBaseline"] = this.textBaseline;
             if (this.textAlign !== "left") nonDefaults["textAlign"] = this.textAlign;
@@ -7206,6 +7279,7 @@ var lng = (function () {
             obj.fontFace = this._fontFace;
             obj.wordWrap = this._wordWrap;
             obj.wordWrapWidth = this._wordWrapWidth;
+            obj.textOverflow = this._textOverflow;
             obj.lineHeight = this._lineHeight;
             obj.textBaseline = this._textBaseline;
             obj.textAlign = this._textAlign;
@@ -7248,6 +7322,7 @@ var lng = (function () {
     proto._fontFace = null;
     proto._wordWrap = true;
     proto._wordWrapWidth = 0;
+    proto._textOverflow = "";
     proto._lineHeight = null;
     proto._textBaseline = "alphabetic";
     proto._textAlign = "left";
@@ -7312,13 +7387,14 @@ var lng = (function () {
             this._settings = settings;
 
             this._element = element;
-            this._getter = Element.getGetter(property);
-            this._setter = Element.getSetter(property);
+
+            this._getter = element.constructor.getGetter(property);
+            this._setter = element.constructor.getSetter(property);
 
             this._merger = settings.merger;
 
             if (!this._merger) {
-                this._merger = Element.getMerger(property);
+                this._merger = element.constructor.getMerger(property);
             }
 
             this._startValue = this._getter(this._element);
@@ -11092,7 +11168,10 @@ var lng = (function () {
                 throw new Error("Ancestor event name must be prefixed by dollar sign.");
             }
 
-            return this._doFireAncestors(name, args);
+            const parent = this._getParentSignalHandler();
+            if (parent) {
+                return parent._doFireAncestors(name, args);
+            }
         }
 
         _doFireAncestors(name, args) {
@@ -18894,7 +18973,54 @@ var lng = (function () {
 
     }
 
-    class GrayscaleShader extends DefaultShader$1 {
+    class WebGLGrayscaleShader extends DefaultShader {
+
+        constructor(context) {
+            super(context);
+            this._amount = 1;
+        }
+
+        static getC2d() {
+            return C2dGrayscaleShader;
+        }
+
+
+        set amount(v) {
+            this._amount = v;
+            this.redraw();
+        }
+
+        get amount() {
+            return this._amount;
+        }
+
+        useDefault() {
+            return this._amount === 0;
+        }
+
+        setupUniforms(operation) {
+            super.setupUniforms(operation);
+            this._setUniform("amount", this._amount, this.gl.uniform1f);
+        }
+
+    }
+
+    WebGLGrayscaleShader.fragmentShaderSource = `
+    #ifdef GL_ES
+    precision lowp float;
+    #endif
+    varying vec2 vTextureCoord;
+    varying vec4 vColor;
+    uniform sampler2D uSampler;
+    uniform float amount;
+    void main(void){
+        vec4 color = texture2D(uSampler, vTextureCoord) * vColor;
+        float grayness = 0.2 * color.r + 0.6 * color.g + 0.2 * color.b;
+        gl_FragColor = vec4(amount * vec3(grayness, grayness, grayness) + (1.0 - amount) * color.rgb, color.a);
+    }
+`;
+
+    class C2dGrayscaleShader extends DefaultShader$1 {
 
         constructor(context) {
             super(context);
@@ -18902,7 +19028,7 @@ var lng = (function () {
         }
 
         static getWebGL() {
-            return GrayscaleShader$1;
+            return WebGLGrayscaleShader;
         }
 
 
@@ -18928,53 +19054,6 @@ var lng = (function () {
         }
 
     }
-
-    class GrayscaleShader$1 extends DefaultShader {
-
-        constructor(context) {
-            super(context);
-            this._amount = 1;
-        }
-
-        static getC2d() {
-            return GrayscaleShader;
-        }
-
-
-        set amount(v) {
-            this._amount = v;
-            this.redraw();
-        }
-
-        get amount() {
-            return this._amount;
-        }
-
-        useDefault() {
-            return this._amount === 0;
-        }
-
-        setupUniforms(operation) {
-            super.setupUniforms(operation);
-            this._setUniform("amount", this._amount, this.gl.uniform1f);
-        }
-
-    }
-
-    GrayscaleShader$1.fragmentShaderSource = `
-    #ifdef GL_ES
-    precision lowp float;
-    #endif
-    varying vec2 vTextureCoord;
-    varying vec4 vColor;
-    uniform sampler2D uSampler;
-    uniform float amount;
-    void main(void){
-        vec4 color = texture2D(uSampler, vTextureCoord) * vColor;
-        float grayness = 0.2 * color.r + 0.6 * color.g + 0.2 * color.b;
-        gl_FragColor = vec4(amount * vec3(grayness, grayness, grayness) + (1.0 - amount) * color.rgb, color.a);
-    }
-`;
 
     /**
      * This shader can be used to fix a problem that is known as 'gradient banding'.
@@ -20150,7 +20229,7 @@ var lng = (function () {
         Texture,
         EventEmitter,
         shaders: {
-            Grayscale: GrayscaleShader$1,
+            Grayscale: WebGLGrayscaleShader,
             BoxBlur: BoxBlurShader,
             Dithering: DitheringShader,
             CircularPush: CircularPushShader,
@@ -20166,7 +20245,7 @@ var lng = (function () {
             C2dShader,
             C2dDefaultShader: DefaultShader$1,
             c2d: {
-                Grayscale: GrayscaleShader,
+                Grayscale: C2dGrayscaleShader,
                 Blur: BlurShader
             }
         },

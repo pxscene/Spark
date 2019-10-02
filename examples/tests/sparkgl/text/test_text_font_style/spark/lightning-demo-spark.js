@@ -1185,7 +1185,7 @@ class LineLayout {
         }
         return mainAxisMinSize;
     }
-    
+
     get numberOfItems() {
         return this.endIndex - this.startIndex + 1;
     }
@@ -1909,12 +1909,12 @@ class FlexContainer {
     get padding() {
         return this.paddingLeft;
     }
-    
+
     set paddingLeft(v) {
         this._paddingLeft = v;
         this._changedDimensions();
     }
-    
+
     get paddingLeft() {
         return this._paddingLeft;
     }
@@ -2120,7 +2120,7 @@ class FlexItem {
     get marginBottom() {
         return this._marginBottom;
     }
-    
+
     _changed() {
         if (this.ctr) this.ctr._changedContents();
     }
@@ -2304,7 +2304,7 @@ class FlexTarget {
          * bit 2: height changed
          */
         this._recalc = 0;
-        
+
         this._enabled = false;
 
         this.x = 0;
@@ -2467,7 +2467,7 @@ class FlexTarget {
             this._enabled = enabled;
         }
     }
-    
+
     _enable() {
         this._setupTargetForFlex();
         this._target.enableFlexLayout();
@@ -2504,7 +2504,7 @@ class FlexTarget {
         this._originalWidth = target._w;
         this._originalHeight = target._h;
     }
-    
+
     setParent(from, to) {
         if (from && from.isFlexContainer()) {
             from._layout._changedChildren();
@@ -3963,7 +3963,7 @@ class ElementCore {
         this._localTb = b;
         this._localTc = c;
         this._localTd = d;
-        
+
         // We also regard negative scaling as a complex case, so that we can optimize the non-complex case better.
         this._isComplex = (b !== 0) || (c !== 0) || (a < 0) || (d < 0);
     };
@@ -4685,10 +4685,10 @@ class ElementCore {
             this._useRenderToTexture = useRenderToTexture;
 
             const r = this._renderContext;
-            
+
             const bboxW = this._dimsUnknown ? 2048 : this._w;
             const bboxH = this._dimsUnknown ? 2048 : this._h;
-            
+
             // Calculate a bbox for this element.
             let sx, sy, ex, ey;
             const rComplex = (r.tb !== 0) || (r.tc !== 0) || (r.ta < 0) || (r.td < 0);
@@ -6711,7 +6711,7 @@ class TextTextureRenderer {
 
         return {l: allLines, n: realNewlines};
     };
-    
+
 }
 
 class TextTexture extends Texture {
@@ -9394,7 +9394,7 @@ class Element {
     set visible(v) {
         this.__core.visible = v;
     }
-    
+
     get colorUl() {
         return this.__core.colorUl;
     }
@@ -10904,13 +10904,13 @@ class Component extends Element {
     __construct() {
         this._construct();
     }
-    
+
     _construct() {
     }
 
     _build() {
     }
-    
+
     __init() {
         this._init();
     }
@@ -11612,7 +11612,7 @@ class CoreRenderState {
         this.quads.reset();
 
         this._temporaryTexturizers = [];
-        
+
         this._isCachingTexturizer = false;
 
     }
@@ -12260,7 +12260,7 @@ class WebGLRenderer extends Renderer {
     createCoreRenderExecutor(ctx) {
         return new WebGLCoreRenderExecutor(ctx);
     }
-    
+
     createCoreRenderState(ctx) {
         return new CoreRenderState(ctx);
     }
@@ -12293,7 +12293,7 @@ class WebGLRenderer extends Renderer {
 
         return glTexture;
     }
-    
+
     freeRenderTexture(glTexture) {
         let gl = this.stage.gl;
         gl.deleteFramebuffer(glTexture.framebuffer);
@@ -12582,13 +12582,13 @@ class C2dCoreRenderExecutor extends CoreRenderExecutor {
             ctx.globalCompositeOperation = 'source-over';
         }
     }
-    
+
     _getContext() {
         if (this._renderTexture) {
             return this._renderTexture.ctx;
         } else {
             return this._mainRenderTexture.ctx;
-        } 
+        }
     }
 
     _restoreContext() {
@@ -13019,7 +13019,7 @@ class C2dRenderer extends Renderer {
     createCoreRenderExecutor(ctx) {
         return new C2dCoreRenderExecutor(ctx);
     }
-    
+
     createCoreRenderState(ctx) {
         return new CoreRenderState(ctx);
     }
@@ -13031,7 +13031,7 @@ class C2dRenderer extends Renderer {
         this.setupC2d(canvas);
         return canvas;
     }
-    
+
     freeRenderTexture(nativeTexture) {
         this.tintManager.delete(nativeTexture);
     }
@@ -13864,9 +13864,9 @@ class WebGLState {
         this._migrateSettings(t, s);
 
         this._migratePixelStorei(t, s);
-        
+
         this._migrateTextures(t, s);
-        
+
     }
 
     _migratePixelStorei(t, s) {
@@ -14534,7 +14534,7 @@ class TextureManager {
         for (let i = 0, n = this._uploadedTextureSources.length; i < n; i++) {
             this._nativeFreeTextureSource(this._uploadedTextureSources[i]);
         }
-        
+
         this.textureSourceHashmap.clear();
         this._usedMemory = 0;
     }
@@ -14576,7 +14576,7 @@ class TextureManager {
         nativeTexture.update = this.stage.frameCounter;
 
         this._uploadedTextureSources.push(textureSource);
-        
+
         this.addToLookupMap(textureSource);
     }
 
@@ -14584,7 +14584,7 @@ class TextureManager {
         this._usedMemory += delta;
         this.stage.addMemoryUsage(delta);
     }
-    
+
     addToLookupMap(textureSource) {
         const lookupId = textureSource.lookupId;
         if (lookupId) {
@@ -14598,7 +14598,7 @@ class TextureManager {
         this.freeUnusedTextureSources();
         this._cleanupLookupMap();
     }
-    
+
     freeUnusedTextureSources() {
         let remainingTextureSources = [];
         for (let i = 0, n = this._uploadedTextureSources.length; i < n; i++) {
@@ -15480,7 +15480,7 @@ class AnimationActionSettings {
             }
         }
     }
-    
+
     getAnimatedElements(element) {
         return element.select(this._selector);
     }
@@ -15504,7 +15504,7 @@ class AnimationActionSettings {
             }
         }
     }
-    
+
     set selector(v) {
         this._selector = v;
     }
@@ -15516,7 +15516,7 @@ class AnimationActionSettings {
     get resetValue() {
         return this._resetValue;
     }
-    
+
     set resetValue(v) {
         this._resetValue = v;
         this._hasResetValue = (v !== undefined);
@@ -15857,7 +15857,7 @@ class Animation extends EventEmitter {
             this.emit('progress', this._p);
         }
     }
-    
+
     _stopProgress(dt) {
         let duration = this._getStopDuration();
 
@@ -15942,9 +15942,9 @@ class Animation extends EventEmitter {
                 }
             }
         }
-        
+
     }
-    
+
     _progressStopTransition(dt) {
         if (this._stopP < 1) {
             if (this._stopDelayLeft > 0) {
@@ -15959,7 +15959,7 @@ class Animation extends EventEmitter {
                     return;
                 }
             }
-            
+
             const duration = this._getStopDuration();
 
             if (duration == 0) {
@@ -19729,7 +19729,7 @@ class RadialFilterShader extends DefaultShader {
     get cutoff() {
         return this._cutoff;
     }
-    
+
     useDefault() {
         return this._radius === 0;
     }
@@ -19781,10 +19781,10 @@ RadialFilterShader.fragmentShaderSource = `
 `;
 
 class RadialGradientShader extends DefaultShader {
-    
+
     constructor(context) {
         super(context);
-        
+
         this._x = 0;
         this._y = 0;
 
@@ -20403,207 +20403,212 @@ class SparkPlatform {
     drawText(textTextureRenderer) {
         let canvasInternal = textTextureRenderer._canvas.internal; // _canvas.internal is a pxTextCanvas object created in getDrawingCanvas()
         let drawPromise = new Promise((resolve, reject) => {
-            canvasInternal.ready.then(function (obj) { // waiting for the empty scene
+            canvasInternal.ready.then( () => { // waiting for the empty scene
                 canvasInternal.parent = sparkscene.root;
-                canvasInternal.pixelSize = textTextureRenderer._settings.fontSize * textTextureRenderer.getPrecision();
-
-                // Original Lightining code (with small changes) begins here
-                // Changes to the original code are:
-                // Replaced:  `this.` => `textTextureRenderer.`
-                // Replaced `StageUtils.getRgbaString(color)` => `color`
-                // Replaced `this._canvas.width` = `canvasInternal.width` and `this._canvas.height` = `canvasInternal.height` after the line: // Add extra margin to prevent issue with clipped text when scaling.
-                // Added this line (which is completely optional and can be removed):
-                // canvasInternal.label = textTextureRenderer._settings.text.slice(0, 10) + '..';
-                let renderInfo = {};
-                const precision = textTextureRenderer.getPrecision();
-                let paddingLeft = textTextureRenderer._settings.paddingLeft * precision;
-                let paddingRight = textTextureRenderer._settings.paddingRight * precision;
-                const fontSize = textTextureRenderer._settings.fontSize * precision;
-                let offsetY = textTextureRenderer._settings.offsetY === null ? null : (textTextureRenderer._settings.offsetY * precision);
-                let lineHeight = textTextureRenderer._settings.lineHeight * precision;
-                const w = textTextureRenderer._settings.w * precision;
-                const h = textTextureRenderer._settings.h * precision;
-                let wordWrapWidth = textTextureRenderer._settings.wordWrapWidth * precision;
-                const cutSx = textTextureRenderer._settings.cutSx * precision;
-                const cutEx = textTextureRenderer._settings.cutEx * precision;
-                const cutSy = textTextureRenderer._settings.cutSy * precision;
-                const cutEy = textTextureRenderer._settings.cutEy * precision;
-
-                canvasInternal.label = textTextureRenderer._settings.text.slice(0, 10) + '..'; // allows to distinguish different canvases by label, useful for debugging
-                // Set font properties.
                 textTextureRenderer.setFontProperties();
-                // Total width.
-                let width = w || (2048 / textTextureRenderer.getPrecision());
-                // Inner width.
-                let innerWidth = width - (paddingLeft);
-                if (innerWidth < 10) {
-                    width += (10 - innerWidth);
-                    innerWidth += (10 - innerWidth);
-                }
-                if (!wordWrapWidth) {
-                    wordWrapWidth = innerWidth;
-                }
-                // word wrap
-                // preserve original text
-                let linesInfo;
-                if (textTextureRenderer._settings.wordWrap) {
-                    linesInfo = textTextureRenderer.wrapText(textTextureRenderer._settings.text, wordWrapWidth);
-                } else {
-                    linesInfo = {l: textTextureRenderer._settings.text.split(/(?:\r\n|\r|\n)/), n: []};
-                    let n = linesInfo.l.length;
-                    for (let i = 0; i < n - 1; i++) {
-                        linesInfo.n.push(i);
+                canvasInternal.font.ready.then(() => { // the font might have been coerced
+                    canvasInternal.pixelSize = textTextureRenderer._settings.fontSize * textTextureRenderer.getPrecision();
+                    console.log("Settings fontStyle: ", textTextureRenderer._settings.fontStyle);
+                    console.log("Actual fontStyle: ", canvasInternal.font.fontStyle);
+                    // Original Lightining code with some changes begins here
+                    // Changes to the original code are:
+                    // Replaced:  `this.` => `textTextureRenderer.`
+                    // Replaced `StageUtils.getRgbaString(color)` => `color`
+                    // Replaced `this._canvas.width` => `canvasInternal.width` and `this._canvas.height` => `canvasInternal.height` after the line: // Add extra margin to prevent issue with clipped text when scaling.
+                    // setFontProperties() calls are commented out as redundant
+                    // Setting canvas label to faciliatate debugging (this is optional and can be removed):
+                    // canvasInternal.label = textTextureRenderer._settings.text.slice(0, 10) + '..';
+                    let renderInfo = {};
+                    const precision = textTextureRenderer.getPrecision();
+                    let paddingLeft = textTextureRenderer._settings.paddingLeft * precision;
+                    let paddingRight = textTextureRenderer._settings.paddingRight * precision;
+                    const fontSize = textTextureRenderer._settings.fontSize * precision;
+                    let offsetY = textTextureRenderer._settings.offsetY === null ? null : (textTextureRenderer._settings.offsetY * precision);
+                    let lineHeight = textTextureRenderer._settings.lineHeight * precision;
+                    const w = textTextureRenderer._settings.w * precision;
+                    const h = textTextureRenderer._settings.h * precision;
+                    let wordWrapWidth = textTextureRenderer._settings.wordWrapWidth * precision;
+                    const cutSx = textTextureRenderer._settings.cutSx * precision;
+                    const cutEx = textTextureRenderer._settings.cutEx * precision;
+                    const cutSy = textTextureRenderer._settings.cutSy * precision;
+                    const cutEy = textTextureRenderer._settings.cutEy * precision;
+
+                    canvasInternal.label = textTextureRenderer._settings.text.slice(0, 10) + '..'; // allows to distinguish different canvases by label, useful for debugging
+                    // Set font properties.
+                    // textTextureRenderer.setFontProperties();
+                    // Total width.
+                    let width = w || (2048 / textTextureRenderer.getPrecision());
+                    // Inner width.
+                    let innerWidth = width - (paddingLeft);
+                    if (innerWidth < 10) {
+                        width += (10 - innerWidth);
+                        innerWidth += (10 - innerWidth);
                     }
-                }
-                let lines = linesInfo.l;
-                if (textTextureRenderer._settings.maxLines && lines.length > textTextureRenderer._settings.maxLines) {
-                    let usedLines = lines.slice(0, textTextureRenderer._settings.maxLines);
-                    let otherLines = null;
-                    if (textTextureRenderer._settings.maxLinesSuffix) {
-                        // Wrap again with max lines suffix enabled.
-                        let w = textTextureRenderer._settings.maxLinesSuffix ? textTextureRenderer._context.measureText(textTextureRenderer._settings.maxLinesSuffix).width : 0;
-                        let al = textTextureRenderer.wrapText(usedLines[usedLines.length - 1], wordWrapWidth - w);
-                        usedLines[usedLines.length - 1] = al.l[0] + textTextureRenderer._settings.maxLinesSuffix;
-                        otherLines = [al.l.length > 1 ? al.l[1] : ''];
+                    if (!wordWrapWidth) {
+                        wordWrapWidth = innerWidth;
+                    }
+                    // word wrap
+                    // preserve original text
+                    let linesInfo;
+                    if (textTextureRenderer._settings.wordWrap) {
+                        linesInfo = textTextureRenderer.wrapText(textTextureRenderer._settings.text, wordWrapWidth);
                     } else {
-                        otherLines = [''];
-                    }
-                    // Re-assemble the remaining text.
-                    let i, n = lines.length;
-                    let j = 0;
-                    let m = linesInfo.n.length;
-                    for (i = textTextureRenderer._settings.maxLines; i < n; i++) {
-                        otherLines[j] += (otherLines[j] ? " " : "") + lines[i];
-                        if (i + 1 < m && linesInfo.n[i + 1]) {
-                            j++;
+                        linesInfo = {l: textTextureRenderer._settings.text.split(/(?:\r\n|\r|\n)/), n: []};
+                        let n = linesInfo.l.length;
+                        for (let i = 0; i < n - 1; i++) {
+                            linesInfo.n.push(i);
                         }
                     }
-                    renderInfo.remainingText = otherLines.join("\n");
-                    renderInfo.moreTextLines = true;
-                    lines = usedLines;
-                } else {
-                    renderInfo.moreTextLines = false;
-                    renderInfo.remainingText = "";
-                }
-                // calculate text width
-                let maxLineWidth = 0;
-                let lineWidths = [];
-                for (let i = 0; i < lines.length; i++) {
-                    let lineWidth = textTextureRenderer._context.measureText(lines[i]).width;
-                    lineWidths.push(lineWidth);
-                    maxLineWidth = Math.max(maxLineWidth, lineWidth);
-                }
-                renderInfo.lineWidths = lineWidths;
-                if (!w) {
-                    // Auto-set width to max text length.
-                    width = maxLineWidth + paddingLeft + paddingRight;
-                    innerWidth = maxLineWidth;
-                }
-                // calculate text height
-                lineHeight = lineHeight || fontSize;
-                let height;
-                if (h) {
-                    height = h;
-                } else {
-                    height = lineHeight * (lines.length - 1) + 0.5 * fontSize + Math.max(lineHeight, fontSize) + offsetY;
-                }
-                if (offsetY === null) {
-                    offsetY = fontSize;
-                }
-                renderInfo.w = width;
-                renderInfo.h = height;
-                renderInfo.lines = lines;
-                renderInfo.precision = precision;
-                if (!width) {
-                    // To prevent canvas errors.
-                    width = 1;
-                }
-                if (!height) {
-                    // To prevent canvas errors.
-                    height = 1;
-                }
-                if (cutSx || cutEx) {
-                    width = Math.min(width, cutEx - cutSx);
-                }
-                if (cutSy || cutEy) {
-                    height = Math.min(height, cutEy - cutSy);
-                }
-                // Add extra margin to prevent issue with clipped text when scaling.
-                canvasInternal.width = Math.ceil(width + textTextureRenderer._stage.getOption('textRenderIssueMargin'));
-                canvasInternal.height = Math.ceil(height);
-                // Canvas context has been reset.
-                textTextureRenderer.setFontProperties();
-                if (fontSize >= 128) {
-                    // WpeWebKit bug: must force compositing because cairo-traps-compositor will not work with text first.
-                    textTextureRenderer._context.globalAlpha = 0.01;
-                    textTextureRenderer._context.fillRect(0, 0, 0.01, 0.01);
-                    textTextureRenderer._context.globalAlpha = 1.0;
-                }
-                if (cutSx || cutSy) {
-                    textTextureRenderer._context.translate(-cutSx, -cutSy);
-                }
-                let linePositionX;
-                let linePositionY;
-                let drawLines = [];
-                // Draw lines line by line.
-                for (let i = 0, n = lines.length; i < n; i++) {
-                    linePositionX = 0;
-                    linePositionY = (i * lineHeight) + offsetY;
-                    if (textTextureRenderer._settings.textAlign === 'right') {
-                        linePositionX += (innerWidth - lineWidths[i]);
-                    } else if (textTextureRenderer._settings.textAlign === 'center') {
-                        linePositionX += ((innerWidth - lineWidths[i]) / 2);
+                    let lines = linesInfo.l;
+                    if (textTextureRenderer._settings.maxLines && lines.length > textTextureRenderer._settings.maxLines) {
+                        let usedLines = lines.slice(0, textTextureRenderer._settings.maxLines);
+                        let otherLines = null;
+                        if (textTextureRenderer._settings.maxLinesSuffix) {
+                            // Wrap again with max lines suffix enabled.
+                            let w = textTextureRenderer._settings.maxLinesSuffix ? textTextureRenderer._context.measureText(textTextureRenderer._settings.maxLinesSuffix).width : 0;
+                            let al = textTextureRenderer.wrapText(usedLines[usedLines.length - 1], wordWrapWidth - w);
+                            usedLines[usedLines.length - 1] = al.l[0] + textTextureRenderer._settings.maxLinesSuffix;
+                            otherLines = [al.l.length > 1 ? al.l[1] : ''];
+                        } else {
+                            otherLines = [''];
+                        }
+                        // Re-assemble the remaining text.
+                        let i, n = lines.length;
+                        let j = 0;
+                        let m = linesInfo.n.length;
+                        for (i = textTextureRenderer._settings.maxLines; i < n; i++) {
+                            otherLines[j] += (otherLines[j] ? " " : "") + lines[i];
+                            if (i + 1 < m && linesInfo.n[i + 1]) {
+                                j++;
+                            }
+                        }
+                        renderInfo.remainingText = otherLines.join("\n");
+                        renderInfo.moreTextLines = true;
+                        lines = usedLines;
+                    } else {
+                        renderInfo.moreTextLines = false;
+                        renderInfo.remainingText = "";
                     }
-                    linePositionX += paddingLeft;
-                    drawLines.push({text: lines[i], x: linePositionX, y: linePositionY, w: lineWidths[i]});
-                }
-                // Highlight.
-                if (textTextureRenderer._settings.highlight) {
-                    let color = textTextureRenderer._settings.highlightColor || 0x00000000;
-                    let hlHeight = (textTextureRenderer._settings.highlightHeight * precision || fontSize * 1.5);
-                    let offset = (textTextureRenderer._settings.highlightOffset !== null ? textTextureRenderer._settings.highlightOffset * precision : -0.5 * fontSize);
-                    const hlPaddingLeft = (textTextureRenderer._settings.highlightPaddingLeft !== null ? textTextureRenderer._settings.highlightPaddingLeft * precision : paddingLeft);
-                    const hlPaddingRight = (textTextureRenderer._settings.highlightPaddingRight !== null ? textTextureRenderer._settings.highlightPaddingRight * precision : paddingRight);
+                    // calculate text width
+                    let maxLineWidth = 0;
+                    let lineWidths = [];
+                    for (let i = 0; i < lines.length; i++) {
+                        let lineWidth = textTextureRenderer._context.measureText(lines[i]).width;
+                        lineWidths.push(lineWidth);
+                        maxLineWidth = Math.max(maxLineWidth, lineWidth);
+                    }
+                    renderInfo.lineWidths = lineWidths;
+                    if (!w) {
+                        // Auto-set width to max text length.
+                        width = maxLineWidth + paddingLeft + paddingRight;
+                        innerWidth = maxLineWidth;
+                    }
+                    // calculate text height
+                    lineHeight = lineHeight || fontSize;
+                    let height;
+                    if (h) {
+                        height = h;
+                    } else {
+                        height = lineHeight * (lines.length - 1) + 0.5 * fontSize + Math.max(lineHeight, fontSize) + offsetY;
+                    }
+                    if (offsetY === null) {
+                        offsetY = fontSize;
+                    }
+                    renderInfo.w = width;
+                    renderInfo.h = height;
+                    renderInfo.lines = lines;
+                    renderInfo.precision = precision;
+                    if (!width) {
+                        // To prevent canvas errors.
+                        width = 1;
+                    }
+                    if (!height) {
+                        // To prevent canvas errors.
+                        height = 1;
+                    }
+                    if (cutSx || cutEx) {
+                        width = Math.min(width, cutEx - cutSx);
+                    }
+                    if (cutSy || cutEy) {
+                        height = Math.min(height, cutEy - cutSy);
+                    }
+                    // Add extra margin to prevent issue with clipped text when scaling.
+                    canvasInternal.width = Math.ceil(width + textTextureRenderer._stage.getOption('textRenderIssueMargin'));
+                    canvasInternal.height = Math.ceil(height);
+                    // Canvas context has been reset.
+                    // textTextureRenderer.setFontProperties();
+                    if (fontSize >= 128) {
+                        // WpeWebKit bug: must force compositing because cairo-traps-compositor will not work with text first.
+                        textTextureRenderer._context.globalAlpha = 0.01;
+                        textTextureRenderer._context.fillRect(0, 0, 0.01, 0.01);
+                        textTextureRenderer._context.globalAlpha = 1.0;
+                    }
+                    if (cutSx || cutSy) {
+                        textTextureRenderer._context.translate(-cutSx, -cutSy);
+                    }
+                    let linePositionX;
+                    let linePositionY;
+                    let drawLines = [];
+                    // Draw lines line by line.
+                    for (let i = 0, n = lines.length; i < n; i++) {
+                        linePositionX = 0;
+                        linePositionY = (i * lineHeight) + offsetY;
+                        if (textTextureRenderer._settings.textAlign === 'right') {
+                            linePositionX += (innerWidth - lineWidths[i]);
+                        } else if (textTextureRenderer._settings.textAlign === 'center') {
+                            linePositionX += ((innerWidth - lineWidths[i]) / 2);
+                        }
+                        linePositionX += paddingLeft;
+                        drawLines.push({text: lines[i], x: linePositionX, y: linePositionY, w: lineWidths[i]});
+                    }
+                    // Highlight.
+                    if (textTextureRenderer._settings.highlight) {
+                        let color = textTextureRenderer._settings.highlightColor || 0x00000000;
+                        let hlHeight = (textTextureRenderer._settings.highlightHeight * precision || fontSize * 1.5);
+                        let offset = (textTextureRenderer._settings.highlightOffset !== null ? textTextureRenderer._settings.highlightOffset * precision : -0.5 * fontSize);
+                        const hlPaddingLeft = (textTextureRenderer._settings.highlightPaddingLeft !== null ? textTextureRenderer._settings.highlightPaddingLeft * precision : paddingLeft);
+                        const hlPaddingRight = (textTextureRenderer._settings.highlightPaddingRight !== null ? textTextureRenderer._settings.highlightPaddingRight * precision : paddingRight);
 
-                    textTextureRenderer._context.fillStyle = color;
-                    for (let i = 0; i < drawLines.length; i++) {
+                        textTextureRenderer._context.fillStyle = color;
+                        for (let i = 0; i < drawLines.length; i++) {
+                            let drawLine = drawLines[i];
+                            textTextureRenderer._context.fillRect((drawLine.x - hlPaddingLeft), (drawLine.y + offset), (drawLine.w + hlPaddingRight + hlPaddingLeft), hlHeight);
+                        }
+                    }
+                    // Text shadow.
+                    let prevShadowSettings = null;
+                    if (textTextureRenderer._settings.shadow) {
+                        prevShadowSettings = [textTextureRenderer._context.shadowColor, textTextureRenderer._context.shadowOffsetX, textTextureRenderer._context.shadowOffsetY, textTextureRenderer._context.shadowBlur];
+                        textTextureRenderer._context.shadowColor = textTextureRenderer._settings.shadowColor;
+                        textTextureRenderer._context.shadowOffsetX = textTextureRenderer._settings.shadowOffsetX * precision;
+                        textTextureRenderer._context.shadowOffsetY = textTextureRenderer._settings.shadowOffsetY * precision;
+                        textTextureRenderer._context.shadowBlur = textTextureRenderer._settings.shadowBlur * precision;
+                    }
+                    textTextureRenderer._context.fillStyle = textTextureRenderer._settings.textColor;
+                    for (let i = 0, n = drawLines.length; i < n; i++) {
                         let drawLine = drawLines[i];
-                        textTextureRenderer._context.fillRect((drawLine.x - hlPaddingLeft), (drawLine.y + offset), (drawLine.w + hlPaddingRight + hlPaddingLeft), hlHeight);
+                        textTextureRenderer._context.fillText(drawLine.text, drawLine.x, drawLine.y);
                     }
-                }
-                // Text shadow.
-                let prevShadowSettings = null;
-                if (textTextureRenderer._settings.shadow) {
-                    prevShadowSettings = [textTextureRenderer._context.shadowColor, textTextureRenderer._context.shadowOffsetX, textTextureRenderer._context.shadowOffsetY, textTextureRenderer._context.shadowBlur];
-                    textTextureRenderer._context.shadowColor = textTextureRenderer._settings.shadowColor;
-                    textTextureRenderer._context.shadowOffsetX = textTextureRenderer._settings.shadowOffsetX * precision;
-                    textTextureRenderer._context.shadowOffsetY = textTextureRenderer._settings.shadowOffsetY * precision;
-                    textTextureRenderer._context.shadowBlur = textTextureRenderer._settings.shadowBlur * precision;
-                }
-                textTextureRenderer._context.fillStyle = textTextureRenderer._settings.textColor;
-                for (let i = 0, n = drawLines.length; i < n; i++) {
-                    let drawLine = drawLines[i];
-                    textTextureRenderer._context.fillText(drawLine.text, drawLine.x, drawLine.y);
-                }
 
-                if (prevShadowSettings) {
-                    textTextureRenderer._context.shadowColor = prevShadowSettings[0];
-                    textTextureRenderer._context.shadowOffsetX = prevShadowSettings[1];
-                    textTextureRenderer._context.shadowOffsetY = prevShadowSettings[2];
-                    textTextureRenderer._context.shadowBlur = prevShadowSettings[3];
-                }
+                    if (prevShadowSettings) {
+                        textTextureRenderer._context.shadowColor = prevShadowSettings[0];
+                        textTextureRenderer._context.shadowOffsetX = prevShadowSettings[1];
+                        textTextureRenderer._context.shadowOffsetY = prevShadowSettings[2];
+                        textTextureRenderer._context.shadowBlur = prevShadowSettings[3];
+                    }
 
-                if (cutSx || cutSy) {
-                    textTextureRenderer._context.translate(cutSx, cutSy);
-                }
-                // Original Lightining code ends here
-                canvasInternal.ready.then(() => { // everything is drawn
-                    renderInfo.w = canvasInternal.w;
-                    renderInfo.h = canvasInternal.h;
-                    textTextureRenderer._canvas.width = canvasInternal.w;
-                    textTextureRenderer._canvas.height = canvasInternal.h;
-                    textTextureRenderer.renderInfo = renderInfo;
-                    resolve();
+                    if (cutSx || cutSy) {
+                        textTextureRenderer._context.translate(cutSx, cutSy);
+                    }
+                    // Original Lightining code ends here
+                    canvasInternal.ready.then(() => { // everything is drawn
+                        renderInfo.w = canvasInternal.w;
+                        renderInfo.h = canvasInternal.h;
+                        textTextureRenderer._canvas.width = canvasInternal.w;
+                        textTextureRenderer._canvas.height = canvasInternal.h;
+                        textTextureRenderer.renderInfo = renderInfo;
+                        resolve();
+                    });
                 });
             });
         });
@@ -20618,15 +20623,32 @@ class SparkPlatform {
             promises.push(fontResource.ready);
             fontResources.set(font.family, fontResource);
         }
-        return {promises: promises, fontResources: fontResources}
+
+        // load fonts and then store a
+        // reference to them so they can be used
+        // in getFontSetting calls
+        Promise.all(promises)
+            .then(() => this._fontResources = fontResources);
+
+        // continue to return promise/font object
+        // to maintain compatibility with SDK client
+        return {
+            promises: promises,
+            fontResources: fontResources
+        };
     }
 
     getFontSetting(textTextureRenderer) {
         let fontResource = textTextureRenderer._context.font;
         let fontFace = textTextureRenderer._settings.fontFace;
-        let preloadedFonts = textTextureRenderer._stage.application._currentApp.fontFaces;
-        if (preloadedFonts.has(fontFace)) {
-            fontResource = preloadedFonts.get(fontFace);
+        let fontStyle = textTextureRenderer._settings.fontStyle.toLowerCase();
+
+        if (this._fontResources.has(fontFace)) {
+            fontResource = this._fontResources.get(fontFace);
+            if (fontResource.needsStyleCoercion(fontStyle)) {
+                let url = fontResource.url;
+                fontResource = sparkscene.create({t: "fontResource", url: url, fontStyle: fontStyle});
+            }
         }
         return fontResource;
     }
@@ -22371,7 +22393,7 @@ class KeyboardButton extends lightning$1.Component {
     _update() {
         this.patch(this._getPatch(this._key));
     }
-    
+
     _getPatch(key) {
         let content = key.patch || {text: {text: key.c, fontFace: 'RobotoRegular', textAlign: 'center', fontSize: 36}};
         return {
@@ -23335,9 +23357,9 @@ let def = {
     vertical_space: 30,
     text: {
         fontFace: 'RobotoRegular',
-        fontSize:  36,
-        text:      'Text a little too long so this part won\'t be visible',
-        longText:  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        fontSize: 36,
+        text: 'Text a little too long so this part won\'t be visible',
+        longText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         textColor: 0xffff00ff,
         wordWrapWidth: 800,
         maxLines: 2,
@@ -23345,7 +23367,7 @@ let def = {
 };
 
 let Defaults = {
-    get: function(prop) {
+    get: function (prop) {
         let val = JSON.parse(JSON.stringify(def));
         if (!prop) {
             return val;
@@ -23359,10 +23381,10 @@ let Defaults = {
         }
         return val;
     },
-    applyToText: function(obj, props) {
+    applyToText: function (obj, props) {
         for (let i in props) {
             let prop = props[i];
-            if (typeof(def.text[prop]) != 'undefined' && def.text[prop] !== false) {
+            if (typeof (def.text[prop]) != 'undefined' && def.text[prop] !== false) {
                 obj.text[prop] = def.text[prop];
             }
         }
@@ -23370,950 +23392,70 @@ let Defaults = {
     }
 };
 
-let values = [-150, 0, 150];
+let font_styles = [
+    false, // attribute will not be set
+    'normal',
+    'italic',
+    'bold',
+    'italic bold',
+    'oblique 45deg'
+];
 
 let def$1 = Defaults.get(),
-    space = def$1.vertical_space || 30,
     x = def$1.x,
     y = def$1.y,
     template$2 = {}
 ;
 
-for (let i in values)
-{
-    template$2['Text_1_' + i] = Defaults.applyToText({
-        x: x,
-        y: y,
-        text: {
-            text:     def$1.text.text,
-            maxLines: 1,
-            cutEx:    values[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    y += (def$1.text.fontSize || space) + space;
-}
-
-
-let max_lines = 3;
-
-for (let i in values)
-{
-    template$2['Text_2_' + i] = Defaults.applyToText({
-        x: x,
-        y: y,
-        text: {
-            text:     def$1.text.longText,
-            maxLines: max_lines,
-            cutEx:    values[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y += (def$1.text.fontSize || space) * max_lines + space;
-}
-
-let values$1 = [-50, 0, 50];
-
-let def$2 = Defaults.get(),
-    space$1 = def$2.vertical_space || 30,
-    x$1 = def$2.x,
-    y$1 = def$2.y,
-    template$1$1 = {}
-;
-
-for (let i in values$1)
-{
-    template$1$1['Text_1_' + i] = Defaults.applyToText({
-        x: x$1,
-        y: y$1,
-        text: {
-            text:     def$2.text.text,
-            maxLines: 1,
-            cutEy:    values$1[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    y$1 += (def$2.text.fontSize || space$1) + space$1;
-}
-
-
-let max_lines$1 = 3;
-
-for (let i in values$1)
-{
-    template$1$1['Text_2_' + i] = Defaults.applyToText({
-        x: x$1,
-        y: y$1,
-        text: {
-            text:     def$2.text.longText,
-            maxLines: max_lines$1,
-            cutEy:    values$1[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y$1 += (def$2.text.fontSize || space$1) * max_lines$1 + space$1;
-}
-
-let values$2 = [
-    {s: 0, e: 100},
-    {s: 100, e: 200},
-    {s: 100, e: 0}
-];
-
-let def$3 = Defaults.get(),
-    space$2 = def$3.vertical_space || 30,
-    x$2 = def$3.x,
-    y$2 = def$3.y,
-    template$2$1 = {}
-;
-
-for (let i in values$2)
-{
-    template$2$1['Text_1_' + i] = Defaults.applyToText({
-        x: x$2,
-        y: y$2,
-        text: {
-            text:     def$3.text.text,
-            maxLines: 1,
-            cutSx:    values$2[i].s,
-            cutEx:    values$2[i].e
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    y$2 += (def$3.text.fontSize || space$2) + space$2;
-}
-
-
-let max_lines$2 = 3;
-
-for (let i in values$2)
-{
-    template$2$1['Text_2_' + i] = Defaults.applyToText({
-        x: x$2,
-        y: y$2,
-        text: {
-            text:     def$3.text.longText,
-            maxLines: max_lines$2,
-            cutSx:    values$2[i].s,
-            cutEx:    values$2[i].e
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y$2 += (def$3.text.fontSize || space$2) * max_lines$2 + space$2;
-}
-
-let def$4 = Defaults.get(),
-    font_size = def$4.text.fontSize || 36
-;
-
-
-let values$3 = [
-    {s: font_size / 2, e: 0},
-    {s: font_size / 2, e: font_size / 1.1},
-    {s: 0, e: font_size / 1.2}
-];
-
-
-let space$3 = def$4.vertical_space || 30,
-    x$3 = def$4.x,
-    y$3 = def$4.y,
-    template$3 = {}
-;
-
-for (let i in values$3)
-{
-    template$3['Text_1_' + i] = Defaults.applyToText({
-        x: x$3,
-        y: y$3,
-        text: {
-            fontSize: font_size,
-            text:     def$4.text.text,
-            maxLines: 1,
-            cutSy:    values$3[i].s,
-            cutEy:    values$3[i].e
-        }
-    }, [
-        'fontFace',
-        'textColor'
-    ]);
-
-    y$3 += font_size + space$3;
-}
-
-
-let max_lines$3 = 3;
-
-for (let i in values$3)
-{
-    template$3['Text_2_' + i] = Defaults.applyToText({
-        x: x$3,
-        y: y$3,
-        text: {
-            fontSize: font_size,
-            text:     def$4.text.longText,
-            maxLines: max_lines$3,
-            cutSy:    values$3[i].s,
-            cutEy:    values$3[i].e
-        }
-    }, [
-        'fontFace',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y$3 += font_size * max_lines$3 + space$3;
-}
-
-let values$4 = [-150, 0, 150];
-
-let def$5 = Defaults.get(),
-    space$4 = def$5.vertical_space || 30,
-    x$4 = def$5.x,
-    y$4 = def$5.y,
-    template$4 = {}
-;
-
-for (let i in values$4)
-{
-    template$4['Text_1_' + i] = Defaults.applyToText({
-        x: x$4,
-        y: y$4,
-        text: {
-            text:     def$5.text.text,
-            maxLines: 1,
-            cutSx:    values$4[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    y$4 += (def$5.text.fontSize || space$4) + space$4;
-}
-
-
-let max_lines$4 = 3;
-
-for (let i in values$4)
-{
-    template$4['Text_2_' + i] = Defaults.applyToText({
-        x: x$4,
-        y: y$4,
-        text: {
-            text:     def$5.text.longText,
-            maxLines: max_lines$4,
-            cutSx:    values$4[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y$4 += (def$5.text.fontSize || space$4) * max_lines$4 + space$4;
-}
-
-let def$6 = Defaults.get(),
-    font_size$1 = def$6.text.fontSize || 36
-;
-
-
-let values$5 = [
-    - font_size$1 / 1.5,
-      0,
-      font_size$1 / 1.5
-];
-
-
-let space$5 = def$6.vertical_space || 30,
-    x$5 = def$6.x,
-    y$5 = def$6.y,
-    template$5 = {}
-;
-
-for (let i in values$5)
-{
-    template$5['Text_1_' + i] = Defaults.applyToText({
-        x: x$5,
-        y: y$5,
-        text: {
-            fontSize: font_size$1,
-            text:     def$6.text.text,
-            maxLines: 1,
-            cutSy:    values$5[i]
-        }
-    }, [
-        'fontFace',
-        'textColor'
-    ]);
-
-    y$5 += font_size$1 + space$5;
-}
-
-
-let max_lines$5 = 3;
-
-for (let i in values$5)
-{
-    template$5['Text_2_' + i] = Defaults.applyToText({
-        x: x$5,
-        y: y$5,
-        text: {
-            fontSize: font_size$1,
-            text:     def$6.text.longText,
-            maxLines: max_lines$5,
-            cutSy:    values$5[i]
-        }
-    }, [
-        'fontFace',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y$5 += font_size$1 * max_lines$5 + space$5;
-}
-
-let font_faces = [
-    'RobotoBold',
-    'RobotoRegular',
-    'DancingScriptRegular',
-    'XFINITYSansTTMedium',
-    'IndieFlower'
-];
-
-let def$7 = Defaults.get(),
-    x$6 = def$7.x,
-    y$6 = def$7.y,
-    template$6 = {}
-;
-
-for (let i in font_faces)
-{
-    template$6['Text_' + i] = Defaults.applyToText({
-        x: x$6,
-        y: y$6,
-        text: {
-            fontFace: font_faces[i],
-            text:     def$7.text.text
-        }
-    }, [
-        'fontSize',
-        'textColor'
-    ]);
-
-    y$6 += (def$7.text.fontSize || def$7.vertical_space) + def$7.vertical_space;
-}
-
-let font_sizes = [6, 8, 10, 16, 30, 50, 100, 150];
-
-let def$8 = Defaults.get(),
-    space$6 = def$8.vertical_space || 30,
-    x$7 = def$8.x,
-    y$7 = def$8.y,
-    template$7 = {}
-;
-
-for (let i in font_sizes)
-{
-    template$7['Text_' + i] = Defaults.applyToText({
-        x: x$7,
-        y: y$7,
-        text: {
-            fontSize: font_sizes[i],
-            text:     def$8.text.text,
-            maxLines: 1
-        }
-    }, [
-        'fontFace',
-        'textColor'
-    ]);
-
-    y$7 += font_sizes[i] + (font_sizes[i] > space$6 ? space$6 : font_sizes[i]);
-}
-
-let font_styles = [
-    false, // attribute will not set
-    'normal',
-    'italic',
-    'bold',
-    'italic bold'
-];
-
-let def$9 = Defaults.get(),
-    x$8 = def$9.x,
-    y$8 = def$9.y,
-    template$8 = {}
-;
-
-for (let i in font_styles)
-{
+for (let i in font_styles) {
     let tpl = {
-        x: x$8,
-        y: y$8,
+        x: x,
+        y: y,
         text: {
-            text: def$9.text.text
+            text: def$1.text.text
         }
     };
 
-    if (font_styles[i] !== false)
-    {
+    if (font_styles[i] !== false) {
         tpl.text.fontStyle = font_styles[i];
     }
 
-    template$8['Text_' + i] = Defaults.applyToText(tpl, [
+    template$2['Text_' + i] = Defaults.applyToText(tpl, [
         'fontFace',
         'fontSize',
         'textColor'
     ]);
 
-    y$8 += (def$9.text.fontSize || def$9.vertical_space) + def$9.vertical_space;
+    y += (def$1.text.fontSize || def$1.vertical_space) + def$1.vertical_space;
 }
-
-let def$a = Defaults.get(),
-    font_size$2 = def$a.text.fontSize || 36
-;
-
-
-let line_heights = [
-    0.5 * font_size$2,
-      1 * font_size$2,
-      2 * font_size$2,
-      3 * font_size$2,
-      4 * font_size$2
-];
-
-
-let space$7 = def$a.vertical_space || 30,
-    x$9 = def$a.x,
-    y$9 = def$a.y,
-    template$9 = {}
-;
-
-for (let i in line_heights)
-{
-    template$9['Text_' + i] = Defaults.applyToText({
-        x: x$9,
-        y: y$9,
-        text: {
-            fontSize:   font_size$2,
-            text:       def$a.text.longText,
-            lineHeight: line_heights[i]
-        }
-    }, [
-        'fontFace',
-        'textColor',
-        'wordWrapWidth',
-        'maxLines'
-    ]);
-
-    y$9 += (def$a.text.maxLines || 5) * line_heights[i] + space$7;
-}
-
-let max_lines$6 = [1, 2, 3, 0];
-
-let def$b = Defaults.get(),
-    space$8 = def$b.vertical_space || 30,
-    x$a = def$b.x,
-    y$a = def$b.y,
-    template$a = {}
-;
-
-for (let i in max_lines$6)
-{
-    template$a['Text_' + i] = Defaults.applyToText({
-        x: x$a,
-        y: y$a,
-        text: {
-            text:     def$b.text.longText,
-            maxLines: max_lines$6[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y$a += (def$b.text.fontSize || space$8) * max_lines$6[i] + space$8;
-}
-
-let max_lines_suffix = [
-    false, // attribute will not set
-    null,  // attribute will set to "null"
-    '',
-    '...',
-    '>>>'
-];
-
-let def$c = Defaults.get(),
-    space$9 = def$c.vertical_space || 30,
-    x$b = def$c.x,
-    y$b = def$c.y,
-    template$b = {}
-;
-
-for (let i in max_lines_suffix)
-{
-    let tpl = {
-        x: x$b,
-        y: y$b,
-        text: {
-            text: def$c.text.longText
-        }
-    };
-
-    if (max_lines_suffix[i] !== false)
-    {
-        tpl.text.maxLinesSuffix = max_lines_suffix[i];
-    }
-
-    template$b['Text_' + i] = Defaults.applyToText(tpl, [
-        'fontFace',
-        'fontSize',
-        'textColor',
-        'wordWrapWidth',
-        'maxLines'
-    ]);
-
-    y$b += (def$c.text.fontSize || space$9) * (def$c.text.maxLines || 5) + space$9;
-}
-
-let offsets = [-50, 0, 50];
-
-let def$d = Defaults.get(),
-    space$a = def$d.vertical_space || 30,
-    x$c = def$d.x,
-    y$c = def$d.y,
-    template$c = {}
-;
-
-for (let i in offsets)
-{
-    template$c['Text_' + i] = Defaults.applyToText({
-        x: x$c,
-        y: y$c,
-        text: {
-            text:    def$d.text.text,
-            offsetX: offsets[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    y$c += (def$d.text.fontSize || space$a) + space$a;
-}
-
-let def$e = Defaults.get(),
-    font_size$3 = def$e.text.fontSize || 36
-;
-
-
-let offsets$1 = [
-    - font_size$3 / 2,
-    0,
-    2 * font_size$3
-];
-
-
-let space$b = def$e.vertical_space || 30,
-    x$d = def$e.x,
-    y$d = def$e.y,
-    max_lines$7 = 3,
-    template$d = {}
-;
-
-for (let i in offsets$1)
-{
-    template$d['Text_' + i] = Defaults.applyToText({
-        x: x$d,
-        y: y$d,
-        text: {
-            fontSize: font_size$3,
-            text:     def$e.text.longText,
-            maxLines: max_lines$7,
-            offsetY:  offsets$1[i]
-        }
-    }, [
-        'fontFace',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y$d += font_size$3 * max_lines$7 + space$b;
-}
-
-let paddings = [-50, 0, 50];
-
-let def$f = Defaults.get(),
-    space$c = def$f.vertical_space || 30,
-    x$e = def$f.x,
-    y$e = def$f.y,
-    template$e = {}
-;
-
-for (let i in paddings)
-{
-    template$e['Text_' + i] = Defaults.applyToText({
-        x: x$e,
-        y: y$e,
-        text: {
-            text:        def$f.text.text,
-            paddingLeft: paddings[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    y$e += (def$f.text.fontSize || space$c) + space$c;
-}
-
-let paddings$1 = [-50, 0, 50];
-
-let def$g = Defaults.get(),
-    space$d = def$g.vertical_space || 30,
-    x$f = def$g.x,
-    y$f = def$g.y,
-    template$f = {}
-;
-
-for (let i in paddings$1)
-{
-    template$f['Text_' + i] = Defaults.applyToText({
-        x: x$f,
-        y: y$f,
-        text: {
-            text:         def$g.text.text,
-            paddingRight: paddings$1[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    y$f += (def$g.text.fontSize || space$d) + space$d;
-}
-
-let text_align = [
-    false, // attribute will not set
-    'left',
-    'center',
-    'right'
-];
-
-let def$h = Defaults.get(),
-    space$e = def$h.vertical_space || 30,
-    x$g = def$h.x,
-    y$g = def$h.y,
-    template$g = {}
-;
-
-for (let i in text_align)
-{
-    let tpl = {
-        x: x$g,
-        y: y$g,
-        text: {
-            text:     def$h.text.text,
-            maxLines: 1,
-        }
-    };
-
-    if (text_align[i] !== false)
-    {
-        tpl.text.textAlign = text_align[i];
-    }
-
-    template$g['Text_1_' + i] = Defaults.applyToText(tpl, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    y$g += (def$h.text.fontSize || space$e) + space$e;
-}
-
-
-let max_lines$8 = 3;
-
-for (let i in text_align)
-{
-    let tpl = {
-        x: x$g,
-        y: y$g,
-        text: {
-            text:     def$h.text.longText,
-            maxLines: max_lines$8
-        }
-    };
-
-    if (text_align[i] !== false)
-    {
-        tpl.text.textAlign = text_align[i];
-    }
-
-    template$g['Text_2_' + i] = Defaults.applyToText(tpl, [
-        'fontFace',
-        'fontSize',
-        'textColor',
-        'wordWrapWidth'
-    ]);
-
-    y$g += (def$h.text.fontSize || space$e) * max_lines$8 + space$e;
-}
-
-let values$6 = [
-    false, // attribute will not set
-    'alphabetic',
-    'top',
-    'hanging',
-    'middle',
-    'ideographic',
-    'bottom'
-];
-
-let def$i = Defaults.get(),
-    text = 'Wqfegl',
-    font_size$4 = def$i.text.fontSize || 36,
-    text_width_with_space = 6 /* quantity of chars */ * (0.69 * font_size$4),
-    x$h = def$i.x,
-    y$h = def$i.y,
-    template$h = {
-        TopLine: {
-            x: 0, y: y$h, w: 1100, h: 1, rect: true
-        },
-        BottomLine: {
-            x: 0, y: y$h + font_size$4, w: 1100, h: 1, rect: true
-        }
-    }
-;
-
-for (let i in values$6)
-{
-    let tpl = {
-        x: x$h,
-        y: y$h,
-        text: {
-            fontSize: font_size$4,
-            text:     text
-        }
-    };
-
-    if (values$6[i] !== false)
-    {
-        tpl.text.textBaseline = values$6[i];
-    }
-
-    template$h['Text_' + i] = Defaults.applyToText(tpl, [
-        'fontFace',
-        'textColor'
-    ]);
-
-    x$h += text_width_with_space;
-}
-
-let text_colors = [
-    false,      // attribute will not set
-    0xff0000ff,
-    0xff00ff00,
-    0xffffff00
-];
-
-let def$j = Defaults.get(),
-    space$f = def$j.vertical_space || 30,
-    x$i = def$j.x,
-    y$i = def$j.y,
-    template$i = {}
-;
-
-for (let i in text_colors)
-{
-    let tpl = {
-        x: x$i,
-        y: y$i,
-        text: {
-            text: def$j.text.text
-        }
-    };
-
-    if (text_colors[i] !== false)
-    {
-        tpl.text.textColor = text_colors[i];
-    }
-
-    template$i['Text_' + i] = Defaults.applyToText(tpl, [
-        'fontFace',
-        'fontSize'
-    ]);
-
-    y$i += (def$j.text.fontSize || space$f) + space$f;
-}
-
-let word_wrap_widths = [
-    0,
-    200,
-    400,
-    800
-];
-
-let def$k = Defaults.get(),
-    space$g = def$k.vertical_space || 30,
-    x$j = def$k.x,
-    y$j = def$k.y,
-    template$j = {}
-;
-
-for (let i in word_wrap_widths)
-{
-    template$j['Text_' + i] = Defaults.applyToText({
-        x: x$j,
-        y: y$j,
-        text: {
-            text:          def$k.text.longText,
-            wordWrapWidth: word_wrap_widths[i]
-        }
-    }, [
-        'fontFace',
-        'fontSize',
-        'textColor',
-        'maxLines'
-    ]);
-
-    y$j += (def$k.text.maxLines || 5) * (def$k.text.fontSize || space$g) + space$g;
-}
-
-let def$l = Defaults.get(),
-    x$k = def$l.x,
-    y$k = def$l.y,
-    template$k = {}
-;
-
-
-let values$7 = [{
-    textAlign: 'left'
-}, {
-    textAlign: 'center',
-    cutSx: 20,
-    cutSy: 60
-}, {
-    textAlign: 'right',
-    cutSx: 20,
-    cutSy: 60,
-    cutEx: 220,
-    cutEy: 250
-}];
-
 
 /*
- * Set common values
- */
-
-for (let i in values$7)
-{
-    values$7[i].text          = def$l.text.longText;
-    values$7[i].wordWrapWidth = 400;
-    values$7[i].lineHeight    = 60;
-    values$7[i].offsetY       = -45;
-    values$7[i].paddingLeft   = -15;
-    values$7[i].paddingRight  = 500;
-}
-
-
-/*
- * Test with maxLines
- */
-
-for (let i in values$7)
-{
-    let tpl = {
-        x: x$k,
-        y: y$k,
-        text: JSON.parse(JSON.stringify(values$7[i]))
-    };
-
-    tpl.text.maxLines = 4;
-
-    template$k['Text_1_' + i] = Defaults.applyToText(tpl, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    x$k += 450;
-}
-
-
-/*
- * Test without maxLines
- */
-
-x$k  = def$l.x;
-y$k += 300;
-
-for (let i in values$7)
-{
-    let tpl = {
-        x: x$k,
-        y: y$k,
-        text: JSON.parse(JSON.stringify(values$7[i]))
-    };
-
-    template$k['Text_2_' + i] = Defaults.applyToText(tpl, [
-        'fontFace',
-        'fontSize',
-        'textColor'
-    ]);
-
-    x$k += 450;
-}
-
-// import test_text_old from './tests/text-old.js';
-
-
-let test_template = template$8;
-
+import test_template from './import/text-cut-e-x.js';
+import test_template from './import/text-cut-e-y.js';
+import test_template from './import/text-cut-s-e-x.js';
+import test_template from './import/text-cut-s-e-y.js';
+import test_template from './import/text-cut-s-x.js';
+import test_template from './import/text-cut-s-y.js';
+import test_template from './import/text-font-face.js';
+import test_template from './import/text-font-size.js';
+import test_template from './import/text-line-height.js';
+import test_template from './import/text-max-lines.js';
+import test_template from './import/text-max-lines-suffix.js';
+import test_template from './import/text-offset-x.js';
+import test_template from './import/text-offset-y.js';
+import test_template from './import/text-padding-left.js';
+import test_template from './import/text-padding-right.js';
+import test_template from './import/text-text-align.js';
+import test_template from './import/text-text-baseline.js';
+import test_template from './import/text-text-color.js';
+import test_template from './import/text-word-wrap-width.js';
+import test_template from './import/text-padding-offset-cut-max-lines.js';
+*/
 
 class MyApp extends ux$1.App {
     static getFonts() {
         return [
             {family: 'RobotoBold', url: MyApp.getPath('fonts/Roboto-Bold.ttf'), descriptors: {}}
-            , {family: 'RobotoBoldItalic', url: MyApp.getPath('fonts/Roboto-BoldItalic.ttf'), descriptors: {}}
-            , {family: 'RobotoBlack', url: MyApp.getPath('fonts/Roboto-Black.ttf'), descriptors: {}}
-            , {family: 'RobotoItalic', url: MyApp.getPath('fonts/Roboto-Italic.ttf'), descriptors: {}}
-            , {family: 'RobotoLight', url: MyApp.getPath('fonts/Roboto-Light.ttf'), descriptors: {}}
             , {family: 'RobotoRegular', url: MyApp.getPath('fonts/Roboto-Regular.ttf'), descriptors: {}}
             , {family: 'DancingScriptRegular', url: MyApp.getPath('fonts/DancingScript-Regular.ttf'), descriptors: {}}
             , {family: 'XFINITYSansTTMedium', url: MyApp.getPath('fonts/XFINITYSansTT-Medium.ttf'), descriptors: {}}
@@ -24324,7 +23466,7 @@ class MyApp extends ux$1.App {
     static _template() {
         return {
             BackgroundImage: {src: MyApp.getPath('bg-grayscale-1080p.png')},
-            Test: test_template
+            Test: template$2
         };
     }
 }
