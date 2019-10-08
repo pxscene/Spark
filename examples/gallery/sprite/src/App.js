@@ -52,6 +52,8 @@ export default class MyApp extends ux.App {
             ImageTexture8: { type:lng.ImageTexture, 
                 quadsList: shared.SpriteQuadList3, 
                 bottom:128, left:0.05, top:215, right:84, x:300, y:100},
+            TextTexture1: { type:lng.TextTexture,
+                text:{text:"XYZ"}, x:400, y:100},
         };
     }
 }
