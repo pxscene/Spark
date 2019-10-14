@@ -1,3 +1,4 @@
+#version 110  // OpenGL ES 2.0
 
 #ifdef GL_ES
   precision mediump float;
