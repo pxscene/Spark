@@ -79,11 +79,17 @@ px.import({scene: "px:scene.1.js",
   let PX_RESOURCE_STATUS_OK              = 0    //         <<<<< GLSL Compiler Result - OK
   let PX_RESOURCE_STATUS_DECODE_FAILURE  = 4    //         <<<<< GLSL Compiler Result - ERROR (expected)
 
-  var direct_URL   = base + "/shaderTests/directTest.js"
-  var single_URL   = base + "/shaderTests/singlepassTest.js"
-  var multi_URL    = base + "/shaderTests/multipassTest.js"
-  var uniforms_URL = base + "/shaderTests/UniformsTest.js"
-  var bind_URL     = base + "/shaderTests/bindTest.js"
+  // var direct_URL   = base + "/shaderTests/directTest.js"
+  // var single_URL   = base + "/shaderTests/singlepassTest.js"
+  // var multi_URL    = base + "/shaderTests/multipassTest.js"
+  // var uniforms_URL = base + "/shaderTests/UniformsTest.js"
+  // var bind_URL     = base + "/shaderTests/bindTest.js"
+
+  var direct_URL   = base + "/shaderTests/directTest_inline.js"
+  var single_URL   = base + "/shaderTests/singlepassTest_inline.js"
+  var multi_URL    = base + "/shaderTests/multipassTest_inline.js"
+  var uniforms_URL = base + "/shaderTests/UniformsTest_inline.js"
+  var bind_URL     = base + "/shaderTests/bindTest_inline.js"
 
   var PASSED = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAACHCAYAAAAoctTrAAABp0lEQVR4nO3VsQ2DUBAFQWPRM5QAVePUIcJCn5Vn4gtesrrXCwAAAAAAAAAAgN9Mpy+37bhxB/BtXU+1+b57B3AfAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBA2jx7wBMeyjJ7ABdO+j54wnA8MYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjC5tEDnmDa99ET4BIfGMIEDGEChjABQ5iAIUzAECZgCBMwhAkYwgQMYQKGMAFDmIAhTMAQJmAIEzCECRjCBAxhAoYwAUOYgCFMwBAmYAgTMIQJGMIEDGEChjABAwAAAAAAAAAAAH/sA3PtB/2R0gFhAAAAAElFTkSuQmCC";
 
@@ -480,7 +486,7 @@ px.import({scene: "px:scene.1.js",
       });
     },
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+/*
     test_sourcePermutation3: function()   // TEST 6 ... Frg: URL, Vtx: (default)
     {
       var results  = [];
@@ -679,7 +685,7 @@ px.import({scene: "px:scene.1.js",
         });
       });
     }
-
+*/
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   }//tests
