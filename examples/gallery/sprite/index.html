@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<script type="module">
+    import DevLauncher from "./node_modules/wpe-lightning-sdk/DevLauncher.js";
+    import MyApp from "./src/App.js";
+
+    const launcher = new DevLauncher();
+    launcher.launch(MyApp, {debug: false}, {useInspector: false})
+</script>
+</body>
+</html>

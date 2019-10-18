@@ -1,0 +1,12 @@
+{
+    "author": "Comcast",
+    "name": "SimpleApp",
+    "version": "1.0.0",
+    "dependencies": {
+        "wpe-lightning-sdk": "git+https://github.com/ashwinikalokhe/Lightning-SDK.git#XRE2-2167"
+    },
+    "scripts": {
+        "release-web": "node ./node_modules/wpe-lightning-sdk/scripts/release-web.js",
+        "release-spark": "node ./node_modules/wpe-lightning-sdk/scripts/release-spark.js"
+    }
+}
