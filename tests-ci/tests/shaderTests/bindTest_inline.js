@@ -9,6 +9,8 @@ px.import({       scene: 'px:scene.1.js'
   var hh    = scene.h - 20;
 
   var vert_src = `data:text/plain,
+                    #version 110  // OpenGL ES 2.0
+
                     #ifdef GL_ES
                       precision mediump float;
                     #endif
@@ -31,7 +33,10 @@ px.import({       scene: 'px:scene.1.js'
 
   // FROM: https://www.shadertoy.com/view/Ms3SRf
   var frag_src1 =
-                  `data:text/plain,
+                  `
+                  #version 110  // OpenGL ES 2.0
+
+                  data:text/plain,
 
                   #ifdef GL_ES
                     precision mediump float;
@@ -108,6 +113,8 @@ px.import({       scene: 'px:scene.1.js'
   var bg         = scene.create({ t: 'rect', parent: root, x:  10,  y:   10, w:   ww, h: hh, fillColor: '#088', interactive: false});
   var rect       = scene.create({ t: 'rect', parent: bg,   x: ww/2, y: hh/2, w: ww/2, h: hh/2, px: 0.5, py: 0.5, fillColor: '#111', interactive: false });
 
+  var pix   = Promise.all([texture0_IMG.ready, texture1_IMG.ready, texture2_IMG.ready, texture3_IMG.ready]);
+
   var fx    = scene.create({
                                t:'shaderResource',
                         fragment: frag_src,
@@ -122,7 +129,7 @@ px.import({       scene: 'px:scene.1.js'
                         }
                     });
 
-      fx.ready.then( () =>
+      Promise.all([pix.ready, fx.ready ]).then( () =>
       {
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         rect.effect =

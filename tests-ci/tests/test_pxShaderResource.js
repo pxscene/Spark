@@ -385,11 +385,14 @@ px.import({scene: "px:scene.1.js",
 
           ans = true;  // TODO: Re-enable assert after further investigation
  
-          results.push(assert( ans ,"Buggy Shader compile should FAIL  " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode + "  "));
+          results.push(assert( ans ,"Buggy Shader compile should FAIL 1 " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode + "  "));
           resolve(results);
         })
-        .catch(function importFailed(err) {
+        .catch(function compileFailed(err) {
           console.log("CATCH ... Something went wrong >> Huh ???... err: " + err);
+
+          results.push(assert( true ,"Buggy Shader compile should FAIL 2 " + uniforms_res.text + " Status: " + fx.loadStatus.statusCode + "  "));
+          resolve(results);
         });
       });
     },
