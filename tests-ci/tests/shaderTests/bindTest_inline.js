@@ -9,7 +9,7 @@ px.import({       scene: 'px:scene.1.js'
   var hh    = scene.h - 20;
 
   var vert_src = `data:text/plain,
-                    #version 110  // OpenGL ES 2.0
+                   // #version 110  // OpenGL ES 2.0
 
                     #ifdef GL_ES
                       precision mediump float;
@@ -34,7 +34,7 @@ px.import({       scene: 'px:scene.1.js'
   // FROM: https://www.shadertoy.com/view/Ms3SRf
   var frag_src1 =
                   `
-                  #version 110  // OpenGL ES 2.0
+                  // #version 110  // OpenGL ES 2.0
 
                   data:text/plain,
 
