@@ -22,19 +22,21 @@ var beforeStart = function() {
   });
   return promise;
 }
-
+var type = "textCanvas";
+                               
 var tests = {
 
   testFontUrlGetter: function() {
     return new Promise(function(resolve, reject) {
       var results = [];
-      var text = scene.create({t:"textCanvas",
+      var text = scene.create({t:type,
                                fontUrl:fontUrl,
                                parent:root, 
                                text:"Simple Text",
                                x:40, y:80 });
 
       text.ready.then( function(obj) {
+        
         results.push(assert(text.fontUrl===fontUrl,"Text fontUrl property was not as expected."));
       }, function failure() {
         results.push(assert(false,"Text got rejected promise, so test could not proceed."));
@@ -47,7 +49,7 @@ var tests = {
   testFontUrlGetter2: function() {
     return new Promise(function(resolve, reject) {
       var results = [];
-      var text2 = scene.create({t:"textCanvas",
+      var text2 = scene.create({t:type,
                                fontUrl:fontUrl,
                                parent:root, 
                                text:"Simple Text",
@@ -67,7 +69,7 @@ var tests = {
     return new Promise(function(resolve, reject) {
       fontResource.ready.then(function() { // Make sure fontResource is ready
         var results = [];
-        var text3 = scene.create({t:"textCanvas",
+        var text3 = scene.create({t:type,
                                 font:fontResource,
                                 parent:root, 
                                 text:"Simple Text",
@@ -88,7 +90,7 @@ var tests = {
     return new Promise(function(resolve, reject) {
       fontResource.ready.then(function() { // Make sure fontResource is ready
         var results = [];
-        var text4 = scene.create({t:"textCanvas",
+        var text4 = scene.create({t:type,
                                 font:fontResource,
                                 parent:root, 
                                 text:"Simple Text",
@@ -109,7 +111,7 @@ var tests = {
   testTextColor: function() {
     return new Promise(function(resolve, reject) {
       var results = [];
-      var text5 = scene.create({t:"textCanvas",
+      var text5 = scene.create({t:type,
                               font:fontResource,
                               parent:root, 
                               text:"Simple Text",
@@ -130,7 +132,7 @@ var tests = {
   testTextColorSetGet: function() {
     return new Promise(function(resolve, reject) {
       var results = [];
-      var text6 = scene.create({t:"textCanvas",
+      var text6 = scene.create({t:type,
                               font:fontResource,
                               parent:root, 
                               text:"Simple Text",
@@ -150,7 +152,6 @@ var tests = {
       });
     });
   }
-
 }
 module.exports.tests = tests;
 module.exports.beforeStart = beforeStart;
