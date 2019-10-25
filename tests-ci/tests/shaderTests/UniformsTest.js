@@ -68,7 +68,12 @@ px.import({       scene: 'px:scene.1.js'
         //   RESULT:  #FFF ... unless any SET UNIFORM fails.  Then the failure is *uniquely* colored.
         //
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      }, () =>
+      {
+        resolve("REJECT >> (UniformsTests.js) "); // signal that  rejected
       }); // READY
+
+
     });
   }//reallyReady()
 
