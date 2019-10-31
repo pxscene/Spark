@@ -8,9 +8,7 @@ px.import({       scene: 'px:scene.1.js'
   var ww    = scene.w - 20;
   var hh    = scene.h - 20;
 
-  var src   =  `#version 110  // OpenGL ES 2.0
-
-                #ifdef GL_ES
+  var src   =  `#ifdef GL_ES
                   precision mediump float;
                 #endif
 
