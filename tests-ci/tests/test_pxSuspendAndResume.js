@@ -43,6 +43,9 @@ var tests = {
           results.push(assert(status == "RUNNING", "test_pxSuspendAndResume: application is failed to RESUME"));
           
           resolve(results);
+      }, function(err) {
+          results.push(assert(false,"app creation failed"));
+          resolve(results);
       });// test promise()
     });
   }
