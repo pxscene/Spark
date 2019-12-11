@@ -22,7 +22,7 @@ px.import({
     let Logger = imports.log.Logger;
     let setLoggingLevel = imports.log.setLoggingLevel;
     let logger = new Logger('XRE2-1555');
-    let rtLogLevel = process.env.RT_LOG_LEVEL ? process.env.RT_LOG_LEVEL : 'debug';
+    let rtLogLevel = process.env.RT_LOG_LEVEL ? process.env.RT_LOG_LEVEL : 'info';
     setLoggingLevel(rtLogLevel);
 
     let doScreenshot = false;
@@ -58,27 +58,27 @@ px.import({
             Promise.all([IndieFlower_font.ready, DejaVu_font.ready]).then(function () {
                 message = 'promise resolved received for IndieFlower_font and DejaVu_font';
                 results.push(assert(true, message));
-                logger.message('debug', message);
+                logger.message('info', message);
             }, function () {
                 message = 'rejection not expected for IndieFlower_font or DejaVu_font';
                 results.push(assert(false, message));
-                logger.message('debug', message);
+                logger.message('info', message);
 
             })
                 .then(function () {
                     Invalid_font.ready.then(function resolve() {
                         message = 'rejection expected for Invalid_font, but promise resolved';
                         results.push(assert(false, message));
-                        logger.message('debug', message);
+                        logger.message('info', message);
                     }, function () {
                         message = 'rejection expected and received for Invalid_font';
                         results.push(assert(true, message));
-                        logger.message('debug', message);
+                        logger.message('info', message);
 
                     }).catch(function (error) {
                         message = 'unexpected exception in beforeStart! ' + error;
                         results.push(assert(false, message));
-                        logger.message('debug', message);
+                        logger.message('info', message);
                         resolve(results);
                     });
                 })
@@ -98,7 +98,7 @@ px.import({
 
             let timer = setTimeout(function () {
                 message = params.name + ' never got promise!';
-                logger.message('debug', message);
+                logger.message('info', message);
                 results.push(assert(false, message));
                 resolve(results);
             }, 3000);
@@ -108,17 +108,17 @@ px.import({
             } catch (exception) {
                 message = params.name + ': ' + params.exception.message;
                 results = assert(params.exception.assert, message);
-                logger.message('debug', message);
+                logger.message('info', message);
                 resolve(results);
             }
             textBox.ready.then(function () {
                 message = params.name + ': ' + params.fulfilled.message;
                 results = assert(params.fulfilled.assert, message);
-                logger.message('debug', message);
+                logger.message('info', message);
             }, function () {
                 message = params.name + ': ' + params.rejected.message;
                 results = assert(params.rejected.assert, message);
-                logger.message('debug', message);
+                logger.message('info', message);
             }).then(function () {
                 clearTimeout(timer);
                 resolve(results);
