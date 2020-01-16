@@ -19,16 +19,15 @@ px.import({scene: "px:scene.1.js",
 
   var manualTest = manual.getManualTestValue();
 
-  // if( scene.capabilities                  == undefined ||
-  //     scene.capabilities.graphics         == undefined ||
-  //     scene.capabilities.graphics.shaders == undefined ||
-  //     scene.capabilities.graphics.shaders < 1)
-  // {
-  //   // Shader is not supported...
-  //   console.error("DIRECT >> scene.capabilities.graphics.shaders ... shaderResource is NOT supported");
+  if( scene.capabilities               == undefined ||
+      scene.capabilities.font          == undefined ||
+      scene.capabilities.font.fallback == undefined ||
+      scene.capabilities.font.fallback < 1)
+  {
+    console.error("DIRECT >> scene.capabilities.font.fallback ... Fallback FONT is NOT supported");
 
-  //   return;
-  // }
+    return;
+  }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
