@@ -31,9 +31,9 @@ px.import({scene: "px:scene.1.js",
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-RegularOnly.ttf' });        // SIMPLIFIED   (from Google Fonts)
-  var scf      = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-Regular.ttf' });            // SIMPLIFIED   (from Google Fonts)
-  var tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/Noto_Sans_TC/NotoSansTC-Medium.ttf' }); // TRADITIONAL  (from Google Fonts)
+  var scf_only = null;
+  var scf      = null;
+  var tcf      = null;
 
   // NOTE:
   // NOTE:   Renamed "NotoSansTC-Medium.otf"  OpenType ... to  "NotoSansTC-Medium.ttf"  ... to load in Spark .. FreeType seems to prefer TTF
@@ -42,6 +42,31 @@ px.import({scene: "px:scene.1.js",
   let pts   = 30;
   let gap   = '   +   '; //'...+...';
   let txt   = '这是简体中文' + gap /* "This is simplified Chinese" */ + '這是繁體中文' /* "This is traditional Chinese" */;
+
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  var beforeStart = function()
+  {
+    console.log("test_fallbackFont.js ...  beforeStart()!");
+
+    scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-RegularOnly.ttf' });        // SIMPLIFIED   (from Google Fonts)
+    scf      = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-Regular.ttf' });            // SIMPLIFIED   (from Google Fonts)
+    tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/Noto_Sans_TC/NotoSansTC-Medium.ttf' }); // TRADITIONAL  (from Google Fonts)
+
+    var promise = new Promise(function(resolve, reject)
+    {
+      Promise.all([ scf_only.ready, scf.ready, tcf.ready
+      ]).then( () =>
+      {
+        resolve("RESOLVE: beforeStart");
+      },
+      function rejection(exception)
+      {
+        resolve("REJECT: beforeStart");
+      })
+    });
+    return promise;
+  }
 
   var tests =
   {
@@ -88,7 +113,7 @@ px.import({scene: "px:scene.1.js",
         },
         function rejection(exception)
         {
-          results.push(assert(false, "fallbackFont failed : "+exception));
+          results.push(assert(false, "REJECT: fallbackFont failed : " + exception));
           resolve(results);
 
         })
@@ -98,13 +123,14 @@ px.import({scene: "px:scene.1.js",
 
   }//tests
 
+  module.exports.beforeStart = beforeStart;
   module.exports.tests = tests;
 
   if(manualTest === true)
   {
     console.log("runTestsManually...");
-    manual.runTestsManually(tests);
 
+    manual.runTestsManually(tests, beforeStart);
   }
 
 }).catch(function importFailed(err) {
