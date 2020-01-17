@@ -86,11 +86,12 @@ px.import({scene: "px:scene.1.js",
 
           resolve(results);
         },
-        function rejection(exception) {
+        function rejection(exception)
+        {
           results.push(assert(false, "fallbackFont failed : "+exception));
-        }).then(function() {
           resolve(results);
-        });
+
+        })
       });//PROMISE
     }
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
