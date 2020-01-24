@@ -104,10 +104,8 @@ px.import({scene: "px:scene.1.js",
         Promise.all([ unbacked.ready, backed.ready
         ]).then( () =>
         {
-          var mu = unbacked.measureText();
-          var mb =   backed.measureText();
-
-          results.push(assert(mu.charLast.x > mb.charLast.x, "Fallback font CORRECTLY used"));
+          var ans = (backed.font.fallbackGlyphsCount == 12);
+          results.push(assert(ans, "Fallback font - fallbackGlyphsCount count is " + (ans ? "CORRECT" : "INCORRECT") ));
 
           resolve(results);
         },
