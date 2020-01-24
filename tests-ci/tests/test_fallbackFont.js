@@ -31,10 +31,6 @@ px.import({scene: "px:scene.1.js",
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var scf_only = null;
-  var scf      = null;
-  var tcf      = null;
-
   // NOTE:
   // NOTE:   Renamed "NotoSansTC-Medium.otf"  OpenType ... to  "NotoSansTC-Medium.ttf"  ... to load in Spark .. FreeType seems to prefer TTF
   // NOTE:
@@ -45,29 +41,6 @@ px.import({scene: "px:scene.1.js",
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var beforeStart = function()
-  {
-    console.log("test_fallbackFont.js ...  beforeStart()!");
-
-    scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-RegularOnly.ttf' });        // SIMPLIFIED   (from Google Fonts)
-    scf      = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-Regular.ttf' });            // SIMPLIFIED   (from Google Fonts)
-    tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/Noto_Sans_TC/NotoSansTC-Medium.ttf' }); // TRADITIONAL  (from Google Fonts)
-
-    var promise = new Promise(function(resolve, reject)
-    {
-      Promise.all([ scf_only.ready, scf.ready, tcf.ready
-      ]).then( () =>
-      {
-        resolve("RESOLVE: beforeStart");
-      },
-      function rejection(exception)
-      {
-        resolve("REJECT: beforeStart");
-      })
-    });
-    return promise;
-  }
-
   var tests =
   {
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -77,11 +50,15 @@ px.import({scene: "px:scene.1.js",
       {
         var results  = [];
 
+        var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-RegularOnly.ttf' });        // SIMPLIFIED   (from Google Fonts)
+        var scf      = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-Regular.ttf' });            // SIMPLIFIED   (from Google Fonts)
+        var tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/Noto_Sans_TC/NotoSansTC-Medium.ttf' }); // TRADITIONAL  (from Google Fonts)
+
         ///////////////////////////////////////////////////////////////////////////////////////////////
         //
         // NO-FALLBACK FONT
 
-        var unbacked = scene.create({t:'textBox', parent: root, x: 100, y: 100, 
+        var unbacked = scene.create({ id: 'unbacked', t:'textBox', parent: root, x: 100, y: 100, 
               pixelSize: pts, textColor: '#fff', font: scf_only, text: txt, interactive: false,
               alignVertical:   scene.alignVertical.CENTER,
               alignHorizontal: scene.alignHorizontal.LEFT});
@@ -94,14 +71,14 @@ px.import({scene: "px:scene.1.js",
         //
         // WITH-FALLBACK FONT
 
-        var backed = scene.create({t:'textBox', parent: root,  x: 100, y: 150, 
+        var backed = scene.create({ id: 'backed', t:'textBox', parent: root,  x: 100, y: 150, 
                                     pixelSize: pts, textColor: '#fff', font: scf, text: txt, interactive: false,
                                     alignVertical:   scene.alignVertical.CENTER,
                                     alignHorizontal: scene.alignHorizontal.LEFT});
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
-        Promise.all([ unbacked.ready, backed.ready
+        Promise.all([ scf_only.ready, scf.ready, tcf.ready, unbacked.ready, backed.ready
         ]).then( () =>
         {
           var count = backed.font.fallbackGlyphsCount;
@@ -112,7 +89,7 @@ px.import({scene: "px:scene.1.js",
         },
         function rejection(exception)
         {
-          results.push(assert(false, "REJECT: fallbackFont failed : " + exception));
+          results.push(assert(false, "REJECT: fallbackFont failed   id: " + exception.id));
           resolve(results);
 
         })
@@ -122,14 +99,13 @@ px.import({scene: "px:scene.1.js",
 
   }//tests
 
-  module.exports.beforeStart = beforeStart;
   module.exports.tests = tests;
 
   if(manualTest === true)
   {
     console.log("runTestsManually...");
 
-    manual.runTestsManually(tests, beforeStart);
+    manual.runTestsManually(tests);
   }
 
 }).catch(function importFailed(err) {
