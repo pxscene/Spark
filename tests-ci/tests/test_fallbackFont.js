@@ -58,7 +58,7 @@ px.import({scene: "px:scene.1.js",
         //
         // NO-FALLBACK FONT
 
-        var unbacked = scene.create({ id: 'unbacked', t:'textBox', parent: root, x: 100, y: 100, 
+        var unbacked = scene.create({ id: 'unbacked', t:'textBox', parent: root, x: 100, y: 100,
               pixelSize: pts, textColor: '#fff', font: scf_only, text: txt, interactive: false,
               alignVertical:   scene.alignVertical.CENTER,
               alignHorizontal: scene.alignHorizontal.LEFT});
@@ -71,7 +71,7 @@ px.import({scene: "px:scene.1.js",
         //
         // WITH-FALLBACK FONT
 
-        var backed = scene.create({ id: 'backed', t:'textBox', parent: root,  x: 100, y: 150, 
+        var backed = scene.create({ id: 'backed', t:'textBox', parent: root,  x: 100, y: 150,
                                     pixelSize: pts, textColor: '#fff', font: scf, text: txt, interactive: false,
                                     alignVertical:   scene.alignVertical.CENTER,
                                     alignHorizontal: scene.alignHorizontal.LEFT});
@@ -89,7 +89,7 @@ px.import({scene: "px:scene.1.js",
         },
         function rejection(exception)
         {
-          results.push(assert(false, "REJECT: fallbackFont failed   id: " + exception.id));
+          results.push(assert(false, "REJECT: fallbackFont failed   id: " + exception));
           resolve(results);
 
         })
