@@ -105,7 +105,7 @@ px.import({scene: "px:scene.1.js",
         ]).then( () =>
         {
           var ans = (backed.font.fallbackGlyphsCount == 2);
-          results.push(assert(ans, "Fallback font - fallbackGlyphsCount count is " + (ans ? "CORRECT" : "INCORRECT") ));
+          results.push(assert(ans, "Fallback font - fallbackGlyphsCount: ( "+backed.font.fallbackGlyphsCount+" == 2) ... is " + (ans ? "CORRECT" : "INCORRECT") ));
 
           resolve(results);
         },
