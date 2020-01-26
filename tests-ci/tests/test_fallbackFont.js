@@ -48,6 +48,7 @@ px.import({scene: "px:scene.1.js",
     {
       return new Promise(function(resolve, reject)
       {
+        var backed   = null;
         var results  = [];
 
         var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-RegularOnly.ttf' });        // SIMPLIFIED   (from Google Fonts)
@@ -58,28 +59,41 @@ px.import({scene: "px:scene.1.js",
         //
         // NO-FALLBACK FONT
 
-        var unbacked = scene.create({ id: 'unbacked', t:'textBox', parent: root, x: 100, y: 100,
-              pixelSize: pts, textColor: '#fff', font: scf_only, text: txt, interactive: false,
-              alignVertical:   scene.alignVertical.CENTER,
-              alignHorizontal: scene.alignHorizontal.LEFT});
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////
-
-        scf.fallbackFont = tcf; // assign FALLBACK font !!!
+        scf_only.ready.then( () =>
+        {
+          var unbacked = scene.create({ id: 'unbacked', t:'textBox', parent: root, x: 100, y: 100,
+                pixelSize: pts, textColor: '#fff', font: scf_only, text: txt, interactive: false,
+                alignVertical:   scene.alignVertical.CENTER,
+                alignHorizontal: scene.alignHorizontal.LEFT});
+        });
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
         //
         // WITH-FALLBACK FONT
+        //
+        scf.ready.then( () =>
+        {
+          tcf.ready.then( () =>
+          {
+            //
+            // Assign the FALLBACK font
+            //
+            scf.fallbackFont = tcf; // assign FALLBACK font !!!
 
-        var backed = scene.create({ id: 'backed', t:'textBox', parent: root,  x: 100, y: 150,
-                                    pixelSize: pts, textColor: '#fff', font: scf, text: txt, interactive: false,
-                                    alignVertical:   scene.alignVertical.CENTER,
-                                    alignHorizontal: scene.alignHorizontal.LEFT});
+            backed = scene.create({ id: 'backed', t:'textBox', parent: root,  x: 100, y: 150,
+              pixelSize: pts, textColor: '#fff', font: scf, text: txt, interactive: false,
+              alignVertical:   scene.alignVertical.CENTER,
+              alignHorizontal: scene.alignHorizontal.LEFT});
+          },
+          (err) =>
+          {
+            console.log("PRIMARY font 'scf' NOT ready ... unexpected.")
+          });
+        });
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
-        Promise.all([ scf_only.ready, scf.ready, tcf.ready, unbacked.ready, backed.ready
-        ]).then( () =>
+        backed.ready.then( () =>
         {
           var count = backed.font.fallbackGlyphsCount;
           var ans   = (count == 2);
