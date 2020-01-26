@@ -84,6 +84,25 @@ px.import({scene: "px:scene.1.js",
               pixelSize: pts, textColor: '#fff', font: scf, text: txt, interactive: false,
               alignVertical:   scene.alignVertical.CENTER,
               alignHorizontal: scene.alignHorizontal.LEFT});
+
+              backed.ready.then( () =>
+              {
+                var count = backed.font.fallbackGlyphsCount;
+                var ans   = (count == 2);
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                // TEST !
+                //
+                results.push(assert(ans, "Fallback font - fallbackGlyphsCount: ( "+count+" == 2) ... is " + (ans ? "CORRECT" : "INCORRECT") ));
+
+                resolve(results);
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+              },
+              function rejection(exception)
+              {
+                results.push(assert(false, "REJECT: fallbackFont failed   id: " + exception));
+                resolve(results);
+              })
           },
           (err) =>
           {
@@ -92,21 +111,6 @@ px.import({scene: "px:scene.1.js",
         });
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
-
-        backed.ready.then( () =>
-        {
-          var count = backed.font.fallbackGlyphsCount;
-          var ans   = (count == 2);
-          results.push(assert(ans, "Fallback font - fallbackGlyphsCount: ( "+count+" == 2) ... is " + (ans ? "CORRECT" : "INCORRECT") ));
-
-          resolve(results);
-        },
-        function rejection(exception)
-        {
-          results.push(assert(false, "REJECT: fallbackFont failed   id: " + exception));
-          resolve(results);
-
-        })
       });//PROMISE
     }
     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
