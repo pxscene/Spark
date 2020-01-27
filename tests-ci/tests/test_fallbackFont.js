@@ -31,16 +31,8 @@ px.import({scene: "px:scene.1.js",
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  // NOTE:
-  // NOTE:   Renamed "NotoSansTC-Medium.otf"  OpenType ... to  "NotoSansTC-Medium.ttf"  ... to load in Spark .. FreeType seems to prefer TTF
-  // NOTE:
-
-  let pts   = 30;
-  let gap   = '   +   '; //'...+...';
-  // let txt   = '这是简体中文' + gap /* "This is simplified Chinese" */ + '這是繁體中文' /* "This is traditional Chinese" */;
-  // let glyphs_missing = 2;
-
-  let txt = "I have no A glyph";
+  let pts            = 30;
+  let txt            = "I have no A glyph";
   let glyphs_missing = 1;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -54,15 +46,9 @@ px.import({scene: "px:scene.1.js",
         var backed   = null;
         var results  = [];
 
-        // var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-RegularOnly.ttf' });        // SIMPLIFIED   (from Google Fonts)
-        // var scf      = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-Regular.ttf' });            // SIMPLIFIED   (from Google Fonts)
-        // var tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/Noto_Sans_TC/NotoSansTC-Medium.ttf' }); // TRADITIONAL  (from Google Fonts)
-
-
         var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/FreeSansMissingA_only.ttf' });
         var scf      = scene.create({ t: 'fontResource', url: base + '/fonts/FreeSansMissingA.ttf' });  // Hacked to remove "A" glyph
         var tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/FreeSans.ttf' });
-
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
         //
