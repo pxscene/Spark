@@ -71,7 +71,7 @@ px.import({scene: "px:scene.1.js",
           console.log("NO-FALLBACK FONT font 'scf_only' NOT ready ... unexpected.")
           results.push(assert(false, "NO-FALLBACK FONT font 'scf_only' NOT ready ... unexpected."));
           resolve(results);
-        }););
+        });
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
         //
