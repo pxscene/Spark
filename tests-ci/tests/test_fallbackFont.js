@@ -106,8 +106,16 @@ px.import({scene: "px:scene.1.js",
           },
           (err) =>
           {
-            console.log("PRIMARY font 'scf' NOT ready ... unexpected.")
+            console.log("FALLBACK font 'tcf' NOT ready ... unexpected.")
+            results.push(assert(false, "FALLBACK font 'scf' NOT ready ... unexpected."));
+            resolve(results);
           });
+        },
+        (err) =>
+        {
+          console.log("PRIMARY font 'scf' NOT ready ... unexpected.")
+          results.push(assert(false, "PRIMARY font 'scf' NOT ready ... unexpected."));
+          resolve(results);
         });
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
