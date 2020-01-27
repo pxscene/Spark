@@ -37,8 +37,11 @@ px.import({scene: "px:scene.1.js",
 
   let pts   = 30;
   let gap   = '   +   '; //'...+...';
-  let txt   = '这是简体中文' + gap /* "This is simplified Chinese" */ + '這是繁體中文' /* "This is traditional Chinese" */;
+  // let txt   = '这是简体中文' + gap /* "This is simplified Chinese" */ + '這是繁體中文' /* "This is traditional Chinese" */;
+  // let glyphs_missing = 2;
 
+  let txt = "I have no A glyph";
+  let glyphs_missing = 1;
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   var tests =
@@ -51,9 +54,15 @@ px.import({scene: "px:scene.1.js",
         var backed   = null;
         var results  = [];
 
-        var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-RegularOnly.ttf' });        // SIMPLIFIED   (from Google Fonts)
-        var scf      = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-Regular.ttf' });            // SIMPLIFIED   (from Google Fonts)
-        var tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/Noto_Sans_TC/NotoSansTC-Medium.ttf' }); // TRADITIONAL  (from Google Fonts)
+        // var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-RegularOnly.ttf' });        // SIMPLIFIED   (from Google Fonts)
+        // var scf      = scene.create({ t: 'fontResource', url: base + '/fonts/MaShanZheng-Regular.ttf' });            // SIMPLIFIED   (from Google Fonts)
+        // var tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/Noto_Sans_TC/NotoSansTC-Medium.ttf' }); // TRADITIONAL  (from Google Fonts)
+
+
+        var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/FreeSansMissingA_only.ttf' });
+        var scf      = scene.create({ t: 'fontResource', url: base + '/fonts/FreeSansMissingA.ttf' });  // Hacked to remove "A" glyph
+        var tcf      = scene.create({ t: 'fontResource', url: base + '/fonts/FreeSans.ttf' });
+
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -94,7 +103,7 @@ px.import({scene: "px:scene.1.js",
               backed.ready.then( () =>
               {
                 var count = backed.font.fallbackGlyphsCount;
-                var ans   = (count == 2);
+                var ans   = (count == glyphs_missing);
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 // TEST !
