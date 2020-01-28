@@ -31,9 +31,9 @@ px.import({scene: "px:scene.1.js",
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  let pts            = 30;
-  let txt            = "I have no A glyph";
-  let glyphs_missing = 1;
+  let pts = 30;
+  let txt = "I have no A glyph";
+
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   var tests =
@@ -44,6 +44,7 @@ px.import({scene: "px:scene.1.js",
       return new Promise(function(resolve, reject)
       {
         var backed   = null;
+        var unbacked = null;
         var results  = [];
 
         var scf_only = scene.create({ t: 'fontResource', url: base + '/fonts/FreeSansMissingA_only.ttf' });
@@ -56,7 +57,7 @@ px.import({scene: "px:scene.1.js",
 
         scf_only.ready.then( () =>
         {
-          var unbacked = scene.create({ id: 'unbacked', t:'textBox', parent: root, x: 100, y: 100,
+          unbacked = scene.create({ id: 'unbacked', t:'textBox', parent: root, x: 100, y: 100,
                 pixelSize: pts, textColor: '#fff', font: scf_only, text: txt, interactive: false,
                 alignVertical:   scene.alignVertical.CENTER,
                 alignHorizontal: scene.alignHorizontal.LEFT});
@@ -88,13 +89,14 @@ px.import({scene: "px:scene.1.js",
 
               backed.ready.then( () =>
               {
-                var count = backed.font.fallbackGlyphsCount;
-                var ans   = (count == glyphs_missing);
-
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 // TEST !
                 //
-                results.push(assert(ans, "Fallback font - fallbackGlyphsCount: ( "+count+" == 2) ... is " + (ans ? "CORRECT" : "INCORRECT") ));
+                var mu  = unbacked.measureText();
+                var mb  =   backed.measureText();
+                var ans = (mu.charLast.x > mb.charLast.x);
+
+                results.push(assert(ans, "Fallback font "+ (ans ? "CORRECT" : "INCORRECTLY") +"  measured"));
 
                 resolve(results);
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
