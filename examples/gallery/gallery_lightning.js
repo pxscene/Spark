@@ -17,8 +17,8 @@ px.import({ scene: 'px:scene.1.js',
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  var appURLs = ["fancy.js", "shaderLightningApp.js", "dynamics.js",
-                 "rectLightningApp.js",   "fancy.js", "transitionLightningApp.js", "fonts.js" , "simpleImageLightningApp.js", "apng1.js"]
+  var appURLs = ["fancy.js", "shaderApp.js", "dynamics.js",
+                 "rectApp.js",   "fancy.js", "transitionApp.js", "fonts.js" , "simpleImageApp.js", "apng1.js"]
 
   // var appURLs = ["dummyScene.js?color='#ff0'", "dummyScene.js?color='#0f0'", "dummyScene.js?color='#00f'",
   //                "dummyScene.js?color='#ff0'", "dummyScene.js?color='#0ff'", "dummyScene.js?color='#f0f'",
