@@ -77,7 +77,7 @@ px.import({ scene: 'px:scene.1.js',
     }
 
     var appUrl = base + "/" + url;
-    if (url.indexOf("LightningApp") != -1)
+    if (url.indexOf("App") != -1)
     {
       appUrl = "gl:" + lightning_base +  url;
     }
