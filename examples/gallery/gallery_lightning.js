@@ -8,7 +8,6 @@ px.import({ scene: 'px:scene.1.js',
   var root  = imports.scene.root;
   var keys  = imports.keys;
 
-  var base = px.getPackageBaseFilePath();
   var base = "https://www.sparkui.org/examples/gallery/";
   var lightning_base = "https://www.sparkui.org/examples/lightning_bundle/spark/";
 
@@ -77,7 +76,7 @@ px.import({ scene: 'px:scene.1.js',
     }
 
     var appUrl = base + "/" + url;
-    if (url.indexOf("LightningApp") != -1)
+    if (url.indexOf("App") != -1)
     {
       appUrl = "gl:" + lightning_base +  url;
     }
