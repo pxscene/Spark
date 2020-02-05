@@ -1,0 +1,24 @@
+{
+    "frameworkType": "sparkGL",
+    "applicationURL": "init.js",
+    "frameworks": [
+        {
+            "url": "src/lightning-web.js"
+        },
+        {
+            "url": "spark/SparkPlatform.js"
+        },
+        {
+            "url": "spark/fetch.js"
+        },
+        {
+            "url": "src/thunderJS.js"
+        },
+        {
+            "url": "src/ux.js"
+        },
+        {
+            "url": "src/appBundle.js"
+        }
+    ]
+}
