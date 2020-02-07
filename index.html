@@ -12,6 +12,42 @@
       <link rel="stylesheet" href="docs/stylesheets/spark-landing.css">
       <link rel="author" href="humans.txt">
   </head>
+  <script>
+
+    // Works in Safari / IE / Firefox / Chrome
+    function copyToClipboard(textToCopy)
+    {
+      var textArea;
+
+      function createTextArea(text) {
+        textArea = document.createElement('textArea');
+        textArea.readOnly = true;
+        textArea.contentEditable = true;
+        textArea.value = text;
+        document.body.appendChild(textArea);
+      }
+
+      function selectText() {
+          textArea.select();
+      }
+
+      function copyTo() {
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+
+      createTextArea(textToCopy);
+      selectText();
+      copyTo();
+    }
+
+    function copySparkLink()
+    {
+      var copyText = document.getElementById("SparkAppLink").href
+      copyToClipboard(copyText);
+    }
+  </script>
+
   <body>
       <nav>
       <div class="logo" onclick="location.href='http://www.sparkui.org';" style="cursor: pointer;"></div>
@@ -51,9 +87,10 @@
 
             </div>
             <img   src="docs/images/Spark21_BannerBig.png" width="150" style="position: absolute; top: -7px; left: 257px; " />
-            <!-- <img   src="docs/images/Spark21_Banner.png" width="100" style="position: absolute; top: -8px; left: 305px; " /> -->
 
           </div>
+          <br>
+          <center>Try this <a id="SparkAppLink" href="web-spark/js/init.spark"> <span style="color:blue">link</span> </a> in <b>Spark.app</b>  <button id='copySparkLinkButton' onclick="copySparkLink()">Copy Link</button> </center>
         </div>
 
       </div>
