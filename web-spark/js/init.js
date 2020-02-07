@@ -54,7 +54,7 @@ function startApp() {
     }
 
     const config = options.stage;
-    if (ux.Ui.hasOption("720") || (!lng.Utils.isSpark && window.innerHeight === 720) || (lng.Utils.isSpark && sparkscene.h === 720)) {
+    if (lng.Utils.isSpark || ux.Ui.hasOption("720") || (!lng.Utils.isSpark && window.innerHeight === 720) || (lng.Utils.isSpark && sparkscene.h === 720)) {
         config['w'] = 1280;
         config['h'] = 720;
         config['precision'] = 0.6666666667;
