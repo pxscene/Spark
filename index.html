@@ -75,28 +75,31 @@
       <center><h1 class="hero__title"> Spark v2.0+ now supports Lightning  !! </h1></center>
       <div class="video" style="padding-top: 0px; display: grid; grid-template-columns: auto 4% auto; justify-items: center;align-items: center;">
 
-        <div id='myApp' style="grid-column: 2">
-          <div class="holder" style=" width: 400px; height: 225px; position:relative; top: 0; left: 0;">
-            <div class="tooltip"><iframe src="web-spark/app.html"  width="400" height="225" scrolling="no"  style="border: none; position: relative; top: 0; left: 0;" alt="This is an actual Lightning app running int the browser, but could run on the Spark anywhere !"></iframe>
+        <!-- <div id='myApp' style="grid-column: 2"> -->
+          <div id='myApp' style="grid-column: 2; ">
+          <div class="tooltip" >
+            <div class="holder" style="width: 400px; height: 225px; position:relative; top: 0; left: 0;">
+              <iframe class="frame" src="web-spark/app.html" scrolling="no"
+                alt="This is an actual Lightning app running int the browser, but could run on Spark anywhere !"></iframe>
 
-              <div class="right">
-                <h3>Lightning App!</h3>
-                <p>This is an actual <b>Lightning</b> app running in the browser, but could run on <b>Spark</b> anywhere !</p>
-                <i></i>
-            </div>
+              <img   src="docs/images/Spark21_BannerBig.png" width="150" style="position: absolute; top: -7px; left: 257px; " />
 
-            </div>
-            <img   src="docs/images/Spark21_BannerBig.png" width="150" style="position: absolute; top: -7px; left: 257px; " />
+            </div><!-- holder -->
+            <br>
+            <center>Try this <a id="SparkAppLink" href="web-spark/js/init.spark"> <span style="color:blue">link</span> </a> in <b>Spark.app</b>  <button id='copySparkLinkButton' onclick="copySparkLink()">Copy Link</button> </center>
 
-          </div>
-          <br>
-          <center>Try this <a id="SparkAppLink" href="web-spark/js/init.spark"> <span style="color:blue">link</span> </a> in <b>Spark.app</b>  <button id='copySparkLinkButton' onclick="copySparkLink()">Copy Link</button> </center>
-        </div>
+            <div class="right">
+              <h3>Lightning App!</h3>
+              <p>This is an actual <b>Lightning</b> app running in the browser, but could run on <b>Spark</b> anywhere !</p>
+              <i></i>
+            </div><!-- right -->
 
+          </div> <!-- tooltip -->
+        </div> <!-- myApp -->
       </div>
     </div>
 
-    <br><br>
+    <br><br><br><br>
     <div class="demo__terminal">
       <center><h1 class="hero__title"> Spark also supports Shaders  !! </h1></center>
         <div class="video" style="padding-top: 0px; display: grid; grid-template-columns: auto 4% auto; justify-items: center;align-items: center;">
