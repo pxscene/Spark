@@ -4,11 +4,11 @@
     "frameworks": [
         {
             "url": "src/lightning-web.js",
-            "md5": "0c5759a1514ffc644e72c6134e9d5864"
+            "md5": "529c31bf034bea7dd62ede3176203a17"
         },
         {
             "url": "spark/SparkPlatform.js",
-            "md5": "f5ee1c81d5f95a6066258c822397e450"
+            "md5": "77af3e0c780ac4323e75cd9210312c4f"
         },
         {
             "url": "spark/fetch.js",

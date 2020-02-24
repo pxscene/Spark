@@ -8,6 +8,7 @@
 
         _construct(){
             this._skipRenderToTexture = false;
+            this._playSent = false;
         }
 
         static _supportedEvents()
@@ -130,6 +131,7 @@
         }
 
         open(url) {
+            this._playSent = false;
             console.log('Playing stream', url);
             if (this.application.noVideo) {
                 console.log('noVideo option set, so ignoring: ' + url);
@@ -140,6 +142,7 @@
         }
 
         close() {
+            this._playSent = false;
             this.videoEl.stop();
             this._clearSrc();
         }
@@ -165,6 +168,7 @@
         }
 
         reload() {
+            this._playSent = false;
             var url = this.videoEl.url;
             this.close();
             this.videoEl.url = url;
@@ -233,6 +237,7 @@
         }
 
         error(args) {
+            this._playSent = false;
             this._fireConsumer('$mediaplayerError', args);
             this._setState("");
             return "";
@@ -277,6 +282,7 @@
         onEndOfStream(args) {
             this._fireConsumer('$mediaplayerEnded', args);
             this._setState("");
+            this._playSent = false;
         }
 
         onProgressUpdate(args) {
@@ -284,6 +290,10 @@
                 currentTime: this.videoEl.position,
                 duration: this.videoEl.duration || 1
             });
+            if (this._playSent == false) {
+              this._fireConsumer('$mediaplayerPlaying', args);
+              this._playSent = true;      
+            }
         }
 
         durationchange(args) {
@@ -637,6 +647,41 @@
       }
     }
 
+    class SparkWindow {
+        _construct(stage){
+          this.stage = stage;
+        }
+
+        get innerWidth() {
+          return (this.stage)?this.stage.getOption('w'):sparkscene.w;
+        }
+
+        get innerHeight() {
+          return (this.stage)?this.stage.getOption('h'):sparkscene.h;
+        }
+
+        get lng() {
+          return lng;
+        }
+
+        get location() {
+            return new this.URL(__dirname);
+        }
+
+        get localStorage() {
+            return localStorage;
+        }
+
+        get URL() {
+            return require('url').URL;
+        }
+    }
+
+    global.window = new SparkWindow(null);
+    if (typeof window !== "undefined") {
+        window = global.window;
+    }
+
     class SparkPlatform {
 
         init(stage) {
@@ -644,9 +689,16 @@
             this._looping = false;
             this._awaitingLoop = false;
             this._sparkCanvas = null;
+            if (typeof window !== "undefined") {
+                window.stage = stage;
+            }
         }
 
         destroy() {
+            if (typeof window !== "undefined") {
+                window = null;
+            }
+            global.window = null;
         }
 
         startLoop() {
@@ -864,6 +916,18 @@
             console.warn("No support for key handling");
         }
 
+        registerKeydownHandler(keyhandler) {
+            sparkview.on('onKeyDown', function(e) {
+                keyhandler(e);
+            });
+        }
+
+        registerKeyupHandler(keyhandler) {
+            sparkview.on('onKeyUp', function(e) {
+                keyhandler(e);
+            });
+        }
+
         drawText(textTextureRenderer) {
             let canvasInternal = textTextureRenderer._canvas.internal; // _canvas.internal is a pxTextCanvas object created in getDrawingCanvas()
             let drawPromise = new Promise((resolve, reject) => {
@@ -1078,14 +1142,21 @@
             return drawPromise;
         }
 
-        paint(gl, obj, x, y, color) {
+        paint(gl, obj, x, y, color, e) {
             if (obj) {
+                let translateOnly = true;
+                if (e && e.rotation !== 0) {
+                    obj.r = e.rotation * 180/Math.PI;
+                    translateOnly = false;
+                } else {
+                    obj.r = 0;
+                }
                 gl.beginNativeSparkRendering();
                 if (typeof obj.description === "function" && (obj.description() === "pxWaylandContainer" || obj.description() === "pxSceneContainer")) {
                     obj.paint(x, y, color, false);
                     this.stage.forceRenderUpdate(); // keep updating
                 } else {
-                    obj.paint(x, y, color, true);
+                    obj.paint(x, y, color, translateOnly);
                 }
                 gl.endNativeSparkRendering();
             }
