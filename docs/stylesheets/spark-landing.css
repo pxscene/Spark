@@ -12,12 +12,12 @@ nav {
 .tooltip {
   display:inline-block;
   position:relative;
-  border-bottom:1px dotted #666;
+  xborder-bottom:1px dotted #666;
   text-align:left;
 }
 
 .tooltip .right {
-  min-width:400px; 
+  min-width:400px;
   max-width:800px;
   top:50%;
   left:100%;
@@ -61,6 +61,35 @@ nav {
   background-color:#EEEEEE;
   box-shadow:0 1px 8px rgba(0,0,0,0.5);
 }
+
+/* iframe */
+.frame {
+  position: relative;
+
+  top: 0;
+  left: 0;
+
+  width: 800px;
+  height: 450px;
+
+  border: 0px solid black;
+
+  -ms-transform: scale(0.5);
+  -ms-transform-origin: 0 0;
+
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+
+  -o-transform: scale(0.5);
+  -o-transform-origin: 0 0;
+
+  transform: scale(0.5);
+  transform-origin: 0 0;
+
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+}
+
 
 /* hero section */
 .hero {
@@ -118,7 +147,7 @@ nav {
 
 .video__item {
   max-width: calc(50% - 40px);
-  margin: 20px 20px 0 0; 
+  margin: 20px 20px 0 0;
 }
 
 .video__item .section__title {
@@ -175,7 +204,7 @@ nav {
 .changelog__detail {
   margin-left: 20%;
   flex-basis: auto;
- 
+
 }
 
 .changelog__meta {
