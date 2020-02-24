@@ -85,12 +85,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }], [{
       key: "_template",
       value: function _template() {
+        var hh = 300; //400
+
         return {
           Bg: {
             x: 0,
             y: 0,
             w: 400,
-            h: 400,
+            h: hh,
             rect: true,
             color: 0xFF8888ff
           },
@@ -101,19 +103,40 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             h: 100,
             src: MyApp.getPath("ball.png")
           },
-          Text: {
-            x: 400 - 10,
-            y: 400 - 10,
-            mount: 1,
+          Text1: {
+            x: 50,
+            y: hh - 10,
+            mountX: 0,
+            mountY: 1,
+            fontFace: 'RobotoRegular',
             text: {
-              fontSize: 14,
-              text: 'Lightning App',
-              textColor: 0xFFffffff
+              fontSize: 16,
+              textColor: 0xFFffffff,
+              text: 'Spark Platform'
+            }
+          },
+          Spark: {
+            x: 40,
+            y: hh - 10,
+            w: 24,
+            h: 24,
+            mount: 1,
+            src: MyApp.getPath("Spark_logo256px.png")
+          },
+          Text2: {
+            x: 400 - 10,
+            y: hh - 10,
+            mount: 1,
+            fontFace: 'RobotoRegular',
+            text: {
+              fontSize: 16,
+              textColor: 0xFFffffff,
+              text: 'Lightning App'
             }
           },
           Lightning: {
-            x: 400 - 90,
-            y: 405,
+            x: 400 - 100,
+            y: hh + 5,
             w: 50,
             h: 50,
             mount: 1,
