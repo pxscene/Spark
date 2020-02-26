@@ -6,10 +6,11 @@
 
   class MyApp extends ux.App {
       static _template() {
-        var hh = 300; //400
+        var ww = 400 * 2;
+        var hh = 230 * 2;
         return {
 
-          Bg: { x: 0, y: 0, w: 400, h: hh, rect: true, color: 0xFF8888ff },
+          Bg: { x: 0, y: 0, w: ww, h: hh, rect: true, color: 0xFF8888ff },
           Ball: {
               x: 275, y: 275, w: 100, h: 100, src: MyApp.getPath("ball.png")
           },
@@ -19,11 +20,11 @@
           Spark: {
               x: 40, y: hh - 10, w: 24, h: 24, mount: 1, src: MyApp.getPath("Spark_logo256px.png")
           },
-          Text2: { x: 400 - 10, y: hh - 10, mount: 1, fontFace: 'RobotoRegular',
+          Text2: { x: ww - 10, y: hh - 10, mount: 1, fontFace: 'RobotoRegular',
               text: { fontSize: 16, textColor: 0xFFffffff, text: 'Lightning App' }
           },
           Lightning: {
-              x: 400 - 100, y: hh + 5, w: 50, h: 50, mount: 1, src: MyApp.getPath("Lightning.png")
+              x: ww - 100, y: hh + 5, w: 50, h: 50, mount: 1, src: MyApp.getPath("Lightning.png")
           },
         }
     }
