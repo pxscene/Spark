@@ -54,7 +54,7 @@ function startApp() {
     }
 
     const config = options.stage;
-    if (lng.Utils.isSpark || ux.Ui.hasOption("720") || (!lng.Utils.isSpark && window.innerHeight === 720) || (lng.Utils.isSpark && sparkscene.h === 720)) {
+    if ((lng.Utils.isSpark && !sparkQueryParams) || (lng.Utils.isSpark && !(sparkscene.capabilities && sparkscene.capabilities.sparkgl && sparkscene.capabilities.sparkgl.supports1080 && sparkQueryParams && sparkQueryParams.enableSparkGL1080 !== undefined)) || ux.Ui.hasOption("720") || (!lng.Utils.isSpark && window.innerHeight === 720)) {
         config['w'] = 1280;
         config['h'] = 720;
         config['precision'] = 0.6666666667;
@@ -86,11 +86,8 @@ function startApp() {
 
         window.app = bootstrap;
     } else {
-        sparkscene.root.on('onPreKeyDown', function(e) {
-            console.log('in app2 webgl onPreKeyDown keyCode:', e.keyCode);
-        });
         sparkscene.root.on('onKeyDown', function(e) {
-            console.log('in app2 webgl onKeyDown keyCode:', e.keyCode);
+            console.log('webgl onKeyDown keyCode:', e.keyCode);
             bootstrap._receiveKeydown(e);
         });
     }

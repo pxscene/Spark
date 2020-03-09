@@ -24,8 +24,46 @@
 
 	var browser = ws||require('ws');
 
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
 	const requestsQueue = {};
 	const listeners = {};
+
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 
 	var requestQueueResolver = data => {
 	  if (typeof data === 'string') {
@@ -43,6 +81,25 @@
 	    }
 	  }
 	};
+
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 
 	var notificationListener = data => {
 	  if (typeof data === 'string') {
@@ -62,6 +119,25 @@
 	  }
 	};
 
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
 	// defaults
 	const protocol = 'ws://';
 	const host = 'localhost';
@@ -76,6 +152,25 @@
 	    (options && options.endpoint) || endpoint,
 	  ].join('')
 	};
+
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 
 	const protocols = 'notification';
 
@@ -108,6 +203,25 @@
 	  })
 	};
 
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
 	var makeBody = (requestId, plugin, method, params, version) => {
 	  // delete possible version key from params
 	  params ? delete params.version : null;
@@ -127,6 +241,25 @@
 	  return body
 	};
 
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
 	var getVersion = (versionsConfig, plugin, params) => {
 	  const defaultVersion = 1;
 
@@ -139,12 +272,50 @@
 	    : defaultVersion
 	};
 
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
 	let id = 0;
 
 	var makeId = () => {
 	  id = id + 1;
 	  return id
 	};
+
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 
 	var execRequest = (options, body) => {
 	  connect(options)
@@ -153,6 +324,44 @@
 	    })
 	    .catch(console.error);
 	};
+
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 
 	var API = options => {
 	  return {
@@ -181,6 +390,25 @@
 	  }
 	};
 
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
 	var DeviceInfo = {
 	  freeRam(params) {
 	    return this.call('systeminfo', params).then(res => {
@@ -194,9 +422,47 @@
 	  },
 	};
 
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
 	var plugins = {
 	  DeviceInfo,
 	};
+
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 
 	function listener(plugin, event, callback) {
 	  const thunder = this;
@@ -275,6 +541,25 @@
 	  };
 	  this.api.request(plugin, method, params);
 	};
+
+	/*
+	 * If not stated otherwise in this file or this component's LICENSE file the
+	 * following copyright and licenses apply:
+	 *
+	 * Copyright 2020 RDK Management
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the License);
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 * http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
 
 	let api;
 

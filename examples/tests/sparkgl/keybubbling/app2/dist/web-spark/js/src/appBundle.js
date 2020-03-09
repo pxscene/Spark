@@ -12,16 +12,15 @@
             };
         }
 
-
         _handleUp(){
             this.tag("BackgroundImage").scaleX = 1;
             this.tag("BackgroundImage").scaleY = 1;
         }
+
         _handleDown(){
             this.tag("BackgroundImage").scaleX = 2;
             this.tag("BackgroundImage").scaleY = 2;
         }
-
     }
 
     MyApp.COLORS = {
