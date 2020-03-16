@@ -7,13 +7,14 @@
     class MyApp extends ux.App {
         static _template() {
             return {
+              /*BackgroundImage: { src: MyApp.getPath("background.png")},
               Text1: {
                 x: 50,
                 text: {
                   fontSize: 36,
                   textAlign: 'center',
                   maxLines: 2,
-                  text: 'Text a little too long so this part won\'t be visible',
+                  text: 'm',
                   wordWrapWidth: 180,
                   textColor: 0xffff00ff,
                 },
@@ -32,7 +33,7 @@
                   shadowOffsetY: 2,
                   shadowBlur: 2,
                 },
-              },
+              },*/
               Text3: {
                 mountX: 1,
                 x: 500,

@@ -6378,6 +6378,10 @@
             this._stage = stage;
             this._canvas = canvas;
             this._context = this._canvas.getContext('2d');
+            sparkscene.on('onClose', function() {
+              console.log("MADANA GOPA ONCLOSE INSIDE RECT RENDERER CALLED !!!");
+              this._context = null;
+            });
             this._settings = settings;
         }
 
@@ -7149,11 +7153,14 @@
 
                 if (p) {
                     p.then(() => {
+console.trace();
+console.log("RECORDER MODE 1!1!!!!!!!!!!!!!!");
                         cb(null, Object.assign({renderInfo: renderer.renderInfo}, this.stage.platform.getTextureOptionsForDrawingCanvas(canvas)));
                     }).catch((err) => {
                         cb(err);
                     });
                 } else {
+console.log("RECORDER MODE 2!2!!!!!!!!!!!!!!");
                     cb(null, Object.assign({renderInfo: renderer.renderInfo}, this.stage.platform.getTextureOptionsForDrawingCanvas(canvas)));
                 }
             }
