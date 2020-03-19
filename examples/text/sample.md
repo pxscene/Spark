@@ -17,6 +17,9 @@ Lightning app running in the SparkGL framework.
 ### Example of Nested Spark Application
 ![Embedded Spark Application](../gallery/picturepile2.js)
 
+### Example of Key based Lightning Application
+![Embedded Lightning Key Application](../Lightning/key_example/js/init.spark)
+
 Native Spark app.
 
 ### Example of Nested Text Document
