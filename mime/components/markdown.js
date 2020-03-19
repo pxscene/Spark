@@ -1739,6 +1739,9 @@ px.import({
 
     var img = scene.create({t:'scene',url:url,w:ww,h:hh,parent:this.options.parent,clip:true})
 
+    if (url.indexOf("key_example/js/init.spark") != -1) {
+      img.focus = true;
+    }
     
     function updateSize() {
       /*
@@ -2051,6 +2054,7 @@ px.import({
     
     this.container = scene.create({
       t: 'object',
+      focus:true,
       x: this.options.styles.container.paddingLeft || 0,
       y: this.options.styles.container.paddingTop || 0,
       parent: this.getParentRoot(),
