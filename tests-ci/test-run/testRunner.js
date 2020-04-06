@@ -172,27 +172,6 @@ var runTests = function( i) {
             console.log("set testScene focus for testName "+testName);
             var cancelToken = {};
             testScene.focus = true;
-            //console.log("beforeStart is "+testUrls[myIndex].preTest);
-            // Run pre-test if well-known name "beforeStart" is present in API
-            if(testScene.api["beforeStart"] !== undefined) {
-            // call the preTest for this scene
-            //if( testUrls[myIndex].preTest !== undefined) {
-             // testScene.api[testUrls[myIndex].preTest]().then( function() {
-                testScene.api["beforeStart"]().then( function() {
-                console.log("Done executing beforeStart for scene "+testName);
-                iterateTests(testScene, myIndex,cancelToken);
-                
-              }, function(){
-                console.log("Problem in 'beforeStart' for test "+myIndex);
-                runnerResults[testUrls[myIndex].title+".beforeStart.rejection"]= "FAILURE";
-                iterateTests(testScene, myIndex,cancelToken);
-              });
-            } else {
-              // Still try to iterateTests even if no PreTests were set
-                //console.log("starting tests without preTests for scene "+myIndex);
-                iterateTests(testScene, myIndex,cancelToken);
-            }
-
             if(testUrls[myIndex].timeToRun == undefined) {
               console.log("[" + new Date() + "] >>>>>>>>>>>STARTING HANG PREVENTION TIMEOUT for url:"+testUrls[myIndex].url);
               timeouts[myIndex] = setTimeout( function() {
@@ -229,6 +208,24 @@ var runTests = function( i) {
                 // not handling errors here as runSceneTests is not expected to reject
                 },
                 (testUrls[savedIndexForTimeout].timeToRun));
+            }
+            //console.log("beforeStart is "+testUrls[myIndex].preTest);
+            // Run pre-test if well-known name "beforeStart" is present in API
+            if(testScene.api["beforeStart"] !== undefined) {
+            // call the preTest for this scene
+                testScene.api["beforeStart"]().then( function() {
+                console.log("Done executing beforeStart for scene "+testName);
+                iterateTests(testScene, myIndex,cancelToken);
+                
+              }, function(){
+                console.log("Problem in 'beforeStart' for test "+myIndex);
+                runnerResults[testUrls[myIndex].title+".beforeStart.rejection"]= "FAILURE";
+                iterateTests(testScene, myIndex,cancelToken);
+              });
+            } else {
+              // Still try to iterateTests even if no PreTests were set
+                //console.log("starting tests without preTests for scene "+myIndex);
+                iterateTests(testScene, myIndex,cancelToken);
             }
           },function() {
             console.log("promise failure for test "+myIndex);
