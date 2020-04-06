@@ -61,13 +61,6 @@ px.import({scene: "px:scene.1.js",
                 pixelSize: pts, textColor: '#fff', font: scf_only, text: txt, interactive: false,
                 alignVertical:   scene.alignVertical.CENTER,
                 alignHorizontal: scene.alignHorizontal.LEFT});
-        },
-        (err) =>
-        {
-          console.log("NO-FALLBACK FONT font 'scf_only' NOT ready ... unexpected.")
-          results.push(assert(false, "NO-FALLBACK FONT font 'scf_only' NOT ready ... unexpected."));
-          resolve(results);
-        });
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
         //
@@ -121,6 +114,13 @@ px.import({scene: "px:scene.1.js",
           resolve(results);
         });
 
+        },
+        (err) =>
+        {
+          console.log("NO-FALLBACK FONT font 'scf_only' NOT ready ... unexpected.")
+          results.push(assert(false, "NO-FALLBACK FONT font 'scf_only' NOT ready ... unexpected."));
+          resolve(results);
+        });
         ///////////////////////////////////////////////////////////////////////////////////////////////
       });//PROMISE
     }
