@@ -62,6 +62,8 @@ px.import({ scene: 'px:scene.1.js',
   //
   // Create the child App scenes...
   //
+  var appObjects = [];
+
   appURLs.map( (url, index) =>
   {
     if(url.indexOf("dummyScene") >= 0) /// Using offline Dummy scenes
@@ -75,6 +77,8 @@ px.import({ scene: 'px:scene.1.js',
 
     var appUrl = base + "/" + url;
     var app = scene.create( { t: "scene", parent: apps, id: index, url: appUrl, w: child_w, h: child_h, clip: true });
+
+    appObjects.push(app);
 
     app.on("onMouseDown", function (e)
     {
@@ -285,10 +289,10 @@ px.import({ scene: 'px:scene.1.js',
         doppel.y = select.y;
 
         // Compute offscreen position
-            if(pos_x < 0)         pos_x = num_cols;
+             if(pos_x < 0)         pos_x = num_cols;
         else if(pos_x == num_cols) pos_x =  -1;
 
-            if(pos_y < 0)         pos_y = num_cols;
+             if(pos_y < 0)         pos_y = num_cols;
         else if(pos_y == num_rows) pos_y =  -1;
 
         // Teleport selection position
@@ -314,6 +318,9 @@ px.import({ scene: 'px:scene.1.js',
         select.id = index;
 
         animSelectMoveTo = null;
+
+        appObjects[index].focus = true;
+
         resolve();
       });
     });
