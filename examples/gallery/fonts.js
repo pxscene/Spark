@@ -26,7 +26,7 @@ var rowcontainer = scene.create({t:"image",parent:scrollContent});
 
 var prevRow;
 
-var p = 0; 
+var p = 0;
 //var len = fonts.length;
 for (var i=0; i < fonts.length; i++)
 {
@@ -34,17 +34,17 @@ for (var i=0; i < fonts.length; i++)
 
     var faceName = fonts[i]?fonts[i]:"FreeSans.ttf";
     console.log(faceName);
-    var t = scene.create({t:"text",text:"Enter in some text...", 
+    var t = scene.create({t:"text",text:"Enter in some text...",
                               parent:row,x:10,
                               textColor:0xfaebd7ff, pixelSize:36,
                               fontUrl:fonts[i]});
-    var t2 = scene.create({t:"text",text:faceName, 
+    var t2 = scene.create({t:"text",text:faceName,
                                parent:row,x:20,
                                textColor:0xeeeeeeff, pixelSize:14,a:0.6});
-    
+
   // Use promises to layout the rows as the text becomes ready
   var rowReady = new Promise(
-    
+
     function(fulfill,reject) {
 
       var prevRowCopy = prevRow;
@@ -73,14 +73,14 @@ for (var i=0; i < fonts.length; i++)
         rowCopy.a = 0;
         fulfill(rowCopy);
       });
-      
+
     });
-  
+
   row.w = 800;
   prevRow = row;
 
 }
-var select = scene.create({t:"rect",parent:scrollContent, fillColor:0x000000, 
+var select = scene.create({t:"rect",parent:scrollContent, fillColor:0x000000,
                                     lineColor:0xffff00ff,
                                     lineWidth:4,w:scene.w,h:100});
 
@@ -110,16 +110,32 @@ function selectRow(i) {
 
 selectRow(currentRow);
 
-function scrollUp() {
+function scrollUp(e) {
     var numRows = rowcontainer.numChildren;
 //    selectRow(currentRow>0?currentRow-1:0);
+
+    // console.log("UP >> numRows", numRows);
+    // console.log(currentRow);
+
+    if(currentRow > 0)
+    {
+      e.stopPropagation();
+    }
+
     selectRow(clamp(currentRow-1, 0, numRows-1));
 }
 
-function scrollDn() {
+function scrollDn(e) {
     var numRows = rowcontainer.numChildren;
-    console.log("numRows", numRows);
-    console.log(currentRow);
+
+    // console.log("DOWN >> numRows", numRows);
+    // console.log(currentRow);
+
+    if(currentRow < (numRows-1) )
+    {
+      e.stopPropagation();
+    }
+
 //    selectRow((currentRow<(numRows-1))?currentRow+1:numRows-1);
     selectRow(clamp(currentRow+1, 0, numRows-1));
 }
@@ -133,8 +149,8 @@ function updateText(s) {
 var str = "";
 scene.root.on("onKeyDown", function (e) {
     var keycode = e.keyCode; var flags = e.flags;
-    if (keycode == 38) scrollUp();
-    else if (keycode == 40) scrollDn();
+    if (keycode == 38) scrollUp(e);
+    else if (keycode == 40) scrollDn(e);
     else if (keycode == 8) {
 //        str = str.substr(0,str.length-1);
 //        str = str.slice(0,str.length-2);
