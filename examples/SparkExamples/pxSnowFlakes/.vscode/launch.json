@@ -1,0 +1,83 @@
+// Reference
+// https://code.visualstudio.com/Docs/editor/debugging
+// https://github.com/Microsoft/vscode/issues/102
+
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "DBG file in pxscene",
+      "type": "node",
+      "request": "launch",
+      "protocol": "legacy",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/Spark.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/Spark.app/Contents/MacOS/Spark",
+      "args":["${file}"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+      "name": "DBG Flakes",
+      "type": "node",
+      "request": "launch",
+      "protocol": "legacy",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/Spark.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/Spark.app/Contents/MacOS/Spark",
+      "args":["${workspaceFolder}/pxSnowflakes.js"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+      "name": "Flakes (Release)",
+      "type": "node",
+      "request": "launch",
+      "protocol": "legacy",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/Spark.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/Spark.app/Contents/MacOS/Spark",
+      "args":["${workspaceFolder}/dist/output.js"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+      "name": "Flakes Web (Release)",
+      "type": "node",
+      "request": "launch",
+      "protocol": "legacy",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/Spark.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/Spark.app/Contents/MacOS/Spark",
+      "args":["http://127.0.0.1:8080/output.js"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/Spark.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+    "name": "Attach pxscene",
+    "type": "node",
+    "request": "attach",
+    // TCP/IP address. Default is "localhost".
+    "address": "localhost",
+    // Port to attach to.
+    "port": 5858,
+    "sourceMaps": false
+    }
+  ]
+  }
