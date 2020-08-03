@@ -1,0 +1,26 @@
+{
+  "name": "GaugeSVG",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "serve": "webpack-dev-server",
+    "watch": "webpack --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "file-loader": "^2.0.0",
+    "image-webpack-loader": "^4.3.1",
+    "loader-utils": "^1.1.0",
+    "remove-comments": "^1.0.0",
+    "schema-utils": "^1.0.0",
+    "spark-import-loader": "^1.0.5",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0",
+    "webpack-command": "^0.4.1",
+    "webpack-dev-server": "^3.1.7"
+  }
+}

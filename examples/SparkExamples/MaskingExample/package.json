@@ -1,0 +1,30 @@
+{
+  "name": "MaskingExample",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "http://www.sparkui.org",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "main": "dist/MaskingExample.js",
+  "keywords": [
+    "spark"
+  ],
+  "devDependencies": {
+    "spark-import-loader": "^1.0.5",
+    "spark-resource-loader": "^1.0.9",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-closure-compiler": "^2.1.6"
+  },
+  "scripts": {
+    "debug": "webpack",
+    "release": "webpack -p"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "copy-webpack-plugin": "^5.1.1"
+  }
+}

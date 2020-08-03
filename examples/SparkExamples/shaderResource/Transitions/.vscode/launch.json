@@ -1,0 +1,86 @@
+// Reference
+// https://code.visualstudio.com/Docs/editor/debugging
+// https://github.com/Microsoft/vscode/issues/102
+
+// Spark App Launch configurations.
+
+{
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "name": "DBG File",
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/SparkEdge.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/SparkEdge.app/Contents/MacOS/SparkEdge",
+      "args":["${file}"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/SparkEdge.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/SparkEdge.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+      "name": "DBG App File",
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/SparkEdge.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/SparkEdge.app/Contents/MacOS/SparkEdge",
+      "args":["${workspaceFolder}/dist/output.js"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/SparkEdge.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/SparkEdge.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+      "name": "App (Release)",
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/SparkEdge.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/SparkEdge.app/Contents/MacOS/SparkEdge",
+      "args":["${workspaceFolder}/dist/output.js"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/SparkEdge.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/SparkEdge.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+      "name": "App Web (Release)",
+      "type": "node",
+      "request": "launch",
+      "protocol": "inspector",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/SparkEdge.app/Contents/MacOS",
+      "runtimeExecutable": "/Applications/SparkEdge.app/Contents/MacOS/SparkEdge",
+      "args":["http://127.0.0.1:8080/output.js"],
+      "env" : {
+      "LD_LIBRARY_PATH":"/Applications/SparkEdge.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH":"/Applications/SparkEdge.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+    "name": "Attach pxscene",
+    "type": "node",
+    "request": "attach",
+    // TCP/IP address. Default is "localhost".
+    "address": "localhost",
+    // Port to attach to.
+    "port": 5858,
+    "sourceMaps": false
+    }
+  ]
+  }
