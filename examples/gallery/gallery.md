@@ -12,3 +12,5 @@
 * [Pile O'Pictures](picturepile2.js)
 * [Polaroid](../polaroid/pp_polaroid.js)
 * [Gallery](gallery.js)
+* [SparkGL Triangle](../sparkgl/triangle/triangle.spark)
+* 
