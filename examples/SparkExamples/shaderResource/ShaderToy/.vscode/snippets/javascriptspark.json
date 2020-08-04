@@ -1,0 +1,401 @@
+{
+  // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  //   "scope": "javascript,typescript",
+  //   "prefix": "log",
+  //   "body": [
+  //     "console.log('$1');",
+  //     "$2"
+  //   ],
+  //   "description": "Log output to console"
+  // }
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // REQUIRED:
+  // 
+  // For VSCode snippets to work 'per project' the following extension is *required* ...
+  //
+  // https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  NOTE:  Use TAB key to traverse fields of inserted snippet !!!
+  //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // PREFIX       BODY
+  // - - -        - - - -
+  //
+  // spprop       Object.defineProperty()
+  // spcfg        px.configImport()
+  // spimp        px.import()
+  // spobj        px.create({ t: 'object') ...
+  // spobjp       px.create({ t: 'object') .then() ...
+  // spim         px.create({ t: 'image') ...
+  // spimp        px.create({ t: 'image') .then() ...
+  // spir         px.create({ t: 'imageResource') ...
+  // spirp        px.create({ t: 'imageResource') .then() ...
+  // spfr         px.create({ t: 'fontResource') ...
+  // spfrp        px.create({ t: 'fontResource') .then() ...
+  // sprect       px.create({ t: 'rect') ...
+  // sprectp      px.create({ t: 'rect') .then() ...
+  // sptext       px.create({ t: 'text') ...
+  // sptextp      px.create({ t: 'text') .then() ...
+  // sptbox       px.create({ t: 'textBox') ...
+  // sptboxp      px.create({ t: 'textBox') .then() ...
+  //
+  // sptonkdn     xx.on('onKeyDown', ...
+  // sptonkup     xx.on('onKeyUp', ...
+  // sptonmdn     xx.on('onMouseDown' ...
+  // sptonmup     xx.on('onMouseUp', ...
+  // sptonfocus   xx.on('onFocus', ...
+  // sptonblur    xx.on('onBlur', ...
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "Property": {
+    "scope": "javascript",
+    "prefix": "spprop",
+    "body": [
+      "// - - - - - - - - - - - - - - - - - - - - - - - - - - - -",
+      "// PROPTERTY: $name",
+      "// - - - - - - - - - - - - - - - - - - - - - - - - - - - -",
+      "",
+      "this._($name) = (params && params.$name) ? params.$name : null;",
+      "Object.defineProperty(this, '$name', ",
+      "{",
+      "    set: function (val) { this._$name = val;  },",
+      "    get: function ()    { return this._$name; },",
+      "});"
+    ],
+    "description": "Create Object Property  set/get "
+  },
+  
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Config Import": {
+    "scope": "javascript",
+    "prefix": "spcfg",
+    "body": [
+      "px.configImport({",
+      "  'root:'       : px.getPackageBaseFilePath(),",
+      "  'components:' : px.getPackageBaseFilePath() + '/components/'",
+      "});",
+      "$0"
+    ],
+    "description": "SPARK configImport() "
+  },
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Import": {
+    "scope": "javascript",
+    "prefix": "spimport",
+    "body": [
+      "px.import({       scene: 'px:scene.1.js',",
+      "                   keys: 'px:tools.keys.js'",
+      "}).then( function importsAreReady(imports)",
+      "{",
+      "  module.exports.wantsClearscreen = function()",
+      "  {",
+      "    return true; // return 'false' to skip system black/blank draw",
+      "  };",
+      "",
+      " var scene = imports.scene;",
+      " var root  = imports.scene.root;",
+      " var keys  = imports.keys;",
+      "",
+      "",
+      "    //   CODE HERE !",
+      "    $0",
+      "",
+      "}).catch(function importFailed(err) {",
+      "  console.error('Import for MyApp.js failed: ' + err);",
+      "});"
+    ],
+    "description": "SPARK import() "
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Object": {
+    "scope": "javascript",
+    "prefix": "spobjp",
+    "body": [
+      "var $name = scene.create({ t: 'object', parent: $2, x: 0, y: 0, w: 100, h: 100, interactive: false });"
+    ],
+    "description": "Create SPARK object "
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Object w/promise": {
+    "scope": "javascript",
+    "prefix": "spobjp",
+    "body": [
+      "var $name = scene.create({ t: 'object', parent: $2, x: 0, y: 0, w: 100, h: 100, interactive: false }) ",
+      "                 .then( o => {",
+      "    // Handle promise",
+      "    $0",
+      "})"
+    ],
+    "description": "Create SPARK object + promise"
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Image": {
+    "scope": "javascript",
+    "prefix": "spim",
+    "body": [
+      "var $1 = scene.create({ t: 'image', parent: $2, url: $3, x: 0, y: 0, interactive: false }); "
+    ],
+    "description": "Create SPARK Image "
+  },
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Image w/promise": {
+    "scope": "javascript",
+    "prefix": "spimp",
+    "body": [
+      "var $1 = scene.create({ t: 'image', parent: $2, url: $3, x: 0, y: 0, interactive: false }) ",
+      "              .then( o => {",
+      "    // Handle promise",
+      "    $0",
+      "})"
+    ],
+    "description": "Create SPARK Image + promise"
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK ImageResource": {
+    "scope": "javascript",
+    "prefix": "spir",
+    "body": [
+      "var $1 = scene.create({ t: 'imageResource', url: $2 }); ",
+      "$0"
+    ],
+    "description": "Create SPARK Image Resource "
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK ImageResource w/promise": {
+    "scope": "javascript",
+    "prefix": "spirp",
+    "body": [
+      "var $1 = scene.create({ t: 'imageResource', url: $2 }) ",
+      "              .then( o => {",
+      "    // Handle promise",
+      "    $3",
+      "})",
+      "$0"
+    ],
+    "description": "Create SPARK Image Resource "
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK FontResource": {
+    "scope": "javascript",
+    "prefix": "spfr",
+    "body": [
+      "var $1 = scene.create({ t: 'fontResource', url: $2 }); ",
+      "$0"
+    ],
+    "description": "Create SPARK Font Resource "
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK FontResource w/promise": {
+    "scope": "javascript",
+    "prefix": "spfrp",
+    "body": [
+      "var $1 = scene.create({ t: 'fontResource', url: $2 }) ",
+      "              .then( o => {",
+      "    // Handle promise",
+      "    $3",
+      "})",
+      "$0"
+    ],
+    "description": "Create SPARK Font Resource + promise"
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Rectangle": {
+  "scope": "javascript",
+  "prefix": "sprect",
+  "body": [
+    "var $1 = scene.create({ t: 'rect', parent: $2, fillColor: '$3', lineColor: '#000', lineWidth: 0, x: 0, y: 0, w: 100, h: 100, interactive: false }) ",
+    "              .then( o => {",
+    "    // Handle promise",
+    "    $3",
+    "})",
+    "$0",
+  ],
+  "description": "Create SPARK rect "
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Rectangle w/promise": {
+    "scope": "javascript",
+    "prefix": "sprectp",
+    "body": [
+      "var $1 = scene.create({ t: 'rect', parent: $2, fillColor: '$3', lineColor: '#000', lineWidth: 0, x: 0, y: 0, w: 100, h: 100, interactive: false }) ",
+      "              .then( o => {",
+      "    // Handle promise",
+      "    $3",
+      "})",
+      "$0"
+    ],
+    "description": "Create SPARK rect + promise"
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Text": {
+    "scope": "javascript",
+    "prefix": "sptext",
+    "body": [
+      "var $1 = scene.create({t:'text', w: 100, h: 20, parent: $2, ",
+      "                  pixelSize: 24, textColor:'#fff', text:  'MyText', interactive: false });",
+      "$0"
+    ],
+    "description": "Create SPARK text"
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK Text w/promise": {
+    "scope": "javascript",
+    "prefix": "sptextp",
+    "body": [
+      "var $1 = scene.create({t:'text', w: 100, h: 20, parent: $2, ",
+      "                  pixelSize: 24, textColor:'#fff', text:  'MyText', interactive: false })",
+      "               .then( o => {",
+      "    // Handle promise",
+      "    $3",
+      "})",
+      "$0"
+    ],
+    "description": "Create SPARK text"
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK TextBox": {
+    "scope": "javascript",
+    "prefix": "sptbox",
+    "body": [
+      "var $1 = scene.create({t:'textBox', w: 100, h: 20, parent: $2, ",
+      "                   pixelSize: 24, textColor: '#fff', font: _MyFont_, text:  'MyText', interactive: false, ",
+      "                   alignVertical:   scene.alignVertical.CENTER,",
+      "                   alignHorizontal: scene.alignHorizontal.CENTER});",
+      "$0"
+    ],
+    "description": "Create SPARK textBox "
+  },
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  "SPARK TextBox w/promise": {
+    "scope": "javascript",
+    "prefix": "sptboxp",
+    "body": [
+      "var $1 = scene.create({t:'textBox', w: 100, h: 20, parent: $2, ",
+      "                   pixelSize: 24, textColor: '#fff', font: _MyFont_, text:  'MyText', interactive: false, ",
+      "                   alignVertical:   scene.alignVertical.CENTER,",
+      "                   alignHorizontal: scene.alignHorizontal.CENTER})",
+      "                .then( o => {",
+      "    // Handle promise",
+      "    $3",
+      "  })",
+      "$0",
+    ],
+    "description": "Create SPARK textBox + promise"
+  },
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // EVENTS
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  "SPARK Event > onKeyDown": {
+    "scope": "javascript",
+    "prefix": "sptonkdn",
+    "body": [
+    "$1.on('onKeyDown', function()",
+    "{",
+    "    // Handle KEYDOWN event",
+    "    $0",
+    "});"
+    ],
+    "description": "Handle SPARK 'keydown' event "
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  "SPARK Event > onKeyUp": {
+    "scope": "javascript",
+    "prefix": "sponkup",
+    "body": [
+    "$1.on('onKeyUp', function()",
+    "{",
+    "    // Handle KEYUP event",
+    "    $0",
+    "});"
+    ],
+    "description": "Handle SPARK 'keyup' event "
+  },
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  "SPARK Event > onMouseDown": {
+    "scope": "javascript",
+    "prefix": "sponmdn",
+    "body": [
+    "$1.on('onKeyDown', function()",
+    "{",
+    "    // Handle MOUSEDOWN event",
+    "    $0",
+    "});"
+    ],
+    "description": "Handle SPARK 'mousedown' event "
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  "SPARK Event > onMouseUp": {
+    "scope": "javascript",
+    "prefix": "sponmup",
+    "body": [
+    "$1.on('onMouseUp', function()",
+    "{",
+    "    // Handle MOUSEUP event",
+    "    $0",
+    "});"
+    ],
+    "description": "Handle SPARK 'mouseup' event "
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  "SPARK Event > Focus": {
+    "scope": "javascript",
+    "prefix": "sponfocus",
+    "body": [
+    "$1.on('onFocus', function()",
+    "{",
+    "    // Handle FOCUS event",
+    "    $0",
+    "});"
+    ],
+    "description": "Handle SPARK 'focus' event "
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  "SPARK Event > Blur": {
+    "scope": "javascript",
+    "prefix": "sponblur",
+    "body": [
+    "$1.on('onBlur', function()",
+    "{",
+    "    // Handle BLUR event",
+    "    $0",
+    "});"
+    ],
+    "description": "Handle SPARK 'blur' event "
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}

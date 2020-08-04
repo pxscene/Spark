@@ -1,0 +1,44 @@
+// Reference
+// https://code.visualstudio.com/Docs/editor/debugging
+// https://github.com/Microsoft/vscode/issues/102
+
+// Spark App Launch configurations.
+
+{
+  "version": "0.2.0",
+  "configurations": [
+
+    {
+      "name": "DBG File",
+      "type": "node",
+      "request": "launch",
+      "protocol": "legacy",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/Spark.app/Contents/MacOS",
+      "args":["${file}"],
+      "env" : {
+      "runtimeExecutable": " /Users/hfitzp200/Library/Developer/Xcode/DerivedData/pxScene2d-cfvgwxxxljcawxclfbuhtwhjgrqd/Build/Products/Debug/Spark.app/Contents/MacOS/Spark",
+      "LD_LIBRARY_PATH":   " /Users/hfitzp200/Library/Developer/Xcode/DerivedData/pxScene2d-cfvgwxxxljcawxclfbuhtwhjgrqd/Build/Products/Debug/Spark.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH": " /Users/hfitzp200/Library/Developer/Xcode/DerivedData/pxScene2d-cfvgwxxxljcawxclfbuhtwhjgrqd/Build/Products/Debug/Spark.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    },
+    {
+      "name": "DBG App",
+      "type": "node",
+      "request": "launch",
+      "protocol": "legacy",
+      "stopOnEntry": false,
+      "autoAttachChildProcesses": true,
+      "cwd": "/Applications/Spark.app/Contents/MacOS",
+      "args":["${workspaceFolder}/DropShadow.js"],
+      "env" : {
+      "runtimeExecutable": " /Users/hfitzp200/Library/Developer/Xcode/DerivedData/pxScene2d-cfvgwxxxljcawxclfbuhtwhjgrqd/Build/Products/Debug/Spark.app/Contents/MacOS/Spark",
+      "LD_LIBRARY_PATH":   " /Users/hfitzp200/Library/Developer/Xcode/DerivedData/pxScene2d-cfvgwxxxljcawxclfbuhtwhjgrqd/Build/Products/Debug/Spark.app/Contents/MacOS/lib",
+      "DYLD_LIBRARY_PATH": " /Users/hfitzp200/Library/Developer/Xcode/DerivedData/pxScene2d-cfvgwxxxljcawxclfbuhtwhjgrqd/Build/Products/Debug/Spark.app/Contents/MacOS/lib"
+      //,"BREAK_ON_SCRIPTSTART":1
+      }
+    }
+  ]
+  }
