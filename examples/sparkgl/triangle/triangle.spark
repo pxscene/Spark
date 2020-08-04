@@ -1,0 +1,4 @@
+{
+    "frameworkType": "sparkGL",
+    "applicationURL": "triangle.mjs"
+}
