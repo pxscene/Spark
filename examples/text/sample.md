@@ -8,19 +8,8 @@ Spark supports [markdown](markdown.md) aka **Sparkdown**.  This is a strict mark
 ## Spark Embedding
 Spark even supports markdown with embedded interactive spark content.
 
-### Example of Nested Lightning Application
-![Embedded Lightning Application](../../web-spark/js/init.spark)
-
-Lightning app running in the SparkGL framework.
-
-
 ### Example of Nested Spark Application
 ![Embedded Spark Application](../gallery/picturepile2.js)
-
-### Example of Key based Lightning Application
-![Embedded Lightning Key Application](../Lightning/key_example/js/init.spark)
-
-Native Spark app.
 
 ### Example of Nested Text Document
 ![Embedded Text Document](loremipsum.txt)
