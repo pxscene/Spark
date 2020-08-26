@@ -63,6 +63,7 @@ px.import({       scene: 'px:scene.1.js',
 
   var toys =
   [
+    { filename: "Spectrum.frg",                gpuHeavy: false },
     { filename: "GradientCircles.frg",         gpuHeavy: false },
     { filename: "WarpVortex.frg",              gpuHeavy: false },
     { filename: "SpaceCurvature.frg",          gpuHeavy: true,  texture0: stars , texture1: organic2 },   // ## HEAVY
