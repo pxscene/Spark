@@ -24,8 +24,8 @@ px.import({ scene: 'px:scene.1.js',
 
   var url = base + "/images/status_bg.svg";
 
-  var bgShade = scene.create({ t: "image", parent: root, url: url, w: scene.w, h: scene.h,
-                              stretchX: scene.stretch.STRETCH, stretchY: scene.stretch.STRETCH });
+  //var bgShade = scene.create({ t: "image", parent: root, url: url, w: scene.w, h: scene.h,
+  //                            stretchX: scene.stretch.NONE, stretchY: scene.stretch.NONE });
 
   var demoMode          = false;
   var demoStopping      = false;
@@ -50,7 +50,10 @@ px.import({ scene: 'px:scene.1.js',
   var select_h = child_h + (2 * childPad);
 
   var child_sx = child_w / select_w / num_cols;
-  var child_sy = child_h / select_h / num_cols;
+  var child_sy = child_h / select_h / num_rows;
+
+  child_sx = Math.min(child_sx,child_sy);
+  child_sy = Math.min(child_sx,child_sy);
 
   var doppel = null;  // 'Doppelganger' aka. Clone !
   var select = null;
@@ -384,6 +387,9 @@ px.import({ scene: 'px:scene.1.js',
         var sx = (root.w / c.w);
         var sy = (root.h / c.h);
 
+        sx = Math.max(sx,sy);
+        sy = Math.max(sx,sy);
+
         var xx = -c.x * sx;
         var yy = -c.y * sy;
 
@@ -576,10 +582,13 @@ px.import({ scene: 'px:scene.1.js',
     select_h = child_h + (2 * childPad);
 
     child_sx = w / select_w / num_cols;
-    child_sy = h / select_h / num_cols;
+    child_sy = h / select_h / num_rows;
 
-    bgShade.w = w;
-    bgShade.h = h;
+    child_sx = Math.min(child_sx,child_sy);
+    child_sy = Math.min(child_sx,child_sy);
+
+    //bgShade.w = w;
+    //bgShade.h = h;
 
     root.w = w;
     root.h = h;
