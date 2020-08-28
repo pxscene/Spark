@@ -36,7 +36,7 @@ if( pics != undefined && pics == 'flickr') { imagesUrl = '/flickr_images.json';}
 var numVisible = 5;
 
 // Create the background cork image
-var bg = scene.create({t:"image",url:bgUrl,parent:root,stretchX:2,stretchY:2,w:root.w,h:root.h});
+//var bg = scene.create({t:"image",url:bgUrl,parent:root,stretchX:2,stretchY:2,w:root.w,h:root.h});
 
     
 function randomInt(from, to) {
@@ -121,7 +121,7 @@ var polaroidH = (scene.root.h - 50) * 0.90;
 var polaroidW = (polaroidH*0.83);
 
 
-var bgShadow = scene.create({t:"image",url:bgShadowUrl,parent:bg,stretchX:1,stretchY:1,a:0.75});
+var bgShadow = scene.create({t:"image",url:bgShadowUrl,parent:root,stretchX:1,stretchY:1,a:0.75});
 
 var captionFont = scene.create({t:"fontResource", url:"http://sparkui.org/examples/fonts/DancingScript-Regular.ttf"});
 captionFont.ready.then( null, 
@@ -493,8 +493,8 @@ console.log("about to scale and crop");
 
 function updateSize(w, h) {
 
-  bg.w = w;
-  bg.h = h;
+  //bg.w = w;
+  //bg.h = h;
 
   bgShadow.w = w;
   bgShadow.h = h;
@@ -574,7 +574,7 @@ var putUpError = function(isError, errorCode) {
 
 
 
-bg.ready.then(function() {
+//bg.ready.then(function() {
   
   console.log("PXAPP_VISIBLE");
 
@@ -594,7 +594,7 @@ bg.ready.then(function() {
       putUpError(true, "Error getting image urls");
       }); 
 
-});
+//});
 
 module.exports.wantsClearscreen = function() 
 {
