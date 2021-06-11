@@ -131,6 +131,7 @@ var runTests = function( i) {
   if( i < numUrls) {
       //console.log("In loop for i="+i);
       var useBaseURI = testUrls[i].useBaseURI;
+      var isLightningApp = testUrls[i].lightningApp;
       //console.log("baseURI is "+useBaseURI);
       var url = (useBaseURI === undefined || useBaseURI == "false")? (testUrls[i].url) : (basePackageUri+"/"+testUrls[i].url) ;
       var testName = testUrls[i].title;
@@ -138,8 +139,16 @@ var runTests = function( i) {
 
       // Create the test page - always pass in manualTest=0 to override default of manual test
       var manualString = (url.indexOf("?") == -1) ? "?manualTest=0"  : "&manualTest=0";
-      
-      var test  = scene.create({t:'scene',parent:root,url:url+manualString,x:0, y:0, w:scene.w, h:scene.h});
+      var prefix = "gl:"; 
+      var finalurl = "";
+      if (isLightningApp == "true") {
+        finalurl = prefix;
+      }
+      finalurl += url;
+      if (isLightningApp == undefined || isLightningApp == "false") {
+        finalurl += manualString;
+      }
+      var test  = scene.create({t:'scene',parent:root,url:finalurl,x:0, y:0, w:scene.w, h:scene.h});
 
           var myIndex = i;
           var testScene = test;
