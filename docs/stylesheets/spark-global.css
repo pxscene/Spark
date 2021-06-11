@@ -62,7 +62,7 @@ hr {
 /* tabs */
 .tab__container {
   position: relative;
-  width: 60%;
+  width: 90%;
 }
 
 .tab__container > ul {
